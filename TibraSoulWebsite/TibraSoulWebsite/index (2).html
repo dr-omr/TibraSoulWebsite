@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="اكتشف رحلتك نحو الشفاء الروحي مع طِبرا. نقدم خلوات وتجارب تحويلية مصممة لتجديد العقل والجسد والروح.">
+    <meta name="keywords" content="الشفاء الروحي, التأمل, خلوة روحية, اليقظة الذهنية, طِبرا, طبيب وعي, TibraSoul, spiritual healing, meditation, retreat, mindfulness">
+    <title>ṬibraSoul طِبرا | Ṭibra - رحلتك نحو الشفاء الروحي</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /*
+         * main.css
+         * Stylesheet for TibraSoul Website
+         * Author: [Your Name]
+         * Version: 2.0.0 (Interactive Enhancements)
+        */
+
+        :root {
+            --primary-color: #5a6e5a;
+            --secondary-color: #f4f1eb;
+            --dark-color: #3c3c3c;
+            --light-color: #FFFFFF;
+            --text-color: #4a4a4a;
+            --accent-color: #c8a07d;
+            --font-body: 'Noto Kufi Arabic', sans-serif;
+            --font-headings: 'Noto Kufi Arabic', sans-serif;
+            --font-brand: 'Great Vibes', cursive;
+            --container-width: 1140px;
+            --transition-speed: 0.4s ease;
+            --border-radius: 8px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { font-family: var(--font-body); color: var(--text-color); line-height: 1.8; background-color: var(--light-color); direction: rtl; text-align: right; }
+        body.no-scroll { overflow: hidden; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-headings); font-weight: 700; color: var(--dark-color); margin-bottom: 1rem; line-height: 1.3; }
+        p { margin-bottom: 1.5rem; }
+        a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed); }
+        a:hover { color: #435243; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
+        .btn { display: inline-block; padding: 0.8rem 2.2rem; border-radius: 50px; font-weight: 700; font-family: var(--font-body); transition: all var(--transition-speed); cursor: pointer; border: none; text-align: center; }
+        .btn-primary { background-color: var(--primary-color); color: var(--light-color); box-shadow: 0 4px 15px rgba(90, 110, 90, 0.3); }
+        .btn-primary:hover { background-color: #435243; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(90, 110, 90, 0.4); }
+        .btn-secondary { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+        .btn-secondary:hover { background-color: var(--primary-color); color: var(--light-color); }
+        .section-title { text-align: center; font-size: 2.8rem; margin-bottom: 1rem; position: relative; padding-bottom: 1rem; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: var(--accent-color); }
+        .section-intro { text-align: center; max-width: 650px; margin: 0 auto 4rem auto; font-size: 1.1rem; }
+        .content-section { padding: 6rem 0; }
+        .bg-light { background-color: var(--secondary-color); }
+        .bg-dark { background-color: #2c2c2c; color: #f0f0f0; }
+        .bg-dark .section-title, .bg-dark .section-intro, .bg-dark h1, .bg-dark h2, .bg-dark h3 { color: var(--light-color); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+        .main-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1rem 0; background-color: transparent; transition: background-color 0.5s ease, box-shadow 0.5s ease, padding 0.5s ease; }
+        .main-header.scrolled { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 0.5rem 0; }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-brand); font-size: 2.5rem; font-weight: 400; color: var(--dark-color); }
+        .main-header.scrolled .logo { color: var(--dark-color); }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-menu a { font-weight: 400; position: relative; padding-bottom: 5px; font-size: 1rem; }
+        .nav-menu a:not(.btn) { color: var(--text-color); }
+        .main-header.scrolled .nav-menu a:not(.btn) { color: var(--text-color); }
+        .nav-menu a:not(.btn)::after { content: ''; position: absolute; bottom: 0; right: 0; width: 0; height: 2px; background-color: var(--primary-color); transition: width var(--transition-speed); }
+        .nav-menu a:not(.btn):hover::after { width: 100%; }
+        .btn-primary-nav { padding: 0.5rem 1.5rem; background-color: var(--primary-color); color: var(--light-color); border-radius: 50px; }
+        .btn-primary-nav:hover { background-color: #435243; color: var(--light-color); }
+        .nav-toggle { display: none; font-size: 1.5rem; background: none; border: none; color: var(--dark-color); cursor: pointer; z-index: 1001; }
+
+        .hero-section { height: 100vh; min-height: 700px; display: flex; justify-content: center; align-items: center; text-align: center; color: var(--light-color); position: relative; }
+        .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -2; transition: opacity 1s ease-in-out; }
+        .hero-background img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)); z-index: -1; }
+        .hero-content { animation: fadeInUp 1s ease-out; }
+        .hero-title { font-family: var(--font-brand); font-size: clamp(3.5rem, 10vw, 7rem); margin-bottom: 0.5rem; font-weight: 400; color: var(--light-color); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero-subtitle { font-size: clamp(1.1rem, 4vw, 1.5rem); margin-bottom: 2.5rem; font-weight: 300; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
+        .scroll-down-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); animation: bounce 2.5s infinite; }
+        .scroll-down-indicator a { font-size: 2rem; color: rgba(255, 255, 255, 0.8); transition: color var(--transition-speed); }
+        .scroll-down-indicator a:hover { color: var(--light-color); }
+
+        .philosophy-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
+        .founder-image img { border-radius: var(--border-radius); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .founder-story h3 { font-size: 2rem; color: var(--primary-color); }
+        .founder-story cite { display: block; margin-top: 1.5rem; font-style: normal; font-weight: 700; color: var(--accent-color); }
+        .founder-story p { line-height: 2.2; }
+
+        .programs-grid, .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .program-card { background: var(--light-color); border-radius: var(--border-radius); overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform var(--transition-speed), box-shadow var(--transition-speed); display: flex; flex-direction: column; }
+        .program-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .program-card-img { width: 100%; height: 220px; object-fit: cover; }
+        .program-card-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .program-card-title { font-size: 1.6rem; }
+        .program-card-desc { flex-grow: 1; }
+
+        .testimonial-carousel { position: relative; overflow: hidden; max-width: 800px; margin: 0 auto; min-height: 300px; }
+        .testimonial-slide { position: absolute; top: 0; left: 0; width: 100%; text-align: center; opacity: 0; transition: opacity 0.6s ease-in-out; }
+        .testimonial-slide.active { opacity: 1; position: relative; }
+        .testimonial-text p { font-size: 1.3rem; font-style: italic; margin-bottom: 2rem; color: #555; }
+        .testimonial-author { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .testimonial-author img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-color); }
+        .testimonial-author span { font-weight: 700; }
+        .carousel-controls { text-align: center; margin-top: 2rem; }
+        .carousel-controls button { background: none; border: 2px solid var(--primary-color); color: var(--primary-color); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; margin: 0 0.5rem; transition: all var(--transition-speed); }
+        .carousel-controls button:hover { background: var(--primary-color); color: var(--light-color); }
+        .video-testimonial-wrapper { aspect-ratio: 16 / 9; width: 100%; max-width: 640px; margin: 0 auto 2rem; border-radius: var(--border-radius); overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .video-testimonial-wrapper iframe { width: 100%; height: 100%; border: 0; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: var(--border-radius); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item figcaption { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: var(--light-color); padding: 2rem 1rem 1rem; text-align: right; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
+        .gallery-item:hover figcaption { opacity: 1; transform: translateY(0); }
+        
+        #circle-of-trust { text-align: center; }
+        .circle-icon { font-size: 4rem; color: var(--accent-color); margin-bottom: 1.5rem; }
+
+        .faq-accordion { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid #ddd; }
+        .faq-question { width: 100%; background: none; border: none; text-align: right; padding: 1.5rem 1rem; font-size: 1.2rem; font-weight: 700; font-family: var(--font-body); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color var(--transition-speed); }
+        .faq-question:hover { color: var(--primary-color); }
+        .faq-question i { transition: transform var(--transition-speed); font-size: 1rem; }
+        .faq-question[aria-expanded="true"] i { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .faq-answer p { padding: 0 1rem 1.5rem 1rem; margin-bottom: 0; }
+
+        .contact-form { max-width: 700px; margin: 0 auto; }
+        .form-group { margin-bottom: 1.5rem; }
+        .contact-form input,.contact-form textarea,.contact-form select { width: 100%; padding: 1rem; border: 1px solid #555; border-radius: var(--border-radius); background-color: #3a3a3a; color: var(--light-color); font-family: var(--font-body); font-size: 1rem; transition: border-color var(--transition-speed); }
+        .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus { outline: none; border-color: var(--accent-color); }
+        .contact-form input::placeholder,.contact-form textarea::placeholder { color: #aaa; }
+        .contact-form button { width: 100%; padding: 1rem; }
+
+        .main-footer { background-color: #222; color: #ccc; padding: 5rem 0 2rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; text-align: right; }
+        .footer-content h3,.footer-content h4 { color: var(--light-color); margin-bottom: 1.5rem; font-family: var(--font-headings); }
+        .footer-links ul li { margin-bottom: 0.8rem; }
+        .footer-links a { color: #ccc; transition: all 0.3s ease; }
+        .footer-links a:hover { color: var(--accent-color); padding-right: 5px; }
+        .footer-social a { color: #ccc; font-size: 1.5rem; margin-left: 1.5rem; transition: color var(--transition-speed); }
+        .footer-social a:hover { color: var(--accent-color); }
+        .footer-bottom { text-align: center; border-top: 1px solid #444; padding-top: 2rem; font-size: 0.9rem; }
+
+        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; background-color: white; padding: 3rem; border-radius: var(--border-radius); z-index: 1010; width: 90%; max-width: 600px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; }
+        .modal.active { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; }
+        .modal-content { text-align: right; }
+        .modal-content h2 { margin-top: 0; color: var(--primary-color); }
+        .close-modal { position: absolute; top: 1rem; left: 1rem; font-size: 2rem; font-weight: bold; border: none; background: none; cursor: pointer; color: #888; transition: color 0.3s ease; }
+        .close-modal:hover { color: #333; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1005; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-book-btn { margin-top: 1.5rem; }
+
+        .welcome-modal .modal-content { text-align: center; }
+        .welcome-modal .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+        .welcome-modal .option-btn { background-color: var(--secondary-color); border: 2px solid transparent; width: 100%; padding: 1rem; border-radius: var(--border-radius); cursor: pointer; transition: all 0.3s ease; }
+        .welcome-modal .option-btn:hover { border-color: var(--primary-color); background-color: #e9e5de; }
+
+        .nature-sounds-toggle { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background-color: var(--primary-color); color: var(--light-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+        .nature-sounds-toggle:hover { transform: scale(1.1); }
+        .nature-sounds-toggle i.fa-volume-mute { display: none; }
+        .nature-sounds-toggle.playing i.fa-volume-high { display: none; }
+        .nature-sounds-toggle.playing i.fa-volume-mute { display: inline-block; }
+
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        .whatsapp-float i { margin-top: 15px; }
+
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-20px) translateX(-50%); } 60% { transform: translateY(-10px) translateX(-50%); } }
+
+        @media (max-width: 992px) { .philosophy-content { grid-template-columns: 1fr; text-align: center; } .founder-image { max-width: 300px; margin: 0 auto 2rem; } }
+        @media (max-width: 768px) { html { font-size: 15px; } .nav-toggle { display: block; } .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background-color: var(--light-color); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.1); } .nav-menu.active { right: 0; } .nav-menu a { font-size: 1.2rem; } .footer-content { text-align: center; } .footer-social { justify-content: center; } .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; font-size: 24px; } .whatsapp-float i { margin-top: 13px; } .welcome-modal .options-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">Ṭibra</a>
+            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="sr-only">فتح القائمة</span>
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul id="nav-menu" class="nav-menu">
+                    <li><a href="#philosophy">فلسفتنا</a></li>
+                    <li><a href="#programs">البرامج</a></li>
+                    <li><a href="#knowledge-center">مركز المعرفة</a></li>
+                    <li><a href="#testimonials">الشهادات</a></li>
+                    <li><a href="#contact" class="btn btn-primary-nav">احجز الآن</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="hero" class="hero-section">
+            <div id="hero-background-wrapper" class="hero-background">
+                <img src="https://images.unsplash.com/photo-1473170611423-22489201d961?q=80&w=2070&auto=format&fit=crop" alt="مشهد طبيعي هادئ عند الغروب" style="width:100%; height:100%; object-fit:cover;" data-bg-for="default">
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">ṬibraSoul</h1>
+                <p class="hero-subtitle">رحلتك التحويلية للروح تبدأ هنا.</p>
+                <a href="#programs" class="btn btn-primary">استكشف رحلاتنا</a>
+            </div>
+            <div class="scroll-down-indicator">
+                <a href="#philosophy" aria-label="التمرير للأسفل">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="philosophy" class="philosophy-section content-section animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">رسالة من طبيب الشفاء</h2>
+                <div class="philosophy-content">
+                    <div class="founder-image">
+                        <img src="IMG-20250529-WA0027.jpg" alt="صورة د. عمر" loading="lazy">
+                    </div>
+                    <div class="founder-story">
+                        <h3>أنا عمر، طبيب ومرشد</h3>
+                        <p>
+                            أنا عمر، طبيب عام،<br>
+                            لكني تعلمت كيف أكون طبيبَ شفاءٍ حقيقيًّا أيضًا.<br>
+                            ولهذا جمعت بين الطب الحديث،<br>
+                            والحكمة الداخلية القديمة —<br>
+                            تلك الحكمة التي ربما شعرت بها يومًا، حين قلت لنفسك:<br>
+                            "لكل داء دواء."<br>
+                            عملت بجهدٍ لأستعيد فطرة الجسد والروح معًا،<br>
+                            عبر منهج أسميته:<br>
+                            "A’tura – عد للفطرة."<br>
+                            من خلال دراساتٍ منهجيةٍ عميقة، وتجاربَ شخصيةٍ صادقة،<br>
+                            تعلمت كيف أعيد الإنسان إلى جذوره الأولى…<br>
+                            حيث تبدأ رحلة الشفاء من الداخل،<br>
+                            ومن الطبيعة أولًا — قبل أي دواء.<br>
+                            وهكذا، سأرافقك…<br>
+                            لأعلمك، وأشفيك — بإذن الله.<br>
+                            سلام
+                        </p>
+                        <cite>— د. عمر، مرشدك في هذه الرحلة</cite>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="programs" class="programs-section content-section bg-light animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">ارسم مسار شفائك</h2>
+                <p class="section-intro">كل رحلة فريدة من نوعها. نقدم مجموعة من الخلوات والبرامج المصممة لتلبية احتياجاتك الروحية، أينما كنت في مسارك.</p>
+                <div class="programs-grid">
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1506126613408-4e0520d380ce?q=80&w=2070&auto=format&fit=crop" alt="امرأة تتأمل بهدوء في الطبيعة" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                            <h3 class="program-card-title">الانغماس في اليقظة الذهنية</h3>
+                            <p class="program-card-desc">خلوة لمدة 7 أيام مصممة لتهدئة العقل وإعادة الاتصال باللحظة الحاضرة من خلال التأمل العميق واليوجا اللطيفة.</p>
+                            <button class="btn btn-secondary" data-modal-target="modal-mindfulness">اعرف المزيد</button>
+                        </div>
+                    </article>
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop" alt="مجموعة من الناس يمارسون اليوجا عند شروق الشمس" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                            <h3 class="program-card-title">خلوة تجديد نهاية الأسبوع</h3>
+                            <p class="program-card-desc">استراحة سريعة ومكثفة لتجديد طاقتك والتخلص من ضغوط الأسبوع. مثالية للمحترفين المشغولين.</p>
+                            <button class="btn btn-secondary" data-modal-target="modal-rejuvenation">اعرف المزيد</button>
+                        </div>
+                    </article>
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1519823551232-723b7a4254b7?q=80&w=1974&auto=format&fit=crop" alt="يدان تمسكان بعضهما البعض في جلسة إرشاد" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                            <h3 class="program-card-title">إرشاد روحي شخصي</h3>
+                            <p class="program-card-desc">جلسات فردية مخصصة للغوص في تحدياتك الشخصية ورسم خريطة طريق فريدة لنموك الروحي.</p>
+                            <button class="btn btn-secondary" data-modal-target="modal-guidance">اعرف المزيد</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="knowledge-center" class="blog-section content-section animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">مركز المعرفة</h2>
+                <p class="section-intro">مكتبتك الحية للنمو والشفاء. مقالات، تأملات، وقصص ملهمة لمرافقتك في رحلتك اليومية.</p>
+                <div class="blog-grid">
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1484069560501-87d72b0c3669?q=80&w=2070&auto=format&fit=crop" alt="شخص يكتب في دفتر ملاحظات" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                            <h4 class="text-sm font-bold text-gray-500 uppercase">مقالات الحكمة</h4>
+                            <h3 class="program-card-title">خمسة طرق لدمج اليقظة في يومك</h3>
+                            <a href="#" class="btn btn-secondary mt-4">اقرأ المزيد</a>
+                        </div>
+                    </article>
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1974&auto=format&fit=crop" alt="كوب شاي عشبي بجانب نافذة" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                             <h4 class="text-sm font-bold text-gray-500 uppercase">تأملات صوتية</h4>
+                            <h3 class="program-card-title">تأمل الشاي: طقس من السكينة</h3>
+                            <a href="#" class="btn btn-secondary mt-4">استمع الآن</a>
+                        </div>
+                    </article>
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1475694867812-f82b8696d610?q=80&w=2070&auto=format&fit=crop" alt="شخص يمشي وحيدًا على شاطئ البحر" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                             <h4 class="text-sm font-bold text-gray-500 uppercase">قصص تحول</h4>
+                            <h3 class="program-card-title">رحلة أحمد: من القلق إلى السلام</h3>
+                            <a href="#" class="btn btn-secondary mt-4">شاهد القصة</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials-section content-section bg-light animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">أصوات التحول</h2>
+                <p class="section-intro">استمع لقصص من ساروا على هذا الدرب قبلك.</p>
+                <div class="testimonial-carousel">
+                    <div class="testimonial-slide">
+                        <div class="video-testimonial-wrapper">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <cite class="testimonial-author">
+                           <span>فاطمة ع. - طبيبة</span>
+                        </cite>
+                    </div>
+                    <div class="testimonial-slide">
+                        <blockquote class="testimonial-text">
+                            <p>"وصلت وأنا أشعر بالإرهاق التام والانفصال عن حياتي. بعد أسبوع من التأمل الصامت والمشي في الطبيعة، غادرت بوضوح لم أشعر به منذ سنوات. كانت تجربة غيرت حياتي."</p>
+                        </blockquote>
+                        <cite class="testimonial-author">
+                            <img src="https://i.pravatar.cc/80?u=1" alt="صورة سارة م." loading="lazy">
+                            <span>سارة م. - مديرة تسويق</span>
+                        </cite>
+                    </div>
+                    <div class="testimonial-slide">
+                        <blockquote class="testimonial-text">
+                            <p>"كنت متشككًا في البداية، لكن الدفء والأصالة في هذا المكان أذابا كل شكوكي. تعلمت أدوات عملية أستخدمها يوميًا للتعامل مع القلق. شكرًا لكم من القلب."</p>
+                        </blockquote>
+                        <cite class="testimonial-author">
+                            <img src="https://i.pravatar.cc/80?u=2" alt="صورة أحمد خ." loading="lazy">
+                            <span>أحمد خ. - مهندس برمجيات</span>
+                        </cite>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="prev-btn" aria-label="الشهادة السابقة"><i class="fas fa-chevron-right"></i></button>
+                    <button class="next-btn" aria-label="الشهادة التالية"><i class="fas fa-chevron-left"></i></button>
+                </div>
+            </div>
+        </section>
+        
+        <section id="circle-of-trust" class="content-section animate-on-scroll">
+            <div class="container">
+                 <div class="circle-icon">
+                    <i class="fas fa-shield-heart"></i>
+                </div>
+                <h2 class="section-title">دائرة الثقة</h2>
+                <p class="section-intro">رحلة الشفاء لا تنتهي بانتهاء الخلوة. ندعو خريجي برامجنا للانضمام إلى "دائرة الثقة"، وهي مساحة خاصة ومستمرة للدعم والنمو والتواصل مع مجتمع يشاركك نفس القيم والرحلة.</p>
+                <div style="text-align: center;">
+                    <a href="#contact" class="btn btn-primary">استفسر عن الانضمام</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq-section content-section bg-light animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">أسئلة شائعة</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>هل أحتاج إلى خبرة سابقة في التأمل أو اليوجا؟</span>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>إطلاقًا. تم تصميم برامجنا لتكون مرحبة ومفيدة للجميع، من المبتدئين تمامًا إلى الممارسين ذوي الخبرة. مرشدونا متخصصون في تكييف الممارسات لتناسب مستوى كل فرد.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>ماذا يجب أن أحضر معي؟</span>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>ننصح بإحضار ملابس مريحة، حذاء مناسب للمشي في الطبيعة، دفتر ملاحظات وقلم، وعقل منفتح. نحن نوفر كل ما يلزم لممارسات اليوجا والتأمل، بما في ذلك الحصائر والوسائد.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>هل هناك خيارات للطعام الخاص بالحميات الغذائية؟</span>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>نعم. مطبخنا يعتمد على الأطعمة النباتية والعضوية. يمكننا بسهولة تلبية معظم الاحتياجات الغذائية الخاصة مثل الخالية من الغلوتين، أو الحساسية من المكسرات، وغيرها. يرجى إبلاغنا باحتياجاتك عند الحجز.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section content-section bg-dark animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">تواصل معي</h2>
+                <p class="section-intro">أنا هنا للإجابة على أسئلتك ومساعدتك في بدء رحلتك. املأ النموذج أدناه، وسأتواصل معك قريبًا.</p>
+                <form action="#" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="sr-only">الاسم</label>
+                        <input type="text" id="name" name="name" placeholder="الاسم الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="sr-only">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" placeholder="البريد الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="program-interest" class="sr-only">البرنامج المهتم به</label>
+                        <select id="program-interest" name="program" required>
+                            <option value="" disabled selected>اختر البرنامج المهتم به...</option>
+                            <option value="mindfulness">الانغماس في اليقظة الذهنية</option>
+                            <option value="rejuvenation">خلوة تجديد نهاية الأسبوع</option>
+                            <option value="guidance">إرشاد روحي شخصي</option>
+                            <option value="general">استفسار عام</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="sr-only">رسالتك</label>
+                        <textarea id="message" name="message" rows="5" placeholder="رسالتك أو سؤالك..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">أرسل استفساري</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+    
+    <a href="https://wa.me/967000000000" class="whatsapp-float" target="_blank" aria-label="تواصل معنا عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <div class="nature-sounds-toggle" aria-label="تشغيل/إيقاف أصوات الطبيعة">
+        <i class="fas fa-volume-high"></i>
+        <i class="fas fa-volume-mute"></i>
+    </div>
+    <audio id="nature-audio" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/10/24/audio_9639c1469e.mp3" type="audio/mpeg">
+    </audio>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>طِبرا | Ṭibra</h3>
+                    <p>مساحة للشفاء والنمو وإعادة الاتصال بالذات. انضم إلينا في رحلة تحويلية.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#philosophy">فلسفتنا</a></li>
+                        <li><a href="#programs">البرامج</a></li>
+                         <li><a href="#knowledge-center">مركز المعرفة</a></li>
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>تابعنا</h4>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 طِبرا | Ṭibra. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="modal-welcome" class="modal welcome-modal">
+        <div class="modal-content">
+            <h2>أهلاً بك في طِبرا</h2>
+            <p>قبل أن تبدأ رحلتك، نود أن نعرف: ما الذي أتى بك إلى هنا اليوم؟</p>
+            <div class="options-grid">
+                <button class="option-btn" data-choice="calm">أبحث عن السكينة والهدوء</button>
+                <button class="option-btn" data-choice="clarity">أبحث عن الوضوح والتركيز</button>
+                <button class="option-btn" data-choice="healing">أبحث عن الشفاء من ألم</button>
+                <button class="option-btn" data-choice="curious">أنا هنا بدافع الفضول</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !isExpanded);
+                    navMenu.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll');
+                    const icon = navToggle.querySelector('i');
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                });
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navMenu.classList.contains('active')) navToggle.click();
+                    });
+                });
+            }
+
+            const header = document.querySelector('.main-header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    header.classList.toggle('scrolled', window.scrollY > 50);
+                });
+            }
+            
+            // --- Welcome Modal Logic ---
+            const welcomeModal = document.getElementById('modal-welcome');
+            const overlay = document.querySelector('.modal-overlay');
+            if (welcomeModal && sessionStorage.getItem('welcomeShown') !== 'true') {
+                 setTimeout(() => {
+                    welcomeModal.classList.add('active');
+                    overlay.classList.add('active');
+                    document.body.classList.add('no-scroll');
+                 }, 1500);
+            }
+            
+            welcomeModal.querySelectorAll('.option-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Here you could add logic based on data-choice
+                    console.log(`User chose: ${btn.dataset.choice}`);
+                    closeModal(welcomeModal);
+                    sessionStorage.setItem('welcomeShown', 'true');
+                });
+            });
+
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            if (slides.length > 0) {
+                let currentSlide = 0;
+                const showSlide = (index) => {
+                    slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+                };
+                nextBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                });
+                prevBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    showSlide(currentSlide);
+                });
+                showSlide(currentSlide);
+            }
+
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = question.querySelector('i');
+                question.addEventListener('click', () => {
+                    const isExpanded = question.getAttribute('aria-expanded') === 'true';
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                            otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                            otherItem.querySelector('i').classList.replace('fa-minus', 'fa-plus');
+                        }
+                    });
+                    if (isExpanded) {
+                        question.setAttribute('aria-expanded', 'false');
+                        answer.style.maxHeight = null;
+                        icon.classList.replace('fa-minus', 'fa-plus');
+                    } else {
+                        question.setAttribute('aria-expanded', 'true');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.classList.replace('fa-plus', 'fa-minus');
+                    }
+                });
+            });
+
+            const modalButtons = document.querySelectorAll('[data-modal-target]');
+            const closeModalButtons = document.querySelectorAll('.close-modal, .modal-book-btn');
+            const openModal = (modal) => {
+                if (!modal) return;
+                modal.classList.add('active');
+                overlay.classList.add('active');
+                document.body.classList.add('no-scroll');
+            };
+            const closeModal = (modal) => {
+                if (!modal) return;
+                modal.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            };
+            modalButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = document.querySelector('#' + button.dataset.modalTarget);
+                    openModal(modal);
+                });
+            });
+            overlay.addEventListener('click', () => {
+                const modals = document.querySelectorAll('.modal.active');
+                modals.forEach(closeModal);
+            });
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = button.closest('.modal');
+                    closeModal(modal);
+                });
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal.active').forEach(closeModal);
+                }
+            });
+
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+            
+            // Nature Sounds Toggle
+            const soundToggle = document.querySelector('.nature-sounds-toggle');
+            const natureAudio = document.getElementById('nature-audio');
+            if(soundToggle && natureAudio) {
+                soundToggle.addEventListener('click', () => {
+                    if (natureAudio.paused) {
+                        natureAudio.play();
+                        soundToggle.classList.add('playing');
+                        soundToggle.setAttribute('aria-label', 'إيقاف أصوات الطبيعة');
+                    } else {
+                        natureAudio.pause();
+                        soundToggle.classList.remove('playing');
+                         soundToggle.setAttribute('aria-label', 'تشغيل أصوات الطبيعة');
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
