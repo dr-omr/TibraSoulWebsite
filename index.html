@@ -18,7 +18,7 @@
          * main.css
          * Stylesheet for TibraSoul Website
          * Author: Dr. Omar & Office701
-         * Version: 4.7.0 (Floating CTA Button)
+         * Version: 4.8.0 (Super Medicines Modal)
         */
 
         :root {
@@ -28,6 +28,7 @@
             --light-color: #FFFFFF;
             --text-color: #4a4a4a;
             --accent-color: #c8a07d;
+            --super-med-color: #c28f5c;
             --font-body: 'Noto Kufi Arabic', sans-serif;
             --font-headings: 'Noto Kufi Arabic', sans-serif;
             --font-brand: 'Great Vibes', cursive;
@@ -184,7 +185,7 @@
         .whatsapp-float:hover { transform: scale(1.1); }
         .whatsapp-float i { margin-top: 15px; }
 
-        .super-medicines-float { position: fixed; bottom: 110px; right: 40px; background-color: var(--accent-color); color: var(--light-color); border-radius: 50px; padding: 0.8rem 1.5rem; font-size: 1rem; font-weight: 700; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; animation: simple-bounce 2.5s infinite; display: flex; align-items: center; gap: 0.5rem; }
+        .super-medicines-float { position: fixed; bottom: 110px; right: 40px; background-color: var(--super-med-color); color: var(--light-color); border-radius: 50px; padding: 0.8rem 1.5rem; font-size: 1rem; font-weight: 700; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; animation: simple-bounce 2.5s infinite; display: flex; align-items: center; gap: 0.5rem; }
         .super-medicines-float:hover { transform: scale(1.05); animation-play-state: paused; }
 
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
@@ -500,9 +501,9 @@
         <i class="fab fa-whatsapp"></i>
     </a>
     
-     <a href="#super-medicines" class="super-medicines-float">
+     <button data-modal-target="modal-super-medicines" class="super-medicines-float">
         🧬 الأدوية الخارقة
-    </a>
+    </button>
 
     <div class="nature-sounds-toggle" aria-label="تشغيل/إيقاف أصوات الطبيعة">
         <i class="fas fa-volume-high"></i>
@@ -674,6 +675,44 @@
                 <span id="cart-total-price">$0.00</span>
             </div>
             <a href="#" id="whatsapp-checkout-btn" class="btn btn-primary checkout-btn" target="_blank">إتمام الشراء عبر واتساب</a>
+        </div>
+    </div>
+    
+    <!-- Super-Medicines Modal -->
+    <div id="modal-super-medicines" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
+            <h2>الأدوية الخارقة</h2>
+            <p>هنا تتجلى خلاصة خبرتي، حيث يلتقي العلم المتقدم بالحكمة الروحية العميقة. هذه ليست مجرد مكملات، بل هي أدوات تحفيزية مصممة لإيقاظ القوة الشفائية الكامنة في خلاياك.</p>
+             <div class="store-grid" style="margin-top: 2rem;">
+                 <article class="product-card" data-id="4" data-name="إكسير الشباب" data-price="49" data-img="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop">
+                    <img src="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop" alt="إكسير الشباب" class="product-card-img" loading="lazy">
+                    <div class="product-card-content">
+                        <h3 class="product-card-title">إكسير الشباب</h3>
+                        <p class="product-card-desc">تركيبة متقدمة تجمع بين مضادات الأكسدة القوية مثل ريسفيراترول و NADH، لدعم تجديد الخلايا وإبطاء علامات الشيخوخة على المستوى الخلوي.</p>
+                        <div class="product-price">$49</div>
+                        <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
+                    </div>
+                </article>
+                <article class="product-card" data-id="5" data-name="درع المناعة الذهبي" data-price="45" data-img="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop">
+                    <img src="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop" alt="درع المناعة الذهبي" class="product-card-img" loading="lazy">
+                    <div class="product-card-content">
+                        <h3 class="product-card-title">درع المناعة الذهبي</h3>
+                        <p class="product-card-desc">مزيج قوي من فطر الريشي، والزنك بيكولينات، وفيتامين د3، مصمم لتقوية خطوط دفاع الجسم الطبيعية وتعزيز الاستجابة المناعية الصحية.</p>
+                        <div class="product-price">$45</div>
+                        <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
+                    </div>
+                </article>
+                <article class="product-card" data-id="6" data-name="تركيز الحكماء" data-price="40" data-img="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop">
+                    <img src="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop" alt="تركيز الحكماء" class="product-card-img" loading="lazy">
+                    <div class="product-card-content">
+                        <h3 class="product-card-title">تركيز الحكماء</h3>
+                        <p class="product-card-desc">يجمع بين عشبة الجنكة بيلوبا ومركب "Lion's Mane" لدعم الوظائف الإدراكية، تعزيز الذاكرة، وتحقيق وضوح ذهني استثنائي.</p>
+                        <div class="product-price">$40</div>
+                        <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
+                    </div>
+                </article>
+            </div>
         </div>
     </div>
 
