@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="اكتشف رحلتك نحو الشفاء الروحي مع طِبرا. نقدم خلوات وتجارب تحويلية مصممة لتجديد العقل والجسد والروح.">
-    <meta name="keywords" content="الشفاء الروحي, التأمل, خلوة روحية, اليقظة الذهنية, طِبرا, طبيب وعي, TibraSoul, spiritual healing, meditation, retreat, mindfulness, أدوية خارقة">
+    <meta name="keywords" content="الشفاء الروحي, التأمل, خلوة روحية, اليقظة الذهنية, طِبرا, طبيب وعي, TibraSoul, spiritual healing, meditation, retreat, mindfulness, أدوية خارقة, آراء العملاء">
     <title>ṬibraSoul طِبرا | Ṭibra - رحلتك نحو الشفاء الروحي</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,14 +16,11 @@
     <style>
         /*
          * TibraSoul - Digital Sanctuary
-         * Version: 6.0.0 (Strategic Evolution Build)
-         * DEVELOPER'S NOTE: This version implements the strategic recommendations from the development report.
-         * The focus is on enhancing performance, building user trust, and transforming the site
-         * from a "digital brochure" into a true "digital sanctuary".
+         * Version: 7.0.0 (Interactive Testimonials Build)
+         * NOTE: This code implements the strategic recommendations and adds a new interactive testimonials section.
         */
 
         :root {
-            /* NOTE: Retained the calming green/beige palette as it better serves the "sanctuary" goal than the purple/gold mentioned in the report's critique. */
             --primary-color: #5a6e5a;
             --secondary-color: #f4f1eb;
             --dark-color: #3c3c3c;
@@ -83,12 +80,6 @@
         .btn-primary-nav:hover { background-color: #435243; color: var(--light-color); }
         .nav-toggle { display: none; font-size: 1.5rem; background: none; border: none; color: var(--dark-color); cursor: pointer; z-index: 1001; }
 
-        /* DEVELOPER'S NOTE: Hero section refactored for performance and trust, per strategic report.
-         * Removed the JS-based parallax effect criticized for causing 'jank'.
-         * Replaced the <img> tag with a pure CSS background-image for faster, smoother rendering.
-         * The overlay is now part of the background itself, which is more efficient.
-         * This directly addresses the report's core concern about the initial user experience reflecting the brand's promise of calm.
-        */
         .hero-section {
             height: 100vh;
             min-height: 700px;
@@ -133,6 +124,93 @@
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
         .faq-answer p { padding: 0 1rem 1.5rem 1rem; margin-bottom: 0; }
         .faq-answer p strong { color: var(--primary-color); }
+        
+        /* NEW SECTION: Testimonials Styles */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #2c2c2c; /* Dark background like a chat app */
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden; /* To contain floating hearts */
+        }
+        .chat-bubble {
+            position: relative;
+            max-width: 80%;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            color: var(--light-color);
+            line-height: 1.6;
+            clear: both;
+        }
+        .chat-bubble p {
+            margin-bottom: 0;
+            font-size: 1.05rem;
+        }
+        .chat-bubble cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-style: normal;
+            font-weight: bold;
+            color: #ccc;
+        }
+        .chat-bubble.client {
+            background-color: var(--primary-color);
+            border-bottom-right-radius: 5px;
+            float: right;
+        }
+        .chat-bubble.doctor {
+            background-color: #4a4a4a;
+            border-bottom-left-radius: 5px;
+            float: left;
+            text-align: left;
+        }
+        .chat-bubble-wrapper {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 1rem;
+        }
+        .chat-bubble-wrapper.client {
+            justify-content: flex-end;
+        }
+        .chat-bubble-wrapper.doctor {
+            justify-content: flex-start;
+        }
+        .reaction-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .reaction-btn:hover {
+            color: #ff4d4d;
+            transform: scale(1.2);
+        }
+        .floating-heart {
+            position: absolute;
+            color: #ff4d4d;
+            font-size: 1.5rem;
+            animation: float-up 1.5s ease-out forwards;
+            pointer-events: none; /* So they don't block clicks */
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.5);
+            }
+        }
+        /* END: Testimonials Styles */
 
         .contact-form { max-width: 700px; margin: 0 auto; }
         .form-group { margin-bottom: 1.5rem; }
@@ -191,9 +269,6 @@
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         
-        /* DEVELOPER'S NOTE: Corrected structural issue where footer shared a class with the header.
-         * Created a dedicated `.site-footer` class for better maintainability and to avoid CSS conflicts,
-         * reinforcing the report's call for a stable and trustworthy platform structure. */
         .site-footer {
             background-color: var(--dark-color);
             color: #ccc;
@@ -266,6 +341,7 @@
                     <li><a href="#philosophy">فلسفتنا</a></li>
                     <li><a href="#programs">البرامج</a></li>
                     <li><a href="#store">كنوز الطبيعة</a></li>
+                    <li><a href="#testimonials">أصداء الشفاء</a></li>
                     <li><a href="#knowledge-center">مركز المعرفة</a></li>
                     <li><a href="#contact" class="btn btn-primary-nav">احجز الآن</a></li>
                 </ul>
@@ -286,7 +362,7 @@
     <main>
 
         <section id="hero" class="hero-section">
-             <div class="hero-content">
+            <div class="hero-content">
                 <h1 class="hero-title">ṬibraSoul</h1>
                 <p class="hero-subtitle">رحلتك التحويلية للروح تبدأ هنا.</p>
                 <a href="#programs" class="btn btn-primary">استكشف رحلاتنا</a>
@@ -430,8 +506,37 @@
                 </div>
             </div>
         </section>
+
+        <section id="testimonials" class="content-section bg-light animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">أصداء الشفاء</h2>
+                <p class="section-intro">رسائل حقيقية من أشخاص لمسوا التغيير. كل رسالة هي شهادة على قوة الاتصال بالذات.</p>
+                <div class="testimonials-container">
+                    <div class="chat-bubble-wrapper client">
+                        <button class="reaction-btn" aria-label="React with heart"><i class="fas fa-heart"></i></button>
+                        <div class="chat-bubble client">
+                            <p>كنت ضائعة تماماً في دوامة من القلق والتفكير الزائد. جلستك كانت مثل النور الذي كنت أحتاجه لأرى طريقي من جديد. شكراً من القلب.</p>
+                            <cite>نورة. م</cite>
+                        </div>
+                    </div>
+                    <div class="chat-bubble-wrapper doctor">
+                        <div class="chat-bubble doctor">
+                            <p>سعيد جداً لسماع ذلك يا نورة. النور كان بداخلك دائماً، أنا فقط ساعدتك في إزالة الغبار عنه.</p>
+                        </div>
+                    </div>
+                    <div class="chat-bubble-wrapper client">
+                        <button class="reaction-btn" aria-label="React with heart"><i class="fas fa-heart"></i></button>
+                        <div class="chat-bubble client">
+                            <p>لم أتوقع أبداً أن جلسة واحدة عن بعد يمكن أن تحدث كل هذا الفارق في حياتي. أشعر وكأني ولدت من جديد، بطاقة وسلام داخلي لم أعهده من قبل.</p>
+                            <cite>أحمد. س</cite>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <section id="faq" class="faq-section content-section animate-on-scroll"> <div class="container">
+        <section id="faq" class="faq-section content-section animate-on-scroll">
+            <div class="container">
                 <h2 class="section-title">أسئلة شائعة</h2>
                 <div class="faq-accordion">
                     <div class="faq-item">
@@ -548,6 +653,7 @@
         </div>
     </footer>
     
+    <!-- Modals (Pop-ups) -->
     <div id="modal-guidance" class="modal">
         <div class="modal-content">
             <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
@@ -609,14 +715,17 @@
         </div>
     </div>
 
+    <!-- Blog Modals -->
     <div id="modal-blog-mindfulness" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>خمسة طرق لدمج اليقظة في يومك</h2><p>في خضم انشغالاتنا اليومية، قد يبدو تخصيص وقت للتأمل أمرًا صعبًا. لكن الحقيقة هي أن اليقظة الذهنية ليست ممارسة تجلس لها، بل هي حالة وعي تعيش بها. إليك خمس طرق بسيطة لنسجها في نسيج يومك...</p></div></div>
     <div id="modal-blog-tea" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>تأمل الشاي: طقس من السكينة</h2><audio controls style="width:100%; margin-top:1rem;"><source src="https://cdn.pixabay.com/audio/2022/10/24/audio_9639c1469e.mp3" type="audio/mpeg"></audio><p style="margin-top:1rem;">فنجان الشاي الصباحي أو المسائي يمكن أن يتحول من مجرد عادة إلى طقس شفائي عميق. في هذا التأمل الصوتي، سأقودك خطوة بخطوة لتحويل هذه اللحظات البسيطة إلى واحة من السلام والوعي...</p></div></div>
     <div id="modal-blog-story" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>رحلة أحمد: من القلق إلى السلام</h2><p>عندما تواصل معي أحمد أول مرة، كان صوته يحمل ثقل العالم. كان القلق يلتهم لياليه، ويسرق منه متعة اللحظة الحاضرة. "أشعر أني في سباق دائم لا أعرف خط نهايته"، هكذا وصف حالته. كانت رحلته معنا شهادة على قوة الالتزام بالشفاء الداخلي...</p></div></div>
     
     <div id="modal-welcome" class="modal welcome-modal"><div class="modal-content"><h2>أهلاً بك في طِبرا</h2><p>قبل أن تبدأ رحلتك، نود أن نعرف: ما الذي أتى بك إلى هنا اليوم؟</p><div class="options-grid"><button class="option-btn" data-choice="calm">أبحث عن السكينة والهدوء</button><button class="option-btn" data-choice="clarity">أبحث عن الوضوح والتركيز</button><button class="option-btn" data-choice="healing">أبحث عن الشفاء من ألم</button><button class="option-btn" data-choice="curious">أنا هنا بدافع الفضول</button></div></div></div>
 
+    <!-- Shopping Cart Modal -->
     <div id="cart-modal" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>سلتي</h2><ul class="cart-items-list"><p class="cart-empty-msg">سلتك فارغة حاليًا.</p></ul></div><div class="cart-summary"><div class="cart-total"><span>المجموع:</span><span id="cart-total-price">$0.00</span></div><a href="#" id="whatsapp-checkout-btn" class="btn btn-primary checkout-btn" target="_blank">إتمام الشراء عبر واتساب</a></div></div>
     
+    <!-- Super-Medicines Modal -->
     <div id="modal-super-medicines" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><div style="padding: 2rem; margin: -2rem; background-color: var(--dark-color); color: white;"><div class="container"><h2 class="section-title">الأدوية الخارقة</h2><p class="section-intro">هنا تتجلى خلاصة خبرتي، حيث يلتقي العلم المتقدم بالحكمة الروحية العميقة. هذه ليست مجرد مكملات، بل هي أدوات تحفيزية مصممة لإيقاظ القوة الشفائية الكامنة في خلاياك.</p><div class="store-grid"><article class="product-card" data-id="4" data-name="إكسير الشباب" data-price="49" data-img="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop" alt="إكسير الشباب" class="product-card-img" loading="lazy"><div class="product-card-content"><h3 class="product-card-title">إكسير الشباب</h3><p class="product-card-desc">تركيبة متقدمة تجمع بين مضادات الأكسدة القوية مثل ريسفيراترول و NADH، لدعم تجديد الخلايا وإبطاء علامات الشيخوخة على المستوى الخلوي.</p><div class="product-price">$49</div><button class="btn btn-primary add-to-cart-btn">أضف للسلة</button></div></article><article class="product-card" data-id="5" data-name="درع المناعة الذهبي" data-price="45" data-img="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop" alt="درع المناعة الذهبي" class="product-card-img" loading="lazy"><div class="product-card-content"><h3 class="product-card-title">درع المناعة الذهبي</h3><p class="product-card-desc">مزيج قوي من فطر الريشي، والزنك بيكولينات، وفيتامين د3، مصمم لتقوية خطوط دفاع الجسم الطبيعية وتعزيز الاستجابة المناعية الصحية.</p><div class="product-price">$45</div><button class="btn btn-primary add-to-cart-btn">أضف للسلة</button></div></article><article class="product-card" data-id="6" data-name="تركيز الحكماء" data-price="40" data-img="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop" alt="تركيز الحكماء" class="product-card-img" loading="lazy"><div class="product-card-content"><h3 class="product-card-title">تركيز الحكماء</h3><p class="product-card-desc">يجمع بين عشبة الجنكة بيلوبا ومركب "Lion's Mane" لدعم الوظائف الإدراكية، تعزيز الذاكرة، وتحقيق وضوح ذهني استثنائي.</p><div class="product-price">$40</div><button class="btn btn-primary add-to-cart-btn">أضف للسلة</button></div></article></div></div></div></div></div>
 
     <div class="modal-overlay"></div>
@@ -658,7 +767,13 @@
                 document.body.classList.remove('no-scroll');
             };
 
-            // --- Welcome Modal Logic ---
+            const openModal = (modal) => {
+                if (!modal) return;
+                modal.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                document.body.classList.add('no-scroll');
+            };
+
             const welcomeModal = document.getElementById('modal-welcome');
             if (welcomeModal && overlay) {
                  if (sessionStorage.getItem('welcomeShown') !== 'true') {
@@ -676,17 +791,9 @@
                 });
             }
             
-            // --- General Modal Logic ---
             const modalButtons = document.querySelectorAll('[data-modal-target]');
             const closeModalButtons = document.querySelectorAll('.close-modal');
             const modalBookButtons = document.querySelectorAll('.modal-book-btn');
-            
-            const openModal = (modal) => {
-                if (!modal) return;
-                modal.classList.add('active');
-                if (overlay) overlay.classList.add('active');
-                document.body.classList.add('no-scroll');
-            };
             
             modalButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
@@ -710,8 +817,6 @@
                 });
             });
             
-            // DEVELOPER'S NOTE: Implemented seamless flow from Modal to Contact Form.
-            // This reduces friction and makes the user journey smoother, aligning with the "sanctuary" principle.
             modalBookButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -738,7 +843,6 @@
                 }
             });
 
-            // --- Shopping Cart Logic ---
             let cart = [];
             const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
             const cartIconWrapper = document.querySelector('.cart-icon-wrapper');
@@ -755,8 +859,10 @@
                  cartItemsList.innerHTML = '';
                  if (cart.length === 0) {
                      cartEmptyMsg.style.display = 'block';
+                     if(whatsAppCheckoutBtn) whatsAppCheckoutBtn.style.display = 'none';
                  } else {
                      cartEmptyMsg.style.display = 'none';
+                     if(whatsAppCheckoutBtn) whatsAppCheckoutBtn.style.display = 'block';
                      cart.forEach(item => {
                          const li = document.createElement('li');
                          li.className = 'cart-item';
@@ -802,13 +908,8 @@
             }
             
             function updateWhatsAppLink(totalPrice) {
-                 if (!whatsAppCheckoutBtn) return;
-                 if (cart.length === 0) {
-                     whatsAppCheckoutBtn.style.display = 'none';
-                     return;
-                 }
+                 if (!whatsAppCheckoutBtn || cart.length === 0) return;
                  
-                 whatsAppCheckoutBtn.style.display = 'block';
                  let message = "سلام دكتور عمر،\nأود طلب المنتجات التالية من موقع طِبْرا:\n\n";
                  cart.forEach(item => {
                      message += `- ${item.name} (الكمية: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
@@ -847,9 +948,8 @@
             if (cartIconWrapper) {
                 cartIconWrapper.addEventListener('click', () => openModal(cartModal));
             }
-            updateCartDisplay(); // Initial call
+            updateCartDisplay();
             
-            // --- Form Handling ---
             const contactForm = document.getElementById('contact-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
@@ -886,7 +986,6 @@
                 });
             }
 
-            // --- Other Initializations ---
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -901,20 +1000,25 @@
             const soundToggle = document.querySelector('.nature-sounds-toggle');
             const natureAudio = document.getElementById('nature-audio');
             if(soundToggle && natureAudio) {
-                soundToggle.addEventListener('click', () => {
+                soundToggle.addEventListener('click', async () => {
                     if (natureAudio.paused) {
-                        natureAudio.play().catch(e => console.error("Audio play failed:", e));
-                        soundToggle.classList.add('playing');
-                        soundToggle.setAttribute('aria-label', 'إيقاف أصوات الطبيعة');
+                        try {
+                            await natureAudio.play();
+                            soundToggle.classList.add('playing');
+                            soundToggle.setAttribute('aria-label', 'إيقاف أصوات الطبيعة');
+                        } catch (error) {
+                            if (error.name !== 'AbortError') {
+                                console.error("Audio play failed:", error);
+                            }
+                        }
                     } else {
                         natureAudio.pause();
                         soundToggle.classList.remove('playing');
-                         soundToggle.setAttribute('aria-label', 'تشغيل أصوات الطبيعة');
+                        soundToggle.setAttribute('aria-label', 'تشغيل أصوات الطبيعة');
                     }
                 });
             }
             
-            // --- FAQ Accordion ---
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
@@ -928,6 +1032,38 @@
                         answer.style.maxHeight = answer.scrollHeight + 'px';
                     } else {
                         answer.style.maxHeight = '0';
+                    }
+                });
+            });
+
+            // NEW: Interactive Testimonials Logic
+            const reactionButtons = document.querySelectorAll('.reaction-btn');
+            reactionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const testimonialsContainer = button.closest('.testimonials-container');
+                    if (!testimonialsContainer) return;
+
+                    // Create and animate multiple hearts
+                    for (let i = 0; i < 5; i++) {
+                        const heart = document.createElement('i');
+                        heart.className = 'fas fa-heart floating-heart';
+                        
+                        // Position heart near the button
+                        const buttonRect = button.getBoundingClientRect();
+                        const containerRect = testimonialsContainer.getBoundingClientRect();
+                        heart.style.left = `${buttonRect.left - containerRect.left + (Math.random() * 20 - 10)}px`;
+                        heart.style.top = `${buttonRect.top - containerRect.top + (Math.random() * 10 - 5)}px`;
+
+                        // Randomize animation properties
+                        heart.style.animationDuration = `${Math.random() * 1 + 1}s`;
+                        heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+
+                        testimonialsContainer.appendChild(heart);
+
+                        // Remove heart from DOM after animation
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 1500);
                     }
                 });
             });
