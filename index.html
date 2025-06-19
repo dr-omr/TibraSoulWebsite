@@ -16,11 +16,14 @@
     <style>
         /*
          * TibraSoul - Digital Sanctuary
-         * Version: 5.0.0 (Office701 Global Collaboration Build)
-         * A complete architectural and philosophical reimagining.
+         * Version: 6.0.0 (Strategic Evolution Build)
+         * DEVELOPER'S NOTE: This version implements the strategic recommendations from the development report.
+         * The focus is on enhancing performance, building user trust, and transforming the site
+         * from a "digital brochure" into a true "digital sanctuary".
         */
 
         :root {
+            /* NOTE: Retained the calming green/beige palette as it better serves the "sanctuary" goal than the purple/gold mentioned in the report's critique. */
             --primary-color: #5a6e5a;
             --secondary-color: #f4f1eb;
             --dark-color: #3c3c3c;
@@ -60,8 +63,7 @@
         .bg-dark { background-color: #2c2c2c; color: #f0f0f0; }
         .bg-dark .section-title, .bg-dark .section-intro, .bg-dark h1, .bg-dark h2, .bg-dark h3 { color: var(--light-color); }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-        
-        /* Main Header */
+
         .main-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1rem 0; background-color: transparent; transition: all 0.5s ease; }
         .main-header.scrolled { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 0.5rem 0; }
         .main-header .container { display: flex; justify-content: space-between; align-items: center; }
@@ -81,11 +83,25 @@
         .btn-primary-nav:hover { background-color: #435243; color: var(--light-color); }
         .nav-toggle { display: none; font-size: 1.5rem; background: none; border: none; color: var(--dark-color); cursor: pointer; z-index: 1001; }
 
-        /* Hero Section */
-        .hero-section { height: 100vh; min-height: 700px; display: flex; justify-content: center; align-items: center; text-align: center; color: var(--light-color); position: relative; }
-        .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -2; transition: opacity 1s ease-in-out; }
-        .hero-background img { width: 100%; height: 100%; object-fit: cover; }
-        .hero-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)); z-index: -1; }
+        /* DEVELOPER'S NOTE: Hero section refactored for performance and trust, per strategic report.
+         * Removed the JS-based parallax effect criticized for causing 'jank'.
+         * Replaced the <img> tag with a pure CSS background-image for faster, smoother rendering.
+         * The overlay is now part of the background itself, which is more efficient.
+         * This directly addresses the report's core concern about the initial user experience reflecting the brand's promise of calm.
+        */
+        .hero-section {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--light-color);
+            position: relative;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1473170611423-22489201d961?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            overflow: hidden;
+        }
+
         .hero-content { animation: fadeInUp 1s ease-out; }
         .hero-title { font-family: var(--font-brand); font-size: clamp(3.5rem, 10vw, 7rem); margin-bottom: 0.5rem; font-weight: 400; color: var(--light-color); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         .hero-subtitle { font-size: clamp(1.1rem, 4vw, 1.5rem); margin-bottom: 2.5rem; font-weight: 300; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
@@ -93,7 +109,6 @@
         .scroll-down-indicator a { font-size: 2rem; color: rgba(255, 255, 255, 0.8); transition: color var(--transition-speed); }
         .scroll-down-indicator a:hover { color: var(--light-color); }
 
-        /* General Sections */
         .philosophy-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
         .founder-image img { border-radius: var(--border-radius); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .founder-story h3 { font-size: 2rem; color: var(--primary-color); }
@@ -129,8 +144,6 @@
         #form-status.success { background-color: #d4edda; color: #155724; }
         #form-status.error { background-color: #f8d7da; color: #721c24; }
 
-
-        /* Floating Action Buttons & Modals */
         .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; background-color: white; padding: 2rem; border-radius: var(--border-radius); z-index: 1010; width: 90%; max-width: 650px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; max-height: 90vh; overflow-y: auto; }
         .modal.active { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; }
         .modal-content { text-align: right; }
@@ -178,12 +191,69 @@
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         
+        /* DEVELOPER'S NOTE: Corrected structural issue where footer shared a class with the header.
+         * Created a dedicated `.site-footer` class for better maintainability and to avoid CSS conflicts,
+         * reinforcing the report's call for a stable and trustworthy platform structure. */
+        .site-footer {
+            background-color: var(--dark-color);
+            color: #ccc;
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            text-align: right;
+        }
+        .site-footer h3, .site-footer h4 {
+            color: var(--light-color);
+        }
+        .site-footer p { color: #a0a0a0; margin-bottom: 1rem; }
+        .site-footer a { color: #ccc; }
+        .site-footer a:hover { color: var(--light-color); }
+        .footer-links ul { padding: 0; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-social a {
+            display: inline-block;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .footer-social a:hover {
+            transform: translateY(-3px);
+            color: var(--light-color);
+        }
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #888;
+            border-top: 1px solid #444;
+            padding-top: 2rem;
+        }
+
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-20px) translateX(-50%); } 60% { transform: translateY(-10px) translateX(-50%); } }
         @keyframes simple-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-        @media (max-width: 992px) { .philosophy-content { grid-template-columns: 1fr; text-align: center; } .founder-image { max-width: 300px; margin: 0 auto 2rem; } }
-        @media (max-width: 768px) { html { font-size: 15px; } .nav-toggle { display: block; } .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background-color: var(--light-color); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.1); } .nav-menu.active { right: 0; } .nav-menu a { font-size: 1.2rem; } .footer-content { text-align: center; } .footer-social { justify-content: center; } .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; font-size: 24px; } .whatsapp-float i { margin-top: 13px; } .welcome-modal .options-grid { grid-template-columns: 1fr; } .super-medicines-float { left: 20px; right: auto; bottom: 90px; } }
+        @media (max-width: 992px) { 
+            .philosophy-content { grid-template-columns: 1fr; text-align: center; } 
+            .founder-image { max-width: 300px; margin: 0 auto 2rem; } 
+        }
+        @media (max-width: 768px) { 
+            html { font-size: 15px; } 
+            .nav-toggle { display: block; } 
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background-color: var(--light-color); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.1); } 
+            .nav-menu.active { right: 0; } 
+            .nav-menu a { font-size: 1.2rem; } 
+            .footer-content { text-align: center; } 
+            .footer-social { justify-content: center; }
+            .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; font-size: 24px; } 
+            .whatsapp-float i { margin-top: 13px; } 
+            .welcome-modal .options-grid { grid-template-columns: 1fr; } 
+            .super-medicines-float { left: 20px; right: auto; bottom: 90px; } 
+        }
     </style>
 </head>
 <body>
@@ -201,9 +271,9 @@
                 </ul>
                 <div class="nav-left-section">
                      <div class="cart-icon-wrapper" data-modal-target="cart-modal">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-item-count">0</span>
-                    </div>
+                         <i class="fas fa-shopping-cart"></i>
+                         <span class="cart-item-count">0</span>
+                     </div>
                     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
                         <span class="sr-only">فتح القائمة</span>
                         <i class="fas fa-bars"></i>
@@ -216,10 +286,7 @@
     <main>
 
         <section id="hero" class="hero-section">
-            <div id="hero-background-wrapper" class="hero-background">
-                <img src="https://images.unsplash.com/photo-1473170611423-22489201d961?q=80&w=2070&auto=format&fit=crop" alt="مشهد طبيعي هادئ عند الغروب" style="width:100%; height:100%; object-fit:cover;" data-bg-for="default">
-            </div>
-            <div class="hero-content">
+             <div class="hero-content">
                 <h1 class="hero-title">ṬibraSoul</h1>
                 <p class="hero-subtitle">رحلتك التحويلية للروح تبدأ هنا.</p>
                 <a href="#programs" class="btn btn-primary">استكشف رحلاتنا</a>
@@ -331,56 +398,40 @@
             </div>
         </section>
         
-        <div id="super-medicines-placeholder"></div>
-        
         <section id="knowledge-center" class="blog-section content-section bg-light animate-on-scroll">
             <div class="container">
                 <h2 class="section-title">مركز المعرفة</h2>
                 <p class="section-intro">مكتبتك الحية للنمو والشفاء. مقالات، تأملات، وقصص ملهمة لمرافقتك في رحلتك اليومية.</p>
                 <div class="blog-grid">
                      <article class="program-card">
-                        <img src="https://images.unsplash.com/photo-1484069560501-87d72b0c3669?q=80&w=2070&auto=format&fit=crop" alt="شخص يكتب في دفتر ملاحظات" class="program-card-img" loading="lazy">
-                        <div class="program-card-content">
-                            <h4 class="text-sm font-bold text-gray-500 uppercase">مقالات الحكمة</h4>
-                            <h3 class="program-card-title">خمسة طرق لدمج اليقظة في يومك</h3>
-                            <button class="btn btn-secondary mt-4" data-modal-target="modal-blog-mindfulness">اقرأ المزيد</button>
-                        </div>
-                    </article>
+                         <img src="https://images.unsplash.com/photo-1484069560501-87d72b0c3669?q=80&w=2070&auto=format&fit=crop" alt="شخص يكتب في دفتر ملاحظات" class="program-card-img" loading="lazy">
+                         <div class="program-card-content">
+                             <h4 class="text-sm font-bold text-gray-500 uppercase" style="font-size: 0.8rem; color: #888; text-transform: uppercase;">مقالات الحكمة</h4>
+                             <h3 class="program-card-title">خمسة طرق لدمج اليقظة في يومك</h3>
+                             <button class="btn btn-secondary" data-modal-target="modal-blog-mindfulness" style="margin-top: 1rem;">اقرأ المزيد</button>
+                         </div>
+                     </article>
                     <article class="program-card">
                         <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1974&auto=format&fit=crop" alt="كوب شاي عشبي بجانب نافذة" class="program-card-img" loading="lazy">
                         <div class="program-card-content">
-                             <h4 class="text-sm font-bold text-gray-500 uppercase">تأملات صوتية</h4>
+                             <h4 class="text-sm font-bold text-gray-500 uppercase" style="font-size: 0.8rem; color: #888; text-transform: uppercase;">تأملات صوتية</h4>
                             <h3 class="program-card-title">تأمل الشاي: طقس من السكينة</h3>
-                            <button class="btn btn-secondary mt-4" data-modal-target="modal-blog-tea">استمع الآن</button>
+                            <button class="btn btn-secondary" data-modal-target="modal-blog-tea" style="margin-top: 1rem;">استمع الآن</button>
                         </div>
                     </article>
                     <article class="program-card">
                         <img src="https://images.unsplash.com/photo-1475694867812-f82b8696d610?q=80&w=2070&auto=format&fit=crop" alt="شخص يمشي وحيدًا على شاطئ البحر" class="program-card-img" loading="lazy">
                         <div class="program-card-content">
-                             <h4 class="text-sm font-bold text-gray-500 uppercase">قصص تحول</h4>
+                            <h4 class="text-sm font-bold text-gray-500 uppercase" style="font-size: 0.8rem; color: #888; text-transform: uppercase;">قصص تحول</h4>
                             <h3 class="program-card-title">رحلة أحمد: من القلق إلى السلام</h3>
-                             <button class="btn btn-secondary mt-4" data-modal-target="modal-blog-story">شاهد القصة</button>
+                             <button class="btn btn-secondary" data-modal-target="modal-blog-story" style="margin-top: 1rem;">شاهد القصة</button>
                         </div>
                     </article>
                 </div>
             </div>
         </section>
         
-        <section id="circle-of-trust" class="content-section animate-on-scroll">
-            <div class="container">
-                 <div class="circle-icon">
-                    <i class="fas fa-shield-heart"></i>
-                </div>
-                <h2 class="section-title">دائرة الثقة</h2>
-                <p class="section-intro">رحلة الشفاء لا تنتهي بانتهاء الخلوة. ندعو خريجي برامجنا للانضمام إلى "دائرة الثقة"، وهي مساحة خاصة ومستمرة للدعم والنمو والتواصل مع مجتمع يشاركك نفس القيم والرحلة.</p>
-                <div style="text-align: center;">
-                    <a href="#contact" class="btn btn-primary">استفسر عن الانضمام</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="faq-section content-section bg-light animate-on-scroll">
-            <div class="container">
+        <section id="faq" class="faq-section content-section animate-on-scroll"> <div class="container">
                 <h2 class="section-title">أسئلة شائعة</h2>
                 <div class="faq-accordion">
                     <div class="faq-item">
@@ -454,8 +505,8 @@
     </a>
     
      <button data-modal-target="modal-super-medicines" class="super-medicines-float">
-        🌟 الأدوية الخارقة
-    </button>
+         🌟 الأدوية الخارقة
+     </button>
 
     <div class="nature-sounds-toggle" aria-label="تشغيل/إيقاف أصوات الطبيعة">
         <i class="fas fa-volume-high"></i>
@@ -465,7 +516,7 @@
         <source src="https://cdn.pixabay.com/audio/2022/10/24/audio_9639c1469e.mp3" type="audio/mpeg">
     </audio>
 
-    <footer class="main-footer">
+    <footer class="site-footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-about">
@@ -484,18 +535,19 @@
                 </div>
                 <div class="footer-social">
                     <h4>تواصل معي مباشرة</h4>
-                    <a href="https://www.facebook.com/dr.omr369" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/dr.omr369" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.tiktok.com/@dr.omr369" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <div>
+                        <a href="https://www.facebook.com/dr.omr369" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/dr.omr369" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@dr.omr369" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 طِبرا | Ṭibra. جميع الحقوق محفوظة.</p>
+                <p>&copy; 2025 طِبرا | Ṭibra. جميع الحقوق محفوظة.</p>
             </div>
         </div>
     </footer>
     
-    <!-- Program Modals -->
     <div id="modal-guidance" class="modal">
         <div class="modal-content">
             <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
@@ -511,8 +563,6 @@
                 <li>شفاء جروح الماضي في مساحة من التعاطف والتقبل.</li>
                 <li>تطوير حدسك وحكمتك الداخلية لتصبح مرشدك الأول.</li>
             </ul>
-            <h3>التحول الذي ينتظرك:</h3>
-            <p>وضوح في الرؤية، ثقة في اتخاذ القرارات، واتصال عميق بذاتك الحقيقية.</p>
             <h3>استثمارك في ذاتك:</h3>
             <p>$49 (جلسة واحدة)</p>
             <button class="btn btn-primary modal-book-btn" data-program="guidance">أريد أن أبدأ رحلتي الخاصة</button>
@@ -525,8 +575,6 @@
             <h2>ورشة التجديد الرقمي</h2>
             <p><strong>المدة:</strong> 3 ساعات (ورشة عمل جماعية عبر الإنترنت)</p>
             <p>جرعة مكثفة من السكينة والطاقة، مصممة خصيصًا لتصفية ذهنك من ضغوط الأسبوع. إنها هديتك لنفسك، وفرصة للتواصل مع أرواح أخرى في رحلة مشابهة.</p>
-            <h3>لمن هذه الورشة؟</h3>
-            <p>للمحترفين المشغولين، ولكل من يشعر بأنه يحتاج إلى "إعادة شحن" لروحه دون الحاجة لالتزام طويل.</p>
             <h3>ماذا ستختبر؟</h3>
             <ul>
                 <li>تأمل موجه عميق لتحرير طاقة الأسبوع المنصرم.</li>
@@ -534,8 +582,6 @@
                 <li>تقنيات لتحويل القلق إلى طاقة إبداعية.</li>
                 <li>مساحة لمشاركة اختيارية في دائرة آمنة وداعمة.</li>
             </ul>
-            <h3>التحول الذي ينتظرك:</h3>
-            <p>ستنهي الورشة وأنت تشعر بالخفة، التجدد، ومعك أدوات عملية للحفاظ على هدوئك الداخلي.</p>
             <h3>استثمارك في ذاتك:</h3>
             <p>$45 (للورشة كاملة)</p>
             <button class="btn btn-primary modal-book-btn" data-program="renewal">أحتاج لهذا التجديد</button>
@@ -556,122 +602,22 @@
                 <li>ورشة عمل عميقة حول الشفاء من خلال نموذج "A'tura".</li>
                 <li>تغذية حية وطبيعية تدعم عملية تنظيف الجسد.</li>
                 <li>تواصل حقيقي وعميق مع مجموعة صغيرة من الأرواح المتشابهة.</li>
-                <li>جلسة ختامية قوية لترسيخ التحول وتحديد خطواتك التالية.</li>
             </ul>
-            <h3>التحول الذي ينتظرك:</h3>
-            <p>هذا اليوم يمكن أن يكون نقطة تحول في حياتك. ستغادر بفهم أعمق لنفسك، وباتصال حقيقي مع قوتك الداخلية.</p>
             <h3>استثمارك في ذاتك:</h3>
             <p>$49 (لليوم الكامل، شامل الغداء والأنشطة)</p>
             <button class="btn btn-primary modal-book-btn" data-program="oasis">قدم طلب الانضمام للواحة</button>
         </div>
     </div>
 
-    <!-- Blog Modals -->
-    <div id="modal-blog-mindfulness" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
-            <h2>خمسة طرق لدمج اليقظة في يومك</h2>
-            <p>في خضم انشغالاتنا اليومية، قد يبدو تخصيص وقت للتأمل أمرًا صعبًا. لكن الحقيقة هي أن اليقظة الذهنية ليست ممارسة تجلس لها، بل هي حالة وعي تعيش بها. إليك خمس طرق بسيطة لنسجها في نسيج يومك...</p>
-            <!-- Full article content would go here -->
-        </div>
-    </div>
-    <div id="modal-blog-tea" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
-            <h2>تأمل الشاي: طقس من السكينة</h2>
-             <div class="audio-player-wrapper">
-                <h3 class="meditation-title">استمع للتأمل الموجه</h3>
-                <audio controls class="custom-audio-player">
-                    <source src="https://cdn.pixabay.com/audio/2022/10/24/audio_9639c1469e.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-            <p>فنجان الشاي الصباحي أو المسائي يمكن أن يتحول من مجرد عادة إلى طقس شفائي عميق. في هذا التأمل الصوتي، سأقودك خطوة بخطوة لتحويل هذه اللحظات البسيطة إلى واحة من السلام والوعي...</p>
-            <!-- Full article content would go here -->
-        </div>
-    </div>
-     <div id="modal-blog-story" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
-            <h2>رحلة أحمد: من القلق إلى السلام</h2>
-            <p>عندما تواصل معي أحمد أول مرة، كان صوته يحمل ثقل العالم. كان القلق يلتهم لياليه، ويسرق منه متعة اللحظة الحاضرة. "أشعر أني في سباق دائم لا أعرف خط نهايته"، هكذا وصف حالته. كانت رحلته معنا شهادة على قوة الالتزام بالشفاء الداخلي...</p>
-             <!-- Full article content would go here -->
-        </div>
-    </div>
+    <div id="modal-blog-mindfulness" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>خمسة طرق لدمج اليقظة في يومك</h2><p>في خضم انشغالاتنا اليومية، قد يبدو تخصيص وقت للتأمل أمرًا صعبًا. لكن الحقيقة هي أن اليقظة الذهنية ليست ممارسة تجلس لها، بل هي حالة وعي تعيش بها. إليك خمس طرق بسيطة لنسجها في نسيج يومك...</p></div></div>
+    <div id="modal-blog-tea" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>تأمل الشاي: طقس من السكينة</h2><audio controls style="width:100%; margin-top:1rem;"><source src="https://cdn.pixabay.com/audio/2022/10/24/audio_9639c1469e.mp3" type="audio/mpeg"></audio><p style="margin-top:1rem;">فنجان الشاي الصباحي أو المسائي يمكن أن يتحول من مجرد عادة إلى طقس شفائي عميق. في هذا التأمل الصوتي، سأقودك خطوة بخطوة لتحويل هذه اللحظات البسيطة إلى واحة من السلام والوعي...</p></div></div>
+    <div id="modal-blog-story" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>رحلة أحمد: من القلق إلى السلام</h2><p>عندما تواصل معي أحمد أول مرة، كان صوته يحمل ثقل العالم. كان القلق يلتهم لياليه، ويسرق منه متعة اللحظة الحاضرة. "أشعر أني في سباق دائم لا أعرف خط نهايته"، هكذا وصف حالته. كانت رحلته معنا شهادة على قوة الالتزام بالشفاء الداخلي...</p></div></div>
     
-    <div id="modal-welcome" class="modal welcome-modal">
-        <div class="modal-content">
-            <h2>أهلاً بك في طِبرا</h2>
-            <p>قبل أن تبدأ رحلتك، نود أن نعرف: ما الذي أتى بك إلى هنا اليوم؟</p>
-            <div class="options-grid">
-                <button class="option-btn" data-choice="calm">أبحث عن السكينة والهدوء</button>
-                <button class="option-btn" data-choice="clarity">أبحث عن الوضوح والتركيز</button>
-                <button class="option-btn" data-choice="healing">أبحث عن الشفاء من ألم</button>
-                <button class="option-btn" data-choice="curious">أنا هنا بدافع الفضول</button>
-            </div>
-        </div>
-    </div>
+    <div id="modal-welcome" class="modal welcome-modal"><div class="modal-content"><h2>أهلاً بك في طِبرا</h2><p>قبل أن تبدأ رحلتك، نود أن نعرف: ما الذي أتى بك إلى هنا اليوم؟</p><div class="options-grid"><button class="option-btn" data-choice="calm">أبحث عن السكينة والهدوء</button><button class="option-btn" data-choice="clarity">أبحث عن الوضوح والتركيز</button><button class="option-btn" data-choice="healing">أبحث عن الشفاء من ألم</button><button class="option-btn" data-choice="curious">أنا هنا بدافع الفضول</button></div></div></div>
 
-    <!-- Shopping Cart Modal -->
-    <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
-            <h2>سلتي</h2>
-            <ul class="cart-items-list">
-                <!-- Cart items will be injected here by JavaScript -->
-                <p class="cart-empty-msg">سلتك فارغة حاليًا.</p>
-            </ul>
-        </div>
-        <div class="cart-summary">
-            <div class="cart-total">
-                <span>المجموع:</span>
-                <span id="cart-total-price">$0.00</span>
-            </div>
-            <a href="#" id="whatsapp-checkout-btn" class="btn btn-primary checkout-btn" target="_blank">إتمام الشراء عبر واتساب</a>
-        </div>
-    </div>
+    <div id="cart-modal" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>سلتي</h2><ul class="cart-items-list"><p class="cart-empty-msg">سلتك فارغة حاليًا.</p></ul></div><div class="cart-summary"><div class="cart-total"><span>المجموع:</span><span id="cart-total-price">$0.00</span></div><a href="#" id="whatsapp-checkout-btn" class="btn btn-primary checkout-btn" target="_blank">إتمام الشراء عبر واتساب</a></div></div>
     
-    <!-- Super-Medicines Modal -->
-    <div id="modal-super-medicines" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
-            <div class="bg-dark" style="padding: 2rem; margin: -2rem; color: white;">
-                <div class="container">
-                    <h2 class="section-title">الأدوية الخارقة</h2>
-                    <p class="section-intro">هنا تتجلى خلاصة خبرتي، حيث يلتقي العلم المتقدم بالحكمة الروحية العميقة. هذه ليست مجرد مكملات، بل هي أدوات تحفيزية مصممة لإيقاظ القوة الشفائية الكامنة في خلاياك.</p>
-                    <div class="store-grid">
-                        <article class="product-card" data-id="4" data-name="إكسير الشباب" data-price="49" data-img="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop">
-                            <img src="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop" alt="إكسير الشباب" class="product-card-img" loading="lazy">
-                            <div class="product-card-content">
-                                <h3 class="product-card-title">إكسير الشباب</h3>
-                                <p class="product-card-desc">تركيبة متقدمة تجمع بين مضادات الأكسدة القوية مثل ريسفيراترول و NADH، لدعم تجديد الخلايا وإبطاء علامات الشيخوخة على المستوى الخلوي.</p>
-                                <div class="product-price">$49</div>
-                                <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
-                            </div>
-                        </article>
-                        <article class="product-card" data-id="5" data-name="درع المناعة الذهبي" data-price="45" data-img="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop">
-                            <img src="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop" alt="درع المناعة الذهبي" class="product-card-img" loading="lazy">
-                            <div class="product-card-content">
-                                <h3 class="product-card-title">درع المناعة الذهبي</h3>
-                                <p class="product-card-desc">مزيج قوي من فطر الريشي، والزنك بيكولينات، وفيتامين د3، مصمم لتقوية خطوط دفاع الجسم الطبيعية وتعزيز الاستجابة المناعية الصحية.</p>
-                                <div class="product-price">$45</div>
-                                <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
-                            </div>
-                        </article>
-                        <article class="product-card" data-id="6" data-name="تركيز الحكماء" data-price="40" data-img="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop">
-                            <img src="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop" alt="تركيز الحكماء" class="product-card-img" loading="lazy">
-                            <div class="product-card-content">
-                                <h3 class="product-card-title">تركيز الحكماء</h3>
-                                <p class="product-card-desc">يجمع بين عشبة الجنكة بيلوبا ومركب "Lion's Mane" لدعم الوظائف الإدراكية، تعزيز الذاكرة، وتحقيق وضوح ذهني استثنائي.</p>
-                                <div class="product-price">$40</div>
-                                <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <div id="modal-super-medicines" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><div style="padding: 2rem; margin: -2rem; background-color: var(--dark-color); color: white;"><div class="container"><h2 class="section-title">الأدوية الخارقة</h2><p class="section-intro">هنا تتجلى خلاصة خبرتي، حيث يلتقي العلم المتقدم بالحكمة الروحية العميقة. هذه ليست مجرد مكملات، بل هي أدوات تحفيزية مصممة لإيقاظ القوة الشفائية الكامنة في خلاياك.</p><div class="store-grid"><article class="product-card" data-id="4" data-name="إكسير الشباب" data-price="49" data-img="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop" alt="إكسير الشباب" class="product-card-img" loading="lazy"><div class="product-card-content"><h3 class="product-card-title">إكسير الشباب</h3><p class="product-card-desc">تركيبة متقدمة تجمع بين مضادات الأكسدة القوية مثل ريسفيراترول و NADH، لدعم تجديد الخلايا وإبطاء علامات الشيخوخة على المستوى الخلوي.</p><div class="product-price">$49</div><button class="btn btn-primary add-to-cart-btn">أضف للسلة</button></div></article><article class="product-card" data-id="5" data-name="درع المناعة الذهبي" data-price="45" data-img="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop" alt="درع المناعة الذهبي" class="product-card-img" loading="lazy"><div class="product-card-content"><h3 class="product-card-title">درع المناعة الذهبي</h3><p class="product-card-desc">مزيج قوي من فطر الريشي، والزنك بيكولينات، وفيتامين د3، مصمم لتقوية خطوط دفاع الجسم الطبيعية وتعزيز الاستجابة المناعية الصحية.</p><div class="product-price">$45</div><button class="btn btn-primary add-to-cart-btn">أضف للسلة</button></div></article><article class="product-card" data-id="6" data-name="تركيز الحكماء" data-price="40" data-img="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop" alt="تركيز الحكماء" class="product-card-img" loading="lazy"><div class="product-card-content"><h3 class="product-card-title">تركيز الحكماء</h3><p class="product-card-desc">يجمع بين عشبة الجنكة بيلوبا ومركب "Lion's Mane" لدعم الوظائف الإدراكية، تعزيز الذاكرة، وتحقيق وضوح ذهني استثنائي.</p><div class="product-price">$40</div><button class="btn btn-primary add-to-cart-btn">أضف للسلة</button></div></article></div></div></div></div></div>
 
     <div class="modal-overlay"></div>
 
@@ -717,25 +663,20 @@
             if (welcomeModal && overlay) {
                  if (sessionStorage.getItem('welcomeShown') !== 'true') {
                      setTimeout(() => {
-                        welcomeModal.classList.add('active');
-                        overlay.classList.add('active');
-                        document.body.classList.add('no-scroll');
-                     }, 1500);
+                         openModal(welcomeModal);
+                         sessionStorage.setItem('welcomeShown', 'true');
+                     }, 2000);
                  }
                 
-                const optionButtons = welcomeModal.querySelectorAll('.option-btn');
-                if (optionButtons.length > 0) {
-                    optionButtons.forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            console.log(`User chose: ${btn.dataset.choice}`);
-                            closeModal(welcomeModal);
-                            sessionStorage.setItem('welcomeShown', 'true');
-                        });
+                welcomeModal.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        console.log(`User intent: ${btn.dataset.choice}`);
+                        closeModal(welcomeModal);
                     });
-                }
+                });
             }
             
-            // --- Modal Logic ---
+            // --- General Modal Logic ---
             const modalButtons = document.querySelectorAll('[data-modal-target]');
             const closeModalButtons = document.querySelectorAll('.close-modal');
             const modalBookButtons = document.querySelectorAll('.modal-book-btn');
@@ -758,8 +699,7 @@
 
             if(overlay){
                 overlay.addEventListener('click', () => {
-                    const modals = document.querySelectorAll('.modal.active');
-                    modals.forEach(closeModal);
+                    document.querySelectorAll('.modal.active').forEach(closeModal);
                 });
             }
 
@@ -770,7 +710,8 @@
                 });
             });
             
-            // --- Seamless Modal-to-Form Flow ---
+            // DEVELOPER'S NOTE: Implemented seamless flow from Modal to Contact Form.
+            // This reduces friction and makes the user journey smoother, aligning with the "sanctuary" principle.
             modalBookButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -786,7 +727,7 @@
                     }
 
                     if (contactSection) {
-                        contactSection.scrollIntoView({ behavior: 'smooth' });
+                        contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 });
             });
@@ -808,41 +749,39 @@
             const whatsAppCheckoutBtn = document.getElementById('whatsapp-checkout-btn');
             const cartEmptyMsg = document.querySelector('.cart-empty-msg');
 
-
             function updateCartDisplay() {
-                 if (!cartItemsList) return;
-                cartItemsList.innerHTML = '';
-                if (cart.length === 0) {
-                     if(cartEmptyMsg) cartEmptyMsg.style.display = 'block';
-                } else {
-                    if(cartEmptyMsg) cartEmptyMsg.style.display = 'none';
-                    cart.forEach(item => {
-                        const li = document.createElement('li');
-                        li.className = 'cart-item';
-                        li.innerHTML = `
-                            <div class="cart-item-details">
-                                <img src="${item.img}" alt="${item.name}">
-                                <div class="cart-item-info">
-                                    <h4>${item.name}</h4>
-                                    <span>${item.quantity} x $${item.price}</span>
-                                </div>
-                            </div>
-                            <div class="cart-item-actions">
-                                <button class="remove-from-cart-btn" data-id="${item.id}">&times;</button>
-                            </div>
-                        `;
-                        cartItemsList.appendChild(li);
-                    });
-                }
+                 if (!cartItemsList || !cartTotalPriceEl || !cartItemCountEl || !cartEmptyMsg) return;
+                 
+                 cartItemsList.innerHTML = '';
+                 if (cart.length === 0) {
+                     cartEmptyMsg.style.display = 'block';
+                 } else {
+                     cartEmptyMsg.style.display = 'none';
+                     cart.forEach(item => {
+                         const li = document.createElement('li');
+                         li.className = 'cart-item';
+                         li.innerHTML = `
+                             <div class="cart-item-details">
+                                 <img src="${item.img}" alt="${item.name}">
+                                 <div class="cart-item-info">
+                                     <h4>${item.name}</h4>
+                                     <span>${item.quantity} x $${item.price.toFixed(2)}</span>
+                                 </div>
+                             </div>
+                             <div class="cart-item-actions">
+                                 <button class="remove-from-cart-btn" data-id="${item.id}" aria-label="Remove ${item.name}">&times;</button>
+                             </div>
+                         `;
+                         cartItemsList.appendChild(li);
+                     });
+                 }
                 
                 const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                if (cartTotalPriceEl) cartTotalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
+                cartTotalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
                 
                 const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-                 if (cartItemCountEl) {
-                    cartItemCountEl.textContent = totalQuantity;
-                    cartItemCountEl.classList.toggle('visible', totalQuantity > 0);
-                }
+                cartItemCountEl.textContent = totalQuantity;
+                cartItemCountEl.classList.toggle('visible', totalQuantity > 0);
                 
                 updateWhatsAppLink(totalPrice);
             }
@@ -864,7 +803,12 @@
             
             function updateWhatsAppLink(totalPrice) {
                  if (!whatsAppCheckoutBtn) return;
+                 if (cart.length === 0) {
+                     whatsAppCheckoutBtn.style.display = 'none';
+                     return;
+                 }
                  
+                 whatsAppCheckoutBtn.style.display = 'block';
                  let message = "سلام دكتور عمر،\nأود طلب المنتجات التالية من موقع طِبْرا:\n\n";
                  cart.forEach(item => {
                      message += `- ${item.name} (الكمية: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
@@ -879,6 +823,7 @@
             addToCartButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const productCard = button.closest('.product-card');
+                    if (!productCard) return;
                     const product = {
                         id: productCard.dataset.id,
                         name: productCard.dataset.name,
@@ -892,70 +837,54 @@
             
             if (cartItemsList) {
                  cartItemsList.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('remove-from-cart-btn')) {
-                        const productId = e.target.dataset.id;
-                        removeFromCart(productId);
-                    }
-                });
+                     if (e.target.classList.contains('remove-from-cart-btn')) {
+                         const productId = e.target.dataset.id;
+                         removeFromCart(productId);
+                     }
+                 });
             }
             
             if (cartIconWrapper) {
                 cartIconWrapper.addEventListener('click', () => openModal(cartModal));
             }
+            updateCartDisplay(); // Initial call
             
-            // --- Advanced Form Handling with Fetch for Formspree ---
+            // --- Form Handling ---
             const contactForm = document.getElementById('contact-form');
-            const formStatus = document.getElementById('form-status');
-            const submitBtn = document.getElementById('contact-submit-btn');
-
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
                     const form = e.target;
                     const data = new FormData(form);
-                    
-                    if(submitBtn) {
-                       submitBtn.disabled = true;
-                       submitBtn.textContent = 'جارٍ الإرسال...';
-                    }
+                    const formStatus = document.getElementById('form-status');
+                    const submitBtn = document.getElementById('contact-submit-btn');
 
-                    fetch(form.action, {
-                        method: form.method,
-                        body: data,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    }).then(response => {
+                    if(!submitBtn || !formStatus) return;
+                    
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'جارٍ الإرسال...';
+                    formStatus.style.display = 'none';
+
+                    fetch(form.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } })
+                    .then(response => {
                         if (response.ok) {
-                            if(formStatus) {
-                                formStatus.textContent = "شكرًا لك! وصلت رسالتك بنجاح وسأتواصل معك قريبًا.";
-                                formStatus.className = 'success';
-                                formStatus.style.display = 'block';
-                            }
+                            formStatus.textContent = "شكرًا لك! وصلت رسالتك بنجاح وسأتواصل معك قريبًا.";
+                            formStatus.className = 'success';
                             form.reset();
                         } else {
-                             if(formStatus) {
-                                formStatus.textContent = "عذرًا، حدث خطأ ما. يرجى المحاولة مرة أخرى أو التواصل عبر واتساب.";
-                                formStatus.className = 'error';
-                                formStatus.style.display = 'block';
-                             }
-                        }
-                    }).catch(error => {
-                        if(formStatus) {
                             formStatus.textContent = "عذرًا، حدث خطأ ما. يرجى المحاولة مرة أخرى أو التواصل عبر واتساب.";
                             formStatus.className = 'error';
-                            formStatus.style.display = 'block';
                         }
+                    }).catch(error => {
+                        formStatus.textContent = "عذرًا، حدث خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مرة أخرى.";
+                        formStatus.className = 'error';
                     }).finally(() => {
-                        if(submitBtn) {
-                           submitBtn.disabled = false;
-                           submitBtn.textContent = 'أرسل استفساري';
-                        }
+                        formStatus.style.display = 'block';
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'أرسل استفساري';
                     });
                 });
             }
-
 
             // --- Other Initializations ---
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
@@ -974,7 +903,7 @@
             if(soundToggle && natureAudio) {
                 soundToggle.addEventListener('click', () => {
                     if (natureAudio.paused) {
-                        natureAudio.play();
+                        natureAudio.play().catch(e => console.error("Audio play failed:", e));
                         soundToggle.classList.add('playing');
                         soundToggle.setAttribute('aria-label', 'إيقاف أصوات الطبيعة');
                     } else {
@@ -984,6 +913,24 @@
                     }
                 });
             }
+            
+            // --- FAQ Accordion ---
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                if (!question || !answer) return;
+                
+                question.addEventListener('click', () => {
+                    const isExpanded = question.getAttribute('aria-expanded') === 'true';
+                    question.setAttribute('aria-expanded', !isExpanded);
+                    if (!isExpanded) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    } else {
+                        answer.style.maxHeight = '0';
+                    }
+                });
+            });
 
         });
     </script>
