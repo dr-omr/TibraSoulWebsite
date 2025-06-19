@@ -18,7 +18,7 @@
          * main.css
          * Stylesheet for TibraSoul Website
          * Author: Dr. Omar & Office701
-         * Version: 4.4.0 (Deep FAQ Section)
+         * Version: 4.5.0 (Seamless UX Flow)
         */
 
         :root {
@@ -555,7 +555,7 @@
             <p>وضوح في الرؤية، ثقة في اتخاذ القرارات، واتصال عميق بذاتك الحقيقية.</p>
             <h3>استثمارك في ذاتك:</h3>
             <p>$49 (جلسة واحدة)</p>
-            <a href="#contact" class="btn btn-primary modal-book-btn">أريد أن أبدأ رحلتي الخاصة</a>
+            <button class="btn btn-primary modal-book-btn" data-program="guidance">أريد أن أبدأ رحلتي الخاصة</button>
         </div>
     </div>
 
@@ -578,7 +578,7 @@
             <p>ستنهي الورشة وأنت تشعر بالخفة، التجدد، ومعك أدوات عملية للحفاظ على هدوئك الداخلي.</p>
             <h3>استثمارك في ذاتك:</h3>
             <p>$45 (للورشة كاملة)</p>
-            <a href="#contact" class="btn btn-primary modal-book-btn">أحتاج لهذا التجديد</a>
+            <button class="btn btn-primary modal-book-btn" data-program="renewal">أحتاج لهذا التجديد</button>
         </div>
     </div>
     
@@ -602,7 +602,7 @@
             <p>هذا اليوم يمكن أن يكون نقطة تحول في حياتك. ستغادر بفهم أعمق لنفسك، وباتصال حقيقي مع قوتك الداخلية.</p>
             <h3>استثمارك في ذاتك:</h3>
             <p>$49 (لليوم الكامل، شامل الغداء والأنشطة)</p>
-            <a href="#contact" class="btn btn-primary modal-book-btn">قدم طلب الانضمام للواحة</a>
+            <button class="btn btn-primary modal-book-btn" data-program="oasis">قدم طلب الانضمام للواحة</button>
         </div>
     </div>
 
@@ -735,6 +735,8 @@
             // --- Modal Logic ---
             const modalButtons = document.querySelectorAll('[data-modal-target]');
             const closeModalButtons = document.querySelectorAll('.close-modal');
+            const modalBookButtons = document.querySelectorAll('.modal-book-btn');
+            
             const openModal = (modal) => {
                 if (!modal) return;
                 modal.classList.add('active');
@@ -762,6 +764,27 @@
                 button.addEventListener('click', () => {
                     const modal = button.closest('.modal');
                     closeModal(modal);
+                });
+            });
+            
+            // --- Seamless Modal-to-Form Flow ---
+            modalBookButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const modal = button.closest('.modal');
+                    const programValue = button.dataset.program;
+                    const contactFormSelect = document.getElementById('program-interest');
+                    const contactSection = document.getElementById('contact');
+
+                    closeModal(modal);
+
+                    if(contactFormSelect && programValue) {
+                        contactFormSelect.value = programValue;
+                    }
+
+                    if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
                 });
             });
 
@@ -889,7 +912,6 @@
                     const form = e.target;
                     const data = new FormData(form);
                     
-                    // Visual feedback for user
                     if(submitBtn) {
                        submitBtn.disabled = true;
                        submitBtn.textContent = 'جارٍ الإرسال...';
