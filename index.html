@@ -18,7 +18,7 @@
          * main.css
          * Stylesheet for TibraSoul Website
          * Author: Dr. Omar & Office701
-         * Version: 4.2.0 (Formspree Integration)
+         * Version: 4.3.0 (Advanced Form Handling)
         */
 
         :root {
@@ -127,6 +127,10 @@
         .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus { outline: none; border-color: var(--accent-color); }
         .contact-form input::placeholder,.contact-form textarea::placeholder { color: #aaa; }
         .contact-form button { width: 100%; padding: 1rem; }
+        #form-status { margin-top: 1.5rem; padding: 1rem; border-radius: var(--border-radius); text-align: center; display: none; }
+        #form-status.success { background-color: #d4edda; color: #155724; }
+        #form-status.error { background-color: #f8d7da; color: #721c24; }
+
 
         .main-footer { background-color: #222; color: #ccc; padding: 5rem 0 2rem; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; text-align: right; }
@@ -457,15 +461,7 @@
             <div class="container">
                 <h2 class="section-title">تواصل معي</h2>
                 <p class="section-intro">أنا هنا للإجابة على أسئلتك ومساعدتك في بدء رحلتك. املأ النموذج أدناه، وسأتواصل معك قريبًا.</p>
-                <!-- 
-                  INSTRUCTIONS FOR DR. OMAR:
-                  1. Go to formspree.io and create a free account.
-                  2. Create a new form and get your unique URL endpoint.
-                  3. Replace the placeholder "YOUR_UNIQUE_ID" in the action attribute below with your actual Formspree endpoint.
-                  4. The first time you submit the form yourself, Formspree will send you a confirmation email. Click the link in it to activate your form.
-                  5. That's it! All future submissions will go directly to your email.
-                -->
-                <form id="contact-form" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST" class="contact-form">
+                <form id="contact-form" action="https://formspree.io/f/myzjpvgp" method="POST" class="contact-form">
                     <div class="form-group">
                         <label for="name" class="sr-only">الاسم</label>
                         <input type="text" id="name" name="name" placeholder="الاسم الكامل" required>
@@ -488,8 +484,9 @@
                         <label for="message" class="sr-only">رسالتك</label>
                         <textarea id="message" name="message" rows="5" placeholder="رسالتك أو سؤالك..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">أرسل استفساري</button>
+                    <button type="submit" id="contact-submit-btn" class="btn btn-primary">أرسل استفساري</button>
                 </form>
+                <div id="form-status"></div>
             </div>
         </section>
 
@@ -859,7 +856,7 @@
                         id: productCard.dataset.id,
                         name: productCard.dataset.name,
                         price: parseFloat(productCard.dataset.price),
-                        img: productCard.dataset.img
+                        img: productCard.querySelector('img').src
                     };
                     addToCart(product);
                     openModal(cartModal);
@@ -877,6 +874,60 @@
             
             if (cartIconWrapper) {
                 cartIconWrapper.addEventListener('click', () => openModal(cartModal));
+            }
+            
+            // --- Advanced Form Handling with Fetch for Formspree ---
+            const contactForm = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+            const submitBtn = document.getElementById('contact-submit-btn');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const form = e.target;
+                    const data = new FormData(form);
+                    
+                    // Visual feedback for user
+                    if(submitBtn) {
+                       submitBtn.disabled = true;
+                       submitBtn.textContent = 'جارٍ الإرسال...';
+                    }
+
+                    fetch(form.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            if(formStatus) {
+                                formStatus.textContent = "شكرًا لك! وصلت رسالتك بنجاح وسأتواصل معك قريبًا.";
+                                formStatus.className = 'success';
+                                formStatus.style.display = 'block';
+                            }
+                            form.reset();
+                        } else {
+                             if(formStatus) {
+                                formStatus.textContent = "عذرًا، حدث خطأ ما. يرجى المحاولة مرة أخرى أو التواصل عبر واتساب.";
+                                formStatus.className = 'error';
+                                formStatus.style.display = 'block';
+                             }
+                        }
+                    }).catch(error => {
+                        if(formStatus) {
+                            formStatus.textContent = "عذرًا، حدث خطأ ما. يرجى المحاولة مرة أخرى أو التواصل عبر واتساب.";
+                            formStatus.className = 'error';
+                            formStatus.style.display = 'block';
+                        }
+                    }).finally(() => {
+                        if(submitBtn) {
+                           submitBtn.disabled = false;
+                           submitBtn.textContent = 'أرسل استفساري';
+                        }
+                    });
+                });
             }
 
 
