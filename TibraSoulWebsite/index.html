@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="اكتشف رحلتك نحو الشفاء الروحي مع طِبرا. نقدم خلوات وتجارب تحويلية مصممة لتجديد العقل والجسد والروح.">
+    <meta name="keywords" content="الشفاء الروحي, التأمل, خلوة روحية, اليقظة الذهنية, طِبرا, طبيب وعي, TibraSoul, spiritual healing, meditation, retreat, mindfulness, أدوية خارقة, آراء العملاء">
+    <title>ṬibraSoul طِبرا | Ṭibra - رحلتك نحو الشفاء الروحي</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /*
+         * TibraSoul - Digital Sanctuary
+         * Version: 7.0.0 (Interactive Testimonials Build)
+         * NOTE: This code implements the strategic recommendations and adds a new interactive testimonials section.
+        */
+
+        :root {
+            --primary-color: #5a6e5a;
+            --secondary-color: #f4f1eb;
+            --dark-color: #3c3c3c;
+            --light-color: #FFFFFF;
+            --text-color: #4a4a4a;
+            --accent-color: #c8a07d;
+            --super-med-color: #c28f5c;
+            --font-body: 'Noto Kufi Arabic', sans-serif;
+            --font-headings: 'Noto Kufi Arabic', sans-serif;
+            --font-brand: 'Great Vibes', cursive;
+            --container-width: 1140px;
+            --transition-speed: 0.5s ease;
+            --border-radius: 8px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { font-family: var(--font-body); color: var(--text-color); line-height: 1.8; background-color: var(--light-color); direction: rtl; text-align: right; overflow-x: hidden; }
+        body.no-scroll { overflow: hidden; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-headings); font-weight: 700; color: var(--dark-color); margin-bottom: 1rem; line-height: 1.3; }
+        p { margin-bottom: 1.5rem; }
+        a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed); }
+        a:hover { color: #435243; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
+        .btn { display: inline-block; padding: 0.8rem 2.2rem; border-radius: 50px; font-weight: 700; font-family: var(--font-body); transition: all var(--transition-speed); cursor: pointer; border: none; text-align: center; }
+        .btn-primary { background-color: var(--primary-color); color: var(--light-color); box-shadow: 0 4px 15px rgba(90, 110, 90, 0.3); }
+        .btn-primary:hover { background-color: #435243; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(90, 110, 90, 0.4); }
+        .btn-secondary { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+        .btn-secondary:hover { background-color: var(--primary-color); color: var(--light-color); }
+        .section-title { text-align: center; font-size: 2.8rem; margin-bottom: 1rem; position: relative; padding-bottom: 1rem; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: var(--accent-color); }
+        .section-intro { text-align: center; max-width: 650px; margin: 0 auto 4rem auto; font-size: 1.1rem; }
+        .content-section { padding: 6rem 0; }
+        .bg-light { background-color: var(--secondary-color); }
+        .bg-dark { background-color: #2c2c2c; color: #f0f0f0; }
+        .bg-dark .section-title, .bg-dark .section-intro, .bg-dark h1, .bg-dark h2, .bg-dark h3 { color: var(--light-color); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+        .main-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1rem 0; background-color: transparent; transition: all 0.5s ease; }
+        .main-header.scrolled { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 0.5rem 0; }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-brand); font-size: 2.5rem; font-weight: 400; color: var(--dark-color); }
+        .nav-left-section { display: flex; align-items: center; gap: 1.5rem; }
+        .cart-icon-wrapper { position: relative; cursor: pointer; }
+        .cart-icon-wrapper .fa-shopping-cart { font-size: 1.5rem; color: var(--dark-color); }
+        .cart-item-count { position: absolute; top: -8px; right: -10px; background-color: var(--accent-color); color: white; border-radius: 50%; width: 22px; height: 22px; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; font-weight: bold; transform: scale(0); transition: transform 0.2s ease; }
+        .cart-item-count.visible { transform: scale(1); }
+
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-menu a { font-weight: 400; position: relative; padding-bottom: 5px; font-size: 1rem; }
+        .nav-menu a:not(.btn) { color: var(--text-color); }
+        .nav-menu a:not(.btn)::after { content: ''; position: absolute; bottom: 0; right: 0; width: 0; height: 2px; background-color: var(--primary-color); transition: width var(--transition-speed); }
+        .nav-menu a:not(.btn):hover::after { width: 100%; }
+        .btn-primary-nav { padding: 0.5rem 1.5rem; background-color: var(--primary-color); color: var(--light-color); border-radius: 50px; }
+        .btn-primary-nav:hover { background-color: #435243; color: var(--light-color); }
+        .nav-toggle { display: none; font-size: 1.5rem; background: none; border: none; color: var(--dark-color); cursor: pointer; z-index: 1001; }
+
+        .hero-section {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--light-color);
+            position: relative;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1473170611423-22489201d961?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            overflow: hidden;
+        }
+
+        .hero-content { animation: fadeInUp 1s ease-out; }
+        .hero-title { font-family: var(--font-brand); font-size: clamp(3.5rem, 10vw, 7rem); margin-bottom: 0.5rem; font-weight: 400; color: var(--light-color); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero-subtitle { font-size: clamp(1.1rem, 4vw, 1.5rem); margin-bottom: 2.5rem; font-weight: 300; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
+        .scroll-down-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); animation: bounce 2.5s infinite; }
+        .scroll-down-indicator a { font-size: 2rem; color: rgba(255, 255, 255, 0.8); transition: color var(--transition-speed); }
+        .scroll-down-indicator a:hover { color: var(--light-color); }
+
+        .philosophy-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
+        .founder-image img { border-radius: var(--border-radius); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .founder-story h3 { font-size: 2rem; color: var(--primary-color); }
+        .founder-story cite { display: block; margin-top: 1.5rem; font-style: normal; font-weight: 700; color: var(--accent-color); }
+        .founder-story p { line-height: 2.2; }
+
+        .programs-grid, .blog-grid, .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .program-card, .product-card { background: var(--light-color); border-radius: var(--border-radius); overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform var(--transition-speed), box-shadow var(--transition-speed); display: flex; flex-direction: column; }
+        .program-card:hover, .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .program-card-img, .product-card-img { width: 100%; height: 220px; object-fit: cover; }
+        .program-card-content, .product-card-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .program-card-title, .product-card-title { font-size: 1.6rem; }
+        .program-card-desc, .product-card-desc { flex-grow: 1; }
+        .product-price { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin: 1rem 0; }
+        
+        .faq-accordion { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid #ddd; }
+        .faq-question { width: 100%; background: none; border: none; text-align: right; padding: 1.5rem 1rem; font-size: 1.2rem; font-weight: 700; font-family: var(--font-body); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color var(--transition-speed); }
+        .faq-question:hover { color: var(--primary-color); }
+        .faq-question i { transition: transform var(--transition-speed); font-size: 1rem; }
+        .faq-question[aria-expanded="true"] i { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .faq-answer p { padding: 0 1rem 1.5rem 1rem; margin-bottom: 0; }
+        .faq-answer p strong { color: var(--primary-color); }
+        
+        /* NEW SECTION: Testimonials Styles */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #2c2c2c; /* Dark background like a chat app */
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden; /* To contain floating hearts */
+        }
+        .chat-bubble {
+            position: relative;
+            max-width: 80%;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            color: var(--light-color);
+            line-height: 1.6;
+            clear: both;
+        }
+        .chat-bubble p {
+            margin-bottom: 0;
+            font-size: 1.05rem;
+        }
+        .chat-bubble cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-style: normal;
+            font-weight: bold;
+            color: #ccc;
+        }
+        .chat-bubble.client {
+            background-color: var(--primary-color);
+            border-bottom-right-radius: 5px;
+            float: right;
+        }
+        .chat-bubble.doctor {
+            background-color: #4a4a4a;
+            border-bottom-left-radius: 5px;
+            float: left;
+            text-align: left;
+        }
+        .chat-bubble-wrapper {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 1rem;
+        }
+        .chat-bubble-wrapper.client {
+            justify-content: flex-end;
+        }
+        .chat-bubble-wrapper.doctor {
+            justify-content: flex-start;
+        }
+        .reaction-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .reaction-btn:hover {
+            color: #ff4d4d;
+            transform: scale(1.2);
+        }
+        .floating-heart {
+            position: absolute;
+            color: #ff4d4d;
+            font-size: 1.5rem;
+            animation: float-up 1.5s ease-out forwards;
+            pointer-events: none; /* So they don't block clicks */
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.5);
+            }
+        }
+        /* END: Testimonials Styles */
+
+        .contact-form { max-width: 700px; margin: 0 auto; }
+        .form-group { margin-bottom: 1.5rem; }
+        .contact-form input,.contact-form textarea,.contact-form select { width: 100%; padding: 1rem; border: 1px solid #555; border-radius: var(--border-radius); background-color: #3a3a3a; color: var(--light-color); font-family: var(--font-body); font-size: 1rem; transition: border-color var(--transition-speed); }
+        .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus { outline: none; border-color: var(--accent-color); }
+        .contact-form input::placeholder,.contact-form textarea::placeholder { color: #aaa; }
+        .contact-form button { width: 100%; padding: 1rem; }
+        #form-status { margin-top: 1.5rem; padding: 1rem; border-radius: var(--border-radius); text-align: center; display: none; }
+        #form-status.success { background-color: #d4edda; color: #155724; }
+        #form-status.error { background-color: #f8d7da; color: #721c24; }
+
+        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; background-color: white; padding: 2rem; border-radius: var(--border-radius); z-index: 1010; width: 90%; max-width: 650px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; max-height: 90vh; overflow-y: auto; }
+        .modal.active { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; }
+        .modal-content { text-align: right; }
+        .modal-content h2 { margin-top: 0; color: var(--primary-color); font-size: 2.2rem; }
+        .modal-content h3 { color: var(--dark-color); border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; margin-top: 2rem; }
+        .modal-content ul { list-style: disc; padding-right: 20px; margin-bottom: 1rem; }
+        .modal-content ul li { margin-bottom: 0.5rem; }
+        .close-modal { position: absolute; top: 1rem; left: 1rem; font-size: 2rem; font-weight: bold; border: none; background: none; cursor: pointer; color: #888; transition: color 0.3s ease; }
+        .close-modal:hover { color: #333; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1005; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-book-btn { margin-top: 1.5rem; }
+
+        .welcome-modal .modal-content { text-align: center; }
+        .welcome-modal .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+        .welcome-modal .option-btn { background-color: var(--secondary-color); border: 2px solid transparent; width: 100%; padding: 1rem; border-radius: var(--border-radius); cursor: pointer; transition: all 0.3s ease; }
+        .welcome-modal .option-btn:hover { border-color: var(--primary-color); background-color: #e9e5de; }
+        
+        #cart-modal .modal-content { padding-bottom: 6rem; }
+        .cart-items-list { list-style: none; padding: 0; max-height: 45vh; overflow-y: auto; }
+        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #eee; }
+        .cart-item-details { display: flex; align-items: center; gap: 1rem; }
+        .cart-item-details img { width: 60px; height: 60px; object-fit: cover; border-radius: var(--border-radius); }
+        .cart-item-info h4 { margin: 0; font-size: 1rem; }
+        .cart-item-info span { color: #888; font-size: 0.9rem; }
+        .cart-item-actions { display: flex; align-items: center; gap: 0.5rem; }
+        .cart-item-actions button { background: none; border: none; font-size: 1rem; cursor: pointer; color: #cc0000; }
+        .cart-summary { position: absolute; bottom: 0; left: 0; right: 0; background: var(--secondary-color); padding: 1.5rem 2rem; border-top: 1px solid #ddd; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem; }
+        .checkout-btn { width: 100%; }
+
+        .nature-sounds-toggle { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background-color: var(--primary-color); color: var(--light-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+        .nature-sounds-toggle:hover { transform: scale(1.1); }
+        .nature-sounds-toggle i.fa-volume-mute { display: none; }
+        .nature-sounds-toggle.playing i.fa-volume-high { display: none; }
+        .nature-sounds-toggle.playing i.fa-volume-mute { display: inline-block; }
+
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        .whatsapp-float i { margin-top: 15px; }
+
+        .super-medicines-float { position: fixed; bottom: 110px; right: 40px; background-color: var(--super-med-color); color: var(--light-color); border-radius: 50px; padding: 0.8rem 1.5rem; font-size: 1rem; font-weight: 700; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; animation: simple-bounce 2.5s infinite; display: flex; align-items: center; gap: 0.5rem; }
+        .super-medicines-float:hover { transform: scale(1.05); animation-play-state: paused; }
+
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        
+        .site-footer {
+            background-color: var(--dark-color);
+            color: #ccc;
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            text-align: right;
+        }
+        .site-footer h3, .site-footer h4 {
+            color: var(--light-color);
+        }
+        .site-footer p { color: #a0a0a0; margin-bottom: 1rem; }
+        .site-footer a { color: #ccc; }
+        .site-footer a:hover { color: var(--light-color); }
+        .footer-links ul { padding: 0; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-social a {
+            display: inline-block;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .footer-social a:hover {
+            transform: translateY(-3px);
+            color: var(--light-color);
+        }
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #888;
+            border-top: 1px solid #444;
+            padding-top: 2rem;
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-20px) translateX(-50%); } 60% { transform: translateY(-10px) translateX(-50%); } }
+        @keyframes simple-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        @media (max-width: 992px) { 
+            .philosophy-content { grid-template-columns: 1fr; text-align: center; } 
+            .founder-image { max-width: 300px; margin: 0 auto 2rem; } 
+        }
+        @media (max-width: 768px) { 
+            html { font-size: 15px; } 
+            .nav-toggle { display: block; } 
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background-color: var(--light-color); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.1); } 
+            .nav-menu.active { right: 0; } 
+            .nav-menu a { font-size: 1.2rem; } 
+            .footer-content { text-align: center; } 
+            .footer-social { justify-content: center; }
+            .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; font-size: 24px; } 
+            .whatsapp-float i { margin-top: 13px; } 
+            .welcome-modal .options-grid { grid-template-columns: 1fr; } 
+            .super-medicines-float { left: 20px; right: auto; bottom: 90px; } 
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">Ṭibra</a>
+            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+                <ul id="nav-menu" class="nav-menu">
+                    <li><a href="#philosophy">فلسفتنا</a></li>
+                    <li><a href="#programs">البرامج</a></li>
+                    <li><a href="#store">كنوز الطبيعة</a></li>
+                    <li><a href="#testimonials">أصداء الشفاء</a></li>
+                    <li><a href="#knowledge-center">مركز المعرفة</a></li>
+                    <li><a href="#contact" class="btn btn-primary-nav">احجز الآن</a></li>
+                </ul>
+                <div class="nav-left-section">
+                     <div class="cart-icon-wrapper" data-modal-target="cart-modal">
+                         <i class="fas fa-shopping-cart"></i>
+                         <span class="cart-item-count">0</span>
+                     </div>
+                    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                        <span class="sr-only">فتح القائمة</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">ṬibraSoul</h1>
+                <p class="hero-subtitle">رحلتك التحويلية للروح تبدأ هنا.</p>
+                <a href="#programs" class="btn btn-primary">استكشف رحلاتنا</a>
+            </div>
+            <div class="scroll-down-indicator">
+                <a href="#philosophy" aria-label="التمرير للأسفل">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="philosophy" class="philosophy-section content-section animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">رسالة من طبيب الشفاء</h2>
+                <div class="philosophy-content">
+                    <div class="founder-image">
+                        <img src="IMG-20250529-WA0027.jpg" alt="صورة د. عمر" loading="lazy">
+                    </div>
+                    <div class="founder-story">
+                        <h3>سلام، أنا عمر. طبيبٌ عام، وطبيبُ شفاء.</h3>
+                        <p>
+                            لكنني لستُ طبيبَ تشخيصٍ فحسب، بل رفيقُ شفاءٍ حقيقي…<br><br>
+                            جمعتُ بين الطب الحديث،<br>
+                            والحكمة الفطرية القديمة —<br>
+                            تلك الحكمة التي ربما شعرت بها ذات يوم، حين قلت في داخلك:<br>
+                            "لكل داءٍ دواء… فينا، لا علينا."<br><br>
+                            عملتُ بصدقٍ لأعيد الجسد والروح إلى حالتهما الأصلية،<br>
+                            عبر منهجٍ شفائي أسميته:<br>
+                            <strong>طِبرا | Ṭibra – الطب الذي يعيدك إليك.</strong><br><br>
+                            من خلال دراساتٍ علمية متعمّقة، وتجارب روحية شجاعة،<br>
+                            تعلّمت كيف أرافق الإنسان في عودته إلى جذوره…<br>
+                            حيث يبدأ الشفاء من الداخل،<br>
+                            ومن الطبيعة أولًا — قبل أي وصفة.<br><br>
+                            وهكذا، سأكون بجانبك —<br>
+                            لأُعلّم، وأشفي، وأذكّرك بمن أنت…<br>
+                            بإذن الله.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="programs" class="programs-section content-section bg-light animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">ارسم مسار شفائك</h2>
+                <p class="section-intro">رحلات تحويلية، متاحة لك أينما كنت، وبأسعار رمزية لنشر نور الشفاء. كل برنامج هو دعوة للعودة إلى فطرتك.</p>
+                <div class="programs-grid">
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1519823551232-723b7a4254b7?q=80&w=1974&auto=format&fit=crop" alt="يدان تمسكان بعضهما البعض في جلسة إرشاد" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                            <h3 class="program-card-title">جلسة إرشاد فردية (عبر الإنترنت)</h3>
+                            <p class="program-card-desc">مساحة آمنة وخاصة لك. جلسة عميقة ومباشرة معي لنغوص في تحدياتك ونرسم معًا خريطة طريق لسلامك الداخلي.</p>
+                            <button class="btn btn-secondary" data-modal-target="modal-guidance">اعرف المزيد</button>
+                        </div>
+                    </article>
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop" alt="مجموعة من الناس يمارسون اليوجا عند شروق الشمس" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                            <h3 class="program-card-title">ورشة التجديد الرقمي</h3>
+                            <p class="program-card-desc">ورشة عمل جماعية مكثفة عبر الإنترنت في نهاية الأسبوع، لإعادة شحن طاقتك وتزويدك بأدوات عملية للتعامل مع ضغوط الحياة.</p>
+                            <button class="btn btn-secondary" data-modal-target="modal-renewal">اعرف المزيد</button>
+                        </div>
+                    </article>
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1506126613408-4e0520d380ce?q=80&w=2070&auto=format&fit=crop" alt="امرأة تتأمل بهدوء في الطبيعة" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                            <h3 class="program-card-title">واحة الشفاء (حضوري)</h3>
+                            <p class="program-card-desc">تجربة حضورية حصرية وعميقة ليوم واحد. فرصة نادرة للانقطاع عن العالم والغوص في ممارسات شفائية مكثفة في الطبيعة.</p>
+                            <button class="btn btn-secondary" data-modal-target="modal-oasis">اعرف المزيد</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="store" class="content-section animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">كنوز الطبيعة</h2>
+                <p class="section-intro">كما أؤمن بالشفاء الروحي، أؤمن بأن الطبيعة قدمت لنا كل ما نحتاجه لدعم أجسادنا. هذه مجموعة منتقاة بعناية من الفيتامينات والأعشاب النقية التي أثق بها وأوصي بها لدعم رحلتكم.</p>
+                <div class="store-grid">
+                    <article class="product-card" data-id="1" data-name="مزيج أعشاب السكينة" data-price="15" data-img="https://images.unsplash.com/photo-1607656583648-84f573b04d16?q=80&w=1974&auto=format&fit=crop">
+                        <img src="https://images.unsplash.com/photo-1607656583648-84f573b04d16?q=80&w=1974&auto=format&fit=crop" alt="مزيج أعشاب مهدئ" class="product-card-img" loading="lazy">
+                        <div class="product-card-content">
+                            <h3 class="product-card-title">مزيج أعشاب السكينة</h3>
+                            <p class="product-card-desc">مزيج فريد من البابونج والخزامى وبلسم الليمون، مصمم لتهدئة الجهاز العصبي وتحسين جودة النوم.</p>
+                            <div class="product-price">$15</div>
+                            <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
+                        </div>
+                    </article>
+                    <article class="product-card" data-id="2" data-name="فيتامينات الحيوية الشاملة" data-price="35" data-img="https://images.unsplash.com/photo-1600600989439-51a88a080c9c?q=80&w=1964&auto=format&fit=crop">
+                        <img src="https://images.unsplash.com/photo-1600600989439-51a88a080c9c?q=80&w=1964&auto=format&fit=crop" alt="كبسولات فيتامينات" class="product-card-img" loading="lazy">
+                        <div class="product-card-content">
+                            <h3 class="product-card-title">فيتامينات الحيوية الشاملة</h3>
+                            <p class="product-card-desc">تركيبة متوازنة من الفيتامينات والمعادن الأساسية لدعم الطاقة والتركيز والمناعة. خالية من الإضافات الصناعية.</p>
+                            <div class="product-price">$35</div>
+                            <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
+                        </div>
+                    </article>
+                    <article class="product-card" data-id="3" data-name="زيت اللبان العطري" data-price="25" data-img="https://images.unsplash.com/photo-1627993079207-a3572945199a?q=80&w=1974&auto=format&fit=crop">
+                        <img src="https://images.unsplash.com/photo-1627993079207-a3572945199a?q=80&w=1974&auto=format&fit=crop" alt="زيت عطري" class="product-card-img" loading="lazy">
+                        <div class="product-card-content">
+                            <h3 class="product-card-title">زيت اللبان العطري</h3>
+                            <p class="product-card-desc">زيت اللبان النقي، يُعرف بقدرته على تعميق التأمل، تصفية الذهن، ودعم صحة البشرة. مثالي للاستخدام الموضعي أو في موزع الروائح.</p>
+                            <div class="product-price">$25</div>
+                            <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
+        <section id="knowledge-center" class="blog-section content-section bg-light animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">مركز المعرفة</h2>
+                <p class="section-intro">مكتبتك الحية للنمو والشفاء. مقالات، تأملات، وقصص ملهمة لمرافقتك في رحلتك اليومية.</p>
+                <div class="blog-grid">
+                     <article class="program-card">
+                         <img src="https://images.unsplash.com/photo-1484069560501-87d72b0c3669?q=80&w=2070&auto=format&fit=crop" alt="شخص يكتب في دفتر ملاحظات" class="program-card-img" loading="lazy">
+                         <div class="program-card-content">
+                             <h4 class="text-sm font-bold text-gray-500 uppercase" style="font-size: 0.8rem; color: #888; text-transform: uppercase;">مقالات الحكمة</h4>
+                             <h3 class="program-card-title">خمسة طرق لدمج اليقظة في يومك</h3>
+                             <button class="btn btn-secondary" data-modal-target="modal-blog-mindfulness" style="margin-top: 1rem;">اقرأ المزيد</button>
+                         </div>
+                     </article>
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1974&auto=format&fit=crop" alt="كوب شاي عشبي بجانب نافذة" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                             <h4 class="text-sm font-bold text-gray-500 uppercase" style="font-size: 0.8rem; color: #888; text-transform: uppercase;">تأملات صوتية</h4>
+                            <h3 class="program-card-title">تأمل الشاي: طقس من السكينة</h3>
+                            <button class="btn btn-secondary" data-modal-target="modal-blog-tea" style="margin-top: 1rem;">استمع الآن</button>
+                        </div>
+                    </article>
+                    <article class="program-card">
+                        <img src="https://images.unsplash.com/photo-1475694867812-f82b8696d610?q=80&w=2070&auto=format&fit=crop" alt="شخص يمشي وحيدًا على شاطئ البحر" class="program-card-img" loading="lazy">
+                        <div class="program-card-content">
+                            <h4 class="text-sm font-bold text-gray-500 uppercase" style="font-size: 0.8rem; color: #888; text-transform: uppercase;">قصص تحول</h4>
+                            <h3 class="program-card-title">رحلة أحمد: من القلق إلى السلام</h3>
+                             <button class="btn btn-secondary" data-modal-target="modal-blog-story" style="margin-top: 1rem;">شاهد القصة</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="content-section bg-light animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">أصداء الشفاء</h2>
+                <p class="section-intro">رسائل حقيقية من أشخاص لمسوا التغيير. كل رسالة هي شهادة على قوة الاتصال بالذات.</p>
+                <div class="testimonials-container">
+                    <div class="chat-bubble-wrapper client">
+                        <button class="reaction-btn" aria-label="React with heart"><i class="fas fa-heart"></i></button>
+                        <div class="chat-bubble client">
+                            <p>كنت ضائعة تماماً في دوامة من القلق والتفكير الزائد. جلستك كانت مثل النور الذي كنت أحتاجه لأرى طريقي من جديد. شكراً من القلب.</p>
+                            <cite>نورة. م</cite>
+                        </div>
+                    </div>
+                    <div class="chat-bubble-wrapper doctor">
+                        <div class="chat-bubble doctor">
+                            <p>سعيد جداً لسماع ذلك يا نورة. النور كان بداخلك دائماً، أنا فقط ساعدتك في إزالة الغبار عنه.</p>
+                        </div>
+                    </div>
+                    <div class="chat-bubble-wrapper client">
+                        <button class="reaction-btn" aria-label="React with heart"><i class="fas fa-heart"></i></button>
+                        <div class="chat-bubble client">
+                            <p>لم أتوقع أبداً أن جلسة واحدة عن بعد يمكن أن تحدث كل هذا الفارق في حياتي. أشعر وكأني ولدت من جديد، بطاقة وسلام داخلي لم أعهده من قبل.</p>
+                            <cite>أحمد. س</cite>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="faq" class="faq-section content-section animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">أسئلة شائعة</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>ما الفرق بين هذا المنهج والعلاج النفسي التقليدي؟</span>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>سؤال ممتاز وجوهري. <strong>العلاج النفسي التقليدي</strong> يركز بشكل أساسي على تحليل العقل، السلوكيات، وتجارب الماضي لفهم ومعالجة الأعراض. إنه فعال جدًا في بناء استراتيجيات التكيف وتغيير أنماط التفكير.<br><br><strong>منهجي في "طِبْرا"</strong> يرى هذه الأعراض كرسائل من الروح. نحن لا نعالج العرض فقط، بل ننصت إلى الرسالة التي يحملها. نحن ندمج الحوار والفهم العقلي مع ممارسات جسدية (كالتنفس واليوجا) وطاقية (كالتأمل الموجه) لإعادة التوازن لكامل كيانك - العقل والجسد والروح كوحدة متكاملة. نحن نرى الجسد كخريطة للوعي، والشفاء يحدث عندما نعيد الانسجام بين هذه الأبعاد الثلاثة.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>هل الشفاء عن بعد فعال حقًا؟</span>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>هذا من أكثر الأسئلة عمقًا. من منظور طبي، نحن نعلم أن **حالة الجهاز العصبي** هي مفتاح الشفاء. التوتر المزمن يضعنا في حالة "الكر أو الفر"، مما يعيق قدرة الجسم على إصلاح نفسه. الشفاء عن بعد، من خلال صوتي وإرشادي، يعمل على تهدئة جهازك العصبي عبر تقنيات التنفس والتأمل.<br><br> هذا ليس "سحرًا"، بل هو علم **المرونة العصبية (Neuroplasticity)**. عندما أقودك في حالة تأمل عميقة، نحن نعمل معًا على إعادة برمجة المسارات العصبية المرتبطة بالتوتر والقلق. المسافة الجغرافية لا تمنع قدرة عقلك على الاستجابة للإرشاد، تمامًا كما أن المسافة لا تمنعك من الشعور بالعاطفة عند مشاهدة فيلم مؤثر. إنها قوة **النية المركزة والاتصال الإنساني** التي تتجاوز المكان.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>هل أحتاج إلى خبرة سابقة في التأمل أو اليوجا؟</span>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>إطلاقًا. في الحقيقة، غالبًا ما يكون المبتدئون هم الأكثر انفتاحًا لتلقي الفائدة لأنهم يأتون بعقل خالٍ من التوقعات. تم تصميم جميع برامجنا لتلتقي بك أينما كنت. من منظور طبي، البدء بلطف واحترام حدود جسدك هو أكثر فعالية وأمانًا من محاولة إجباره على أوضاع متقدمة. هدفنا ليس الأداء، بل **الاتصال الداخلي**.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section content-section bg-dark animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">تواصل معي</h2>
+                <p class="section-intro">أنا هنا للإجابة على أسئلتك ومساعدتك في بدء رحلتك. املأ النموذج أدناه، وسأتواصل معك قريبًا.</p>
+                <form id="contact-form" action="https://formspree.io/f/myzjpvgp" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="sr-only">الاسم</label>
+                        <input type="text" id="name" name="name" placeholder="الاسم الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="sr-only">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" placeholder="البريد الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="program-interest" class="sr-only">البرنامج المهتم به</label>
+                        <select id="program-interest" name="الاهتمام" required>
+                            <option value="" disabled selected>اختر البرنامج المهتم به...</option>
+                            <option value="guidance">جلسة إرشاد فردية</option>
+                            <option value="renewal">ورشة التجديد الرقمي</option>
+                            <option value="oasis">واحة الشفاء (حضوري)</option>
+                            <option value="general">استفسار عام</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="sr-only">رسالتك</label>
+                        <textarea id="message" name="message" rows="5" placeholder="رسالتك أو سؤالك..." required></textarea>
+                    </div>
+                    <button type="submit" id="contact-submit-btn" class="btn btn-primary">أرسل استفساري</button>
+                </form>
+                <div id="form-status"></div>
+            </div>
+        </section>
+
+    </main>
+    
+    <a href="https://wa.me/967771447111?text=%D8%B3%D9%84%D8%A7%D9%85%20%D8%AF%D9%83%D8%AA%D9%88%D8%B1%20%D8%B9%D9%85%D8%B1%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D9%81%D8%A7%D8%A1%20%D8%A7%D9%84%D8%AA%D9%8A%20%D8%AA%D9%82%D8%AF%D9%85%D9%87%D8%A7." class="whatsapp-float" target="_blank" aria-label="تواصل معنا عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+     <button data-modal-target="modal-super-medicines" class="super-medicines-float">
+         🌟 الأدوية الخارقة
+     </button>
+
+    <div class="nature-sounds-toggle" aria-label="تشغيل/إيقاف أصوات الطبيعة">
+        <i class="fas fa-volume-high"></i>
+        <i class="fas fa-volume-mute"></i>
+    </div>
+    <audio id="nature-audio" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/10/24/audio_9639c1469e.mp3" type="audio/mpeg">
+    </audio>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>طِبرا | Ṭibra</h3>
+                    <p>مساحة للشفاء والنمو وإعادة الاتصال بالذات. انضم إلينا في رحلة تحويلية.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#philosophy">فلسفتنا</a></li>
+                        <li><a href="#programs">البرامج</a></li>
+                         <li><a href="#knowledge-center">مركز المعرفة</a></li>
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>تواصل معي مباشرة</h4>
+                    <div>
+                        <a href="https://www.facebook.com/dr.omr369" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/dr.omr369" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@dr.omr369" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 طِبرا | Ṭibra. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Modals (Pop-ups) -->
+    <div id="modal-guidance" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
+            <h2>إرشاد روحي فردي</h2>
+            <p><strong>المدة:</strong> 60 دقيقة (عبر الإنترنت)</p>
+            <p>هنا، أنت محور الرحلة. هذه ليست استشارة، بل هي شراكة شفائية. مساحة آمنة تمامًا لك لتفتح قلبك، وتستكشف أعماق روحك، وتجد طريقك الخاص نحو النور.</p>
+            <h3>لمن هذه الرحلة؟</h3>
+            <p>لمن يقف عند مفترق طرق، لمن يواجه تحديًا عاطفيًا، أو لمن يشعر بنداء داخلي لاكتشاف معنى أعمق لوجوده. هذه الساعة لك وحدك.</p>
+            <h3>ماذا سنستكشف معًا؟</h3>
+            <ul>
+                <li>تحديد وتحرير المعتقدات المقيدة والعوائق العاطفية.</li>
+                <li>اكتشاف شغفك ورسالتك الحقيقية في الحياة.</li>
+                <li>شفاء جروح الماضي في مساحة من التعاطف والتقبل.</li>
+                <li>تطوير حدسك وحكمتك الداخلية لتصبح مرشدك الأول.</li>
+            </ul>
+            <h3>استثمارك في ذاتك:</h3>
+            <p>$49 (جلسة واحدة)</p>
+            <button class="btn btn-primary modal-book-btn" data-program="guidance">أريد أن أبدأ رحلتي الخاصة</button>
+        </div>
+    </div>
+
+    <div id="modal-renewal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
+            <h2>ورشة التجديد الرقمي</h2>
+            <p><strong>المدة:</strong> 3 ساعات (ورشة عمل جماعية عبر الإنترنت)</p>
+            <p>جرعة مكثفة من السكينة والطاقة، مصممة خصيصًا لتصفية ذهنك من ضغوط الأسبوع. إنها هديتك لنفسك، وفرصة للتواصل مع أرواح أخرى في رحلة مشابهة.</p>
+            <h3>ماذا ستختبر؟</h3>
+            <ul>
+                <li>تأمل موجه عميق لتحرير طاقة الأسبوع المنصرم.</li>
+                <li>تمارين عملية في التنفس الواعي لتهدئة الجهاز العصبي.</li>
+                <li>تقنيات لتحويل القلق إلى طاقة إبداعية.</li>
+                <li>مساحة لمشاركة اختيارية في دائرة آمنة وداعمة.</li>
+            </ul>
+            <h3>استثمارك في ذاتك:</h3>
+            <p>$45 (للورشة كاملة)</p>
+            <button class="btn btn-primary modal-book-btn" data-program="renewal">أحتاج لهذا التجديد</button>
+        </div>
+    </div>
+    
+    <div id="modal-oasis" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="إغلاق النافذة">&times;</button>
+            <h2>واحة الشفاء (حضوري)</h2>
+            <p><strong>المدة:</strong> يوم واحد كامل (من 9 صباحًا حتى 5 مساءً)</p>
+            <p>تجربة حضورية حصرية، فرصة نادرة للانقطاع التام عن العالم الخارجي والغوص في أعماق فطرتك الشفائية. هذا اليوم ليس مجرد ورشة عمل، بل هو طقس عبور نحو نسخة أكثر سلامًا من ذاتك.</p>
+            <h3>لمن هذه الواحة؟</h3>
+            <p>للأرواح الجادة المستعدة لعمل تحول حقيقي. القبول في هذه الواحة يتم عبر تقديم طلب لضمان توافق طاقة المجموعة.</p>
+            <h3>ماذا ستختبر؟</h3>
+            <ul>
+                <li>الانغماس الكامل في الطبيعة وممارسات التأمل الحركي.</li>
+                <li>ورشة عمل عميقة حول الشفاء من خلال نموذج "A'tura".</li>
+                <li>تغذية حية وطبيعية تدعم عملية تنظيف الجسد.</li>
+                <li>تواصل حقيقي وعميق مع مجموعة صغيرة من الأرواح المتشابهة.</li>
+            </ul>
+            <h3>استثمارك في ذاتك:</h3>
+            <p>$49 (لليوم الكامل، شامل الغداء والأنشطة)</p>
+            <button class="btn btn-primary modal-book-btn" data-program="oasis">قدم طلب الانضمام للواحة</button>
+        </div>
+    </div>
+
+    <!-- Blog Modals -->
+    <div id="modal-blog-mindfulness" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>خمسة طرق لدمج اليقظة في يومك</h2><p>في خضم انشغالاتنا اليومية، قد يبدو تخصيص وقت للتأمل أمرًا صعبًا. لكن الحقيقة هي أن اليقظة الذهنية ليست ممارسة تجلس لها، بل هي حالة وعي تعيش بها. إليك خمس طرق بسيطة لنسجها في نسيج يومك...</p></div></div>
+    <div id="modal-blog-tea" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>تأمل الشاي: طقس من السكينة</h2><audio controls style="width:100%; margin-top:1rem;"><source src="https://cdn.pixabay.com/audio/2022/10/24/audio_9639c1469e.mp3" type="audio/mpeg"></audio><p style="margin-top:1rem;">فنجان الشاي الصباحي أو المسائي يمكن أن يتحول من مجرد عادة إلى طقس شفائي عميق. في هذا التأمل الصوتي، سأقودك خطوة بخطوة لتحويل هذه اللحظات البسيطة إلى واحة من السلام والوعي...</p></div></div>
+    <div id="modal-blog-story" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>رحلة أحمد: من القلق إلى السلام</h2><p>عندما تواصل معي أحمد أول مرة، كان صوته يحمل ثقل العالم. كان القلق يلتهم لياليه، ويسرق منه متعة اللحظة الحاضرة. "أشعر أني في سباق دائم لا أعرف خط نهايته"، هكذا وصف حالته. كانت رحلته معنا شهادة على قوة الالتزام بالشفاء الداخلي...</p></div></div>
+    
+    <div id="modal-welcome" class="modal welcome-modal"><div class="modal-content"><h2>أهلاً بك في طِبرا</h2><p>قبل أن تبدأ رحلتك، نود أن نعرف: ما الذي أتى بك إلى هنا اليوم؟</p><div class="options-grid"><button class="option-btn" data-choice="calm">أبحث عن السكينة والهدوء</button><button class="option-btn" data-choice="clarity">أبحث عن الوضوح والتركيز</button><button class="option-btn" data-choice="healing">أبحث عن الشفاء من ألم</button><button class="option-btn" data-choice="curious">أنا هنا بدافع الفضول</button></div></div></div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><h2>سلتي</h2><ul class="cart-items-list"><p class="cart-empty-msg">سلتك فارغة حاليًا.</p></ul></div><div class="cart-summary"><div class="cart-total"><span>المجموع:</span><span id="cart-total-price">$0.00</span></div><a href="#" id="whatsapp-checkout-btn" class="btn btn-primary checkout-btn" target="_blank">إتمام الشراء عبر واتساب</a></div></div>
+    
+    <!-- Super-Medicines Modal -->
+    <div id="modal-super-medicines" class="modal"><div class="modal-content"><button class="close-modal" aria-label="إغلاق النافذة">&times;</button><div style="padding: 2rem; margin: -2rem; background-color: var(--dark-color); color: white;"><div class="container"><h2 class="section-title">الأدوية الخارقة</h2><p class="section-intro">هنا تتجلى خلاصة خبرتي، حيث يلتقي العلم المتقدم بالحكمة الروحية العميقة. هذه ليست مجرد مكملات، بل هي أدوات تحفيزية مصممة لإيقاظ القوة الشفائية الكامنة في خلاياك.</p><div class="store-grid"><article class="product-card" data-id="4" data-name="إكسير الشباب" data-price="49" data-img="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1596713211532-519c5c8a6662?q=80&w=1974&auto=format&fit=crop" alt="إكسير الشباب" class="product-card-img" loading="lazy"><div class="product-card-content"><h3 class="product-card-title">إكسير الشباب</h3><p class="product-card-desc">تركيبة متقدمة تجمع بين مضادات الأكسدة القوية مثل ريسفيراترول و NADH، لدعم تجديد الخلايا وإبطاء علامات الشيخوخة على المستوى الخلوي.</p><div class="product-price">$49</div><button class="btn btn-primary add-to-cart-btn">أضف للسلة</button></div></article><article class="product-card" data-id="5" data-name="درع المناعة الذهبي" data-price="45" data-img="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1563212897-523296223a49?q=80&w=1964&auto=format&fit=crop" alt="درع المناعة الذهبي" class="product-card-img" loading="lazy"><div class="product-card-content"><h3 class="product-card-title">درع المناعة الذهبي</h3><p class="product-card-desc">مزيج قوي من فطر الريشي، والزنك بيكولينات، وفيتامين د3، مصمم لتقوية خطوط دفاع الجسم الطبيعية وتعزيز الاستجابة المناعية الصحية.</p><div class="product-price">$45</div><button class="btn btn-primary add-to-cart-btn">أضف للسلة</button></div></article><article class="product-card" data-id="6" data-name="تركيز الحكماء" data-price="40" data-img="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1556760544-44217648345a?q=80&w=1974&auto=format&fit=crop" alt="تركيز الحكماء" class="product-card-img" loading="lazy"><div class="product-card-content"><h3 class="product-card-title">تركيز الحكماء</h3><p class="product-card-desc">يجمع بين عشبة الجنكة بيلوبا ومركب "Lion's Mane" لدعم الوظائف الإدراكية، تعزيز الذاكرة، وتحقيق وضوح ذهني استثنائي.</p><div class="product-price">$40</div><button class="btn btn-primary add-to-cart-btn">أضف للسلة</button></div></article></div></div></div></div></div>
+
+    <div class="modal-overlay"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !isExpanded);
+                    navMenu.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll');
+                    const icon = navToggle.querySelector('i');
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                });
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navMenu.classList.contains('active')) navToggle.click();
+                    });
+                });
+            }
+
+            const header = document.querySelector('.main-header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    header.classList.toggle('scrolled', window.scrollY > 50);
+                });
+            }
+            
+            const overlay = document.querySelector('.modal-overlay');
+            const closeModal = (modal) => {
+                if (!modal) return;
+                modal.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            };
+
+            const openModal = (modal) => {
+                if (!modal) return;
+                modal.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                document.body.classList.add('no-scroll');
+            };
+
+            const welcomeModal = document.getElementById('modal-welcome');
+            if (welcomeModal && overlay) {
+                 if (sessionStorage.getItem('welcomeShown') !== 'true') {
+                     setTimeout(() => {
+                         openModal(welcomeModal);
+                         sessionStorage.setItem('welcomeShown', 'true');
+                     }, 2000);
+                 }
+                
+                welcomeModal.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        console.log(`User intent: ${btn.dataset.choice}`);
+                        closeModal(welcomeModal);
+                    });
+                });
+            }
+            
+            const modalButtons = document.querySelectorAll('[data-modal-target]');
+            const closeModalButtons = document.querySelectorAll('.close-modal');
+            const modalBookButtons = document.querySelectorAll('.modal-book-btn');
+            
+            modalButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    const modalId = button.dataset.modalTarget;
+                    const modal = document.getElementById(modalId);
+                    openModal(modal);
+                });
+            });
+
+            if(overlay){
+                overlay.addEventListener('click', () => {
+                    document.querySelectorAll('.modal.active').forEach(closeModal);
+                });
+            }
+
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = button.closest('.modal');
+                    closeModal(modal);
+                });
+            });
+            
+            modalBookButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const modal = button.closest('.modal');
+                    const programValue = button.dataset.program;
+                    const contactFormSelect = document.getElementById('program-interest');
+                    const contactSection = document.getElementById('contact');
+
+                    closeModal(modal);
+
+                    if(contactFormSelect && programValue) {
+                        contactFormSelect.value = programValue;
+                    }
+
+                    if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal.active').forEach(closeModal);
+                }
+            });
+
+            let cart = [];
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            const cartIconWrapper = document.querySelector('.cart-icon-wrapper');
+            const cartItemsList = document.querySelector('.cart-items-list');
+            const cartModal = document.getElementById('cart-modal');
+            const cartTotalPriceEl = document.getElementById('cart-total-price');
+            const cartItemCountEl = document.querySelector('.cart-item-count');
+            const whatsAppCheckoutBtn = document.getElementById('whatsapp-checkout-btn');
+            const cartEmptyMsg = document.querySelector('.cart-empty-msg');
+
+            function updateCartDisplay() {
+                 if (!cartItemsList || !cartTotalPriceEl || !cartItemCountEl || !cartEmptyMsg) return;
+                 
+                 cartItemsList.innerHTML = '';
+                 if (cart.length === 0) {
+                     cartEmptyMsg.style.display = 'block';
+                     if(whatsAppCheckoutBtn) whatsAppCheckoutBtn.style.display = 'none';
+                 } else {
+                     cartEmptyMsg.style.display = 'none';
+                     if(whatsAppCheckoutBtn) whatsAppCheckoutBtn.style.display = 'block';
+                     cart.forEach(item => {
+                         const li = document.createElement('li');
+                         li.className = 'cart-item';
+                         li.innerHTML = `
+                             <div class="cart-item-details">
+                                 <img src="${item.img}" alt="${item.name}">
+                                 <div class="cart-item-info">
+                                     <h4>${item.name}</h4>
+                                     <span>${item.quantity} x $${item.price.toFixed(2)}</span>
+                                 </div>
+                             </div>
+                             <div class="cart-item-actions">
+                                 <button class="remove-from-cart-btn" data-id="${item.id}" aria-label="Remove ${item.name}">&times;</button>
+                             </div>
+                         `;
+                         cartItemsList.appendChild(li);
+                     });
+                 }
+                
+                const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                cartTotalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
+                
+                const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartItemCountEl.textContent = totalQuantity;
+                cartItemCountEl.classList.toggle('visible', totalQuantity > 0);
+                
+                updateWhatsAppLink(totalPrice);
+            }
+
+            function addToCart(product) {
+                const existingItem = cart.find(item => item.id === product.id);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                updateCartDisplay();
+            }
+            
+            function removeFromCart(productId) {
+                cart = cart.filter(item => item.id !== String(productId));
+                updateCartDisplay();
+            }
+            
+            function updateWhatsAppLink(totalPrice) {
+                 if (!whatsAppCheckoutBtn || cart.length === 0) return;
+                 
+                 let message = "سلام دكتور عمر،\nأود طلب المنتجات التالية من موقع طِبْرا:\n\n";
+                 cart.forEach(item => {
+                     message += `- ${item.name} (الكمية: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
+                 });
+                 message += `\n*المجموع الإجمالي: $${totalPrice.toFixed(2)}*\n\n`;
+                 message += "يرجى تزويدي بتفاصيل الدفع والشحن. شكرًا لك.";
+
+                 const whatsappURL = `https://wa.me/967771447111?text=${encodeURIComponent(message)}`;
+                 whatsAppCheckoutBtn.href = whatsappURL;
+            }
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const productCard = button.closest('.product-card');
+                    if (!productCard) return;
+                    const product = {
+                        id: productCard.dataset.id,
+                        name: productCard.dataset.name,
+                        price: parseFloat(productCard.dataset.price),
+                        img: productCard.querySelector('img').src
+                    };
+                    addToCart(product);
+                    openModal(cartModal);
+                });
+            });
+            
+            if (cartItemsList) {
+                 cartItemsList.addEventListener('click', (e) => {
+                     if (e.target.classList.contains('remove-from-cart-btn')) {
+                         const productId = e.target.dataset.id;
+                         removeFromCart(productId);
+                     }
+                 });
+            }
+            
+            if (cartIconWrapper) {
+                cartIconWrapper.addEventListener('click', () => openModal(cartModal));
+            }
+            updateCartDisplay();
+            
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const form = e.target;
+                    const data = new FormData(form);
+                    const formStatus = document.getElementById('form-status');
+                    const submitBtn = document.getElementById('contact-submit-btn');
+
+                    if(!submitBtn || !formStatus) return;
+                    
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'جارٍ الإرسال...';
+                    formStatus.style.display = 'none';
+
+                    fetch(form.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } })
+                    .then(response => {
+                        if (response.ok) {
+                            formStatus.textContent = "شكرًا لك! وصلت رسالتك بنجاح وسأتواصل معك قريبًا.";
+                            formStatus.className = 'success';
+                            form.reset();
+                        } else {
+                            formStatus.textContent = "عذرًا، حدث خطأ ما. يرجى المحاولة مرة أخرى أو التواصل عبر واتساب.";
+                            formStatus.className = 'error';
+                        }
+                    }).catch(error => {
+                        formStatus.textContent = "عذرًا، حدث خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مرة أخرى.";
+                        formStatus.className = 'error';
+                    }).finally(() => {
+                        formStatus.style.display = 'block';
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'أرسل استفساري';
+                    });
+                });
+            }
+
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+            
+            const soundToggle = document.querySelector('.nature-sounds-toggle');
+            const natureAudio = document.getElementById('nature-audio');
+            if(soundToggle && natureAudio) {
+                soundToggle.addEventListener('click', async () => {
+                    if (natureAudio.paused) {
+                        try {
+                            await natureAudio.play();
+                            soundToggle.classList.add('playing');
+                            soundToggle.setAttribute('aria-label', 'إيقاف أصوات الطبيعة');
+                        } catch (error) {
+                            if (error.name !== 'AbortError') {
+                                console.error("Audio play failed:", error);
+                            }
+                        }
+                    } else {
+                        natureAudio.pause();
+                        soundToggle.classList.remove('playing');
+                        soundToggle.setAttribute('aria-label', 'تشغيل أصوات الطبيعة');
+                    }
+                });
+            }
+            
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                if (!question || !answer) return;
+                
+                question.addEventListener('click', () => {
+                    const isExpanded = question.getAttribute('aria-expanded') === 'true';
+                    question.setAttribute('aria-expanded', !isExpanded);
+                    if (!isExpanded) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    } else {
+                        answer.style.maxHeight = '0';
+                    }
+                });
+            });
+
+            // NEW: Interactive Testimonials Logic
+            const reactionButtons = document.querySelectorAll('.reaction-btn');
+            reactionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const testimonialsContainer = button.closest('.testimonials-container');
+                    if (!testimonialsContainer) return;
+
+                    // Create and animate multiple hearts
+                    for (let i = 0; i < 5; i++) {
+                        const heart = document.createElement('i');
+                        heart.className = 'fas fa-heart floating-heart';
+                        
+                        // Position heart near the button
+                        const buttonRect = button.getBoundingClientRect();
+                        const containerRect = testimonialsContainer.getBoundingClientRect();
+                        heart.style.left = `${buttonRect.left - containerRect.left + (Math.random() * 20 - 10)}px`;
+                        heart.style.top = `${buttonRect.top - containerRect.top + (Math.random() * 10 - 5)}px`;
+
+                        // Randomize animation properties
+                        heart.style.animationDuration = `${Math.random() * 1 + 1}s`;
+                        heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+
+                        testimonialsContainer.appendChild(heart);
+
+                        // Remove heart from DOM after animation
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 1500);
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
