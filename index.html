@@ -18,7 +18,7 @@
          * main.css
          * Stylesheet for TibraSoul Website
          * Author: Dr. Omar & Office701
-         * Version: 4.1.0 (Super-Medicines Section Added)
+         * Version: 4.2.0 (Formspree Integration)
         */
 
         :root {
@@ -457,7 +457,15 @@
             <div class="container">
                 <h2 class="section-title">تواصل معي</h2>
                 <p class="section-intro">أنا هنا للإجابة على أسئلتك ومساعدتك في بدء رحلتك. املأ النموذج أدناه، وسأتواصل معك قريبًا.</p>
-                <form action="#" method="POST" class="contact-form">
+                <!-- 
+                  INSTRUCTIONS FOR DR. OMAR:
+                  1. Go to formspree.io and create a free account.
+                  2. Create a new form and get your unique URL endpoint.
+                  3. Replace the placeholder "YOUR_UNIQUE_ID" in the action attribute below with your actual Formspree endpoint.
+                  4. The first time you submit the form yourself, Formspree will send you a confirmation email. Click the link in it to activate your form.
+                  5. That's it! All future submissions will go directly to your email.
+                -->
+                <form id="contact-form" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST" class="contact-form">
                     <div class="form-group">
                         <label for="name" class="sr-only">الاسم</label>
                         <input type="text" id="name" name="name" placeholder="الاسم الكامل" required>
@@ -468,7 +476,7 @@
                     </div>
                     <div class="form-group">
                         <label for="program-interest" class="sr-only">البرنامج المهتم به</label>
-                        <select id="program-interest" name="program" required>
+                        <select id="program-interest" name="الاهتمام" required>
                             <option value="" disabled selected>اختر البرنامج المهتم به...</option>
                             <option value="guidance">جلسة إرشاد فردية</option>
                             <option value="renewal">ورشة التجديد الرقمي</option>
