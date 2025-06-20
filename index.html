@@ -1,894 +1,958 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="اكتشف رحلتك نحو الشفاء الروحي مع طِبرا. نقدم خلوات وتجارب تحويلية مصممة لتجديد العقل والجسد والروح.">
-    <meta name="keywords" content="الشفاء الروحي, التأمل, خلوة روحية, اليقظة الذهنية, طِبرا, طبيب وعي, TibraSoul, spiritual healing, meditation, retreat, أدوية خارقة, حديقة زن الرقمية, دفتر يوميات ذكي">
-    <title>ṬibraSoul طِبرا | Ṭibra - رحلتك نحو الشفاء الروحي</title>
+    <title>Ṭibra - Your Digital Sanctuary</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.13.0/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
-        /*
-         * TibraSoul - Digital Sanctuary
-         * Version: 6.0.0 (Interactive Features Update)
-         * Author: Dr. Omar & Office701 & Gemini AI
-         */
-
+        /* --- GLOBAL STYLES & RESET --- */
         :root {
-            --primary-color: #5a6e5a;
-            --secondary-color: #f4f1eb;
-            --dark-color: #3c3c3c;
-            --light-color: #FFFFFF;
-            --text-color: #4a4a4a;
-            --accent-color: #c8a07d;
-            --super-med-color: #c28f5c;
-            --font-body: 'Noto Kufi Arabic', sans-serif;
-            --font-headings: 'Noto Kufi Arabic', sans-serif;
-            --font-brand: 'Great Vibes', cursive;
-            --container-width: 1140px;
-            --transition-speed: 0.5s ease;
-            --border-radius: 8px;
+            --bg-color: #F4F1EA;
+            --primary-text: #3D405B;
+            --secondary-text: #81B29A;
+            --accent-color: #E07A5F;
+            --sand-color: #EADDC6;
+            --rake-color: #D4C4A8;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --font-primary: 'Merriweather', serif;
+            --font-secondary: 'Montserrat', sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body { font-family: var(--font-body); color: var(--text-color); line-height: 1.8; background-color: var(--light-color); direction: rtl; text-align: right; overflow-x: hidden; }
-        body.no-scroll { overflow: hidden; }
-        h1, h2, h3, h4, h5, h6 { font-family: var(--font-headings); font-weight: 700; color: var(--dark-color); margin-bottom: 1rem; line-height: 1.3; }
-        p { margin-bottom: 1.5rem; }
-        a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed); }
-        a:hover { color: #435243; }
-        ul { list-style: none; }
-        img { max-width: 100%; height: auto; display: block; }
-        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
-        .btn { display: inline-block; padding: 0.8rem 2.2rem; border-radius: 50px; font-weight: 700; font-family: var(--font-body); transition: all var(--transition-speed); cursor: pointer; border: none; text-align: center; }
-        .btn-primary { background-color: var(--primary-color); color: var(--light-color); box-shadow: 0 4px 15px rgba(90, 110, 90, 0.3); }
-        .btn-primary:hover { background-color: #435243; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(90, 110, 90, 0.4); }
-        .btn-secondary { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
-        .btn-secondary:hover { background-color: var(--primary-color); color: var(--light-color); }
-        .section-title { text-align: center; font-size: 2.8rem; margin-bottom: 1rem; position: relative; padding-bottom: 1rem; }
-        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: var(--accent-color); }
-        .section-intro { text-align: center; max-width: 650px; margin: 0 auto 4rem auto; font-size: 1.1rem; }
-        .content-section { padding: 6rem 0; }
-        .bg-light { background-color: var(--secondary-color); }
-        .bg-dark { background-color: #2c2c2c; color: #f0f0f0; }
-        .bg-dark .section-title, .bg-dark .section-intro, .bg-dark h1, .bg-dark h2, .bg-dark h3 { color: var(--light-color); }
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-        
-        /* --- Main Header --- */
-        .main-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1rem 0; background-color: transparent; transition: all 0.5s ease; }
-        .main-header.scrolled { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 0.5rem 0; }
-        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: var(--font-brand); font-size: 2.5rem; font-weight: 400; color: var(--dark-color); }
-        
-        .main-nav { display: flex; align-items: center; gap: 1rem; }
-        .nav-menu { display: flex; align-items: center; gap: 2rem; }
-        .nav-menu a { font-weight: 400; position: relative; padding-bottom: 5px; font-size: 1rem; }
-        .nav-menu a:not(.btn) { color: var(--text-color); }
-        .nav-menu a:not(.btn)::after { content: ''; position: absolute; bottom: 0; right: 0; width: 0; height: 2px; background-color: var(--primary-color); transition: width var(--transition-speed); }
-        .nav-menu a:not(.btn):hover::after { width: 100%; }
-        
-        .nav-left-section { display: flex; align-items: center; gap: 1.5rem; }
-        .cart-icon-wrapper, #user-profile-icon { position: relative; cursor: pointer; font-size: 1.5rem; color: var(--dark-color); }
-        #auth-container button { margin-right: 1rem; }
-        .cart-item-count { position: absolute; top: -8px; right: -10px; background-color: var(--accent-color); color: white; border-radius: 50%; width: 22px; height: 22px; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; font-weight: bold; transform: scale(0); transition: transform 0.2s ease; }
-        .cart-item-count.visible { transform: scale(1); }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        .nav-toggle { display: none; font-size: 1.5rem; background: none; border: none; color: var(--dark-color); cursor: pointer; z-index: 1001; }
-
-        /* --- Hero Section --- */
-        .hero-section { height: 100vh; min-height: 700px; display: flex; justify-content: center; align-items: center; text-align: center; color: var(--light-color); position: relative; }
-        .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -2; transition: opacity 1s ease-in-out; }
-        .hero-background img { width: 100%; height: 100%; object-fit: cover; }
-        .hero-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)); z-index: -1; }
-        .hero-content { animation: fadeInUp 1s ease-out; }
-        .hero-title { font-family: var(--font-brand); font-size: clamp(3.5rem, 10vw, 7rem); margin-bottom: 0.5rem; font-weight: 400; color: var(--light-color); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .hero-subtitle { font-size: clamp(1.1rem, 4vw, 1.5rem); margin-bottom: 2.5rem; font-weight: 300; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
-        .scroll-down-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); animation: bounce 2.5s infinite; }
-        .scroll-down-indicator a { font-size: 2rem; color: rgba(255, 255, 255, 0.8); transition: color var(--transition-speed); }
-        .scroll-down-indicator a:hover { color: var(--light-color); }
-        
-        /* --- General Content Styles --- */
-        .philosophy-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
-        .founder-image img { border-radius: var(--border-radius); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .founder-story h3 { font-size: 2rem; color: var(--primary-color); }
-        .founder-story p { line-height: 2.2; }
-        .programs-grid, .blog-grid, .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .program-card, .product-card { background: var(--light-color); border-radius: var(--border-radius); overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform var(--transition-speed), box-shadow var(--transition-speed); display: flex; flex-direction: column; }
-        .program-card:hover, .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .program-card-img, .product-card-img { width: 100%; height: 220px; object-fit: cover; }
-        .program-card-content, .product-card-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .program-card-title, .product-card-title { font-size: 1.6rem; }
-        .program-card-desc, .product-card-desc { flex-grow: 1; }
-        .product-price { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin: 1rem 0; }
-        
-        /* --- NEW: Digital Zen Garden --- */
-        #zen-garden-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
-            background-color: #f4f1eb;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s, visibility 0s 0.5s;
+        body {
+            font-family: var(--font-secondary);
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            line-height: 1.6;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
         }
-        #zen-garden-container.active {
-            opacity: 1;
-            visibility: visible;
-            transition-delay: 0s;
+
+        /* --- UI CONTAINERS --- */
+       .auth-container,.main-app-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-in-out;
         }
-        #zen-garden {
-            position: absolute;
-            top: 0;
-            left: 0;
+
+       .hidden {
+            display: none!important;
+        }
+
+        /* --- AUTH SCREEN --- */
+       .auth-container {
+            text-align: center;
+        }
+       .auth-container h1 {
+            font-family: var(--font-primary);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+       .auth-container p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+       .google-signin-btn {
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            transition: background-color 0.3s;
+        }
+       .google-signin-btn:hover {
+            background-color: #357ae8;
+        }
+
+        /* --- MAIN APP LAYOUT --- */
+       .main-app-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            grid-template-rows: 60px 1fr;
+            grid-template-areas:
+                "header header"
+                "sidebar content";
+            width: 100vw;
+            height: 100vh;
+        }
+
+        header {
+            grid-area: header;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            background-color: white;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            z-index: 10;
+        }
+        
+        header.logo {
+            font-family: var(--font-primary);
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+       .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+       .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+       .logout-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+       .logout-btn:hover {
+            background: #c76b50;
+        }
+
+        aside {
+            grid-area: sidebar;
+            background-color: #fff;
+            padding: 2rem 1rem;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        aside nav ul {
+            list-style: none;
+        }
+
+        aside nav li {
+            margin-bottom: 1rem;
+        }
+
+        aside nav a {
+            text-decoration: none;
+            color: var(--primary-text);
+            font-size: 1.1rem;
+            padding: 10px 15px;
+            display: block;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        aside nav a.active, aside nav a:hover {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+        }
+
+        main {
+            grid-area: content;
+            overflow-y: auto;
+            padding: 2rem;
+            background-color: var(--bg-color);
+        }
+
+       .content-section {
+            display: none;
+        }
+       .content-section.active {
+            display: block;
+        }
+
+        h2 {
+            font-family: var(--font-primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-text);
+        }
+        
+        button {
+            font-family: var(--font-secondary);
+        }
+
+        /* --- ZEN GARDEN SECTION --- */
+        #zen-garden-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: var(--sand-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        #zen-canvas {
             width: 100%;
             height: 100%;
             cursor: crosshair;
         }
-        .zen-garden-ui {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            z-index: 2001;
-        }
-        .zen-garden-ui .close-btn { font-size: 2rem; color: var(--dark-color); background: transparent; border: none; cursor: pointer; }
-        
-        .breathing-guide {
-            position: absolute;
-            bottom: 3rem;
-            left: 50%;
-            transform: translateX(-50%);
+       .garden-controls {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2002;
-        }
-        #breathing-circle {
-            width: 100px;
-            height: 100px;
-            background-color: rgba(90, 110, 90, 0.5);
-            border-radius: 50%;
-            animation: breath 16s infinite ease-in-out;
-        }
-        #breathing-text {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            color: var(--dark-color);
-            font-weight: bold;
-        }
-
-        @keyframes breath {
-            0%, 100% { transform: scale(1); } /* Hold */
-            25% { transform: scale(1.5); } /* Inhale */
-            50% { transform: scale(1.5); } /* Hold */
-            75% { transform: scale(1); } /* Exhale */
-        }
-        
-        .affirmation-wall {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 2003;
-        }
-        .affirmation {
-            position: absolute;
-            color: rgba(60, 60, 60, 0.6);
-            font-size: 1.5rem;
-            white-space: nowrap;
-            animation: float-across 30s linear infinite;
-            will-change: transform;
-        }
-
-        @keyframes float-across {
-            from { transform: translateX(100vw); }
-            to { transform: translateX(-100%); }
-        }
-
-        /* --- NEW: AI Journal & User Profile --- */
-        .dashboard-section {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: flex-start;
-        }
-        #journey-visual-container {
-            position: sticky;
-            top: 100px;
-            text-align: center;
-        }
-        #lottie-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        #journal-container { padding: 2rem; background: var(--light-color); border-radius: var(--border-radius); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        #journal-entry { width: 100%; height: 200px; padding: 1rem; border: 1px solid #ccc; border-radius: var(--border-radius); font-family: var(--font-body); resize: vertical; margin-bottom: 1rem; }
-        #journal-analysis { margin-top: 1.5rem; padding: 1.5rem; background: var(--secondary-color); border-radius: var(--border-radius); border-left: 5px solid var(--accent-color); min-height: 50px; }
-        #journal-analysis p { margin-bottom: 0; }
-        #past-entries-list { margin-top: 2rem; }
-        .past-entry-item { padding: 1rem; border-bottom: 1px solid #eee; cursor: pointer; }
-        .past-entry-item:hover { background: var(--secondary-color); }
-
-        /* --- NEW: Soundscape Mixer --- */
-        #soundscape-mixer {
-            padding: 2rem;
-            background-color: var(--secondary-color);
-            border-radius: var(--border-radius);
-            margin-top: 2rem;
-        }
-        .mixer-channel {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
             gap: 1rem;
         }
-        .mixer-channel label {
-            width: 120px;
-            font-weight: bold;
+       .garden-controls button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--secondary-text);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .mixer-channel input[type="range"] {
+       .garden-controls button:hover {
+            background-color: #6a9a7f;
+        }
+
+        /* --- JOURNAL SECTION --- */
+       .journal-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: calc(100vh - 180px);
+        }
+       .journal-entry-area,.journal-history-area {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+       .journal-history-area {
+            overflow-y: auto;
+        }
+        #journal-textarea {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            resize: none;
+        }
+        #save-journal-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        #save-journal-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+       .journal-post {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #eee;
+        }
+       .journal-post:last-child {
+            border-bottom: none;
+        }
+       .journal-post p {
+            margin-bottom: 0.5rem;
+        }
+       .journal-post.timestamp {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+       .gemini-response {
+            background-color: #f9f9f9;
+            border-left: 3px solid var(--secondary-text);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+       .gemini-response.processing::before {
+            content: 'Ṭibra is reflecting...';
+            color: #999;
+        }
+        
+        /* --- SOUNDSCAPE SECTION --- */
+       .soundscape-mixer {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+       .sound-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+       .sound-control label {
+            width: 100px;
+        }
+       .sound-control input[type="range"] {
             flex-grow: 1;
+            cursor: pointer;
         }
-        
-        /* --- Modals & Overlays --- */
-        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; background-color: white; padding: 2rem; border-radius: var(--border-radius); z-index: 1010; width: 90%; max-width: 650px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; max-height: 90vh; overflow-y: auto; }
-        .modal.active { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; }
-        .modal-content { text-align: right; }
-        .modal-content h2 { margin-top: 0; color: var(--primary-color); font-size: 2.2rem; }
-        .modal-content h3 { color: var(--dark-color); border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; margin-top: 2rem; }
-        .modal-content ul { list-style: disc; padding-right: 20px; margin-bottom: 1rem; }
-        .close-modal { position: absolute; top: 1rem; left: 1rem; font-size: 2rem; font-weight: bold; border: none; background: none; cursor: pointer; color: #888; transition: color 0.3s ease; }
-        .close-modal:hover { color: #333; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1005; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out; }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        
-        /* --- FAQ --- */
-        .faq-accordion { max-width: 800px; margin: 0 auto; }
-        .faq-item { border-bottom: 1px solid #ddd; }
-        .faq-question { width: 100%; background: none; border: none; text-align: right; padding: 1.5rem 1rem; font-size: 1.2rem; font-weight: 700; font-family: var(--font-body); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color var(--transition-speed); }
-        .faq-question:hover { color: var(--primary-color); }
-        .faq-question i { transition: transform var(--transition-speed); font-size: 1rem; }
-        .faq-question[aria-expanded="true"] i { transform: rotate(45deg); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
-        .faq-answer p { padding: 0 1rem 1.5rem 1rem; margin-bottom: 0; }
-
-        /* --- Forms & Footer --- */
-        .contact-form { max-width: 700px; margin: 0 auto; }
-        .form-group { margin-bottom: 1.5rem; }
-        .contact-form input,.contact-form textarea,.contact-form select { width: 100%; padding: 1rem; border: 1px solid #555; border-radius: var(--border-radius); background-color: #3a3a3a; color: var(--light-color); font-family: var(--font-body); font-size: 1rem; transition: border-color var(--transition-speed); }
-        .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus { outline: none; border-color: var(--accent-color); }
-        
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; }
-        .whatsapp-float:hover { transform: scale(1.1); }
-        .whatsapp-float i { margin-top: 15px; }
-
-        .super-medicines-float { position: fixed; bottom: 110px; right: 40px; background-color: var(--super-med-color); color: var(--light-color); border-radius: 50px; padding: 0.8rem 1.5rem; font-size: 1rem; font-weight: 700; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; animation: simple-bounce 2.5s infinite; display: flex; align-items: center; gap: 0.5rem; }
-        .super-medicines-float:hover { transform: scale(1.05); animation-play-state: paused; }
-
-        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-        
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-20px) translateX(-50%); } 60% { transform: translateY(-10px) translateX(-50%); } }
-        @keyframes simple-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
-        @media (max-width: 992px) { 
-            .philosophy-content { grid-template-columns: 1fr; text-align: center; } 
-            .founder-image { max-width: 300px; margin: 0 auto 2rem; } 
-            .dashboard-section { grid-template-columns: 1fr; }
-            #journey-visual-container { position: static; }
+        #master-play-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--secondary-text);
+            color: white;
+            cursor: pointer;
+            margin-top: 1rem;
         }
-        @media (max-width: 768px) { 
-            html { font-size: 15px; } 
-            .nav-toggle { display: block; } 
-            .main-nav { flex-grow: 1; justify-content: flex-end; }
-            .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background-color: var(--light-color); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.1); } .nav-menu.active { right: 0; } .nav-menu a { font-size: 1.2rem; } 
+
+        /* --- PROFILE SECTION --- */
+       .profile-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
+       .profile-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            text-align: center;
+        }
+       .profile-card h3 {
+            font-family: var(--font-primary);
+            color: var(--primary-text);
+            margin-bottom: 1.5rem;
+        }
+       .breathing-circle {
+            width: 150px;
+            height: 150px;
+            background-color: var(--secondary-text);
+            border-radius: 50%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 600;
+            animation: breathe 8s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+        #growth-tree-container {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        #zen-snapshot-container img {
+            width: 100%;
+            border-radius: 8px;
+            border: 5px solid white;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        #zen-snapshot-container p {
+            margin-top: 1rem;
+            color: #999;
+        }
+
     </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container">
-            <a href="#" class="logo">Ṭibra</a>
-            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
-                <ul id="nav-menu" class="nav-menu">
-                    <li><a href="#philosophy">فلسفتنا</a></li>
-                    <li><a href="#programs">البرامج</a></li>
-                    <li><a href="#zen-garden-link">الحديقة الرقمية</a></li>
-                    <li><a href="#dashboard" id="dashboard-nav-link" style="display: none;">لوحة التحكم</a></li>
-                    <li><a href="#contact" class="btn btn-primary-nav">احجز الآن</a></li>
-                </ul>
-            </nav>
-            <div class="nav-left-section">
-                <div id="auth-container">
-                    <!-- Auth buttons will be injected here -->
-                </div>
-                <div id="user-profile-icon" style="display: none;">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-                <div class="cart-icon-wrapper" data-modal-target="cart-modal">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-item-count">0</span>
-                </div>
-                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
-                    <span class="sr-only">فتح القائمة</span>
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <!-- Existing sections (Hero, Philosophy, etc.) remain here -->
-        <section id="hero" class="hero-section">
-             <div id="hero-background-wrapper" class="hero-background">
-                 <img src="https://images.unsplash.com/photo-1473170611423-22489201d961?q=80&w=2070&auto=format&fit=crop" alt="مشهد طبيعي هادئ عند الغروب" style="width:100%; height:100%; object-fit:cover;" data-bg-for="default">
-             </div>
-             <div class="hero-content">
-                 <h1 class="hero-title">ṬibraSoul</h1>
-                 <p class="hero-subtitle">رحلتك التحويلية للروح تبدأ هنا.</p>
-                 <a href="#programs" class="btn btn-primary">استكشف رحلاتنا</a>
-             </div>
-             <div class="scroll-down-indicator">
-                 <a href="#philosophy" aria-label="التمرير للأسفل">
-                     <i class="fas fa-chevron-down"></i>
-                 </a>
-             </div>
-        </section>
-        
-        <section id="philosophy" class="philosophy-section content-section animate-on-scroll">
-            <div class="container">
-                <h2 class="section-title">رسالة من طبيب الشفاء</h2>
-                <div class="philosophy-content">
-                    <div class="founder-image">
-                        <img src="https://placehold.co/400x500/5a6e5a/f4f1eb?text=Dr.Omar" alt="صورة د. عمر" loading="lazy">
-                    </div>
-                    <div class="founder-story">
-                        <h3>سلام، أنا عمر. طبيبٌ عام، وطبيبُ شفاء.</h3>
-                        <p>
-                            لكنني لستُ طبيبَ تشخيصٍ فحسب، بل رفيقُ شفاءٍ حقيقي…<br><br>
-                            جمعتُ بين الطب الحديث،<br>
-                            والحكمة الفطرية القديمة —<br>
-                            تلك الحكمة التي ربما شعرت بها ذات يوم، حين قلت في داخلك:<br>
-                            "لكل داءٍ دواء… فينا، لا علينا."<br><br>
-                            عملتُ بصدقٍ لأعيد الجسد والروح إلى حالتهما الأصلية،<br>
-                            عبر منهجٍ شفائي أسميته:<br>
-                            <strong>طِبرا | Ṭibra – الطب الذي يعيدك إليك.</strong><br><br>
-                            سأكون بجانبك —<br>
-                            لأُعلّم، وأشفي، وأذكّرك بمن أنت…<br>
-                            بإذن الله.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Programs section remains here... -->
-        
-        <!-- NEW: Dashboard Section -->
-        <section id="dashboard" class="content-section bg-light animate-on-scroll" style="display: none;">
-            <div class="container">
-                <h2 class="section-title">رحلتك الشفائية</h2>
-                <p class="section-intro">هنا تتجسد رحلتك. كل خطوة تخطوها، وكل لحظة تأمل، تساهم في نمو حديقتك الداخلية.</p>
-                <div class="dashboard-section">
-                    <div id="journey-visual-container">
-                        <h3>شجرة روحك</h3>
-                        <div id="lottie-container"></div>
-                        <p>شاهد شجرتك تنمو وتزدهر مع كل ممارسة تقوم بها.</p>
-                    </div>
-                    <div id="journal-soundscape-container">
-                        <div id="journal-container">
-                            <h3>دفتر يومياتي الذكي</h3>
-                            <p>مكانك الآمن لتدوين الأفكار والمشاعر. خاصة بك تمامًا.</p>
-                            <textarea id="journal-entry" placeholder="اكتب ما في قلبك..."></textarea>
-                            <button id="save-entry-btn" class="btn btn-primary">حفظ الإدخال</button>
-                            <button id="analyze-entry-btn" class="btn btn-secondary" style="display: none;">تحليل بواسطة مساعد طِبرا</button>
-                            <div id="journal-analysis">
-                                <p>اضغط على زر التحليل لاكتشاف رؤى لطيفة حول كتاباتك.</p>
-                            </div>
-                            <h4 style="margin-top: 2rem;">إدخالات سابقة</h4>
-                            <div id="past-entries-list"></div>
-                        </div>
-
-                        <div id="soundscape-mixer">
-                             <h3>مُنشئ الأجواء الصوتية</h3>
-                             <p>صمم مزيجك الصوتي الخاص للتركيز أو الاسترخاء.</p>
-                             <div class="mixer-channel">
-                                 <label for="rain-volume"><i class="fas fa-cloud-showers-heavy"></i> مطر</label>
-                                 <input type="range" id="rain-volume" class="sound-slider" min="0" max="1" step="0.01" value="0" data-sound="rain">
-                             </div>
-                             <div class="mixer-channel">
-                                 <label for="forest-volume"><i class="fas fa-tree"></i> غابة</label>
-                                 <input type="range" id="forest-volume" class="sound-slider" min="0" max="1" step="0.01" value="0" data-sound="forest">
-                             </div>
-                             <div class="mixer-channel">
-                                <label for="waves-volume"><i class="fas fa-water"></i> أمواج</label>
-                                <input type="range" id="waves-volume" class="sound-slider" min="0" max="1" step="0.01" value="0" data-sound="waves">
-                            </div>
-                            <div class="mixer-channel">
-                                <label for="bowls-volume"><i class="fas fa-bell"></i> أوعية غنائية</label>
-                                <input type="range" id="bowls-volume" class="sound-slider" min="0" max="1" step="0.01" value="0" data-sound="bowls">
-                            </div>
-                             <button id="save-mix-btn" class="btn btn-primary" style="margin-top:1rem;">حفظ المزيج</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Other sections (FAQ, Contact, etc.) remain here -->
-
-    </main>
-    
-    <!-- All Modals and Floating Buttons remain here -->
-    
-    <!-- NEW: Digital Zen Garden Container -->
-    <div id="zen-garden-container">
-        <div class="zen-garden-ui">
-            <button class="close-btn" id="close-zen-garden"><i class="fas fa-times"></i></button>
-        </div>
-        <canvas id="zen-garden"></canvas>
-        <div class="breathing-guide">
-            <div id="breathing-circle"></div>
-            <p id="breathing-text">تنفس...</p>
-        </div>
-        <div class="affirmation-wall" id="affirmation-wall">
-            <!-- Affirmations will be injected here -->
-        </div>
-         <div style="position: absolute; bottom: 2rem; right: 2rem; z-index: 2004; background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 8px;">
-            <input type="text" id="affirmation-input" placeholder="اكتب تأكيدًا إيجابيًا..." style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 4px;">
-            <button id="submit-affirmation" class="btn btn-primary" style="padding: 0.5rem 1rem;">شارك</button>
-        </div>
+    <div id="auth-container" class="auth-container">
+        <h1>Welcome to Ṭibra</h1>
+        <p>Your personal sanctuary for mindfulness, reflection, and growth. Begin your journey by signing in.</p>
+        <button id="google-signin-btn" class="google-signin-btn">
+            <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9.18v3.48h4.79c-.2 1.12-.84 2.08-1.79 2.73v2.26h2.9c1.7-1.56 2.67-3.88 2.67-6.63z"></path><path fill="#34A853" d="M9.18 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-2.97.86-2.28 0-4.22-1.54-4.9-3.61H1.28v2.33C2.74 16.5 5.7 18 9.18 18z"></path><path fill="#FBBC05" d="M4.28 10.79c-.12-.36-.18-.75-.18-1.15s.06-.79.18-1.15V6.16H1.28C.48 7.73 0 9.77 0 12s.48 4.27 1.28 5.84l3-2.33z"></path><path fill="#EA4335" d="M9.18 3.54c1.32 0 2.5.45 3.44 1.34l2.58-2.58C13.65.88 11.61 0 9.18 0 5.7 0 2.74 1.5 1.28 4.16l3 2.33c.68-2.07 2.62-3.61 4.9-3.61z"></path></svg>
+            <span>Sign in with Google</span>
+        </button>
     </div>
 
-    <!-- Hidden audio elements for Soundscape Mixer -->
-    <audio id="audio-rain" loop src="https://cdn.pixabay.com/audio/2022/08/04/audio_35470ed7d0.mp3"></audio>
-    <audio id="audio-forest" loop src="https://cdn.pixabay.com/audio/2022/10/24/audio_9639c1469e.mp3"></audio>
-    <audio id="audio-waves" loop src="https://cdn.pixabay.com/audio/2023/09/21/audio_a0a2a1155b.mp3"></audio>
-    <audio id="audio-bowls" loop src="https://cdn.pixabay.com/audio/2022/05/18/audio_83d12b0aaf.mp3"></audio>
+    <div id="main-app-container" class="main-app-container hidden">
+        <header>
+            <div class="logo">Ṭibra</div>
+            <div class="user-info">
+                <img id="user-avatar" src="" alt="User Avatar">
+                <span id="user-name"></span>
+                <button id="logout-btn" class="logout-btn">Logout</button>
+            </div>
+        </header>
 
-    <div class="modal-overlay"></div>
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="#profile" class="nav-link active">My Journey</a></li>
+                    <li><a href="#zen-garden" class="nav-link">Zen Garden</a></li>
+                    <li><a href="#journal" class="nav-link">Journal</a></li>
+                    <li><a href="#soundscape" class="nav-link">Soundscape</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-    <!-- Firebase SDKs -->
+        <main>
+            <section id="profile" class="content-section active">
+                <h2>My Journey</h2>
+                <div class="profile-layout">
+                    <div class="profile-card">
+                        <h3>Mindful Breathing</h3>
+                        <div class="breathing-circle">Breathe</div>
+                        <p style="margin-top: 1.5rem; color: #888;">Follow the rhythm. Inhale as it grows, exhale as it shrinks.</p>
+                    </div>
+                    <div class="profile-card">
+                        <h3>Your Growth</h3>
+                        <div id="growth-tree-container"></div>
+                        <p style="margin-top: 1rem;" id="journal-count-text">You have written 0 journal entries.</p>
+                    </div>
+                    <div class="profile-card">
+                        <h3>Your Zen Garden</h3>
+                        <div id="zen-snapshot-container">
+                            <p>Create and save a snapshot of your Zen Garden to see it here.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="zen-garden" class="content-section">
+                <h2>Digital Zen Garden</h2>
+                <p style="margin-bottom: 1.5rem;">Create a space of calm. Click and drag on the sand to rake your patterns.</p>
+                <div id="zen-garden-container">
+                    <canvas id="zen-canvas"></canvas>
+                </div>
+                <div class="garden-controls">
+                    <button id="clear-garden-btn">Clear Sand</button>
+                    <button id="save-garden-btn">Save Snapshot</button>
+                </div>
+            </section>
+
+            <section id="journal" class="content-section">
+                <h2>AI-Powered Journal</h2>
+                <div class="journal-layout">
+                    <div class="journal-entry-area">
+                        <h3>New Entry</h3>
+                        <textarea id="journal-textarea" placeholder="What's on your mind?"></textarea>
+                        <button id="save-journal-btn">Save & Reflect</button>
+                    </div>
+                    <div class="journal-history-area">
+                        <h3>Past Entries</h3>
+                        <div id="journal-history-container">
+                            <p>Your journal entries will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="soundscape" class="content-section">
+                <h2>Dynamic Soundscape</h2>
+                <div class="soundscape-mixer">
+                    <p style="margin-bottom: 2rem;">Adjust the sliders to create your perfect ambient sound mix. Press Play to begin.</p>
+                    
+                    <div class="sound-control">
+                        <label for="rain-slider">Rain</label>
+                        <input type="range" id="rain-slider" class="volume-slider" data-audio="rain-audio" min="0" max="100" value="0">
+                    </div>
+                    <audio id="rain-audio" src="https://www.soundjay.com/nature/rain-03.mp3" loop></audio>
+                    
+                    <div class="sound-control">
+                        <label for="wind-slider">Wind</label>
+                        <input type="range" id="wind-slider" class="volume-slider" data-audio="wind-audio" min="0" max="100" value="0">
+                    </div>
+                     <audio id="wind-audio" src="https://www.soundjay.com/nature/wind-howl-01.mp3" loop></audio>
+
+                    <div class="sound-control">
+                        <label for="chimes-slider">Chimes</label>
+                        <input type="range" id="chimes-slider" class="volume-slider" data-audio="chimes-audio" min="0" max="100" value="0">
+                    </div>
+                    <audio id="chimes-audio" src="https://www.soundjay.com/misc/wind-chime-1.mp3" loop></audio>
+
+                    <button id="master-play-btn">Play Soundscape</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
     <script type="module">
-        // --- Firebase Configuration ---
-        // IMPORTANT: These variables are placeholders and will be provided by the canvas environment.
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        // --- Firebase Imports ---
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, addDoc, onSnapshot, collection, query, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // --- App Initialization ---
-        let app, auth, db;
-        let userId = null;
-        let lottieAnim = null;
-
-        // --- DOM Elements ---
-        const authContainer = document.getElementById('auth-container');
-        const userProfileIcon = document.getElementById('user-profile-icon');
-        const dashboardNavLink = document.getElementById('dashboard-nav-link');
-        const dashboardSection = document.getElementById('dashboard');
+        // =================================================================================
+        // === FIREBASE SDK IMPORTS & INITIALIZATION =======================================
+        // =================================================================================
         
-        // --- Main App Logic ---
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-                
-                setupAuthObserver();
-                setupGeneralUIListeners();
+        // These modules are imported from the Firebase CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+        import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js";
 
-            } catch (error) {
-                console.error("Firebase initialization failed:", error);
-                authContainer.innerHTML = `<p>Error loading experience.</p>`;
+        // --- Firebase Configuration ---
+        // IMPORTANT: Replace the following object with your app's Firebase project configuration.
+        // You can find this in your Firebase project settings.
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase services
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // =================================================================================
+        // === DOM ELEMENT SELECTORS =======================================================
+        // =================================================================================
+        
+        const authContainer = document.getElementById('auth-container');
+        const mainAppContainer = document.getElementById('main-app-container');
+        const googleSignInBtn = document.getElementById('google-signin-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userNameEl = document.getElementById('user-name');
+        const userAvatarEl = document.getElementById('user-avatar');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        // =================================================================================
+        // === GLOBAL STATE ================================================================
+        // =================================================================================
+
+        let currentUser = null;
+        let unsubscribeJournalListener = null;
+
+        // =================================================================================
+        // === AUTHENTICATION MODULE =======================================================
+        // =================================================================================
+
+        // Listen for authentication state changes
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in
+                currentUser = user;
+                await setupUser(user);
+                authContainer.classList.add('hidden');
+                mainAppContainer.classList.remove('hidden');
+                updateUserInfoUI(user);
+                initializeActiveFeatures();
+            } else {
+                // User is signed out
+                currentUser = null;
+                authContainer.classList.remove('hidden');
+                mainAppContainer.classList.add('hidden');
+                if (unsubscribeJournalListener) {
+                    unsubscribeJournalListener();
+                }
             }
         });
 
-        // --- Authentication ---
-        function setupAuthObserver() {
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    userId = user.uid;
-                    console.log("User is signed in:", userId);
-                    updateUIForAuthenticatedUser();
-                    await loadUserData();
-                } else {
-                    userId = null;
-                    console.log("User is signed out.");
-                    updateUIForAnonymousUser();
-                }
+        // Handle Google Sign-In
+        googleSignInBtn.addEventListener('click', () => {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider).catch((error) => {
+                console.error("Authentication Error: ", error);
+                alert("Could not sign in. Please try again.");
             });
+        });
 
-            // Initial sign-in attempt
-            signInUser();
-        }
-
-        async function signInUser() {
-             if (initialAuthToken) {
-                try {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } catch (error) {
-                    console.error("Custom token sign-in failed, trying anonymous:", error);
-                    await signInAnonymously(auth);
-                }
-            } else {
-                await signInAnonymously(auth);
-            }
-        }
+        // Handle Logout
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth).catch((error) => {
+                console.error("Sign Out Error: ", error);
+            });
+        });
         
-        function updateUIForAuthenticatedUser() {
-            authContainer.innerHTML = `<button id="logout-btn" class="btn btn-secondary">تسجيل الخروج</button>`;
-            document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
-            
-            userProfileIcon.style.display = 'block';
-            dashboardNavLink.style.display = 'block';
-            dashboardSection.style.display = 'block';
-        }
+        // Setup user profile in Firestore on first login
+        async function setupUser(user) {
+            const userRef = doc(db, "users", user.uid);
+            const userDoc = await getDoc(userRef);
 
-        function updateUIForAnonymousUser() {
-            authContainer.innerHTML = `<button id="login-btn" class="btn btn-primary">تسجيل الدخول</button>`;
-            document.getElementById('login-btn').addEventListener('click', () => {
-                 // In a real app, this would open a login modal. For now, we sign in anonymously.
-                 signInAnonymously(auth).catch(err => console.error("Anonymous sign-in failed:", err));
-            });
-            
-            userProfileIcon.style.display = 'none';
-            dashboardNavLink.style.display = 'none';
-            dashboardSection.style.display = 'none';
-        }
-
-        // --- User Data & Visual Journey ---
-        async function loadUserData() {
-            if (!userId) return;
-            const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-            const userDocSnap = await getDoc(userDocRef);
-
-            if (userDocSnap.exists()) {
-                const userData = userDocSnap.data();
-                // Load features with user data
-                initializeJournal(userData.journal || []);
-                initializeSoundscape(userData.soundscape || {});
-                updateJourneyVisual(userData.activity || {});
-            } else {
-                // Initialize for a new user
-                const initialData = {
+            if (!userDoc.exists()) {
+                // New user, create profile
+                await setDoc(userRef, {
+                    uid: user.uid,
+                    displayName: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
                     createdAt: serverTimestamp(),
-                    journal: [],
-                    soundscape: {},
-                    activity: { entries: 0, mixes: 0 }
-                };
-                await setDoc(userDocRef, initialData);
-                initializeJournal([]);
-                initializeSoundscape({});
-                updateJourneyVisual({});
+                    journalEntriesCount: 0,
+                    zenGardenImageUrl: null
+                });
             }
         }
         
-        function initializeLottie() {
-            if (lottieAnim) lottieAnim.destroy(); // Clean up previous animation
-            lottieAnim = lottie.loadAnimation({
-                container: document.getElementById('lottie-container'),
+        function updateUserInfoUI(user) {
+            userNameEl.textContent = user.displayName;
+            userAvatarEl.src = user.photoURL;
+        }
+
+        // =================================================================================
+        // === NAVIGATION MODULE ===========================================================
+        // =================================================================================
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+
+                // Update active link
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                link.classList.add('active');
+
+                // Update active content section
+                contentSections.forEach(section => {
+                    if (section.id === targetId) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+                
+                // Re-initialize features if they are now visible
+                if (targetId === 'profile') loadProfileData();
+                if (targetId === 'zen-garden' &&!zenGardenInitialized) initZenGarden();
+            });
+        });
+        
+        function initializeActiveFeatures() {
+            // This function is called on login to load data for the default view
+            loadProfileData();
+        }
+
+        // =================================================================================
+        // === PROFILE MODULE ==============================================================
+        // =================================================================================
+        
+        const growthTreeContainer = document.getElementById('growth-tree-container');
+        const journalCountText = document.getElementById('journal-count-text');
+        const zenSnapshotContainer = document.getElementById('zen-snapshot-container');
+        let growthTreeAnim;
+        
+        function initGrowthTree() {
+            // Lottie animation JSON data (replace with your chosen animation)
+            const animationData = {"v":"5.5.2","fr":30,"ip":0,"op":150,"w":500,"h":500,"nm":"Plant Growth","ddd":0,"assets":,"layers":[{"ddd":0,"ind":1,"ty":4,"nm":"Plant","ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":,"ix":2},"a":{"a":0,"k":,"ix":1},"s":{"a":0,"k":,"ix":6}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":1,"k":{"i":[,,],"o":[,,],"v":[[[0,-50],],[[-25,-25],[-13.8,0]],[[0,-50],]],"c":false},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"fl","c":{"a":0,"k":[0.4,0.6,0.2,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":,"ix":2},"a":{"a":0,"k":,"ix":1},"s":{"a":0,"k":,"ix":6},"r":{"a":0,"k":0,"ix":10},"o":{"a":0,"k":100,"ix":11},"sk":{"a":0,"k":0,"ix":14},"sa":{"a":0,"k":0,"ix":15},"nm":"Transform"}],"nm":"Stem","np":3,"cix":2,"ix":1,"mn":"ADBE Vector Group","hd":false},{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":1,"k":{"i":[,,],"o":[,,],"v":[[[0,-100],],[[-50,-50],[-27.6,0]],[[0,-100],]],"c":false},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"fl","c":{"a":0,"k":[0.2,0.8,0.3,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":,"ix":2},"a":{"a":0,"k":,"ix":1},"s":{"a":0,"k":,"ix":6},"r":{"a":0,"k":0,"ix":10},"o":{"a":0,"k":100,"ix":11},"sk":{"a":0,"k":0,"ix":14},"sa":{"a":0,"k":0,"ix":15},"nm":"Transform"}],"nm":"Leaf 1","np":3,"cix":2,"ix":2,"mn":"ADBE Vector Group","hd":false},{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":1,"k":{"i":[,,],"o":[,,],"v":[[[0,-100],],[[50,-50],[27.6,0]],[[0,-100],]],"c":false},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"fl","c":{"a":0,"k":[0.2,0.8,0.3,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":,"ix":2},"a":{"a":0,"k":,"ix":1},"s":{"a":0,"k":,"ix":6},"r":{"a":0,"k":0,"ix":10},"o":{"a":0,"k":100,"ix":11},"sk":{"a":0,"k":0,"ix":14},"sa":{"a":0,"k":0,"ix":15},"nm":"Transform"}],"nm":"Leaf 2","np":3,"cix":2,"ix":3,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":150,"st":0,"bm":0}]};
+
+            growthTreeAnim = lottie.loadAnimation({
+                container: growthTreeContainer,
                 renderer: 'svg',
                 loop: false,
                 autoplay: false,
-                // Using a placeholder JSON for a growing tree animation
-                path: 'https://assets2.lottiefiles.com/packages/lf20_yvepvmy8.json' 
+                animationData: animationData
             });
         }
-
-        function updateJourneyVisual(activity) {
-            if (!lottieAnim) initializeLottie();
-            
-            const entries = activity.entries || 0;
-            const mixes = activity.mixes || 0;
-            const totalActivity = entries + mixes;
-
-            // Simple logic: play animation frames based on activity score
-            // Assumes the animation has 100 frames total.
-            const frameToGo = Math.min(100, totalActivity * 5); 
-
-            lottieAnim.goToAndStop(frameToGo, true);
-        }
         
-        async function updateUserActivity(activityType) {
-            if (!userId) return;
-            const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-            const userDocSnap = await getDoc(userDocRef);
-            if(userDocSnap.exists()) {
-                const userData = userDocSnap.data();
-                const newActivityCount = (userData.activity?.[activityType] || 0) + 1;
+        async function loadProfileData() {
+            if (!currentUser) return;
+            if (!growthTreeAnim) initGrowthTree();
+            
+            const userRef = doc(db, "users", currentUser.uid);
+            const userDoc = await getDoc(userRef);
+            
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+                const journalCount = userData.journalEntriesCount |
+| 0;
                 
-                const updatedData = {
-                    activity: {
-                        ...userData.activity,
-                        [activityType]: newActivityCount
-                    }
-                };
-                await setDoc(userDocRef, updatedData, { merge: true });
-                updateJourneyVisual(updatedData.activity); // Update visual immediately
+                // Update journal count text
+                journalCountText.textContent = `You have written ${journalCount} journal entries. Keep growing!`;
+                
+                // Update growth tree animation
+                const totalFrames = growthTreeAnim.totalFrames;
+                const maxEntriesForFullGrowth = 20; // Arbitrary number for full growth
+                let progress = Math.min(journalCount / maxEntriesForFullGrowth, 1);
+                let targetFrame = Math.floor(progress * totalFrames);
+                growthTreeAnim.goToAndStop(targetFrame, true);
+                
+                // Update Zen Garden snapshot
+                if (userData.zenGardenImageUrl) {
+                    zenSnapshotContainer.innerHTML = `<img src="${userData.zenGardenImageUrl}" alt="Your Zen Garden">`;
+                } else {
+                    zenSnapshotContainer.innerHTML = `<p>Create and save a snapshot of your Zen Garden to see it here.</p>`;
+                }
             }
         }
 
-        // --- General UI Listeners ---
-        function setupGeneralUIListeners() {
-            // Zen Garden
-            document.getElementById('zen-garden-link')?.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('zen-garden-container')?.classList.add('active');
-            });
-            document.getElementById('close-zen-garden')?.addEventListener('click', () => {
-                document.getElementById('zen-garden-container')?.classList.remove('active');
-            });
+        // =================================================================================
+        // === ZEN GARDEN MODULE ===========================================================
+        // =================================================================================
 
-             // Nav-toggle for mobile
-            const navToggle = document.querySelector('.nav-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            navToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-            });
+        const zenCanvas = document.getElementById('zen-canvas');
+        const gardenContainer = document.getElementById('zen-garden-container');
+        const clearGardenBtn = document.getElementById('clear-garden-btn');
+        const saveGardenBtn = document.getElementById('save-garden-btn');
+        let zenCtx, isRaking = false, zenGardenInitialized = false;
+
+        function initZenGarden() {
+            const rect = gardenContainer.getBoundingClientRect();
+            zenCanvas.width = rect.width;
+            zenCanvas.height = rect.height;
+            zenCtx = zenCanvas.getContext('2d');
+            drawSand();
+            
+            zenCanvas.addEventListener('mousedown', startRaking);
+            zenCanvas.addEventListener('mouseup', stopRaking);
+            zenCanvas.addEventListener('mouseleave', stopRaking);
+            zenCanvas.addEventListener('mousemove', rake);
+            
+            clearGardenBtn.addEventListener('click', drawSand);
+            saveGardenBtn.addEventListener('click', saveGardenSnapshot);
+            zenGardenInitialized = true;
         }
-        
-        // --- Zen Garden Logic ---
-        const zenCanvas = document.getElementById('zen-garden');
-        const zenCtx = zenCanvas.getContext('2d');
-        let isDrawing = false;
-        
-        function resizeCanvas() {
-            zenCanvas.width = window.innerWidth;
-            zenCanvas.height = window.innerHeight;
-            zenCtx.fillStyle = '#f4f1eb';
+
+        function drawSand() {
+            zenCtx.fillStyle = '#EADDC6'; // Sand color
             zenCtx.fillRect(0, 0, zenCanvas.width, zenCanvas.height);
-            // You can add a subtle sand texture here if desired
+            // Add some noise for texture
+            for (let i = 0; i < 20000; i++) {
+                let x = Math.random() * zenCanvas.width;
+                let y = Math.random() * zenCanvas.height;
+                zenCtx.fillStyle = `rgba(0,0,0,${Math.random() * 0.05})`;
+                zenCtx.fillRect(x, y, 1, 1);
+            }
         }
 
-        function draw(e) {
-            if (!isDrawing) return;
-            e.preventDefault(); // prevent scrolling on touch devices
-            
-            const rect = zenCanvas.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+        function startRaking(e) {
+            isRaking = true;
+            zenCtx.beginPath();
+            zenCtx.moveTo(e.offsetX, e.offsetY);
+        }
 
-            zenCtx.lineWidth = 3;
+        function stopRaking() {
+            isRaking = false;
+        }
+
+        function rake(e) {
+            if (!isRaking) return;
+            zenCtx.lineWidth = 4;
             zenCtx.lineCap = 'round';
-            zenCtx.strokeStyle = 'rgba(0, 0, 0, 0.05)';
-            
-            zenCtx.lineTo(x, y);
+            zenCtx.strokeStyle = '#D4C4A8'; // Rake color
+            zenCtx.lineTo(e.offsetX, e.offsetY);
             zenCtx.stroke();
             zenCtx.beginPath();
-            zenCtx.moveTo(x, y);
+            zenCtx.moveTo(e.offsetX, e.offsetY);
         }
         
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        zenCanvas.addEventListener('mousedown', (e) => { isDrawing = true; draw(e); });
-        zenCanvas.addEventListener('touchstart', (e) => { isDrawing = true; draw(e); });
-        zenCanvas.addEventListener('mouseup', () => { isDrawing = false; zenCtx.beginPath(); });
-        zenCanvas.addEventListener('touchend', () => { isDrawing = false; zenCtx.beginPath(); });
-        zenCanvas.addEventListener('mousemove', draw);
-        zenCanvas.addEventListener('touchmove', draw);
-        
-        // --- Breathing Guide Logic ---
-        const breathingText = document.getElementById('breathing-text');
-        setInterval(() => {
-            setTimeout(() => breathingText.textContent = "شهيق...", 0);
-            setTimeout(() => breathingText.textContent = "احبس...", 4000);
-            setTimeout(() => breathingText.textContent = "زفير...", 8000);
-            setTimeout(() => breathingText.textContent = "احبس...", 12000);
-        }, 16000);
+        async function saveGardenSnapshot() {
+            if (!currentUser) return;
+            saveGardenBtn.textContent = 'Saving...';
+            saveGardenBtn.disabled = true;
 
-        // --- Affirmations Wall Logic ---
-        const affirmationWall = document.getElementById('affirmation-wall');
-        const affirmationInput = document.getElementById('affirmation-input');
-        const submitAffirmationBtn = document.getElementById('submit-affirmation');
-        
-        const affirmationsCol = collection(db, `artifacts/${appId}/public/data/affirmations`);
-
-        submitAffirmationBtn.addEventListener('click', async () => {
-            const text = affirmationInput.value.trim();
-            if (text) {
-                await addDoc(affirmationsCol, {
-                    text: text,
-                    createdAt: serverTimestamp()
-                });
-                affirmationInput.value = '';
+            try {
+                const canvas = await html2canvas(gardenContainer);
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.8); // Use JPEG for smaller file size
+                
+                const storageRef = ref(storage, `users/${currentUser.uid}/zen-garden.jpg`);
+                await uploadString(storageRef, dataUrl, 'data_url');
+                
+                const downloadURL = await getDownloadURL(storageRef);
+                
+                const userRef = doc(db, "users", currentUser.uid);
+                await setDoc(userRef, { zenGardenImageUrl: downloadURL }, { merge: true });
+                
+                alert('Your Zen Garden has been saved to your Journey profile!');
+                loadProfileData(); // Refresh profile to show new image
+            } catch (error) {
+                console.error("Error saving snapshot: ", error);
+                alert("Could not save your garden. Please try again.");
+            } finally {
+                saveGardenBtn.textContent = 'Save Snapshot';
+                saveGardenBtn.disabled = false;
             }
-        });
-
-        onSnapshot(query(affirmationsCol), (snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-                if (change.type === 'added') {
-                    const affirmationData = change.doc.data();
-                    displayAffirmation(affirmationData.text);
-                }
-            });
-        });
-
-        function displayAffirmation(text) {
-            const el = document.createElement('div');
-            el.className = 'affirmation';
-            el.textContent = text;
-            el.style.top = `${Math.random() * 90}%`;
-            el.style.animationDuration = `${20 + Math.random() * 20}s`;
-            affirmationWall.appendChild(el);
-            setTimeout(() => el.remove(), 40000); // Cleanup
-        }
-        
-        // --- AI Journal Logic ---
-        const journalEntryText = document.getElementById('journal-entry');
-        const saveEntryBtn = document.getElementById('save-entry-btn');
-        const analyzeEntryBtn = document.getElementById('analyze-entry-btn');
-        const journalAnalysisDiv = document.getElementById('journal-analysis');
-        let currentJournal = [];
-        let currentEntryId = null;
-
-        function initializeJournal(journalData) {
-            currentJournal = journalData;
-            // Render past entries
         }
 
-        saveEntryBtn.addEventListener('click', async () => {
-            if(!userId) return;
-            const text = journalEntryText.value.trim();
-            if(!text) return;
-            
-            const newEntry = {
-                id: crypto.randomUUID(),
-                text: text,
-                timestamp: new Date().toISOString()
-            };
-            
-            currentJournal.push(newEntry);
-            const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-            await setDoc(userDocRef, { journal: currentJournal }, { merge: true });
-            
-            journalEntryText.value = '';
-            analyzeEntryBtn.style.display = 'inline-block';
-            analyzeEntryBtn.dataset.text = text;
-            journalAnalysisDiv.innerHTML = '<p>تم الحفظ. اضغط للتحليل.</p>';
-            await updateUserActivity('entries');
-        });
+        // =================================================================================
+        // === JOURNAL MODULE ==============================================================
+        // =================================================================================
         
-        analyzeEntryBtn.addEventListener('click', async () => {
-            const textToAnalyze = analyzeEntryBtn.dataset.text;
-            if(!textToAnalyze) return;
-            
-            journalAnalysisDiv.innerHTML = '<p>جارٍ التحليل...</p>';
+        const journalTextarea = document.getElementById('journal-textarea');
+        const saveJournalBtn = document.getElementById('save-journal-btn');
+        const journalHistoryContainer = document.getElementById('journal-history-container');
+        
+        // --- Gemini API Configuration ---
+        // IMPORTANT: Storing your API key in client-side code is insecure and for
+        // prototyping only. For production, use a server-side proxy like a Cloud Function.
+        const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY";
+        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-            const prompt = `You are a gentle, non-clinical wellness assistant named 'Tibra Helper'. Analyze the following journal entry from a user. Do not provide medical advice. Instead, reflect back emotional themes or recurring keywords in a soft, encouraging way. Frame your response as a "gentle invitation for reflection". For example: "It seems the idea of 'release' comes up for you. Perhaps this is an invitation to explore what that means to you today." or "I notice a feeling of peace in your words about nature. A beautiful moment to cherish." The user's entry is: "${textToAnalyze}"`;
+        saveJournalBtn.addEventListener('click', saveJournalEntry);
+        
+        async function saveJournalEntry() {
+            const text = journalTextarea.value.trim();
+            if (!text ||!currentUser) return;
+            
+            saveJournalBtn.disabled = true;
+            saveJournalBtn.textContent = 'Saving...';
             
             try {
-                // Gemini API Call
-                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-                const payload = { contents: chatHistory };
-                const apiKey = ""; // Will be handled by the environment
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                // 1. Save the initial entry to Firestore
+                const entryData = {
+                    userId: currentUser.uid,
+                    text: text,
+                    createdAt: serverTimestamp(),
+                    geminiResponse: null,
+                    status: 'processing'
+                };
+                const docRef = await addDoc(collection(db, "journalEntries"), entryData);
+                
+                // 2. Clear textarea and update user's journal count
+                journalTextarea.value = '';
+                await updateUserJournalCount(1);
+                
+                // 3. Call Gemini API for reflection
+                const geminiResponse = await getGeminiReflection(text);
+                
+                // 4. Update the entry with Gemini's response
+                await setDoc(doc(db, "journalEntries", docRef.id), { 
+                    geminiResponse: geminiResponse,
+                    status: 'complete'
+                }, { merge: true });
 
-                const response = await fetch(apiUrl, {
+            } catch (error) {
+                console.error("Error saving journal entry: ", error);
+                alert("Could not save your entry. Please try again.");
+            } finally {
+                saveJournalBtn.disabled = false;
+                saveJournalBtn.textContent = 'Save & Reflect';
+            }
+        }
+
+        async function getGeminiReflection(promptText) {
+            const payload = {
+                contents:
+                }],
+                systemInstruction: {
+                    parts:
+                }
+            };
+
+            try {
+                const response = await fetch(GEMINI_API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-                
                 if (!response.ok) {
-                    throw new Error(`API call failed with status: ${response.status}`);
+                    throw new Error(`API Error: ${response.statusText}`);
                 }
-
-                const result = await response.json();
-                
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const analysisText = result.candidates[0].content.parts[0].text;
-                    journalAnalysisDiv.innerHTML = `<p>${analysisText.replace(/\n/g, '<br>')}</p>`;
-                } else {
-                     journalAnalysisDiv.innerHTML = '<p>لم أتمكن من استخلاص رؤية واضحة. ربما يمكنك المحاولة مرة أخرى بكلمات مختلفة.</p>';
-                }
+                const data = await response.json();
+                return data.candidates.content.parts.text;
             } catch (error) {
-                 console.error("Gemini API error:", error);
-                 journalAnalysisDiv.innerHTML = '<p>عذرًا، حدث خطأ أثناء الاتصال بمساعد طِبرا.</p>';
+                console.error("Gemini API Error:", error);
+                return "There was a moment of quiet reflection. Please try again later.";
+            }
+        }
+
+        function listenForJournalEntries() {
+            if (!currentUser) return;
+            
+            const q = query(collection(db, "journalEntries"), where("userId", "==", currentUser.uid), orderBy("createdAt", "desc"));
+            
+            unsubscribeJournalListener = onSnapshot(q, (querySnapshot) => {
+                const entries =;
+                querySnapshot.forEach((doc) => {
+                    entries.push({ id: doc.id,...doc.data() });
+                });
+                renderJournalHistory(entries);
+            }, (error) => {
+                console.error("Error listening to journal entries: ", error);
+            });
+        }
+        
+        function renderJournalHistory(entries) {
+            if (entries.length === 0) {
+                journalHistoryContainer.innerHTML = '<p>Your journal entries will appear here.</p>';
+                return;
+            }
+            
+            journalHistoryContainer.innerHTML = entries.map(entry => {
+                const date = entry.createdAt? entry.createdAt.toDate().toLocaleString() : 'Just now';
+                return `
+                    <div class="journal-post">
+                        <p class="timestamp">${date}</p>
+                        <p>${entry.text.replace(/\n/g, '<br>')}</p>
+                        <div class="gemini-response ${entry.status}">
+                            ${entry.status === 'complete'? entry.geminiResponse : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        async function updateUserJournalCount(increment) {
+            if (!currentUser) return;
+            const userRef = doc(db, "users", currentUser.uid);
+            const userDoc = await getDoc(userRef);
+            if (userDoc.exists()) {
+                const currentCount = userDoc.data().journalEntriesCount |
+| 0;
+                await setDoc(userRef, { journalEntriesCount: currentCount + increment }, { merge: true });
+                loadProfileData(); // Refresh profile data after count update
+            }
+        }
+
+        // =================================================================================
+        // === SOUNDSCAPE MODULE ===========================================================
+        // =================================================================================
+        
+        const volumeSliders = document.querySelectorAll('.volume-slider');
+        const masterPlayBtn = document.getElementById('master-play-btn');
+        let isPlaying = false;
+
+        volumeSliders.forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                const audioId = e.target.dataset.audio;
+                const audioEl = document.getElementById(audioId);
+                audioEl.volume = e.target.value / 100;
+            });
+        });
+
+        masterPlayBtn.addEventListener('click', () => {
+            isPlaying =!isPlaying;
+            volumeSliders.forEach(slider => {
+                const audioEl = document.getElementById(slider.dataset.audio);
+                if (isPlaying) {
+                    audioEl.play();
+                } else {
+                    audioEl.pause();
+                }
+            });
+            masterPlayBtn.textContent = isPlaying? 'Pause Soundscape' : 'Play Soundscape';
+        });
+        
+        // Initial setup on login
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                listenForJournalEntries();
             }
         });
 
-
-        // --- Soundscape Mixer Logic ---
-        const soundSliders = document.querySelectorAll('.sound-slider');
-        const saveMixBtn = document.getElementById('save-mix-btn');
-        let audioContext;
-
-        function initializeSoundscape(savedMix) {
-            soundSliders.forEach(slider => {
-                const soundId = slider.dataset.sound;
-                if(savedMix[soundId] !== undefined) {
-                    slider.value = savedMix[soundId];
-                }
-                const audioEl = document.getElementById(`audio-${soundId}`);
-                if(audioEl) audioEl.volume = slider.value;
-            });
-        }
-        
-        function setupAudio() {
-             if (audioContext) return;
-             audioContext = new (window.AudioContext || window.webkitAudioContext)();
-             // Play all sounds silently to enable them on mobile
-             document.querySelectorAll('.soundscape-audios audio').forEach(audio => {
-                audio.volume = 0;
-                audio.play().catch(e => console.log("Audio play failed on initial setup", e));
-             });
-        }
-
-        soundSliders.forEach(slider => {
-            slider.addEventListener('input', (e) => {
-                if(!audioContext) setupAudio();
-                const soundId = e.target.dataset.sound;
-                const volume = e.target.value;
-                const audioEl = document.getElementById(`audio-${soundId}`);
-                if (audioEl) {
-                    audioEl.volume = volume;
-                    if(volume > 0 && audioEl.paused) {
-                        audioEl.play().catch(err => console.error("Could not play audio:", err));
-                    }
-                }
-            });
-        });
-        
-        saveMixBtn.addEventListener('click', async () => {
-             if(!userId) return;
-             const mixSettings = {};
-             soundSliders.forEach(slider => {
-                mixSettings[slider.dataset.sound] = slider.value;
-             });
-
-             const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-             await setDoc(userDocRef, { soundscape: mixSettings }, { merge: true });
-             alert('تم حفظ مزيجك الصوتي!');
-             await updateUserActivity('mixes');
-        });
-
-
     </script>
-    <script>
-        // Non-module, general script for things that don't need Firebase logic immediately
-        document.addEventListener('DOMContentLoaded', () => {
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            faqQuestions.forEach(button => {
-                button.addEventListener('click', () => {
-                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
-                    button.setAttribute('aria-expanded', !isExpanded);
-                    const answer = button.nextElementSibling;
-                    if (!isExpanded) {
-                        answer.style.maxHeight = answer.scrollHeight + 'px';
-                    } else {
-                        answer.style.maxHeight = '0';
-                    }
-                });
-            });
-        });
-    </script>
-
 </body>
 </html>
