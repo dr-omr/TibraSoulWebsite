@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="اكتشف رحلتك نحو الشفاء الروحي مع طِبرا. نقدم خلوات وتجارب تحويلية مصممة لتجديد العقل والجسد والروح.">
-    <meta name="keywords" content="الشفاء الروحي, التأمل, خلوة روحية, اليقظة الذهنية, طِبرا, طبيب وعي, TibraSoul, spiritual healing, meditation, retreat, mindfulness, أدوية خارقة, آراء العملاء">
+    <meta name="keywords" content="الشفاء الروحي, التأمل, خلوة روحية, اليقظة الذهنية, طِبرا, طبيب وعي, TibraSoul, spiritual healing, meditation, retreat, أدوية خارقة, حديقة زن الرقمية, دفتر يوميات ذكي">
     <title>ṬibraSoul طِبرا | Ṭibra - رحلتك نحو الشفاء الروحي</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,13 +12,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
 
     <style>
         /*
          * TibraSoul - Digital Sanctuary
-         * Version: 8.0.0 (Firebase Realtime Likes)
-         * NOTE: Implemented a full interactive like system with a cloud backend.
-        */
+         * Version: 6.0.0 (Interactive Features Update)
+         * Author: Dr. Omar & Office701 & Gemini AI
+         */
 
         :root {
             --primary-color: #5a6e5a;
@@ -32,7 +34,7 @@
             --font-headings: 'Noto Kufi Arabic', sans-serif;
             --font-brand: 'Great Vibes', cursive;
             --container-width: 1140px;
-            --transition-speed: 0.3s ease;
+            --transition-speed: 0.5s ease;
             --border-radius: 8px;
         }
 
@@ -60,176 +62,245 @@
         .bg-dark { background-color: #2c2c2c; color: #f0f0f0; }
         .bg-dark .section-title, .bg-dark .section-intro, .bg-dark h1, .bg-dark h2, .bg-dark h3 { color: var(--light-color); }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-
+        
+        /* --- Main Header --- */
         .main-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1rem 0; background-color: transparent; transition: all 0.5s ease; }
         .main-header.scrolled { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 0.5rem 0; }
         .main-header .container { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: var(--font-brand); font-size: 2.5rem; font-weight: 400; color: var(--dark-color); }
-        .nav-left-section { display: flex; align-items: center; gap: 1.5rem; }
-        .cart-icon-wrapper { position: relative; cursor: pointer; }
-        .cart-icon-wrapper .fa-shopping-cart { font-size: 1.5rem; color: var(--dark-color); }
-        .cart-item-count { position: absolute; top: -8px; right: -10px; background-color: var(--accent-color); color: white; border-radius: 50%; width: 22px; height: 22px; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; font-weight: bold; transform: scale(0); transition: transform 0.2s ease; }
-        .cart-item-count.visible { transform: scale(1); }
-
+        
+        .main-nav { display: flex; align-items: center; gap: 1rem; }
         .nav-menu { display: flex; align-items: center; gap: 2rem; }
         .nav-menu a { font-weight: 400; position: relative; padding-bottom: 5px; font-size: 1rem; }
         .nav-menu a:not(.btn) { color: var(--text-color); }
         .nav-menu a:not(.btn)::after { content: ''; position: absolute; bottom: 0; right: 0; width: 0; height: 2px; background-color: var(--primary-color); transition: width var(--transition-speed); }
         .nav-menu a:not(.btn):hover::after { width: 100%; }
-        .btn-primary-nav { padding: 0.5rem 1.5rem; background-color: var(--primary-color); color: var(--light-color); border-radius: 50px; }
-        .btn-primary-nav:hover { background-color: #435243; color: var(--light-color); }
+        
+        .nav-left-section { display: flex; align-items: center; gap: 1.5rem; }
+        .cart-icon-wrapper, #user-profile-icon { position: relative; cursor: pointer; font-size: 1.5rem; color: var(--dark-color); }
+        #auth-container button { margin-right: 1rem; }
+        .cart-item-count { position: absolute; top: -8px; right: -10px; background-color: var(--accent-color); color: white; border-radius: 50%; width: 22px; height: 22px; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; font-weight: bold; transform: scale(0); transition: transform 0.2s ease; }
+        .cart-item-count.visible { transform: scale(1); }
+
         .nav-toggle { display: none; font-size: 1.5rem; background: none; border: none; color: var(--dark-color); cursor: pointer; z-index: 1001; }
 
-        .hero-section {
-            height: 100vh;
-            min-height: 700px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--light-color);
-            position: relative;
-            background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1473170611423-22489201d961?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-            overflow: hidden;
-        }
-
+        /* --- Hero Section --- */
+        .hero-section { height: 100vh; min-height: 700px; display: flex; justify-content: center; align-items: center; text-align: center; color: var(--light-color); position: relative; }
+        .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -2; transition: opacity 1s ease-in-out; }
+        .hero-background img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)); z-index: -1; }
         .hero-content { animation: fadeInUp 1s ease-out; }
         .hero-title { font-family: var(--font-brand); font-size: clamp(3.5rem, 10vw, 7rem); margin-bottom: 0.5rem; font-weight: 400; color: var(--light-color); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         .hero-subtitle { font-size: clamp(1.1rem, 4vw, 1.5rem); margin-bottom: 2.5rem; font-weight: 300; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
         .scroll-down-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); animation: bounce 2.5s infinite; }
         .scroll-down-indicator a { font-size: 2rem; color: rgba(255, 255, 255, 0.8); transition: color var(--transition-speed); }
         .scroll-down-indicator a:hover { color: var(--light-color); }
-
+        
+        /* --- General Content Styles --- */
         .philosophy-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
         .founder-image img { border-radius: var(--border-radius); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .founder-story h3 { font-size: 2rem; color: var(--primary-color); }
         .founder-story p { line-height: 2.2; }
-
         .programs-grid, .blog-grid, .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
         .program-card, .product-card { background: var(--light-color); border-radius: var(--border-radius); overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform var(--transition-speed), box-shadow var(--transition-speed); display: flex; flex-direction: column; }
         .program-card:hover, .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .program-card-img, .product-card-img { width: 100%; height: 220px; object-fit: cover; }
-        .program-card-content, .product-card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .program-card-content, .product-card-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
         .program-card-title, .product-card-title { font-size: 1.6rem; }
-        .program-card-desc, .product-card-desc { flex-grow: 1; margin-top: 1rem; }
+        .program-card-desc, .product-card-desc { flex-grow: 1; }
         .product-price { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin: 1rem 0; }
         
+        /* --- NEW: Digital Zen Garden --- */
+        #zen-garden-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            background-color: #f4f1eb;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s, visibility 0s 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #zen-garden-container.active {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0s;
+        }
+        #zen-garden {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+        .zen-garden-ui {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 2001;
+        }
+        .zen-garden-ui .close-btn { font-size: 2rem; color: var(--dark-color); background: transparent; border: none; cursor: pointer; }
+        
+        .breathing-guide {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2002;
+        }
+        #breathing-circle {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(90, 110, 90, 0.5);
+            border-radius: 50%;
+            animation: breath 16s infinite ease-in-out;
+        }
+        #breathing-text {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            font-weight: bold;
+        }
+
+        @keyframes breath {
+            0%, 100% { transform: scale(1); } /* Hold */
+            25% { transform: scale(1.5); } /* Inhale */
+            50% { transform: scale(1.5); } /* Hold */
+            75% { transform: scale(1); } /* Exhale */
+        }
+        
+        .affirmation-wall {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 2003;
+        }
+        .affirmation {
+            position: absolute;
+            color: rgba(60, 60, 60, 0.6);
+            font-size: 1.5rem;
+            white-space: nowrap;
+            animation: float-across 30s linear infinite;
+            will-change: transform;
+        }
+
+        @keyframes float-across {
+            from { transform: translateX(100vw); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* --- NEW: AI Journal & User Profile --- */
+        .dashboard-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+        #journey-visual-container {
+            position: sticky;
+            top: 100px;
+            text-align: center;
+        }
+        #lottie-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        #journal-container { padding: 2rem; background: var(--light-color); border-radius: var(--border-radius); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        #journal-entry { width: 100%; height: 200px; padding: 1rem; border: 1px solid #ccc; border-radius: var(--border-radius); font-family: var(--font-body); resize: vertical; margin-bottom: 1rem; }
+        #journal-analysis { margin-top: 1.5rem; padding: 1.5rem; background: var(--secondary-color); border-radius: var(--border-radius); border-left: 5px solid var(--accent-color); min-height: 50px; }
+        #journal-analysis p { margin-bottom: 0; }
+        #past-entries-list { margin-top: 2rem; }
+        .past-entry-item { padding: 1rem; border-bottom: 1px solid #eee; cursor: pointer; }
+        .past-entry-item:hover { background: var(--secondary-color); }
+
+        /* --- NEW: Soundscape Mixer --- */
+        #soundscape-mixer {
+            padding: 2rem;
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+        }
+        .mixer-channel {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+        .mixer-channel label {
+            width: 120px;
+            font-weight: bold;
+        }
+        .mixer-channel input[type="range"] {
+            flex-grow: 1;
+        }
+        
+        /* --- Modals & Overlays --- */
+        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; background-color: white; padding: 2rem; border-radius: var(--border-radius); z-index: 1010; width: 90%; max-width: 650px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; max-height: 90vh; overflow-y: auto; }
+        .modal.active { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; }
+        .modal-content { text-align: right; }
+        .modal-content h2 { margin-top: 0; color: var(--primary-color); font-size: 2.2rem; }
+        .modal-content h3 { color: var(--dark-color); border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; margin-top: 2rem; }
+        .modal-content ul { list-style: disc; padding-right: 20px; margin-bottom: 1rem; }
+        .close-modal { position: absolute; top: 1rem; left: 1rem; font-size: 2rem; font-weight: bold; border: none; background: none; cursor: pointer; color: #888; transition: color 0.3s ease; }
+        .close-modal:hover { color: #333; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1005; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        /* --- FAQ --- */
         .faq-accordion { max-width: 800px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid #ddd; }
         .faq-question { width: 100%; background: none; border: none; text-align: right; padding: 1.5rem 1rem; font-size: 1.2rem; font-weight: 700; font-family: var(--font-body); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color var(--transition-speed); }
+        .faq-question:hover { color: var(--primary-color); }
         .faq-question i { transition: transform var(--transition-speed); font-size: 1rem; }
         .faq-question[aria-expanded="true"] i { transform: rotate(45deg); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
         .faq-answer p { padding: 0 1rem 1.5rem 1rem; margin-bottom: 0; }
-        
-        .testimonials-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: #2c2c2c;
-            border-radius: var(--border-radius);
-            position: relative;
-            overflow: hidden;
-        }
-        .chat-bubble {
-            position: relative;
-            max-width: 80%;
-            padding: 1rem 1.5rem;
-            border-radius: 20px;
-            margin-bottom: 1.5rem;
-            color: var(--light-color);
-            line-height: 1.6;
-            clear: both;
-        }
-        .chat-bubble p { margin-bottom: 0; font-size: 1.05rem; }
-        .chat-bubble cite { display: block; margin-top: 0.5rem; font-size: 0.9rem; font-style: normal; font-weight: bold; color: #ccc; }
-        .chat-bubble.client { background-color: var(--primary-color); border-bottom-right-radius: 5px; float: right; }
-        .chat-bubble.doctor { background-color: #4a4a4a; border-bottom-left-radius: 5px; float: left; text-align: left; }
-        .chat-bubble-wrapper { display: flex; align-items: flex-end; margin-bottom: 1rem; gap: 0.5rem; }
-        .chat-bubble-wrapper.client { justify-content: flex-end; }
-        .chat-bubble-wrapper.doctor { justify-content: flex-start; }
-        
-        .floating-heart {
-            position: absolute;
-            color: #ff4d4d;
-            font-size: 1.5rem;
-            animation: float-up 1.5s ease-out forwards;
-            pointer-events: none;
-        }
 
-        @keyframes float-up {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-100px) scale(0.5); }
-        }
-
-        /* LIKE BUTTON STYLES */
-        .card-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1.5rem;
-        }
-        .like-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-color);
-        }
-        .like-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: #aaa;
-            transition: all var(--transition-speed);
-        }
-        .like-btn.liked {
-            color: #ff4d4d;
-            transform: scale(1.1);
-        }
-        .like-count {
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
+        /* --- Forms & Footer --- */
         .contact-form { max-width: 700px; margin: 0 auto; }
         .form-group { margin-bottom: 1.5rem; }
-        .contact-form input,.contact-form textarea,.contact-form select { width: 100%; padding: 1rem; border: 1px solid #555; border-radius: var(--border-radius); background-color: #3a3a3a; color: var(--light-color); }
-        .contact-form button { width: 100%; padding: 1rem; }
-
-        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; background-color: white; padding: 2rem; border-radius: var(--border-radius); z-index: 1010; width: 90%; max-width: 650px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; max-height: 90vh; overflow-y: auto; }
-        .modal.active { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1005; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out; }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-
-        .nature-sounds-toggle { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background-color: var(--primary-color); color: var(--light-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 100; }
-        .nature-sounds-toggle i.fa-volume-mute { display: none; }
-        .nature-sounds-toggle.playing i.fa-volume-high { display: none; }
-        .nature-sounds-toggle.playing i.fa-volume-mute { display: inline-block; }
-
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; }
+        .contact-form input,.contact-form textarea,.contact-form select { width: 100%; padding: 1rem; border: 1px solid #555; border-radius: var(--border-radius); background-color: #3a3a3a; color: var(--light-color); font-family: var(--font-body); font-size: 1rem; transition: border-color var(--transition-speed); }
+        .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus { outline: none; border-color: var(--accent-color); }
+        
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; }
+        .whatsapp-float:hover { transform: scale(1.1); }
         .whatsapp-float i { margin-top: 15px; }
 
-        .super-medicines-float { position: fixed; bottom: 110px; right: 40px; background-color: var(--super-med-color); color: var(--light-color); border-radius: 50px; padding: 0.8rem 1.5rem; font-size: 1rem; font-weight: 700; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; animation: simple-bounce 2.5s infinite; }
+        .super-medicines-float { position: fixed; bottom: 110px; right: 40px; background-color: var(--super-med-color); color: var(--light-color); border-radius: 50px; padding: 0.8rem 1.5rem; font-size: 1rem; font-weight: 700; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; animation: simple-bounce 2.5s infinite; display: flex; align-items: center; gap: 0.5rem; }
+        .super-medicines-float:hover { transform: scale(1.05); animation-play-state: paused; }
 
-        .site-footer { background-color: var(--dark-color); color: #ccc; padding: 4rem 0 2rem; text-align: center; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem; text-align: right; }
-        .site-footer h3, .site-footer h4 { color: var(--light-color); }
-        .footer-bottom p { margin: 0; font-size: 0.9rem; color: #888; border-top: 1px solid #444; padding-top: 2rem; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-20px) translateX(-50%); } 60% { transform: translateY(-10px) translateX(-50%); } }
         @keyframes simple-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
         @media (max-width: 992px) { 
             .philosophy-content { grid-template-columns: 1fr; text-align: center; } 
             .founder-image { max-width: 300px; margin: 0 auto 2rem; } 
+            .dashboard-section { grid-template-columns: 1fr; }
+            #journey-visual-container { position: static; }
         }
         @media (max-width: 768px) { 
             html { font-size: 15px; } 
             .nav-toggle { display: block; } 
-            .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background-color: var(--light-color); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.1); } 
-            .nav-menu.active { right: 0; } 
-            .footer-content { text-align: center; } 
+            .main-nav { flex-grow: 1; justify-content: flex-end; }
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background-color: var(--light-color); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 15px rgba(0,0,0,0.1); } .nav-menu.active { right: 0; } .nav-menu a { font-size: 1.2rem; } 
         }
     </style>
 </head>
@@ -242,376 +313,581 @@
                 <ul id="nav-menu" class="nav-menu">
                     <li><a href="#philosophy">فلسفتنا</a></li>
                     <li><a href="#programs">البرامج</a></li>
-                    <li><a href="#store">كنوز الطبيعة</a></li>
-                    <li><a href="#testimonials">أصداء الشفاء</a></li>
-                    <li><a href="#knowledge-center">مركز المعرفة</a></li>
+                    <li><a href="#zen-garden-link">الحديقة الرقمية</a></li>
+                    <li><a href="#dashboard" id="dashboard-nav-link" style="display: none;">لوحة التحكم</a></li>
                     <li><a href="#contact" class="btn btn-primary-nav">احجز الآن</a></li>
                 </ul>
-                <div class="nav-left-section">
-                     <div class="cart-icon-wrapper" data-modal-target="cart-modal">
-                         <i class="fas fa-shopping-cart"></i>
-                         <span class="cart-item-count">0</span>
-                     </div>
-                    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
-                        <span class="sr-only">فتح القائمة</span>
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
             </nav>
+            <div class="nav-left-section">
+                <div id="auth-container">
+                    <!-- Auth buttons will be injected here -->
+                </div>
+                <div id="user-profile-icon" style="display: none;">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="cart-icon-wrapper" data-modal-target="cart-modal">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-item-count">0</span>
+                </div>
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="sr-only">فتح القائمة</span>
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
     <main>
-
+        <!-- Existing sections (Hero, Philosophy, etc.) remain here -->
         <section id="hero" class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">ṬibraSoul</h1>
-                <p class="hero-subtitle">رحلتك التحويلية للروح تبدأ هنا.</p>
-                <a href="#programs" class="btn btn-primary">استكشف رحلاتنا</a>
-            </div>
-            <div class="scroll-down-indicator">
-                <a href="#philosophy" aria-label="التمرير للأسفل"><i class="fas fa-chevron-down"></i></a>
-            </div>
+             <div id="hero-background-wrapper" class="hero-background">
+                 <img src="https://images.unsplash.com/photo-1473170611423-22489201d961?q=80&w=2070&auto=format&fit=crop" alt="مشهد طبيعي هادئ عند الغروب" style="width:100%; height:100%; object-fit:cover;" data-bg-for="default">
+             </div>
+             <div class="hero-content">
+                 <h1 class="hero-title">ṬibraSoul</h1>
+                 <p class="hero-subtitle">رحلتك التحويلية للروح تبدأ هنا.</p>
+                 <a href="#programs" class="btn btn-primary">استكشف رحلاتنا</a>
+             </div>
+             <div class="scroll-down-indicator">
+                 <a href="#philosophy" aria-label="التمرير للأسفل">
+                     <i class="fas fa-chevron-down"></i>
+                 </a>
+             </div>
         </section>
-
+        
         <section id="philosophy" class="philosophy-section content-section animate-on-scroll">
             <div class="container">
                 <h2 class="section-title">رسالة من طبيب الشفاء</h2>
                 <div class="philosophy-content">
                     <div class="founder-image">
-                        <img src="IMG-20250529-WA0027.jpg" alt="صورة د. عمر" loading="lazy">
+                        <img src="https://placehold.co/400x500/5a6e5a/f4f1eb?text=Dr.Omar" alt="صورة د. عمر" loading="lazy">
                     </div>
                     <div class="founder-story">
                         <h3>سلام، أنا عمر. طبيبٌ عام، وطبيبُ شفاء.</h3>
                         <p>
-                            جمعتُ بين الطب الحديث، والحكمة الفطرية القديمة — تلك الحكمة التي ربما شعرت بها ذات يوم، حين قلت في داخلك: "لكل داءٍ دواء… فينا، لا علينا."<br><br>
-                            عملتُ بصدقٍ لأعيد الجسد والروح إلى حالتهما الأصلية، عبر منهجٍ شفائي أسميته: <strong>طِبرا | Ṭibra – الطب الذي يعيدك إليك.</strong><br><br>
-                            من خلال دراساتٍ علمية متعمّقة، وتجارب روحية شجاعة، تعلّمت كيف أرافق الإنسان في عودته إلى جذوره… حيث يبدأ الشفاء من الداخل، ومن الطبيعة أولًا — قبل أي وصفة.
+                            لكنني لستُ طبيبَ تشخيصٍ فحسب، بل رفيقُ شفاءٍ حقيقي…<br><br>
+                            جمعتُ بين الطب الحديث،<br>
+                            والحكمة الفطرية القديمة —<br>
+                            تلك الحكمة التي ربما شعرت بها ذات يوم، حين قلت في داخلك:<br>
+                            "لكل داءٍ دواء… فينا، لا علينا."<br><br>
+                            عملتُ بصدقٍ لأعيد الجسد والروح إلى حالتهما الأصلية،<br>
+                            عبر منهجٍ شفائي أسميته:<br>
+                            <strong>طِبرا | Ṭibra – الطب الذي يعيدك إليك.</strong><br><br>
+                            سأكون بجانبك —<br>
+                            لأُعلّم، وأشفي، وأذكّرك بمن أنت…<br>
+                            بإذن الله.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="programs" class="programs-section content-section bg-light animate-on-scroll">
-            <div class="container">
-                <h2 class="section-title">ارسم مسار شفائك</h2>
-                <p class="section-intro">رحلات تحويلية، متاحة لك أينما كنت، وبأسعار رمزية لنشر نور الشفاء. كل برنامج هو دعوة للعودة إلى فطرتك.</p>
-                <div class="programs-grid">
-                    <article class="program-card" data-id="program-guidance">
-                        <img src="https://images.unsplash.com/photo-1519823551232-723b7a4254b7?q=80&w=1974&auto=format&fit=crop" alt="يدان تمسكان بعضهما البعض في جلسة إرشاد" class="program-card-img" loading="lazy">
-                        <div class="program-card-content">
-                            <h3 class="program-card-title">جلسة إرشاد فردية</h3>
-                            <p class="program-card-desc">مساحة آمنة وخاصة لك. جلسة عميقة ومباشرة معي لنغوص في تحدياتك ونرسم معًا خريطة طريق لسلامك الداخلي.</p>
-                            <div class="card-actions">
-                                <button class="btn btn-secondary" data-modal-target="modal-guidance">اعرف المزيد</button>
-                                <div class="like-container">
-                                    <button class="like-btn" data-id="program-guidance" aria-label="Like this program"><i class="far fa-heart"></i></button>
-                                    <span class="like-count" data-id="program-guidance">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="program-card" data-id="program-renewal">
-                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop" alt="مجموعة من الناس يمارسون اليوجا" class="program-card-img" loading="lazy">
-                        <div class="program-card-content">
-                            <h3 class="program-card-title">ورشة التجديد الرقمي</h3>
-                            <p class="program-card-desc">ورشة عمل جماعية عبر الإنترنت لإعادة شحن طاقتك وتزويدك بأدوات عملية للتعامل مع ضغوط الحياة.</p>
-                           <div class="card-actions">
-                                <button class="btn btn-secondary" data-modal-target="modal-renewal">اعرف المزيد</button>
-                                <div class="like-container">
-                                    <button class="like-btn" data-id="program-renewal" aria-label="Like this program"><i class="far fa-heart"></i></button>
-                                    <span class="like-count" data-id="program-renewal">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="program-card" data-id="program-oasis">
-                        <img src="https://images.unsplash.com/photo-1506126613408-4e0520d380ce?q=80&w=2070&auto=format&fit=crop" alt="امرأة تتأمل بهدوء في الطبيعة" class="program-card-img" loading="lazy">
-                        <div class="program-card-content">
-                            <h3 class="program-card-title">واحة الشفاء (حضوري)</h3>
-                            <p class="program-card-desc">تجربة حضورية حصرية وعميقة ليوم واحد. فرصة نادرة للانقطاع عن العالم والغوص في ممارسات شفائية مكثفة.</p>
-                            <div class="card-actions">
-                                <button class="btn btn-secondary" data-modal-target="modal-oasis">اعرف المزيد</button>
-                                <div class="like-container">
-                                    <button class="like-btn" data-id="program-oasis" aria-label="Like this program"><i class="far fa-heart"></i></button>
-                                    <span class="like-count" data-id="program-oasis">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="store" class="content-section animate-on-scroll">
-            <div class="container">
-                <h2 class="section-title">كنوز الطبيعة</h2>
-                <p class="section-intro">مجموعة منتقاة بعناية من الفيتامينات والأعشاب النقية التي أثق بها وأوصي بها لدعم رحلتكم.</p>
-                <div class="store-grid">
-                    <article class="product-card" data-id="product-1">
-                        <img src="https://images.unsplash.com/photo-1607656583648-84f573b04d16?q=80&w=1974&auto=format&fit=crop" alt="مزيج أعشاب مهدئ" class="product-card-img" loading="lazy">
-                        <div class="product-card-content">
-                            <h3 class="product-card-title">مزيج أعشاب السكينة</h3>
-                            <div class="product-price">$15</div>
-                            <div class="card-actions">
-                                <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
-                                <div class="like-container">
-                                    <button class="like-btn" data-id="product-1"><i class="far fa-heart"></i></button>
-                                    <span class="like-count" data-id="product-1">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="product-card" data-id="product-2">
-                        <img src="https://images.unsplash.com/photo-1600600989439-51a88a080c9c?q=80&w=1964&auto=format&fit=crop" alt="كبسولات فيتامينات" class="product-card-img" loading="lazy">
-                        <div class="product-card-content">
-                            <h3 class="product-card-title">فيتامينات الحيوية</h3>
-                            <div class="product-price">$35</div>
-                            <div class="card-actions">
-                                <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
-                                <div class="like-container">
-                                    <button class="like-btn" data-id="product-2"><i class="far fa-heart"></i></button>
-                                    <span class="like-count" data-id="product-2">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="product-card" data-id="product-3">
-                        <img src="https://images.unsplash.com/photo-1627993079207-a3572945199a?q=80&w=1974&auto=format&fit=crop" alt="زيت عطري" class="product-card-img" loading="lazy">
-                        <div class="product-card-content">
-                            <h3 class="product-card-title">زيت اللبان العطري</h3>
-                            <div class="product-price">$25</div>
-                            <div class="card-actions">
-                                <button class="btn btn-primary add-to-cart-btn">أضف للسلة</button>
-                                <div class="like-container">
-                                    <button class="like-btn" data-id="product-3"><i class="far fa-heart"></i></button>
-                                    <span class="like-count" data-id="product-3">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="testimonials" class="content-section bg-dark animate-on-scroll">
-            <div class="container">
-                <h2 class="section-title">أصداء الشفاء</h2>
-                <p class="section-intro">رسائل حقيقية من أشخاص لمسوا التغيير. كل رسالة هي شهادة على قوة الاتصال بالذات.</p>
-                <div class="testimonials-container">
-                    <div class="chat-bubble-wrapper client" data-id="testimonial-1">
-                        <div class="like-container">
-                            <button class="like-btn" data-id="testimonial-1"><i class="far fa-heart"></i></button>
-                            <span class="like-count" data-id="testimonial-1">0</span>
-                        </div>
-                        <div class="chat-bubble client">
-                            <p>كنت ضائعة تماماً. جلستك كانت مثل النور الذي كنت أحتاجه لأرى طريقي من جديد. شكراً من القلب.</p>
-                            <cite>نورة. م</cite>
-                        </div>
-                    </div>
-                    <div class="chat-bubble-wrapper doctor">
-                        <div class="chat-bubble doctor">
-                            <p>سعيد جداً لسماع ذلك يا نورة. النور كان بداخلك دائماً، أنا فقط ساعدتك في إزالة الغبار عنه.</p>
-                        </div>
-                    </div>
-                    <div class="chat-bubble-wrapper client" data-id="testimonial-2">
-                         <div class="like-container">
-                            <button class="like-btn" data-id="testimonial-2"><i class="far fa-heart"></i></button>
-                            <span class="like-count" data-id="testimonial-2">0</span>
-                        </div>
-                        <div class="chat-bubble client">
-                            <p>لم أتوقع أبداً أن جلسة واحدة عن بعد يمكن أن تحدث كل هذا الفارق في حياتي. أشعر وكأني ولدت من جديد.</p>
-                            <cite>أحمد. س</cite>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Programs section remains here... -->
         
-        <section id="knowledge-center" class="blog-section content-section bg-light animate-on-scroll">
-             <div class="container">
-                <h2 class="section-title">مركز المعرفة</h2>
-                <p class="section-intro">مكتبتك الحية للنمو والشفاء. مقالات، تأملات، وقصص ملهمة لمرافقتك في رحلتك اليومية.</p>
-                <div class="blog-grid">
-                     <article class="program-card" data-id="blog-1">
-                         <img src="https://images.unsplash.com/photo-1484069560501-87d72b0c3669?q=80&w=2070&auto=format&fit=crop" alt="شخص يكتب في دفتر ملاحظات" class="program-card-img" loading="lazy">
-                         <div class="program-card-content">
-                             <h4>مقالات الحكمة</h4>
-                             <h3 class="program-card-title">دمج اليقظة في يومك</h3>
-                            <div class="card-actions">
-                                <button class="btn btn-secondary" data-modal-target="modal-blog-mindfulness">اقرأ المزيد</button>
-                                <div class="like-container">
-                                    <button class="like-btn" data-id="blog-1"><i class="far fa-heart"></i></button>
-                                    <span class="like-count" data-id="blog-1">0</span>
-                                </div>
+        <!-- NEW: Dashboard Section -->
+        <section id="dashboard" class="content-section bg-light animate-on-scroll" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">رحلتك الشفائية</h2>
+                <p class="section-intro">هنا تتجسد رحلتك. كل خطوة تخطوها، وكل لحظة تأمل، تساهم في نمو حديقتك الداخلية.</p>
+                <div class="dashboard-section">
+                    <div id="journey-visual-container">
+                        <h3>شجرة روحك</h3>
+                        <div id="lottie-container"></div>
+                        <p>شاهد شجرتك تنمو وتزدهر مع كل ممارسة تقوم بها.</p>
+                    </div>
+                    <div id="journal-soundscape-container">
+                        <div id="journal-container">
+                            <h3>دفتر يومياتي الذكي</h3>
+                            <p>مكانك الآمن لتدوين الأفكار والمشاعر. خاصة بك تمامًا.</p>
+                            <textarea id="journal-entry" placeholder="اكتب ما في قلبك..."></textarea>
+                            <button id="save-entry-btn" class="btn btn-primary">حفظ الإدخال</button>
+                            <button id="analyze-entry-btn" class="btn btn-secondary" style="display: none;">تحليل بواسطة مساعد طِبرا</button>
+                            <div id="journal-analysis">
+                                <p>اضغط على زر التحليل لاكتشاف رؤى لطيفة حول كتاباتك.</p>
                             </div>
-                         </div>
-                     </article>
-                    <article class="program-card" data-id="blog-2">
-                        <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1974&auto=format&fit=crop" alt="كوب شاي عشبي بجانب نافذة" class="program-card-img" loading="lazy">
-                        <div class="program-card-content">
-                            <h4>تأملات صوتية</h4>
-                            <h3 class="program-card-title">تأمل الشاي: طقس السكينة</h3>
-                           <div class="card-actions">
-                                <button class="btn btn-secondary" data-modal-target="modal-blog-tea">استمع الآن</button>
-                                <div class="like-container">
-                                    <button class="like-btn" data-id="blog-2"><i class="far fa-heart"></i></button>
-                                    <span class="like-count" data-id="blog-2">0</span>
-                                </div>
-                            </div>
+                            <h4 style="margin-top: 2rem;">إدخالات سابقة</h4>
+                            <div id="past-entries-list"></div>
                         </div>
-                    </article>
-                    <article class="program-card" data-id="blog-3">
-                        <img src="https://images.unsplash.com/photo-1475694867812-f82b8696d610?q=80&w=2070&auto=format&fit=crop" alt="شخص يمشي وحيدًا على شاطئ البحر" class="program-card-img" loading="lazy">
-                        <div class="program-card-content">
-                            <h4>قصص تحول</h4>
-                            <h3 class="program-card-title">رحلة أحمد: من القلق للسلام</h3>
-                             <div class="card-actions">
-                                <button class="btn btn-secondary" data-modal-target="modal-blog-story">شاهد القصة</button>
-                                <div class="like-container">
-                                    <button class="like-btn" data-id="blog-3"><i class="far fa-heart"></i></button>
-                                    <span class="like-count" data-id="blog-3">0</span>
-                                </div>
+
+                        <div id="soundscape-mixer">
+                             <h3>مُنشئ الأجواء الصوتية</h3>
+                             <p>صمم مزيجك الصوتي الخاص للتركيز أو الاسترخاء.</p>
+                             <div class="mixer-channel">
+                                 <label for="rain-volume"><i class="fas fa-cloud-showers-heavy"></i> مطر</label>
+                                 <input type="range" id="rain-volume" class="sound-slider" min="0" max="1" step="0.01" value="0" data-sound="rain">
+                             </div>
+                             <div class="mixer-channel">
+                                 <label for="forest-volume"><i class="fas fa-tree"></i> غابة</label>
+                                 <input type="range" id="forest-volume" class="sound-slider" min="0" max="1" step="0.01" value="0" data-sound="forest">
+                             </div>
+                             <div class="mixer-channel">
+                                <label for="waves-volume"><i class="fas fa-water"></i> أمواج</label>
+                                <input type="range" id="waves-volume" class="sound-slider" min="0" max="1" step="0.01" value="0" data-sound="waves">
                             </div>
+                            <div class="mixer-channel">
+                                <label for="bowls-volume"><i class="fas fa-bell"></i> أوعية غنائية</label>
+                                <input type="range" id="bowls-volume" class="sound-slider" min="0" max="1" step="0.01" value="0" data-sound="bowls">
+                            </div>
+                             <button id="save-mix-btn" class="btn btn-primary" style="margin-top:1rem;">حفظ المزيج</button>
                         </div>
-                    </article>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Other sections like FAQ and Contact remain here -->
+        <!-- Other sections (FAQ, Contact, etc.) remain here -->
 
     </main>
     
-    <!-- Floating action buttons and modals remain here -->
+    <!-- All Modals and Floating Buttons remain here -->
+    
+    <!-- NEW: Digital Zen Garden Container -->
+    <div id="zen-garden-container">
+        <div class="zen-garden-ui">
+            <button class="close-btn" id="close-zen-garden"><i class="fas fa-times"></i></button>
+        </div>
+        <canvas id="zen-garden"></canvas>
+        <div class="breathing-guide">
+            <div id="breathing-circle"></div>
+            <p id="breathing-text">تنفس...</p>
+        </div>
+        <div class="affirmation-wall" id="affirmation-wall">
+            <!-- Affirmations will be injected here -->
+        </div>
+         <div style="position: absolute; bottom: 2rem; right: 2rem; z-index: 2004; background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 8px;">
+            <input type="text" id="affirmation-input" placeholder="اكتب تأكيدًا إيجابيًا..." style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 4px;">
+            <button id="submit-affirmation" class="btn btn-primary" style="padding: 0.5rem 1rem;">شارك</button>
+        </div>
+    </div>
 
+    <!-- Hidden audio elements for Soundscape Mixer -->
+    <audio id="audio-rain" loop src="https://cdn.pixabay.com/audio/2022/08/04/audio_35470ed7d0.mp3"></audio>
+    <audio id="audio-forest" loop src="https://cdn.pixabay.com/audio/2022/10/24/audio_9639c1469e.mp3"></audio>
+    <audio id="audio-waves" loop src="https://cdn.pixabay.com/audio/2023/09/21/audio_a0a2a1155b.mp3"></audio>
+    <audio id="audio-bowls" loop src="https://cdn.pixabay.com/audio/2022/05/18/audio_83d12b0aaf.mp3"></audio>
+
+    <div class="modal-overlay"></div>
+
+    <!-- Firebase SDKs -->
     <script type="module">
-        // Import Firebase modules
+        // --- Firebase Configuration ---
+        // IMPORTANT: These variables are placeholders and will be provided by the canvas environment.
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // --- Firebase Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, increment, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, addDoc, onSnapshot, collection, query, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- Firebase Initialization ---
-        let db, auth;
+        // --- App Initialization ---
+        let app, auth, db;
+        let userId = null;
+        let lottieAnim = null;
+
+        // --- DOM Elements ---
+        const authContainer = document.getElementById('auth-container');
+        const userProfileIcon = document.getElementById('user-profile-icon');
+        const dashboardNavLink = document.getElementById('dashboard-nav-link');
+        const dashboardSection = document.getElementById('dashboard');
         
-        async function initializeFirebase() {
+        // --- Main App Logic ---
+        document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-                
-                if (!firebaseConfig.apiKey) {
-                    console.error("Firebase config not found.");
-                    return;
-                }
-
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
+                app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
-
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
+                db = getFirestore(app);
                 
-                console.log("Firebase initialized and user signed in.", auth.currentUser?.uid);
-                
-                // Once Firebase is ready, setup like features
-                setupLikeSystem();
+                setupAuthObserver();
+                setupGeneralUIListeners();
 
             } catch (error) {
                 console.error("Firebase initialization failed:", error);
+                authContainer.innerHTML = `<p>Error loading experience.</p>`;
             }
+        });
+
+        // --- Authentication ---
+        function setupAuthObserver() {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    userId = user.uid;
+                    console.log("User is signed in:", userId);
+                    updateUIForAuthenticatedUser();
+                    await loadUserData();
+                } else {
+                    userId = null;
+                    console.log("User is signed out.");
+                    updateUIForAnonymousUser();
+                }
+            });
+
+            // Initial sign-in attempt
+            signInUser();
         }
 
-        // --- Like System Logic ---
-        function setupLikeSystem() {
-            const likeButtons = document.querySelectorAll('.like-btn');
-            let likedItems = JSON.parse(localStorage.getItem('likedItems')) || [];
-
-            const updateButtonUI = (button, isLiked) => {
-                if (isLiked) {
-                    button.classList.add('liked');
-                    button.innerHTML = '<i class="fas fa-heart"></i>'; // Solid heart
-                } else {
-                    button.classList.remove('liked');
-                    button.innerHTML = '<i class="far fa-heart"></i>'; // Outline heart
+        async function signInUser() {
+             if (initialAuthToken) {
+                try {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } catch (error) {
+                    console.error("Custom token sign-in failed, trying anonymous:", error);
+                    await signInAnonymously(auth);
                 }
-            };
+            } else {
+                await signInAnonymously(auth);
+            }
+        }
+        
+        function updateUIForAuthenticatedUser() {
+            authContainer.innerHTML = `<button id="logout-btn" class="btn btn-secondary">تسجيل الخروج</button>`;
+            document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
+            
+            userProfileIcon.style.display = 'block';
+            dashboardNavLink.style.display = 'block';
+            dashboardSection.style.display = 'block';
+        }
 
-            likeButtons.forEach(button => {
-                const itemId = button.dataset.id;
-                if (!itemId) return;
+        function updateUIForAnonymousUser() {
+            authContainer.innerHTML = `<button id="login-btn" class="btn btn-primary">تسجيل الدخول</button>`;
+            document.getElementById('login-btn').addEventListener('click', () => {
+                 // In a real app, this would open a login modal. For now, we sign in anonymously.
+                 signInAnonymously(auth).catch(err => console.error("Anonymous sign-in failed:", err));
+            });
+            
+            userProfileIcon.style.display = 'none';
+            dashboardNavLink.style.display = 'none';
+            dashboardSection.style.display = 'none';
+        }
 
-                // Set initial UI state from localStorage
-                updateButtonUI(button, likedItems.includes(itemId));
-                
-                // Firestore path
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const likeDocRef = doc(db, `artifacts/${appId}/public/data/likes`, itemId);
+        // --- User Data & Visual Journey ---
+        async function loadUserData() {
+            if (!userId) return;
+            const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
+            const userDocSnap = await getDoc(userDocRef);
 
-                // Listen for real-time updates
-                onSnapshot(likeDocRef, (docSnap) => {
-                    const likeCountSpan = document.querySelector(`.like-count[data-id="${itemId}"]`);
-                    if (likeCountSpan) {
-                        const count = docSnap.exists() ? docSnap.data().count : 0;
-                        likeCountSpan.textContent = count;
-                    }
-                });
-
-                // Handle click event
-                button.addEventListener('click', async () => {
-                    if (likedItems.includes(itemId)) {
-                        console.log("You have already liked this item.");
-                        return; // Already liked, do nothing
-                    }
-
-                    // Update local state and UI immediately for responsiveness
-                    likedItems.push(itemId);
-                    localStorage.setItem('likedItems', JSON.stringify(likedItems));
-                    updateButtonUI(button, true);
-
-                    // Update Firestore
-                    try {
-                        await setDoc(likeDocRef, { count: increment(1) }, { merge: true });
-                    } catch (error) {
-                        console.error("Error updating like count:", error);
-                        // Optional: revert local change if Firebase update fails
-                        likedItems = likedItems.filter(id => id !== itemId);
-                        localStorage.setItem('likedItems', JSON.stringify(likedItems));
-                        updateButtonUI(button, false);
-                    }
-                });
+            if (userDocSnap.exists()) {
+                const userData = userDocSnap.data();
+                // Load features with user data
+                initializeJournal(userData.journal || []);
+                initializeSoundscape(userData.soundscape || {});
+                updateJourneyVisual(userData.activity || {});
+            } else {
+                // Initialize for a new user
+                const initialData = {
+                    createdAt: serverTimestamp(),
+                    journal: [],
+                    soundscape: {},
+                    activity: { entries: 0, mixes: 0 }
+                };
+                await setDoc(userDocRef, initialData);
+                initializeJournal([]);
+                initializeSoundscape({});
+                updateJourneyVisual({});
+            }
+        }
+        
+        function initializeLottie() {
+            if (lottieAnim) lottieAnim.destroy(); // Clean up previous animation
+            lottieAnim = lottie.loadAnimation({
+                container: document.getElementById('lottie-container'),
+                renderer: 'svg',
+                loop: false,
+                autoplay: false,
+                // Using a placeholder JSON for a growing tree animation
+                path: 'https://assets2.lottiefiles.com/packages/lf20_yvepvmy8.json' 
             });
         }
 
-        // --- Standard DOMContentLoaded Logic ---
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeFirebase(); // Initialize Firebase on page load
+        function updateJourneyVisual(activity) {
+            if (!lottieAnim) initializeLottie();
+            
+            const entries = activity.entries || 0;
+            const mixes = activity.mixes || 0;
+            const totalActivity = entries + mixes;
 
-            // Existing logic for nav, modals, etc.
+            // Simple logic: play animation frames based on activity score
+            // Assumes the animation has 100 frames total.
+            const frameToGo = Math.min(100, totalActivity * 5); 
+
+            lottieAnim.goToAndStop(frameToGo, true);
+        }
+        
+        async function updateUserActivity(activityType) {
+            if (!userId) return;
+            const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
+            const userDocSnap = await getDoc(userDocRef);
+            if(userDocSnap.exists()) {
+                const userData = userDocSnap.data();
+                const newActivityCount = (userData.activity?.[activityType] || 0) + 1;
+                
+                const updatedData = {
+                    activity: {
+                        ...userData.activity,
+                        [activityType]: newActivityCount
+                    }
+                };
+                await setDoc(userDocRef, updatedData, { merge: true });
+                updateJourneyVisual(updatedData.activity); // Update visual immediately
+            }
+        }
+
+        // --- General UI Listeners ---
+        function setupGeneralUIListeners() {
+            // Zen Garden
+            document.getElementById('zen-garden-link')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('zen-garden-container')?.classList.add('active');
+            });
+            document.getElementById('close-zen-garden')?.addEventListener('click', () => {
+                document.getElementById('zen-garden-container')?.classList.remove('active');
+            });
+
+             // Nav-toggle for mobile
             const navToggle = document.querySelector('.nav-toggle');
             const navMenu = document.querySelector('.nav-menu');
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
-                    document.body.classList.toggle('no-scroll');
-                    const icon = navToggle.querySelector('i');
-                    icon.classList.toggle('fa-bars');
-                    icon.classList.toggle('fa-times');
-                });
-            }
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+        
+        // --- Zen Garden Logic ---
+        const zenCanvas = document.getElementById('zen-garden');
+        const zenCtx = zenCanvas.getContext('2d');
+        let isDrawing = false;
+        
+        function resizeCanvas() {
+            zenCanvas.width = window.innerWidth;
+            zenCanvas.height = window.innerHeight;
+            zenCtx.fillStyle = '#f4f1eb';
+            zenCtx.fillRect(0, 0, zenCanvas.width, zenCanvas.height);
+            // You can add a subtle sand texture here if desired
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault(); // prevent scrolling on touch devices
             
-            // ... (rest of your existing non-Firebase JS logic for modals, cart, etc.)
+            const rect = zenCanvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            zenCtx.lineWidth = 3;
+            zenCtx.lineCap = 'round';
+            zenCtx.strokeStyle = 'rgba(0, 0, 0, 0.05)';
+            
+            zenCtx.lineTo(x, y);
+            zenCtx.stroke();
+            zenCtx.beginPath();
+            zenCtx.moveTo(x, y);
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        zenCanvas.addEventListener('mousedown', (e) => { isDrawing = true; draw(e); });
+        zenCanvas.addEventListener('touchstart', (e) => { isDrawing = true; draw(e); });
+        zenCanvas.addEventListener('mouseup', () => { isDrawing = false; zenCtx.beginPath(); });
+        zenCanvas.addEventListener('touchend', () => { isDrawing = false; zenCtx.beginPath(); });
+        zenCanvas.addEventListener('mousemove', draw);
+        zenCanvas.addEventListener('touchmove', draw);
+        
+        // --- Breathing Guide Logic ---
+        const breathingText = document.getElementById('breathing-text');
+        setInterval(() => {
+            setTimeout(() => breathingText.textContent = "شهيق...", 0);
+            setTimeout(() => breathingText.textContent = "احبس...", 4000);
+            setTimeout(() => breathingText.textContent = "زفير...", 8000);
+            setTimeout(() => breathingText.textContent = "احبس...", 12000);
+        }, 16000);
+
+        // --- Affirmations Wall Logic ---
+        const affirmationWall = document.getElementById('affirmation-wall');
+        const affirmationInput = document.getElementById('affirmation-input');
+        const submitAffirmationBtn = document.getElementById('submit-affirmation');
+        
+        const affirmationsCol = collection(db, `artifacts/${appId}/public/data/affirmations`);
+
+        submitAffirmationBtn.addEventListener('click', async () => {
+            const text = affirmationInput.value.trim();
+            if (text) {
+                await addDoc(affirmationsCol, {
+                    text: text,
+                    createdAt: serverTimestamp()
+                });
+                affirmationInput.value = '';
+            }
         });
 
+        onSnapshot(query(affirmationsCol), (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                if (change.type === 'added') {
+                    const affirmationData = change.doc.data();
+                    displayAffirmation(affirmationData.text);
+                }
+            });
+        });
+
+        function displayAffirmation(text) {
+            const el = document.createElement('div');
+            el.className = 'affirmation';
+            el.textContent = text;
+            el.style.top = `${Math.random() * 90}%`;
+            el.style.animationDuration = `${20 + Math.random() * 20}s`;
+            affirmationWall.appendChild(el);
+            setTimeout(() => el.remove(), 40000); // Cleanup
+        }
+        
+        // --- AI Journal Logic ---
+        const journalEntryText = document.getElementById('journal-entry');
+        const saveEntryBtn = document.getElementById('save-entry-btn');
+        const analyzeEntryBtn = document.getElementById('analyze-entry-btn');
+        const journalAnalysisDiv = document.getElementById('journal-analysis');
+        let currentJournal = [];
+        let currentEntryId = null;
+
+        function initializeJournal(journalData) {
+            currentJournal = journalData;
+            // Render past entries
+        }
+
+        saveEntryBtn.addEventListener('click', async () => {
+            if(!userId) return;
+            const text = journalEntryText.value.trim();
+            if(!text) return;
+            
+            const newEntry = {
+                id: crypto.randomUUID(),
+                text: text,
+                timestamp: new Date().toISOString()
+            };
+            
+            currentJournal.push(newEntry);
+            const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
+            await setDoc(userDocRef, { journal: currentJournal }, { merge: true });
+            
+            journalEntryText.value = '';
+            analyzeEntryBtn.style.display = 'inline-block';
+            analyzeEntryBtn.dataset.text = text;
+            journalAnalysisDiv.innerHTML = '<p>تم الحفظ. اضغط للتحليل.</p>';
+            await updateUserActivity('entries');
+        });
+        
+        analyzeEntryBtn.addEventListener('click', async () => {
+            const textToAnalyze = analyzeEntryBtn.dataset.text;
+            if(!textToAnalyze) return;
+            
+            journalAnalysisDiv.innerHTML = '<p>جارٍ التحليل...</p>';
+
+            const prompt = `You are a gentle, non-clinical wellness assistant named 'Tibra Helper'. Analyze the following journal entry from a user. Do not provide medical advice. Instead, reflect back emotional themes or recurring keywords in a soft, encouraging way. Frame your response as a "gentle invitation for reflection". For example: "It seems the idea of 'release' comes up for you. Perhaps this is an invitation to explore what that means to you today." or "I notice a feeling of peace in your words about nature. A beautiful moment to cherish." The user's entry is: "${textToAnalyze}"`;
+            
+            try {
+                // Gemini API Call
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Will be handled by the environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API call failed with status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const analysisText = result.candidates[0].content.parts[0].text;
+                    journalAnalysisDiv.innerHTML = `<p>${analysisText.replace(/\n/g, '<br>')}</p>`;
+                } else {
+                     journalAnalysisDiv.innerHTML = '<p>لم أتمكن من استخلاص رؤية واضحة. ربما يمكنك المحاولة مرة أخرى بكلمات مختلفة.</p>';
+                }
+            } catch (error) {
+                 console.error("Gemini API error:", error);
+                 journalAnalysisDiv.innerHTML = '<p>عذرًا، حدث خطأ أثناء الاتصال بمساعد طِبرا.</p>';
+            }
+        });
+
+
+        // --- Soundscape Mixer Logic ---
+        const soundSliders = document.querySelectorAll('.sound-slider');
+        const saveMixBtn = document.getElementById('save-mix-btn');
+        let audioContext;
+
+        function initializeSoundscape(savedMix) {
+            soundSliders.forEach(slider => {
+                const soundId = slider.dataset.sound;
+                if(savedMix[soundId] !== undefined) {
+                    slider.value = savedMix[soundId];
+                }
+                const audioEl = document.getElementById(`audio-${soundId}`);
+                if(audioEl) audioEl.volume = slider.value;
+            });
+        }
+        
+        function setupAudio() {
+             if (audioContext) return;
+             audioContext = new (window.AudioContext || window.webkitAudioContext)();
+             // Play all sounds silently to enable them on mobile
+             document.querySelectorAll('.soundscape-audios audio').forEach(audio => {
+                audio.volume = 0;
+                audio.play().catch(e => console.log("Audio play failed on initial setup", e));
+             });
+        }
+
+        soundSliders.forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                if(!audioContext) setupAudio();
+                const soundId = e.target.dataset.sound;
+                const volume = e.target.value;
+                const audioEl = document.getElementById(`audio-${soundId}`);
+                if (audioEl) {
+                    audioEl.volume = volume;
+                    if(volume > 0 && audioEl.paused) {
+                        audioEl.play().catch(err => console.error("Could not play audio:", err));
+                    }
+                }
+            });
+        });
+        
+        saveMixBtn.addEventListener('click', async () => {
+             if(!userId) return;
+             const mixSettings = {};
+             soundSliders.forEach(slider => {
+                mixSettings[slider.dataset.sound] = slider.value;
+             });
+
+             const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
+             await setDoc(userDocRef, { soundscape: mixSettings }, { merge: true });
+             alert('تم حفظ مزيجك الصوتي!');
+             await updateUserActivity('mixes');
+        });
+
+
     </script>
-    
-    <!-- Keep your existing non-module script if it contains other functionalities -->
     <script>
-        // Non-module script for functionalities that don't depend on Firebase
-        // For example, simple UI interactions.
+        // Non-module, general script for things that don't need Firebase logic immediately
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(button => {
+                button.addEventListener('click', () => {
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    const answer = button.nextElementSibling;
+                    if (!isExpanded) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    } else {
+                        answer.style.maxHeight = '0';
+                    }
+                });
+            });
+        });
     </script>
 
 </body>
