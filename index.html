@@ -14,11 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Firebase SDKs (for login functionality) -->
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js" type="module"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js" type="module"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js" type="module"></script>
-
     <style>
         /* Custom Styles to complement Tailwind */
         :root {
@@ -382,9 +377,14 @@
     </a>
     
     <script type="module">
-        // Firebase Config - استبدل هذا بمعلومات مشروعك
+        // --- SDK IMPORTS ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+
+        // --- FIREBASE CONFIG ---
         const firebaseConfig = {
-            apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg", // استخدم المفتاح الذي زودتنا به
+            apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg", 
             authDomain: "tibrasoul.firebaseapp.com",
             projectId: "tibrasoul",
             storageBucket: "tibrasoul.appspot.com",
@@ -392,11 +392,11 @@
             appId: "1:920755760709:web:778cd12e6edbd199827d2c"
         };
 
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        const provider = new firebase.auth.GoogleAuthProvider();
+        // --- FIREBASE INITIALIZATION (MODULAR SYNTAX) ---
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
 
         // --- AUTHENTICATION ---
         const loginBtn = document.getElementById('login-btn');
@@ -405,7 +405,7 @@
         const profileLinkMobile = document.getElementById('profile-link-mobile');
         const premiumContentSection = document.getElementById('premium-content');
 
-        auth.onAuthStateChanged(user => {
+        onAuthStateChanged(auth, user => {
             if (user) {
                 // User is signed in
                 loginBtn.classList.add('hidden');
@@ -427,7 +427,7 @@
         });
 
         const handleLogin = () => {
-            auth.signInWithPopup(provider).catch(error => console.error("Login Error:", error));
+            signInWithPopup(auth, provider).catch(error => console.error("Login Error:", error));
         }
         loginBtn.addEventListener('click', handleLogin);
         loginBtnMobile.addEventListener('click', handleLogin);
@@ -452,7 +452,9 @@
 
         const playFrequency = (freq) => {
             initAudio();
-            stopFrequency(); // Stop any previous frequency
+            if (oscillator) {
+                stopFrequency(); // Stop any previous frequency before starting a new one
+            }
 
             oscillator = audioCtx.createOscillator();
             gainNode = audioCtx.createGain();
@@ -470,7 +472,7 @@
             analyser.connect(audioCtx.destination);
             
             gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.5); // Fade in
+            gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.1); // Faster fade in
 
             oscillator.start();
             stopFreqBtn.classList.remove('hidden');
@@ -479,8 +481,8 @@
 
         const stopFrequency = () => {
             if (oscillator) {
-                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5); // Fade out
-                oscillator.stop(audioCtx.currentTime + 0.5);
+                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2); // Faster fade out
+                oscillator.stop(audioCtx.currentTime + 0.2);
                 oscillator = null;
                 cancelAnimationFrame(animationFrameId);
                 clearCanvas();
@@ -529,11 +531,8 @@
 
         freqButtonsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('freq-btn')) {
-                 // Deactivate all buttons first
-                document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-                // Activate clicked button
+                 document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
-
                 const freq = parseFloat(e.target.dataset.freq);
                 playFrequency(freq);
             }
