@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="د. عمر - رحلتك نحو الشفاء بالطب الشمولي والوظيفي. جلسات علاجية، منتجات طبيعية، ومحتوى ملهم للصحة النفسية والجسدية.">
-    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر, طِبرا">
+    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر, طِبرا, DMSO, ترددات شفائية">
     <title>د. عمر | خبير الطب الشمولي والوظيفي</title>
 
     <!-- Fonts & Icons -->
@@ -13,6 +13,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Firebase SDKs (for login functionality) -->
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js" type="module"></script>
 
     <style>
         /* Custom Styles to complement Tailwind */
@@ -88,6 +93,18 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Frequency Generator Styles */
+        #frequency-canvas {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            box-shadow: inset 0 0 10px #000;
+        }
+        .freq-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -100,11 +117,19 @@
                 <a href="#about" class="hover:text-[--primary-color]">عني</a>
                 <a href="#services" class="hover:text-[--primary-color]">جلساتي</a>
                 <a href="#store" class="hover:text-[--primary-color]">المتجر</a>
+                <a href="#frequencies" class="hover:text-[--primary-color]">الترددات</a>
                 <a href="#blog" class="hover:text-[--primary-color]">المدونة</a>
-                <a href="#contact" class="hover:text-[--primary-color]">تواصل معي</a>
+                 <!-- Login/Profile Link -->
+                 <div id="auth-section" class="flex items-center">
+                     <button id="login-btn" class="font-bold text-[--primary-color] hover:underline">تسجيل الدخول</button>
+                     <div id="profile-section-nav" class="hidden items-center">
+                         <a href="#premium-content" class="font-bold text-[--primary-color] hover:underline ml-4">مجتمع الأعضاء</a>
+                         <img id="user-avatar" class="w-8 h-8 rounded-full" alt="صورة المستخدم">
+                     </div>
+                 </div>
             </div>
             <a href="#contact" class="hidden md:block bg-[--primary-color] text-white py-2 px-6 rounded-full hover:bg-opacity-90 transition">احجز جلستك</a>
-             <!-- Mobile Menu Button -->
+            <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
@@ -114,9 +139,14 @@
             <a href="#about" class="block py-2 hover:text-[--primary-color]">عني</a>
             <a href="#services" class="block py-2 hover:text-[--primary-color]">جلساتي</a>
             <a href="#store" class="block py-2 hover:text-[--primary-color]">المتجر</a>
+            <a href="#frequencies" class="block py-2 hover:text-[--primary-color]">الترددات</a>
             <a href="#blog" class="block py-2 hover:text-[--primary-color]">المدونة</a>
             <a href="#contact" class="block py-2 hover:text-[--primary-color]">تواصل معي</a>
-            <a href="#contact" class="mt-2 block bg-[--primary-color] text-white text-center py-2 px-6 rounded-full hover:bg-opacity-90 transition">احجز جلستك</a>
+            <hr class="my-2">
+            <div id="auth-section-mobile">
+                <button id="login-btn-mobile" class="w-full text-right py-2 font-bold text-[--primary-color]">تسجيل الدخول</button>
+                <a href="#premium-content" id="profile-link-mobile" class="hidden w-full text-right py-2 font-bold text-[--primary-color]">مجتمع الأعضاء</a>
+            </div>
         </div>
     </header>
 
@@ -138,7 +168,7 @@
             <div class="container mx-auto px-6">
                 <div class="md:flex items-center gap-12">
                     <div class="md:w-1/3 text-center fade-in-up">
-                        <img src="https://placehold.co/400x400/5a6e5a/white?text=Dr.+Omar" alt="صورة د. عمر" class="rounded-full shadow-2xl mx-auto w-64 h-64 md:w-80 md:h-80 object-cover">
+                        <img src="https://i.ibb.co/6wmT73L/image-c28027.jpg" alt="صورة د. عمر" class="rounded-full shadow-2xl mx-auto w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white">
                     </div>
                     <div class="md:w-2/3 mt-8 md:mt-0 fade-in-up">
                         <h2 class="text-4xl font-bold mb-4 section-title text-right">عن د. عمر</h2>
@@ -161,21 +191,21 @@
                         <div class="text-5xl text-[--accent-color] mb-4"><i class="fas fa-user-md"></i></div>
                         <h3 class="text-2xl font-bold mb-3">استشارة أولية شاملة</h3>
                         <p class="mb-6">جلسة لمدة 90 دقيقة لتقييم حالتك الصحية بالكامل، مناقشة تاريخك المرضي، ووضع خريطة طريق علاجية مخصصة.</p>
-                        <a href="https://wa.me/967000000000?text=أرغب%20في%20حجز%20استشارة%20أولية%20شاملة" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">احجز الآن</a>
+                        <a href="https://wa.me/967771447111?text=أرغب%20في%20حجز%20استشارة%20أولية%20شاملة" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">احجز الآن</a>
                     </div>
                     <!-- Service 2 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
                         <div class="text-5xl text-[--accent-color] mb-4"><i class="fas fa-heartbeat"></i></div>
                         <h3 class="text-2xl font-bold mb-3">باقة المتابعة الصحية</h3>
                         <p class="mb-6">3 جلسات متابعة (45 دقيقة لكل جلسة) لمراقبة تقدمك، تعديل الخطة العلاجية، وتقديم الدعم المستمر لك.</p>
-                         <a href="https://wa.me/967000000000?text=أرغب%20في%20الاشتراك%20بباقة%20المتابعة%20الصحية" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">اشترك الآن</a>
+                         <a href="https://wa.me/967771447111?text=أرغب%20في%20الاشتراك%20بباقة%20المتابعة%20الصحية" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">اشترك الآن</a>
                     </div>
                     <!-- Service 3 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.4s;">
                         <div class="text-5xl text-[--accent-color] mb-4"><i class="fas fa-leaf"></i></div>
                         <h3 class="text-2xl font-bold mb-3">استشارة التغذية الوظيفية</h3>
                         <p class="mb-6">جلسة مركزة لمدة 60 دقيقة لوضع خطة تغذية علاجية مخصصة لمعالجة مشاكل صحية معينة مثل مشاكل الهضم أو الطاقة.</p>
-                         <a href="https://wa.me/967000000000?text=أرغب%20في%20حجز%20استشارة%20التغذية%20الوظيفية" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">احجز الآن</a>
+                         <a href="https://wa.me/967771447111?text=أرغب%20في%20حجز%20استشارة%20التغذية%20الوظيفية" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">احجز الآن</a>
                     </div>
                 </div>
             </div>
@@ -187,71 +217,94 @@
                 <h2 class="text-4xl font-bold mb-4 section-title">متجر المنتجات الشافية</h2>
                 <p class="max-w-2xl mx-auto mb-12">مجموعة منتقاة بعناية من المنتجات الطبيعية والأدوية الوظيفية التي أثق بها وأوصي بها لدعم رحلتك العلاجية.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Product 1 -->
+                     <!-- Product 1 -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up">
-                        <img src="https://placehold.co/300x300/c8a07d/white?text=منتج+1" alt="صورة المنتج 1" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/300x300/5a6e5a/white?text=DMSO" alt="DMSO" class="w-full h-56 object-cover">
                         <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">مكمل فيتامين د3 + ك2</h3>
-                            <p class="text-gray-600 mb-4">لدعم صحة العظام والمناعة.</p>
-                            <p class="text-2xl font-bold text-[--primary-color] mb-4">$35</p>
-                            <a href="https://wa.me/967000000000?text=أرغب%20في%20شراء%20مكمل%20فيتامين%20د3%20%2B%20ك2" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                            <h3 class="text-xl font-bold mb-2">DMSO للجلد</h3>
+                            <p class="text-gray-600 mb-4">مذيب طبيعي قوي لدعم الشفاء وتخفيف الألم الموضعي.</p>
+                            <p class="text-2xl font-bold text-[--primary-color] mb-4">$45</p>
+                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20DMSO%20للجلد" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
                     <!-- Product 2 -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.1s;">
-                        <img src="https://placehold.co/300x300/5a6e5a/white?text=منتج+2" alt="صورة المنتج 2" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/300x300/c8a07d/white?text=Vit+D3" alt="صورة المنتج 1" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">مكمل فيتامين د3 + ك2</h3>
+                            <p class="text-gray-600 mb-4">لدعم صحة العظام والمناعة.</p>
+                            <p class="text-2xl font-bold text-[--primary-color] mb-4">$35</p>
+                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20مكمل%20فيتامين%20د3%20%2B%20ك2" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
+                        <img src="https://placehold.co/300x300/5a6e5a/white?text=Mg+Oil" alt="صورة المنتج 2" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">زيت الماغنسيوم النقي</h3>
                             <p class="text-gray-600 mb-4">للاسترخاء وتخفيف آلام العضلات.</p>
                              <p class="text-2xl font-bold text-[--primary-color] mb-4">$25</p>
-                           <a href="https://wa.me/967000000000?text=أرغب%20في%20شراء%20زيت%20الماغنسيوم%20النقي" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
-                        </div>
-                    </div>
-                     <!-- Product 3 -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
-                        <img src="https://placehold.co/300x300/c8a07d/white?text=منتج+3" alt="صورة المنتج 3" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">شاي الأعشاب المهدئ</h3>
-                            <p class="text-gray-600 mb-4">مزيج من البابونج والخزامى للمساعدة على النوم.</p>
-                             <p class="text-2xl font-bold text-[--primary-color] mb-4">$15</p>
-                            <a href="https://wa.me/967000000000?text=أرغب%20في%20شراء%20شاي%20الأعشاب%20المهدئ" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                           <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20زيت%20الماغنسيوم%20النقي" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
                      <!-- Product 4 -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.3s;">
-                        <img src="https://placehold.co/300x300/5a6e5a/white?text=منتج+4" alt="صورة المنتج 4" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/300x300/c8a07d/white?text=Probiotic" alt="صورة المنتج 4" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">بروبيوتيك عالي الجودة</h3>
                             <p class="text-gray-600 mb-4">لدعم صحة الجهاز الهضمي والميكروبيوم.</p>
                              <p class="text-2xl font-bold text-[--primary-color] mb-4">$50</p>
-                           <a href="https://wa.me/967000000000?text=أرغب%20في%20شراء%20بروبيوتيك%20عالي%20الجودة" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                           <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20بروبيوتيك%20عالي%20الجودة" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Free Gift Section -->
-        <section id="gift" class="py-20 bg-[--primary-color] text-white">
+        <!-- Frequency Generator Section -->
+        <section id="frequencies" class="py-20">
             <div class="container mx-auto px-6 text-center">
-                <div class="text-6xl mb-4"><i class="fas fa-gift"></i></div>
-                <h2 class="text-4xl font-bold mb-4">هديتك المجانية لبداية رحلتك</h2>
-                <p class="max-w-2xl mx-auto mb-8">احصل على دليلي المجاني "5 خطوات بسيطة لتقليل الالتهابات واستعادة طاقتك" عند الاشتراك في قائمتي البريدية.</p>
-                <form class="max-w-md mx-auto">
-                    <div class="flex items-center">
-                        <input type="email" placeholder="أدخل بريدك الإلكتروني" class="w-full p-3 rounded-r-full text-gray-800" required>
-                        <button type="submit" class="bg-[--accent-color] text-white py-3 px-6 rounded-l-full font-bold hover:bg-opacity-90 transition">احصل على هديتك</button>
+                <h2 class="text-4xl font-bold mb-4 section-title">مولد الترددات الشفائية</h2>
+                <p class="max-w-2xl mx-auto mb-12">اختر أحد ترددات السولفيجيو للاستماع إليها أثناء التأمل. استخدم سماعات الرأس لأفضل تأثير.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
+                    <canvas id="frequency-canvas" class="w-full h-32 mb-8"></canvas>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="frequency-buttons">
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="396">396 Hz - تحرير الذنب والخوف</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="417">417 Hz - تسهيل التغيير</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="528">528 Hz - التحول والمعجزات</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="639">639 Hz - إعادة الاتصال والعلاقات</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="741">741 Hz - إيقاظ الحدس</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="852">852 Hz - العودة إلى النظام الروحي</button>
                     </div>
-                </form>
+                    <button id="stop-freq-btn" class="mt-8 btn-secondary py-2 px-6 rounded-full hidden">إيقاف التردد</button>
+                </div>
             </div>
         </section>
         
+        <!-- Premium Content Section -->
+        <section id="premium-content" class="py-20 bg-white hidden">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 section-title">أهلاً بك في مجتمع الرسالة</h2>
+                <p class="max-w-2xl mx-auto mb-12">هذه مساحتك الحصرية كمشترك. هنا ستجد محتوى خاصاً، جلسات تأمل عميقة، ودروساً متقدمة غير متوفرة للعامة.</p>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-inner max-w-3xl mx-auto">
+                     <h3 class="text-2xl font-bold mb-4">تأمل حصري: "تحرير العوائق"</h3>
+                    <p>هذا التأمل الموجه مصمم لمساعدتك على تحديد وتحرير المعتقدات المقيدة التي تمنعك من تحقيق إمكاناتك الكاملة.</p>
+                    <div class="mt-6">
+                        <audio controls class="w-full">
+                            <source src="https://cdn.pixabay.com/audio/2022/03/10/audio_c39121a95e.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Testimonials Section -->
-        <section id="testimonials" class="py-20 bg-white">
+        <section id="testimonials" class="py-20">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">ماذا يقول عملائي</h2>
                  <div class="max-w-3xl mx-auto mt-12 fade-in-up">
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-inner">
+                    <div class="bg-white p-8 rounded-xl shadow-inner">
                         <p class="text-lg italic mb-6">"لقد غيرت جلساتي مع د. عمر حياتي. كنت أعاني من التعب المزمن ومشاكل في الهضم لسنوات، وبعد اتباع خطته العلاجية، أشعر بأنني شخص جديد تماماً. شكراً لك من القلب."</p>
                         <div class="flex items-center justify-center">
                             <img src="https://i.pravatar.cc/60?u=1" alt="صورة العميل" class="w-16 h-16 rounded-full mr-4 border-2 border-[--accent-color]">
@@ -266,13 +319,13 @@
         </section>
 
         <!-- Blog Section -->
-        <section id="blog" class="py-20">
+        <section id="blog" class="py-20 bg-white">
              <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">من وحي المدونة</h2>
                 <p class="max-w-2xl mx-auto mb-12">مقالات ورؤى لمساعدتك على فهم جسدك بشكل أفضل واتخاذ قرارات صحية مستنيرة.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-right">
                     <!-- Post 1 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up">
+                    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up">
                         <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop" alt="صورة طعام صحي" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-3">هل أمعاؤك هي سبب تقلبات مزاجك؟</h3>
@@ -281,7 +334,7 @@
                         </div>
                     </div>
                      <!-- Post 2 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
                         <img src="https://images.unsplash.com/photo-1599301934984-1d2741913a5f?q=80&w=2070&auto=format&fit=crop" alt="صورة امرأة تتأمل" class="w-full h-56 object-cover">
                         <div class="p-6">
                              <h3 class="text-xl font-bold mb-3">قوة التنفس: كيف تهدئ جهازك العصبي في 5 دقائق</h3>
@@ -290,7 +343,7 @@
                         </div>
                     </div>
                      <!-- Post 3 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.4s;">
                         <img src="https://images.unsplash.com/photo-1476837579993-f1d3948f17c2?q=80&w=2070&auto=format&fit=crop" alt="صورة توابل وأعشاب" class="w-full h-56 object-cover">
                         <div class="p-6">
                            <h3 class="text-xl font-bold mb-3">أفضل 3 مكملات غذائية لمكافحة الالتهابات</h3>
@@ -309,13 +362,12 @@
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-4">هل أنت مستعد لبدء رحلة الشفاء؟</h2>
             <p class="max-w-xl mx-auto mb-8">تواصل معي اليوم عبر واتساب لحجز استشارتك الأولى، أو تابعني على وسائل التواصل الاجتماعي لمحتوى يومي ملهم.</p>
-            <a href="https://wa.me/967000000000?text=أهلاً%20د.%20عمر،%20أرغب%20في%20الاستفسار%20عن%20جلسات%20العلاج%20الشمولي" target="_blank" class="btn-primary text-white text-xl py-3 px-8 rounded-full inline-block mb-12"><i class="fab fa-whatsapp"></i> تواصل معي عبر واتساب</a>
+            <a href="https://wa.me/967771447111?text=أهلاً%20د.%20عمر،%20أرغب%20في%20الاستفسار%20عن%20جلسات%20العلاج%20الشمولي" target="_blank" class="btn-primary text-white text-xl py-3 px-8 rounded-full inline-block mb-12"><i class="fab fa-whatsapp"></i> تواصل معي عبر واتساب</a>
             
             <div class="flex justify-center space-x-6 text-3xl mb-8">
-                <a href="#" class="hover:text-[--accent-color] transition"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-[--accent-color] transition"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="hover:text-[--accent-color] transition"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="hover:text-[--accent-color] transition"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/dr.omr369" target="_blank" class="hover:text-[--accent-color] transition"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/dr.omr369" target="_blank" class="hover:text-[--accent-color] transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.tiktok.com/@dr.omr369" target="_blank" class="hover:text-[--accent-color] transition"><i class="fab fa-tiktok"></i></a>
             </div>
 
             <div class="border-t border-gray-700 pt-6">
@@ -325,11 +377,171 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/967000000000" class="whatsapp-float" target="_blank" aria-label="تواصل معنا عبر واتساب">
+    <a href="https://wa.me/967771447111" class="whatsapp-float" target="_blank" aria-label="تواصل معنا عبر واتساب">
         <i class="fab fa-whatsapp"></i>
     </a>
     
-    <script>
+    <script type="module">
+        // Firebase Config - استبدل هذا بمعلومات مشروعك
+        const firebaseConfig = {
+            apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg", // استخدم المفتاح الذي زودتنا به
+            authDomain: "tibrasoul.firebaseapp.com",
+            projectId: "tibrasoul",
+            storageBucket: "tibrasoul.appspot.com",
+            messagingSenderId: "920755760709",
+            appId: "1:920755760709:web:778cd12e6edbd199827d2c"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        // --- AUTHENTICATION ---
+        const loginBtn = document.getElementById('login-btn');
+        const loginBtnMobile = document.getElementById('login-btn-mobile');
+        const profileNav = document.getElementById('profile-section-nav');
+        const profileLinkMobile = document.getElementById('profile-link-mobile');
+        const premiumContentSection = document.getElementById('premium-content');
+
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in
+                loginBtn.classList.add('hidden');
+                loginBtnMobile.classList.add('hidden');
+                profileNav.classList.remove('hidden');
+                profileNav.classList.add('flex');
+                profileLinkMobile.classList.remove('hidden');
+                document.getElementById('user-avatar').src = user.photoURL;
+                premiumContentSection.classList.remove('hidden');
+            } else {
+                // User is signed out
+                loginBtn.classList.remove('hidden');
+                loginBtnMobile.classList.remove('hidden');
+                profileNav.classList.add('hidden');
+                profileNav.classList.remove('flex');
+                profileLinkMobile.classList.add('hidden');
+                premiumContentSection.classList.add('hidden');
+            }
+        });
+
+        const handleLogin = () => {
+            auth.signInWithPopup(provider).catch(error => console.error("Login Error:", error));
+        }
+        loginBtn.addEventListener('click', handleLogin);
+        loginBtnMobile.addEventListener('click', handleLogin);
+
+
+        // --- FREQUENCY GENERATOR ---
+        const freqButtonsContainer = document.getElementById('frequency-buttons');
+        const stopFreqBtn = document.getElementById('stop-freq-btn');
+        const canvas = document.getElementById('frequency-canvas');
+        const canvasCtx = canvas.getContext('2d');
+        let audioCtx;
+        let oscillator;
+        let gainNode;
+        let analyser;
+        let animationFrameId;
+
+        const initAudio = () => {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        const playFrequency = (freq) => {
+            initAudio();
+            stopFrequency(); // Stop any previous frequency
+
+            oscillator = audioCtx.createOscillator();
+            gainNode = audioCtx.createGain();
+            analyser = audioCtx.createAnalyser();
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            
+            analyser.fftSize = 2048;
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.5); // Fade in
+
+            oscillator.start();
+            stopFreqBtn.classList.remove('hidden');
+            visualize(analyser, dataArray, bufferLength);
+        };
+
+        const stopFrequency = () => {
+            if (oscillator) {
+                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5); // Fade out
+                oscillator.stop(audioCtx.currentTime + 0.5);
+                oscillator = null;
+                cancelAnimationFrame(animationFrameId);
+                clearCanvas();
+                stopFreqBtn.classList.add('hidden');
+                document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+            }
+        };
+
+        const visualize = (analyser, dataArray, bufferLength) => {
+            canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const draw = () => {
+                animationFrameId = requestAnimationFrame(draw);
+                analyser.getByteTimeDomainData(dataArray);
+
+                canvasCtx.fillStyle = '#1a1a1a';
+                canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+                canvasCtx.lineWidth = 2;
+                canvasCtx.strokeStyle = 'rgb(129, 178, 154)';
+                canvasCtx.beginPath();
+
+                const sliceWidth = canvas.width * 1.0 / bufferLength;
+                let x = 0;
+
+                for (let i = 0; i < bufferLength; i++) {
+                    const v = dataArray[i] / 128.0;
+                    const y = v * canvas.height / 2;
+                    if (i === 0) {
+                        canvasCtx.moveTo(x, y);
+                    } else {
+                        canvasCtx.lineTo(x, y);
+                    }
+                    x += sliceWidth;
+                }
+
+                canvasCtx.lineTo(canvas.width, canvas.height / 2);
+                canvasCtx.stroke();
+            };
+            draw();
+        };
+        
+        const clearCanvas = () => {
+             canvasCtx.fillStyle = '#1a1a1a';
+             canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        freqButtonsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('freq-btn')) {
+                 // Deactivate all buttons first
+                document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+                // Activate clicked button
+                e.target.classList.add('active');
+
+                const freq = parseFloat(e.target.dataset.freq);
+                playFrequency(freq);
+            }
+        });
+
+        stopFreqBtn.addEventListener('click', stopFrequency);
+
+        // --- GENERAL UI ---
         // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -355,6 +567,3 @@
     </script>
 </body>
 </html>
-```
-
-الآن، موقعك أصبح يعكس خبرتك وخدماتك بشكل كامل واحترافي. آمل أن يكون هذا التصميم الجديد هو الانطلاقة التي تتمناها لمشرو
