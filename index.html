@@ -22,41 +22,109 @@
 
 
     <style>
-        /* Custom Styles to complement Tailwind */
+        /* --- GLOBAL DESIGN SYSTEM & VARIABLES --- */
         :root {
             --primary-color: #5a6e5a;
+            --primary-dark: #435243;
             --secondary-color: #f4f1eb;
             --accent-color: #c8a07d;
+            --accent-light: #e6d3c1;
+            --text-dark: #333333;
+            --text-light: #f8f9fa;
         }
+        
+        /* --- GENERAL BODY & TYPOGRAPHY STYLES --- */
         body {
             font-family: 'Noto Kufi Arabic', sans-serif;
             background-color: var(--secondary-color);
+            color: var(--text-dark);
             scroll-behavior: smooth;
         }
         .font-brand {
             font-family: 'Great Vibes', cursive;
         }
+
+        /* --- ADVANCED ANIMATIONS & EFFECTS --- */
+        @keyframes subtle-pan {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--accent-light); }
+            50% { box-shadow: 0 0 20px var(--accent-light); }
+            100% { box-shadow: 0 0 5px var(--accent-light); }
+        }
+        @keyframes pulse-loader {
+          0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(90, 110, 90, 0.7); }
+          70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(90, 110, 90, 0); }
+          100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(90, 110, 90, 0); }
+        }
+
+        /* --- HERO SECTION STYLES --- */
+        .hero-bg {
+            animation: subtle-pan 25s ease-in-out infinite;
+        }
         .hero-gradient {
             background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
         }
+
+        /* --- ENHANCED BUTTON STYLES --- */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
         .btn-primary {
             background-color: var(--primary-color);
-            transition: background-color 0.3s, transform 0.3s;
+            color: var(--text-light);
         }
         .btn-primary:hover {
-            background-color: #435243;
-            transform: translateY(-3px);
+            background-color: var(--primary-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         }
         .btn-secondary {
             background-color: transparent;
             color: var(--primary-color);
             border: 2px solid var(--primary-color);
-            transition: background-color 0.3s, color 0.3s;
         }
         .btn-secondary:hover {
             background-color: var(--primary-color);
-            color: white;
+            color: var(--text-light);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(90, 110, 90, 0.2);
         }
+        .btn-glow {
+            animation: glow 3s infinite ease-in-out;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-effect 0.6s linear;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* --- INTERACTIVE DASHBOARD CARD --- */
+        .dashboard-card {
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transform-style: preserve-3d; /* Essential for 3D effect */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        /* No hover transform here, it will be handled by JS */
+
+        /* --- SECTION STYLES --- */
         .section-title::after {
             content: '';
             display: block;
@@ -64,38 +132,64 @@
             height: 3px;
             background-color: var(--accent-color);
             margin: 1rem auto 0;
+            transition: width 0.5s ease;
         }
+        .section-title:hover::after {
+            width: 100px;
+        }
+        
+        /* --- WHATSAPP & MODAL --- */
         .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            left: 40px; /* Adjusted for RTL */
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-            z-index: 100;
-            transition: transform 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: fixed; width: 60px; height: 60px; bottom: 40px; left: 40px;
+            background-color: #25d366; color: #FFF; border-radius: 50px;
+            text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 100; transition: transform 0.3s ease; display: flex; align-items: center; justify-content: center;
         }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
+        .whatsapp-float:hover { transform: scale(1.1) rotate(10deg); }
+        #tool-modal {
+            transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
+            backdrop-filter: blur(0px);
         }
-        /* Animation for elements on scroll */
+        #tool-modal.is-open {
+            opacity: 1;
+            backdrop-filter: blur(8px);
+        }
+
+        /* --- FADE-IN ANIMATION --- */
         .fade-in-up {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .fade-in-up.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* --- CUSTOM AI LOADER --- */
+        .ai-loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .ai-loader-dots {
+            width: 80px;
+            height: 40px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .ai-loader-dots div {
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            animation: pulse-loader 1.4s infinite ease-in-out both;
+        }
+        .ai-loader-dots .dot1 { animation-delay: -0.32s; }
+        .ai-loader-dots .dot2 { animation-delay: -0.16s; }
+
         /* Frequency Generator Styles */
         #frequency-canvas {
             background-color: #1a1a1a;
@@ -108,35 +202,21 @@
             transform: scale(1.05);
             box-shadow: 0 0 15px var(--accent-color);
         }
-        /* Tool Modal Styles */
-        #tool-modal {
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-        .dashboard-card {
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .page-view {
-           transition: opacity 0.5s ease-in-out;
-        }
+
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
     <!-- Header -->
-    <header class="bg-white/80 backdrop-blur-sm shadow-md sticky top-0 z-50">
+    <header class="bg-white/80 backdrop-blur-sm shadow-lg sticky top-0 z-50 transition-shadow duration-300">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#" class="font-brand text-4xl text-gray-800 nav-link" data-view="hero">د. عمر</a>
             <div class="hidden md:flex items-center space-x-reverse space-x-8">
-                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="about">عني</a>
-                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="dashboard">الخدمات التفاعلية</a>
-                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="services">الجلسات</a>
-                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="store">المتجر</a>
-                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="blog">المدونة</a>
+                <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="about">عني</a>
+                <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="dashboard">الخدمات التفاعلية</a>
+                <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="services">الجلسات</a>
+                <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="store">المتجر</a>
+                <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="blog">المدونة</a>
                  <!-- Login/Profile Link -->
                  <div id="auth-section" class="flex items-center">
                      <button id="login-btn" class="font-bold text-[--primary-color] hover:underline">تسجيل الدخول</button>
@@ -146,7 +226,7 @@
                      </div>
                  </div>
             </div>
-            <a href="#contact" class="hidden md:block bg-[--primary-color] text-white py-2 px-6 rounded-full hover:bg-opacity-90 transition">احجز جلستك</a>
+            <a href="#contact" class="hidden md:block btn btn-primary text-white py-2 px-6 rounded-full">احجز جلستك</a>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden">
                 <i class="fas fa-bars text-2xl"></i>
@@ -171,13 +251,13 @@
     <main id="main-content">
         <!-- Hero Section -->
         <section id="view-hero" class="page-view relative h-screen flex items-center justify-center text-white text-center">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542601906-8b6aBA801697?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="absolute inset-0 bg-cover bg-center hero-bg" style="background-image: url('https://images.unsplash.com/photo-1542601906-8b6aBA801697?q=80&w=2070&auto=format&fit=crop');"></div>
             <div class="absolute inset-0 hero-gradient"></div>
             <div class="relative z-10 p-6 fade-in-up">
                 <h1 class="font-brand text-7xl md:text-9xl mb-4">ṬibraSoul</h1>
                 <h2 class="text-2xl md:text-4xl font-bold mb-2">رحلتك نحو الشفاء المتكامل تبدأ هنا</h2>
                 <p class="text-lg md:text-xl max-w-3xl mx-auto">أساعدك على استعادة توازن جسدك وروحك عبر دمج حكمة الطب الشمولي والوظيفي مع أحدث العلوم.</p>
-                <a href="#" class="nav-link mt-8 inline-block bg-white text-[--primary-color] font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-200 transition" data-view="dashboard">اكتشف خدماتنا</a>
+                <a href="#" class="nav-link mt-8 inline-block btn btn-primary bg-white text-[--primary-color] font-bold py-3 px-8 rounded-full text-lg btn-glow" data-view="dashboard">اكتشف خدماتنا</a>
             </div>
         </section>
 
@@ -188,50 +268,50 @@
                 <p class="max-w-3xl mx-auto mb-12">اختر الأداة أو الخدمة التي تناسب احتياجك الحالي وابدأ رحلة الشفاء.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Card 1: AI Tools -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg dashboard-card text-center">
+                    <div class="p-8 rounded-xl shadow-lg dashboard-card text-center">
                         <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-magic-wand-sparkles"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الأدوات الذكية</h3>
                         <p class="text-gray-600 mb-6">استخدم أدوات الذكاء الاصطناعي للتشخيص، إنشاء الخطط العلاجية، الحصول على توصيات، والمزيد.</p>
                         <div class="grid grid-cols-2 gap-3">
-                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="diagnosis">التشخيص</button>
-                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="treatment-plan">خطة علاجية</button>
-                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="supplements">توصية مكملات</button>
-                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="awareness-exercise">تمرين وعي</button>
-                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="consultation">استشارة آلية</button>
-                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="intention">نية اليوم</button>
+                           <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="diagnosis">التشخيص</button>
+                           <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="treatment-plan">خطة علاجية</button>
+                           <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="supplements">توصية مكملات</button>
+                           <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="awareness-exercise">تمرين وعي</button>
+                           <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="consultation">استشارة آلية</button>
+                           <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="intention">نية اليوم</button>
                         </div>
                     </div>
 
                     <!-- Card 2: Consultations -->
-                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="services">
+                    <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="services">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-user-doctor"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الجلسات الاستشارية</h3>
                         <p class="text-gray-600">احجز جلسة استشارية شاملة أو جلسة متابعة معي مباشرة لوضع خريطة طريق علاجية مخصصة.</p>
                     </a>
 
                     <!-- Card 3: Frequency Generator -->
-                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="frequencies">
+                    <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="frequencies">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas-solid fa-wave-square"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الترددات الشفائية</h3>
                         <p class="text-gray-600">استمع إلى ترددات السولفيجيو المصممة لتهدئة الجهاز العصبي وتحفيز الشفاء أثناء التأمل.</p>
                     </a>
 
                     <!-- Card 4: Store -->
-                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="store">
+                    <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="store">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-store"></i></div>
                         <h3 class="text-2xl font-bold mb-3">المتجر العلاجي</h3>
                         <p class="text-gray-600">تصفح مجموعتنا المنتقاة من المكملات الغذائية والمنتجات الطبيعية التي أوصي بها.</p>
                     </a>
 
                     <!-- Card 5: Blog -->
-                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="blog">
+                    <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="blog">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-book-open"></i></div>
                         <h3 class="text-2xl font-bold mb-3">المقالات والمعرفة</h3>
                         <p class="text-gray-600">اقرأ أحدث المقالات والرؤى حول الطب الشمولي، التغذية، والصحة النفسية لتعميق فهمك.</p>
                     </a>
                     
                     <!-- Card 6: Patient File -->
-                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="premium-content">
+                    <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="premium-content">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-folder-user"></i></div>
                         <h3 class="text-2xl font-bold mb-3">ملف المريض</h3>
                         <p class="text-gray-600">ادخل إلى مساحتك الخاصة لمراجعة نتائجك المحفوظة والمحتوى الحصري للأعضاء (يتطلب تسجيل الدخول).</p>
@@ -275,23 +355,23 @@
                 <h2 class="text-4xl font-bold mb-4 section-title">جلسات العلاج الشمولي</h2>
                 <p class="max-w-2xl mx-auto mb-12">جلسات شخصية عن بعد، مصممة خصيصاً لتلبية احتياجاتك الفريدة ومساعدتك على تحقيق أهدافك الصحية.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up">
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2">
                         <div class="text-5xl text-[--accent-color] mb-4"><i class="fas fa-user-md"></i></div>
                         <h3 class="text-2xl font-bold mb-3">استشارة أولية شاملة</h3>
                         <p class="mb-6">جلسة لمدة 90 دقيقة لتقييم حالتك الصحية بالكامل، مناقشة تاريخك المرضي، ووضع خريطة طريق علاجية مخصصة.</p>
-                        <a href="https://wa.me/967771447111?text=أرغب%20في%20حجز%20استشارة%20أولية%20شاملة" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">احجز الآن</a>
+                        <a href="https://wa.me/967771447111?text=أرغب%20في%20حجز%20استشارة%20أولية%20شاملة" target="_blank" class="btn btn-primary text-white py-2 px-6 rounded-full">احجز الآن</a>
                     </div>
-                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.2s;">
                         <div class="text-5xl text-[--accent-color] mb-4"><i class="fas fa-heartbeat"></i></div>
                         <h3 class="text-2xl font-bold mb-3">باقة المتابعة الصحية</h3>
                         <p class="mb-6">3 جلسات متابعة (45 دقيقة لكل جلسة) لمراقبة تقدمك، تعديل الخطة العلاجية، وتقديم الدعم المستمر لك.</p>
-                         <a href="https://wa.me/967771447111?text=أرغب%20في%20الاشتراك%20بباقة%20المتابعة%20الصحية" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">اشترك الآن</a>
+                         <a href="https://wa.me/967771447111?text=أرغب%20في%20الاشتراك%20بباقة%20المتابعة%20الصحية" target="_blank" class="btn btn-primary text-white py-2 px-6 rounded-full">اشترك الآن</a>
                     </div>
-                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.4s;">
                         <div class="text-5xl text-[--accent-color] mb-4"><i class="fas fa-leaf"></i></div>
                         <h3 class="text-2xl font-bold mb-3">استشارة التغذية الوظيفية</h3>
                         <p class="mb-6">جلسة مركزة لمدة 60 دقيقة لوضع خطة تغذية علاجية مخصصة لمعالجة مشاكل صحية معينة مثل مشاكل الهضم أو الطاقة.</p>
-                         <a href="https://wa.me/967771447111?text=أرغب%20في%20حجز%20استشارة%20التغذية%20الوظيفية" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">احجز الآن</a>
+                         <a href="https://wa.me/967771447111?text=أرغب%20في%20حجز%20استشارة%20التغذية%20الوظيفية" target="_blank" class="btn btn-primary text-white py-2 px-6 rounded-full">احجز الآن</a>
                     </div>
                 </div>
             </div>
@@ -310,43 +390,43 @@
                 <p class="max-w-2xl mx-auto mb-12">مجموعة منتقاة بعناية من المنتجات الطبيعية والأدوية الوظيفية التي أثق بها وأوصي بها لدعم رحلتك العلاجية.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                      <!-- Product 1 -->
-                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up">
+                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 fade-in-up hover:-translate-y-2">
                         <img src="https://placehold.co/300x300/5a6e5a/white?text=DMSO" alt="DMSO" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">DMSO للجلد</h3>
                             <p class="text-gray-600 mb-4">مذيب طبيعي قوي لدعم الشفاء وتخفيف الألم الموضعي.</p>
                             <p class="text-2xl font-bold text-[--primary-color] mb-4">$45</p>
-                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20DMSO%20للجلد" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20DMSO%20للجلد" target="_blank" class="btn btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
                     <!-- Product 2 -->
-                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.1s;">
                         <img src="https://placehold.co/300x300/c8a07d/white?text=Vit+D3" alt="مكمل فيتامين د3 + ك2" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">مكمل فيتامين د3 + ك2</h3>
                             <p class="text-gray-600 mb-4">لدعم صحة العظام والمناعة.</p>
                             <p class="text-2xl font-bold text-[--primary-color] mb-4">$35</p>
-                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20مكمل%20فيتامين%20د3%20%2B%20ك2" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20مكمل%20فيتامين%20د3%20%2B%20ك2" target="_blank" class="btn btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
                     <!-- Product 3 -->
-                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.2s;">
                         <img src="https://placehold.co/300x300/5a6e5a/white?text=Mg+Oil" alt="زيت الماغنسيوم النقي" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">زيت الماغنسيوم النقي</h3>
                             <p class="text-gray-600 mb-4">للاسترخاء وتخفيف آلام العضلات.</p>
                              <p class="text-2xl font-bold text-[--primary-color] mb-4">$25</p>
-                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20زيت%20الماغنسيوم%20النقي" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20زيت%20الماغنسيوم%20النقي" target="_blank" class="btn btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
                      <!-- Product 4 -->
-                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.3s;">
                         <img src="https://placehold.co/300x300/c8a07d/white?text=Probiotic" alt="بروبيوتيك عالي الجودة" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">بروبيوتيك عالي الجودة</h3>
                             <p class="text-gray-600 mb-4">لدعم صحة الجهاز الهضمي والميكروبيوم.</p>
                              <p class="text-2xl font-bold text-[--primary-color] mb-4">$50</p>
-                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20بروبيوتيك%20عالي%20الجودة" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20بروبيوتيك%20عالي%20الجودة" target="_blank" class="btn btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
                 </div>
@@ -374,7 +454,7 @@
                         <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="741">741 Hz - إيقاظ الحدس</button>
                         <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="852">852 Hz - العودة إلى النظام الروحي</button>
                     </div>
-                    <button id="stop-freq-btn" class="mt-8 btn-secondary py-2 px-6 rounded-full hidden">إيقاف التردد</button>
+                    <button id="stop-freq-btn" class="mt-8 btn btn-secondary py-2 px-6 rounded-full hidden">إيقاف التردد</button>
                 </div>
             </div>
         </section>
@@ -412,7 +492,7 @@
                 <h2 class="text-4xl font-bold mb-4 section-title">من وحي المدونة</h2>
                 <p class="max-w-2xl mx-auto mb-12">مقالات ورؤى لمساعدتك على فهم جسدك بشكل أفضل واتخاذ قرارات صحية مستنيرة.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-right">
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2">
                         <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop" alt="صورة طعام صحي" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-3">هل أمعاؤك هي سبب تقلبات مزاجك؟</h3>
@@ -420,7 +500,7 @@
                             <a href="#" class="font-bold text-[--primary-color] hover:underline">اقرأ المزيد &larr;</a>
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.2s;">
                         <img src="https://images.unsplash.com/photo-1599301934984-1d2741913a5f?q=80&w=2070&auto=format&fit=crop" alt="صورة امرأة تتأمل" class="w-full h-56 object-cover">
                         <div class="p-6">
                              <h3 class="text-xl font-bold mb-3">قوة التنفس: كيف تهدئ جهازك العصبي في 5 دقائق</h3>
@@ -428,7 +508,7 @@
                             <a href="#" class="font-bold text-[--primary-color] hover:underline">اقرأ المزيد &larr;</a>
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.4s;">
                         <img src="https://images.unsplash.com/photo-1476837579993-f1d3948f17c2?q=80&w=2070&auto=format&fit=crop" alt="صورة توابل وأعشاب" class="w-full h-56 object-cover">
                         <div class="p-6">
                            <h3 class="text-xl font-bold mb-3">أفضل 3 مكملات غذائية لمكافحة الالتهابات</h3>
@@ -439,7 +519,7 @@
                 </div>
             </div>
         </section>
-        
+
     </main>
     
     <!-- Footer -->
@@ -447,7 +527,7 @@
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-4">هل أنت مستعد لبدء رحلة الشفاء؟</h2>
             <p class="max-w-xl mx-auto mb-8">تواصل معي اليوم عبر واتساب لحجز استشارتك الأولى، أو تابعني على وسائل التواصل الاجتماعي لمحتوى يومي ملهم.</p>
-            <a href="https://wa.me/967771447111?text=أهلاً%20د.%20عمر،%20أرغب%20في%20الاستفسار%20عن%20جلسات%20العلاج%20الشمولي" target="_blank" class="btn-primary text-white text-xl py-3 px-8 rounded-full inline-block mb-12"><i class="fab fa-whatsapp"></i> تواصل معي عبر واتساب</a>
+            <a href="https://wa.me/967771447111?text=أهلاً%20د.%20عمر،%20أرغب%20في%20الاستفسار%20عن%20جلسات%20العلاج%20الشمولي" target="_blank" class="btn btn-primary text-white text-xl py-3 px-8 rounded-full inline-block mb-12"><i class="fab fa-whatsapp"></i> تواصل معي عبر واتساب</a>
             
             <div class="flex justify-center space-x-6 text-3xl mb-8">
                 <a href="https://www.instagram.com/dr.omr369" target="_blank" class="hover:text-[--accent-color] transition"><i class="fab fa-instagram"></i></a>
@@ -467,8 +547,8 @@
     </a>
 
     <!-- Tool Modal -->
-    <div id="tool-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[100] p-4 opacity-0 -translate-y-10">
-        <div id="modal-content" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+    <div id="tool-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-4 opacity-0">
+        <div id="modal-content" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
             <!-- Content will be injected by JavaScript -->
         </div>
     </div>
@@ -481,11 +561,10 @@
     <script type="module">
         // --- SDK IMPORTS ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- FIREBASE CONFIG - KEYS RE-ADDED FOR EXTERNAL HOSTING ---
-        // These keys are from your original code.
         const firebaseConfig = {
              apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg",
              authDomain: "tibrasoul.firebaseapp.com",
@@ -512,7 +591,8 @@
             initFrequencyGenerator();
             initGeneralUI();
             initNavigation();
-            showView('hero'); // Show hero view by default
+            initCreativeEffects(); // Initialize new design effects
+            showView('hero');
         });
 
         // --- NAVIGATION MODULE ---
@@ -530,16 +610,13 @@
         }
 
         function showView(viewId) {
-            // Hide all page views
             document.querySelectorAll('.page-view').forEach(view => {
                 view.classList.add('hidden');
             });
-
-            // Show the target view
             const targetView = document.getElementById('view-' + viewId);
             if(targetView) {
                 targetView.classList.remove('hidden');
-                window.scrollTo(0, 0); // Scroll to top of the new view
+                window.scrollTo(0, 0);
             }
         }
 
@@ -547,27 +624,21 @@
         const notificationToast = document.getElementById('notification-toast');
         const notificationMessage = document.getElementById('notification-message');
         let notificationTimeout;
-
         function showNotification(message, type = 'error', duration = 4000) {
             if (notificationTimeout) clearTimeout(notificationTimeout);
-
             notificationMessage.textContent = message;
-            // Reset classes
             notificationToast.className = 'fixed top-20 right-5 py-3 px-6 rounded-lg shadow-xl z-[150] transition-all duration-500 transform';
-            
             if (type === 'success') {
                 notificationToast.classList.add('bg-green-500');
             } else if (type === 'warning') {
                 notificationToast.classList.add('bg-yellow-500');
-            } else { // error
+            } else {
                 notificationToast.classList.add('bg-red-600');
             }
-
             notificationToast.classList.remove('hidden');
             setTimeout(() => {
                 notificationToast.classList.remove('translate-x-full');
             }, 10);
-            
             notificationTimeout = setTimeout(() => {
                 notificationToast.classList.add('translate-x-full');
                  setTimeout(() => notificationToast.classList.add('hidden'), 500);
@@ -575,7 +646,7 @@
         }
 
         // --- AUTHENTICATION MODULE ---
-        async function initAuth() {
+        function initAuth() {
             const loginBtns = [document.getElementById('login-btn'), document.getElementById('login-btn-mobile')];
             const profileNav = document.getElementById('profile-section-nav');
             const profileLinkMobile = document.getElementById('profile-link-mobile');
@@ -583,11 +654,10 @@
             const welcomeMessage = document.getElementById('welcome-message');
 
             onAuthStateChanged(auth, user => {
-                currentUser = user; // Store current user globally
-                const isLoggedIn = !!user && !user.isAnonymous;
+                currentUser = user;
+                const isLoggedIn = !!user;
                 
                 loginBtns.forEach(btn => btn.classList.toggle('hidden', isLoggedIn));
-
                 profileNav.classList.toggle('hidden', !isLoggedIn);
                 profileNav.classList.toggle('flex', isLoggedIn);
                 profileLinkMobile.classList.toggle('hidden', !isLoggedIn);
@@ -595,24 +665,19 @@
                 if (isLoggedIn) {
                     if (userAvatar) userAvatar.src = user.photoURL || 'https://placehold.co/40x40/5a6e5a/white?text=U';
                     if (welcomeMessage) welcomeMessage.textContent = `مرحباً بك في أسرتنا، ${user.displayName || 'صديقي'}`;
-                    loadPatientFileData(); // Load user data when they log in
+                    loadPatientFileData();
                 } else {
-                    // Clear patient data if user logs out or is anonymous
                      document.getElementById('saved-results-container').innerHTML = '<p>الرجاء تسجيل الدخول لعرض سجلاتك المحفوظة.</p>';
                 }
             });
-            
-            // **FIX**: Removed the automatic anonymous sign-in call that was causing the error.
-            // The app will now wait for the user to explicitly sign in with Google.
 
             const handleLogin = () => {
                 signInWithPopup(auth, provider).catch(error => {
                     console.error("Google Login Error:", error);
-                    // This error is often because the domain is not authorized in Firebase.
                     if (error.code === 'auth/operation-not-allowed') {
                          showNotification("فشل تسجيل الدخول. يجب تفعيل Google كطريقة تسجيل دخول في مشروع Firebase.", "error");
                     } else {
-                        showNotification("فشل تسجيل الدخول. يرجى التأكد من أن النطاق مضاف لقائمة المصرح بهم والمحاولة مرة أخرى.", "error");
+                        showNotification("فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.", "error");
                     }
                 });
             }
@@ -621,12 +686,11 @@
         
         // --- PATIENT FILE & FIRESTORE MODULE ---
         async function saveResultToFirestore(toolName, resultData) {
-            if (!currentUser || currentUser.isAnonymous) {
+            if (!currentUser) {
                 showNotification('الرجاء تسجيل الدخول لحفظ نتائجك.', 'warning'); 
                 return;
             }
             const resultId = `${toolName.replace(/\s+/g, '-')}-${new Date().getTime()}`;
-            // Correct Firestore path for private user data
             const resultRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'toolResults', resultId);
             
             try {
@@ -649,26 +713,18 @@
         }
 
         async function loadPatientFileData() {
-            if (!currentUser || currentUser.isAnonymous) return;
+            if (!currentUser) return;
             const container = document.getElementById('saved-results-container');
             container.innerHTML = '<p>جاري تحميل سجلاتك...</p>';
-
             try {
                 const resultsCol = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'toolResults');
-                // Removed orderBy from query to avoid indexing issues. Sorting is now done on the client-side.
                 const q = query(resultsCol, limit(50));
                 const querySnapshot = await getDocs(q);
-
                 if (querySnapshot.empty) {
                     container.innerHTML = '<p>لا توجد نتائج محفوظة بعد. استخدم إحدى الأدوات الذكية واحفظ النتيجة لتظهر هنا.</p>';
                     return;
                 }
-
-                // Sort documents by date on the client side (newest first)
-                const sortedDocs = querySnapshot.docs.sort((a, b) => 
-                    b.data().createdAt.toDate() - a.data().createdAt.toDate()
-                );
-
+                const sortedDocs = querySnapshot.docs.sort((a, b) => b.data().createdAt.toDate() - a.data().createdAt.toDate());
                 let html = '';
                 sortedDocs.forEach(doc => {
                     const result = doc.data();
@@ -677,8 +733,7 @@
                             <h4 class="font-bold text-lg">${result.tool}</h4>
                             <p class="text-sm text-gray-500 mb-2">تاريخ الحفظ: ${result.createdAt.toDate().toLocaleString('ar-EG')}</p>
                             <div class="text-gray-700 whitespace-pre-wrap">${result.data}</div>
-                        </div>
-                    `;
+                        </div>`;
                 });
                 container.innerHTML = html;
             } catch (error) {
@@ -696,13 +751,17 @@
             const showModal = (content) => {
                 modalContent.innerHTML = content;
                 toolModal.classList.remove('hidden');
-                setTimeout(() => toolModal.classList.remove('opacity-0', '-translate-y-10'), 10);
+                setTimeout(() => {
+                    toolModal.classList.add('is-open');
+                    modalContent.classList.add('scale-100');
+                }, 10);
                 const closeButton = modalContent.querySelector('.close-modal-btn');
                 if (closeButton) closeButton.addEventListener('click', hideModal);
             };
 
             const hideModal = () => {
-                toolModal.classList.add('opacity-0', '-translate-y-10');
+                toolModal.classList.remove('is-open');
+                modalContent.classList.remove('scale-100');
                 setTimeout(() => {
                     toolModal.classList.add('hidden');
                     modalContent.innerHTML = '';
@@ -716,13 +775,12 @@
             document.querySelectorAll('.smart-tool-btn').forEach(button => {
                 button.addEventListener('click', () => {
                     const tool = button.dataset.tool;
-                    // All modal HTML structures are the same as before.
                     let modalHTML = '';
                     switch(tool) {
                          case 'diagnosis':
                              modalHTML = `
                                  <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">تشخيص متعدد الأبعاد</h3>
-                                 <p class="text-gray-600 mb-6">يرجى إدخال المعلومات التالية بأكبر قدر ممكن من التفصيل لمساعدة مساعدنا الذكي على تقديم تحليل دقيق.</p>
+                                 <p class="text-gray-600 mb-6">يرجى إدخال المعلومات التالية بأكبر قدر ممكن من التفصيل.</p>
                                  <form id="tool-form">
                                      <div class="mb-4">
                                          <label for="symptoms" class="block text-right font-semibold mb-2">1. الأعراض الجسدية</label>
@@ -737,13 +795,12 @@
                                          <textarea id="lifestyle" rows="3" class="w-full p-2 border rounded-md" placeholder="مثال: نومي متقطع، أعتمد على الوجبات السريعة..."></textarea>
                                      </div>
                                      <div class="text-left">
-                                         <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
-                                         <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">ابدأ التحليل</button>
+                                         <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                         <button type="submit" class="btn btn-primary text-white py-2 px-6 rounded-full mr-2">ابدأ التحليل</button>
                                      </div>
                                  </form>
                                  <div id="tool-results" class="mt-6 hidden"></div>`;
                              break;
-
                          case 'treatment-plan':
                              modalHTML = `
                                  <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">وصفة علاجية شمولية ذكية</h3>
@@ -762,13 +819,12 @@
                                          <textarea id="history" rows="2" class="w-full p-2 border rounded-md" placeholder="مثال: حساسية من البنسلين، مرض السكري"></textarea>
                                      </div>
                                      <div class="text-left">
-                                         <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
-                                         <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">صمم خطتي</button>
+                                         <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                         <button type="submit" class="btn btn-primary text-white py-2 px-6 rounded-full mr-2">صمم خطتي</button>
                                      </div>
                                  </form>
                                  <div id="tool-results" class="mt-6 hidden"></div>`;
                              break;
-                         
                          case 'awareness-exercise':
                               modalHTML = `
                                  <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">تمرين وعي موجّه</h3>
@@ -779,13 +835,12 @@
                                          <textarea id="repressed-feelings" rows="4" class="w-full p-2 border rounded-md" placeholder="مثال: أشعر بغضب مكبوت تجاه موقف معين، أو حزن عميق بسبب تجربة سابقة..."></textarea>
                                      </div>
                                      <div class="text-left">
-                                         <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
-                                         <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">أنشئ التمرين</button>
+                                         <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                         <button type="submit" class="btn btn-primary text-white py-2 px-6 rounded-full mr-2">أنشئ التمرين</button>
                                      </div>
                                  </form>
                                  <div id="tool-results" class="mt-6 hidden"></div>`;
                              break;
-                         
                          case 'consultation':
                               modalHTML = `
                                  <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">استشارة طبية آلية</h3>
@@ -796,13 +851,12 @@
                                          <textarea id="question" rows="4" class="w-full p-2 border rounded-md" placeholder="مثال: ما هي أفضل الطرق لتقوية المناعة بشكل طبيعي؟"></textarea>
                                      </div>
                                      <div class="text-left">
-                                         <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
-                                         <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">احصل على الإجابة</button>
+                                         <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                         <button type="submit" class="btn btn-primary text-white py-2 px-6 rounded-full mr-2">احصل على الإجابة</button>
                                      </div>
                                  </form>
                                  <div id="tool-results" class="mt-6 hidden"></div>`;
                              break;
-                         
                          case 'supplements':
                               modalHTML = `
                                  <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">توصية مكملات غذائية</h3>
@@ -813,13 +867,12 @@
                                          <textarea id="analysis-data" rows="5" class="w-full p-2 border rounded-md" placeholder="مثال: أعاني من تساقط الشعر، إرهاق مستمر، وأظافر هشة. أو: Vitamin D: 15 ng/mL, Ferritin: 20 µg/L"></textarea>
                                      </div>
                                      <div class="text-left">
-                                         <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
-                                         <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">احصل على توصية</button>
+                                         <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                         <button type="submit" class="btn btn-primary text-white py-2 px-6 rounded-full mr-2">احصل على توصية</button>
                                      </div>
                                  </form>
                                  <div id="tool-results" class="mt-6 hidden"></div>`;
                              break;
-                         
                          case 'intention':
                               modalHTML = `
                                  <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">نية اليوم</h3>
@@ -830,16 +883,16 @@
                                          <input type="text" id="current-feeling" class="w-full p-2 border rounded-md" placeholder="مثال: متوتر، سعيد، محبط، ممتن...">
                                      </div>
                                      <div class="text-left">
-                                         <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
-                                         <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">أعطني نيتي</button>
+                                         <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                         <button type="submit" class="btn btn-primary text-white py-2 px-6 rounded-full mr-2">أعطني نيتي</button>
                                      </div>
                                  </form>
                                  <div id="tool-results" class="mt-6 hidden"></div>`;
                              break;
                     }
-                    
                     showModal(modalHTML);
-                    document.getElementById('tool-form').addEventListener('submit', (e) => handleToolSubmit(e, tool));
+                    const form = document.getElementById('tool-form');
+                    if (form) form.addEventListener('submit', (e) => handleToolSubmit(e, tool));
                 });
             });
 
@@ -847,56 +900,45 @@
                 const resultsDiv = document.getElementById(resultsDivId);
                 resultsDiv.classList.remove('hidden');
                 resultsDiv.innerHTML = `
-                    <div class="text-center p-4">
-                        <i class="fas fa-spinner fa-spin text-3xl text-[--primary-color]"></i>
-                        <p class="mt-2">جاري التحليل باستخدام الذكاء الاصطناعي...</p>
+                    <div class="ai-loader">
+                        <div class="ai-loader-dots">
+                            <div class="dot1"></div>
+                            <div class="dot2"></div>
+                            <div class="dot3"></div>
+                        </div>
+                        <p class="mt-2 text-[--primary-color]">جاري التحليل باستخدام الذكاء الاصطناعي...</p>
                     </div>`;
                 
-                // --- GEMINI API KEY - RE-ADDED FOR EXTERNAL HOSTING ---
-                // This key is from your original code.
                 const apiKey = "AIzaSyCOfNaYITDWfe6OibILsDBx6Pe6b3SeNJ4";
-                
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-                
-                const payload = {
-                    contents: [{ role: "user", parts: [{ text: prompt }] }]
-                };
+                const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
 
                 try {
                     const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
                     });
                     if (!response.ok) {
                        const errorData = await response.json();
                        console.error("API Error Details:", errorData);
                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                    
                     const data = await response.json();
-
-                    if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
+                    if (data.candidates && data.candidates[0].content.parts.length > 0) {
                         return data.candidates[0].content.parts[0].text;
                     } else {
-                        console.error("Invalid API response:", data);
                         throw new Error("Invalid API response structure");
                     }
                 } catch (error) {
                     console.error("API Request Error:", error);
-                    resultsDiv.innerHTML = '<p class="text-center text-red-500">عذراً، حدث خطأ أثناء الاتصال بالمساعد الذكي. قد يكون هناك مشكلة في الشبكة. يرجى مراجعة Console المتصفح لمزيد من التفاصيل والمحاولة مرة أخرى.</p>';
+                    resultsDiv.innerHTML = '<p class="text-center text-red-500">عذراً، حدث خطأ أثناء الاتصال بالمساعد الذكي. يرجى المحاولة مرة أخرى.</p>';
                     return null;
                 }
             }
             
             async function handleToolSubmit(e, tool) {
                 e.preventDefault();
-                let prompt = '';
-                let toolTitle = '';
-                let rawInputForSaving = ''; // To store the user's raw text input
-                
-                // Construct prompt based on tool (logic is the same as before)
-                switch(tool) {
+                let prompt = '', toolTitle = '', rawInputForSaving = '';
+                 switch(tool) {
                     case 'diagnosis':
                         toolTitle = "تشخيص متعدد الأبعاد";
                         const symptoms = document.getElementById('symptoms').value;
@@ -908,7 +950,6 @@
                         }
                         prompt = `Act as a holistic medicine expert. Analyze the user's input based on a tripartite model (organic, emotional, energetic) and provide a probable diagnosis or assessment. User Input -> Symptoms: "${symptoms}", Feelings: "${feelings}", Lifestyle: "${lifestyle}". Structure the output as a clean, readable text in Arabic with three main sections: "الاحتمال العضوي", "الجذر الشعوري", and "التوازن الطاقي المختل". Use markdown for formatting.`;
                         break;
-                    
                     case 'treatment-plan':
                         toolTitle = "وصفة علاجية شمولية";
                         const diagnosisInput = document.getElementById('diagnosis-input').value;
@@ -918,7 +959,6 @@
                         if (!diagnosisInput) { showNotification('يرجى إدخال التشخيص أو الأعراض الرئيسية.', 'warning'); return; }
                         prompt = `As a functional medicine doctor, design a comprehensive 21-day holistic treatment plan for a patient. Patient details -> Diagnosis/Symptoms: "${diagnosisInput}", Weight: "${weight}", Medical History: "${history}". The plan should include sections for: "الأدوية أو المكملات المقترحة", "توصيات التغذية", "تمارين تأمل أو وعي", and "نصائح طاقة ونمط حياة". Present the output in a well-structured, easy-to-read format in Arabic using markdown. It should be a general daily plan, not a strict schedule.`;
                         break;
-
                     case 'awareness-exercise':
                         toolTitle = "تمرين وعي موجّه";
                         const repressedFeelings = document.getElementById('repressed-feelings').value;
@@ -926,7 +966,6 @@
                         if (!repressedFeelings) { showNotification('يرجى وصف مشاعرك.', 'warning'); return; }
                         prompt = `You are a therapeutic writing coach. Based on the user's stated repressed feelings or past trauma, create a guided expressive writing exercise. User's input: "${repressedFeelings}". The output should be in Arabic and include: 1. A short, gentle introduction. 2. A series of 3-5 reflective writing prompts. 3. A concluding emotional guidance on how to process what they've written. Format the output with clear headings using markdown.`;
                         break;
-                    
                     case 'consultation':
                         toolTitle = "استشارة طبية آلية";
                         const question = document.getElementById('question').value;
@@ -934,7 +973,6 @@
                         if (!question) { showNotification('يرجى كتابة سؤالك.', 'warning'); return; }
                         prompt = `As a holistic medicine assistant for Dr. Omar, answer the following question in Arabic, incorporating principles of holistic, functional, and spiritual medicine where appropriate. Keep the tone empathetic and informative. Question: "${question}"`;
                         break;
-                    
                     case 'supplements':
                          toolTitle = "توصية مكملات غذائية";
                         const analysisData = document.getElementById('analysis-data').value;
@@ -942,7 +980,6 @@
                         if (!analysisData) { showNotification('يرجى إدخال الأعراض أو نتائج التحليل.', 'warning'); return; }
                         prompt = `As a functional medicine expert, analyze the provided symptoms or blood test results and recommend the most effective supplements. Include recommended timing (e.g., with food, in the morning) and any potential warnings. Input: "${analysisData}". The output should be a clear, bulleted list in Arabic, with each supplement having its own section for "التوقيت" and "تحذيرات".`;
                         break;
-                    
                     case 'intention':
                         toolTitle = "نية اليوم";
                         const currentFeeling = document.getElementById('current-feeling').value;
@@ -950,26 +987,21 @@
                         prompt = `As a spiritual wellness coach, provide a supportive, healing daily intention for the user. If the user provides their current feeling, tailor the intention to it. User's feeling: "${currentFeeling}". The output should be a single, powerful intention sentence in Arabic, followed by a short (1-2 sentences) "تمرين دعم داخلي" to help them embody that intention.`;
                         break;
                 }
-
                 const responseText = await handleApiRequest(prompt, 'tool-results');
                 if (responseText) {
                     const resultsDiv = document.getElementById('tool-results');
                     resultsDiv.innerHTML = `
                         <div id="result-content" class="p-4 bg-gray-50 rounded-md text-right whitespace-pre-wrap border">${responseText}</div>
                         <div class="mt-4 text-left">
-                            ${currentUser && !currentUser.isAnonymous ? '<button id="save-result-btn" class="btn-secondary py-2 px-4 rounded-full text-sm">حفظ النتيجة</button>' : ''}
-                            <button id="download-pdf-btn" class="btn-primary text-white py-2 px-4 rounded-full mr-2 text-sm">تحميل كـ PDF</button>
-                        </div>
-                    `;
-
-                    // Add event listeners for the new buttons
-                    if (currentUser && !currentUser.isAnonymous) {
+                            ${currentUser ? '<button id="save-result-btn" class="btn btn-secondary py-2 px-4 rounded-full text-sm">حفظ النتيجة</button>' : ''}
+                            <button id="download-pdf-btn" class="btn btn-primary text-white py-2 px-4 rounded-full mr-2 text-sm">تحميل كـ PDF</button>
+                        </div>`;
+                    if (currentUser) {
                          document.getElementById('save-result-btn').addEventListener('click', () => {
                              const fullResultText = `--- المدخلات ---\n${rawInputForSaving}\n\n--- نتيجة التحليل ---\n${responseText}`;
                              saveResultToFirestore(toolTitle, fullResultText)
                          });
                     }
-                    
                     document.getElementById('download-pdf-btn').addEventListener('click', () => downloadResultAsPDF('result-content', toolTitle));
                 }
             }
@@ -986,9 +1018,7 @@
             html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
                 const imgData = canvas.toDataURL('image/png');
                 const pdf = new jsPDF({
-                    orientation: 'p',
-                    unit: 'mm',
-                    format: 'a4'
+                    orientation: 'p', unit: 'mm', format: 'a4'
                 });
 
                 pdf.setProperties({
@@ -998,25 +1028,15 @@
 
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 const pdfHeight = pdf.internal.pageSize.getHeight();
-                const canvasWidth = canvas.width;
-                const canvasHeight = canvas.height;
-                const ratio = canvasWidth / canvasHeight;
-                
                 const imgWidth = pdfWidth - 20;
-                const imgHeight = imgWidth / ratio;
+                const imgHeight = imgWidth / (canvas.width / canvas.height);
                 
                 let heightLeft = imgHeight;
-                let position = 10;
+                let position = 15;
 
-                // Add header to PDF (You can customize this)
-                // Note: jsPDF doesn't support Arabic well by default. This will likely show gibberish without a custom font.
-                // For now, we will use a simple title.
-                pdf.setFontSize(20);
-                pdf.text(`Report: Dr. Omar`, pdfWidth / 2, position, { align: 'center' });
-                pdf.setFontSize(14);
-                pdf.text(title.replace(/[^\x00-\x7F]/g, ""), pdfWidth / 2, position + 10, { align: 'center' }); // English-only title for now
-                position += 20;
-
+                pdf.setFont('Amiri', 'normal'); // Set a font that might support Arabic
+                pdf.text(title, pdfWidth / 2, 10, { align: 'center' });
+                
                 pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
                 heightLeft -= (pdfHeight - position - 10);
 
@@ -1045,14 +1065,20 @@
 
             const setupAudio = async () => {
                 if (oscillator) return;
-                await Tone.start();
-                oscillator = new Tone.Oscillator({type: 'sine'}).toDestination();
-                analyser = new Tone.Analyser('waveform', 1024);
-                oscillator.connect(analyser);
+                try {
+                    await Tone.start();
+                    oscillator = new Tone.Oscillator({type: 'sine'}).toDestination();
+                    analyser = new Tone.Analyser('waveform', 1024);
+                    oscillator.connect(analyser);
+                } catch(e) {
+                    console.error("Tone.js setup failed:", e);
+                    showNotification("فشل تهيئة الصوت. قد تحتاج إلى التفاعل مع الصفحة أولاً.", "warning");
+                }
             };
 
             const playFrequency = async (freq) => {
                 await setupAudio();
+                if (!oscillator) return;
                 
                 oscillator.frequency.value = freq;
                 if (Tone.context.state !== 'running') await Tone.start();
@@ -1063,21 +1089,20 @@
             };
 
             const stopFrequency = () => {
-                if (oscillator) {
+                if (oscillator && oscillator.state === "started") {
                     oscillator.stop();
                     // Re-create the oscillator for the next play to avoid errors
-                    oscillator = new Tone.Oscillator({type: 'sine'}).toDestination();
-                    oscillator.connect(analyser);
-
-                    stopFreqBtn.classList.add('hidden');
-                    document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
-                    clearCanvas();
+                    setupAudio(); // Re-initialize audio components
                 }
+                stopFreqBtn.classList.add('hidden');
+                document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                clearCanvas();
             };
             
             function visualize() {
                 animationFrameId = requestAnimationFrame(visualize);
+                if (!analyser) return;
                 const waveformValues = analyser.getValue();
                 canvasCtx.fillStyle = '#1a1a1a';
                 canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
@@ -1107,9 +1132,7 @@
                 const button = e.target.closest('.freq-btn');
                 if (button) {
                     const isActive = button.classList.contains('active');
-                    
                     stopFrequency(); // Stop any currently playing frequency
-
                     if (!isActive) {
                          document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
                          button.classList.add('active');
@@ -1122,9 +1145,9 @@
             clearCanvas();
         }
 
-        // --- GENERAL UI MODULE ---
+        // --- GENERAL UI & CREATIVE EFFECTS ---
         function initGeneralUI() {
-            // Mobile Menu Toggle
+            // Mobile Menu
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
@@ -1141,6 +1164,47 @@
                 });
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        }
+
+        function initCreativeEffects() {
+            // --- 3D Tilt Effect for Dashboard Cards ---
+            const cards = document.querySelectorAll('.dashboard-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = card.offsetWidth / 2;
+                    const centerY = card.offsetHeight / 2;
+                    const rotateX = ((y - centerY) / centerY) * -5; // Max rotation 5 degrees
+                    const rotateY = ((x - centerX) / centerX) * 5;  // Max rotation 5 degrees
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+
+            // --- Button Ripple Effect ---
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const rect = button.getBoundingClientRect();
+                    const ripple = document.createElement('span');
+                    const diameter = Math.max(button.clientWidth, button.clientHeight);
+                    const radius = diameter / 2;
+
+                    ripple.style.width = ripple.style.height = `${diameter}px`;
+                    ripple.style.left = `${e.clientX - rect.left - radius}px`;
+                    ripple.style.top = `${e.clientY - rect.top - radius}px`;
+                    ripple.classList.add('ripple');
+                    
+                    const existingRipple = button.querySelector('.ripple');
+                    if(existingRipple) {
+                        existingRipple.remove();
+                    }
+                    button.appendChild(ripple);
+                });
+            });
         }
     </script>
 </body>
