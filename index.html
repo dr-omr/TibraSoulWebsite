@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="د. عمر - رحلتك نحو الشفاء بالطب الشمولي والوظيفي. جلسات علاجية، منتجات طبيعية، ومحتوى ملهم للصحة النفسية والجسدية.">
-    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر, طِبرا, DMSO, ترددات شفائية">
+    <meta name="description" content="د. عمر - رحلتك نحو الشفاء بالطب الشمولي والوظيفي. أدوات ذكية، جلسات علاجية، ومنتجات طبيعية.">
+    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر, طِبرا, DMSO, ترددات شفائية, تشخيص ذكي, خطة علاجية">
     <title>د. عمر | خبير الطب الشمولي والوظيفي</title>
 
     <!-- Fonts & Icons -->
@@ -12,7 +12,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
     <style>
         /* Custom Styles to complement Tailwind */
@@ -24,6 +31,7 @@
         body {
             font-family: 'Noto Kufi Arabic', sans-serif;
             background-color: var(--secondary-color);
+            scroll-behavior: smooth;
         }
         .font-brand {
             font-family: 'Great Vibes', cursive;
@@ -62,7 +70,7 @@
             width: 60px;
             height: 60px;
             bottom: 40px;
-            left: 40px; /* Changed to left for RTL layout */
+            left: 40px; /* Adjusted for RTL */
             background-color: #25d366;
             color: #FFF;
             border-radius: 50px;
@@ -71,12 +79,12 @@
             box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
             z-index: 100;
             transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .whatsapp-float:hover {
             transform: scale(1.1);
-        }
-         .whatsapp-float i {
-            margin-top: 15px;
         }
         /* Animation for elements on scroll */
         .fade-in-up {
@@ -100,8 +108,8 @@
             transform: scale(1.05);
             box-shadow: 0 0 15px var(--accent-color);
         }
-        /* Notification Modal */
-        #notification-modal {
+        /* Tool Modal Styles */
+        #tool-modal {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
     </style>
@@ -117,14 +125,13 @@
                 <a href="#services" class="hover:text-[--primary-color]">جلساتي</a>
                 <a href="#smart-tools" class="hover:text-[--primary-color]">أدواتي الذكية</a>
                 <a href="#store" class="hover:text-[--primary-color]">المتجر</a>
-                <a href="#frequencies" class="hover:text-[--primary-color]">الترددات</a>
                 <a href="#blog" class="hover:text-[--primary-color]">المدونة</a>
                  <!-- Login/Profile Link -->
                  <div id="auth-section" class="flex items-center">
                      <button id="login-btn" class="font-bold text-[--primary-color] hover:underline">تسجيل الدخول</button>
                      <div id="profile-section-nav" class="hidden items-center">
-                         <a href="#premium-content" class="font-bold text-[--primary-color] hover:underline ml-4">مجتمع الأعضاء</a>
-                         <img id="user-avatar" class="w-8 h-8 rounded-full" alt="صورة المستخدم">
+                         <a href="#premium-content" class="font-bold text-[--primary-color] hover:underline ml-4">ملف المريض</a>
+                         <img id="user-avatar" class="w-8 h-8 rounded-full" alt="صورة المستخدم" onerror="this.src='https://placehold.co/40x40/5a6e5a/white?text=U'">
                      </div>
                  </div>
             </div>
@@ -135,20 +142,19 @@
             </button>
         </nav>
          <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#about" class="block py-2 hover:text-[--primary-color]">عني</a>
-            <a href="#services" class="block py-2 hover:text-[--primary-color]">جلساتي</a>
-            <a href="#smart-tools" class="block py-2 hover:text-[--primary-color]">أدواتي الذكية</a>
-            <a href="#store" class="block py-2 hover:text-[--primary-color]">المتجر</a>
-            <a href="#frequencies" class="block py-2 hover:text-[--primary-color]">الترددات</a>
-            <a href="#blog" class="block py-2 hover:text-[--primary-color]">المدونة</a>
-            <a href="#contact" class="block py-2 hover:text-[--primary-color]">تواصل معي</a>
-            <hr class="my-2">
-            <div id="auth-section-mobile">
-                <button id="login-btn-mobile" class="w-full text-right py-2 font-bold text-[--primary-color]">تسجيل الدخول</button>
-                <a href="#premium-content" id="profile-link-mobile" class="hidden w-full text-right py-2 font-bold text-[--primary-color]">مجتمع الأعضاء</a>
-            </div>
-        </div>
+         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+              <a href="#about" class="block py-2 hover:text-[--primary-color]">عني</a>
+              <a href="#services" class="block py-2 hover:text-[--primary-color]">جلساتي</a>
+              <a href="#smart-tools" class="block py-2 hover:text-[--primary-color]">أدواتي الذكية</a>
+              <a href="#store" class="block py-2 hover:text-[--primary-color]">المتجر</a>
+              <a href="#blog" class="block py-2 hover:text-[--primary-color]">المدونة</a>
+              <a href="#contact" class="block py-2 hover:text-[--primary-color]">تواصل معي</a>
+              <hr class="my-2">
+              <div id="auth-section-mobile">
+                  <button id="login-btn-mobile" class="w-full text-right py-2 font-bold text-[--primary-color]">تسجيل الدخول</button>
+                  <a href="#premium-content" id="profile-link-mobile" class="hidden w-full text-right py-2 font-bold text-[--primary-color]">ملف المريض</a>
+              </div>
+         </div>
     </header>
 
     <main>
@@ -169,7 +175,7 @@
             <div class="container mx-auto px-6">
                 <div class="md:flex items-center gap-12">
                     <div class="md:w-1/3 text-center fade-in-up">
-                        <img src="https://i.ibb.co/6wmT73L/image-c28027.jpg" alt="صورة د. عمر" class="rounded-full shadow-2xl mx-auto w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white">
+                        <img src="https://i.ibb.co/6wmT73L/image-c28027.jpg" alt="صورة د. عمر" class="rounded-full shadow-2xl mx-auto w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white" onerror="this.onerror=null;this.src='https://placehold.co/320x320/eeeeee/333333?text=Dr.+Omar';">
                     </div>
                     <div class="md:w-2/3 mt-8 md:mt-0 fade-in-up">
                         <h2 class="text-4xl font-bold mb-4 section-title text-right">عن د. عمر</h2>
@@ -187,21 +193,18 @@
                 <h2 class="text-4xl font-bold mb-4 section-title">جلسات العلاج الشمولي</h2>
                 <p class="max-w-2xl mx-auto mb-12">جلسات شخصية عن بعد، مصممة خصيصاً لتلبية احتياجاتك الفريدة ومساعدتك على تحقيق أهدافك الصحية.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Service 1 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up">
                         <div class="text-5xl text-[--accent-color] mb-4"><i class="fas fa-user-md"></i></div>
                         <h3 class="text-2xl font-bold mb-3">استشارة أولية شاملة</h3>
                         <p class="mb-6">جلسة لمدة 90 دقيقة لتقييم حالتك الصحية بالكامل، مناقشة تاريخك المرضي، ووضع خريطة طريق علاجية مخصصة.</p>
                         <a href="https://wa.me/967771447111?text=أرغب%20في%20حجز%20استشارة%20أولية%20شاملة" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">احجز الآن</a>
                     </div>
-                    <!-- Service 2 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
                         <div class="text-5xl text-[--accent-color] mb-4"><i class="fas fa-heartbeat"></i></div>
                         <h3 class="text-2xl font-bold mb-3">باقة المتابعة الصحية</h3>
                         <p class="mb-6">3 جلسات متابعة (45 دقيقة لكل جلسة) لمراقبة تقدمك، تعديل الخطة العلاجية، وتقديم الدعم المستمر لك.</p>
                          <a href="https://wa.me/967771447111?text=أرغب%20في%20الاشتراك%20بباقة%20المتابعة%20الصحية" target="_blank" class="btn-primary text-white py-2 px-6 rounded-full">اشترك الآن</a>
                     </div>
-                    <!-- Service 3 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.4s;">
                         <div class="text-5xl text-[--accent-color] mb-4"><i class="fas fa-leaf"></i></div>
                         <h3 class="text-2xl font-bold mb-3">استشارة التغذية الوظيفية</h3>
@@ -216,53 +219,54 @@
         <section id="smart-tools" class="py-20 bg-white">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">أدواتي العلاجية الذكية</h2>
-                <p class="max-w-3xl mx-auto mb-12">مجموعة من الأدوات التفاعلية المتقدمة، المبنية على الذكاء الاصطناعي والطب الشمولي، لمساعدتك على فهم نفسك بشكل أعمق وتسريع رحلة شفائك. (قيد التطوير)</p>
+                <p class="max-w-3xl mx-auto mb-12">مجموعة من الأدوات التفاعلية المتقدمة، المبنية على الذكاء الاصطناعي والطب الشمولي، لمساعدتك على فهم نفسك بشكل أعمق وتسريع رحلة شفائك. (تتطلب بعض الأدوات تسجيل الدخول).</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Tool 1 -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
+                    <!-- Tool 1: Multi-dimensional Diagnosis -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
                         <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-sitemap"></i></div>
-                        <h3 class="text-xl font-bold mb-3">تشخيص متعدد الأبعاد</h3>
+                        <h3 class="text-xl font-bold mb-3">1. تشخيص متعدد الأبعاد</h3>
                         <p class="text-gray-600 mb-4 flex-grow">حلل أعراضك لفهم جذورها العضوية، الشعورية، والطاقية.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="diagnosis">ابدأ التشخيص</button>
                     </div>
-                    <!-- Tool 2 -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
-                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-prescription-bottle-alt"></i></div>
-                        <h3 class="text-xl font-bold mb-3">وصفة علاجية شمولية</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">احصل على خطة علاجية ذكية ومخصصة لمدة 21 يوم.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                    <!-- Tool 2: Holistic Treatment Plan -->
+                     <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-file-prescription"></i></div>
+                        <h3 class="text-xl font-bold mb-3">2. وصفة علاجية شمولية</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">احصل على خطة علاجية أولية لمدة 21 يوم بناءً على حالتك.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="treatment-plan">صمم خطتي</button>
                     </div>
-                    <!-- Tool 3 -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
+                    <!-- Tool 3: Guided Awareness Exercise -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
                         <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-brain"></i></div>
-                        <h3 class="text-xl font-bold mb-3">تمارين وعي موجّه</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">تمارين تأمل وكتابة تستهدف جذورك الشعورية العميقة.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                        <h3 class="text-xl font-bold mb-3">3. تمرين وعي موجّه</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">تمرين كتابة موجه لمساعدتك على تحرير المشاعر المكبوتة.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="awareness-exercise">ابدأ التمرين</button>
                     </div>
-                    <!-- Tool 4 -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
+                    <!-- Tool 4: Automated Consultation -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
                         <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-robot"></i></div>
-                        <h3 class="text-xl font-bold mb-3">استشارة طبية آلية</h3>
+                        <h3 class="text-xl font-bold mb-3">4. استشارة طبية آلية</h3>
                         <p class="text-gray-600 mb-4 flex-grow">اطرح سؤالك واحصل على إجابة فورية من مساعدي الذكي.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="consultation">اسأل الآن</button>
                     </div>
-                    <!-- Tool 5 -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
-                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-search-plus"></i></div>
-                        <h3 class="text-xl font-bold mb-3">اختبار استبصاري</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">اكتشف أنماطك النفسية اللاواعية عبر اختبار تفاعلي.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                    <!-- Tool 6: Supplement Recommendation -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-pills"></i></div>
+                        <h3 class="text-xl font-bold mb-3">5. توصية مكملات غذائية</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">احصل على توصيات للمكملات بناءً على أعراضك.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="supplements">احصل على توصية</button>
                     </div>
-                    <!-- Tool 6 -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
-                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-vial"></i></div>
-                        <h3 class="text-xl font-bold mb-3">توصية مكملات ذكية</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">حلل نتائج تحاليلك واحصل على توصيات مكملات دقيقة.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                    <!-- Tool 10: Daily Intention -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="far fa-lightbulb"></i></div>
+                        <h3 class="text-xl font-bold mb-3">6. نية اليوم</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">احصل على نية إيجابية تدعمك في رحلة شفائك اليوم.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="intention">احصل على نيتي</button>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- Store Section -->
         <section id="store" class="py-20">
@@ -282,7 +286,7 @@
                     </div>
                     <!-- Product 2 -->
                     <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.1s;">
-                        <img src="https://placehold.co/300x300/c8a07d/white?text=Vit+D3" alt="صورة المنتج 1" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/300x300/c8a07d/white?text=Vit+D3" alt="مكمل فيتامين د3 + ك2" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">مكمل فيتامين د3 + ك2</h3>
                             <p class="text-gray-600 mb-4">لدعم صحة العظام والمناعة.</p>
@@ -292,22 +296,22 @@
                     </div>
                     <!-- Product 3 -->
                     <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
-                        <img src="https://placehold.co/300x300/5a6e5a/white?text=Mg+Oil" alt="صورة المنتج 2" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/300x300/5a6e5a/white?text=Mg+Oil" alt="زيت الماغنسيوم النقي" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">زيت الماغنسيوم النقي</h3>
                             <p class="text-gray-600 mb-4">للاسترخاء وتخفيف آلام العضلات.</p>
                              <p class="text-2xl font-bold text-[--primary-color] mb-4">$25</p>
-                           <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20زيت%20الماغنسيوم%20النقي" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20زيت%20الماغنسيوم%20النقي" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
                      <!-- Product 4 -->
                     <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.3s;">
-                        <img src="https://placehold.co/300x300/c8a07d/white?text=Probiotic" alt="صورة المنتج 4" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/300x300/c8a07d/white?text=Probiotic" alt="بروبيوتيك عالي الجودة" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">بروبيوتيك عالي الجودة</h3>
                             <p class="text-gray-600 mb-4">لدعم صحة الجهاز الهضمي والميكروبيوم.</p>
                              <p class="text-2xl font-bold text-[--primary-color] mb-4">$50</p>
-                           <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20بروبيوتيك%20عالي%20الجودة" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
+                            <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20بروبيوتيك%20عالي%20الجودة" target="_blank" class="btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
                 </div>
@@ -334,51 +338,28 @@
             </div>
         </section>
         
-        <!-- Premium Content Section -->
+        <!-- Premium Content / Patient File Section -->
         <section id="premium-content" class="py-20 hidden">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4 section-title">أهلاً بك في مجتمع الرسالة</h2>
-                <p class="max-w-2xl mx-auto mb-12">هذه مساحتك الحصرية كمشترك. هنا ستجد محتوى خاصاً، جلسات تأمل عميقة، ودروساً متقدمة غير متوفرة للعامة.</p>
-                <div class="bg-white p-8 rounded-xl shadow-inner max-w-3xl mx-auto">
-                     <h3 class="text-2xl font-bold mb-4">تأمل حصري: الاستقبال والتوسع</h3>
-                    <p>برمج عقلك الباطن على الاستقبال اللامحدود مع هذا التأمل الصوتي العميق.</p>
-                    <div class="mt-6">
-                        <audio controls class="w-full">
-                            <source src="https://github.com/dr-omr/TibraSoulWebsite/raw/main/assets/audio/guided-meditation.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+                <h2 class="text-4xl font-bold mb-4 section-title">ملف المريض ومحتوى الأعضاء</h2>
+                <p class="max-w-2xl mx-auto mb-12">هذه مساحتك الحصرية. هنا ستجد المحتوى الخاص وجميع نتائجك المحفوظة من أدواتنا الذكية.</p>
+                <div id="patient-file-content" class="bg-white p-8 rounded-xl shadow-inner max-w-4xl mx-auto text-right">
+                    <h3 class="text-2xl font-bold mb-6">سجلاتي المحفوظة</h3>
+                    <div id="saved-results-container" class="space-y-6">
+                        <!-- Saved results will be loaded here -->
+                        <p>لا توجد نتائج محفوظة بعد. استخدم إحدى الأدوات الذكية واحفظ النتيجة لتظهر هنا.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="py-20">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4 section-title">ماذا يقول عملائي</h2>
-                 <div class="max-w-3xl mx-auto mt-12 fade-in-up">
-                    <div class="bg-white p-8 rounded-xl shadow-inner">
-                        <p class="text-lg italic mb-6">"لقد غيرت جلساتي مع د. عمر حياتي. كنت أعاني من التعب المزمن ومشاكل في الهضم لسنوات، وبعد اتباع خطته العلاجية، أشعر بأنني شخص جديد تماماً. شكراً لك من القلب."</p>
-                        <div class="flex items-center justify-center">
-                            <img src="https://i.pravatar.cc/60?u=1" alt="صورة العميل" class="w-16 h-16 rounded-full mr-4 border-2 border-[--accent-color]">
-                            <div>
-                                <p class="font-bold text-lg">سارة. م</p>
-                                <p class="text-gray-600">مديرة تسويق</p>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-            </div>
-        </section>
-
         <!-- Blog Section -->
-        <section id="blog" class="py-20 bg-white">
+        <section id="blog" class="py-20 bg-gray-50">
              <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">من وحي المدونة</h2>
                 <p class="max-w-2xl mx-auto mb-12">مقالات ورؤى لمساعدتك على فهم جسدك بشكل أفضل واتخاذ قرارات صحية مستنيرة.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-right">
-                    <!-- Post 1 -->
-                    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up">
                         <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop" alt="صورة طعام صحي" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-3">هل أمعاؤك هي سبب تقلبات مزاجك؟</h3>
@@ -386,8 +367,7 @@
                             <a href="#" class="font-bold text-[--primary-color] hover:underline">اقرأ المزيد &larr;</a>
                         </div>
                     </div>
-                     <!-- Post 2 -->
-                    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
                         <img src="https://images.unsplash.com/photo-1599301934984-1d2741913a5f?q=80&w=2070&auto=format&fit=crop" alt="صورة امرأة تتأمل" class="w-full h-56 object-cover">
                         <div class="p-6">
                              <h3 class="text-xl font-bold mb-3">قوة التنفس: كيف تهدئ جهازك العصبي في 5 دقائق</h3>
@@ -395,8 +375,7 @@
                             <a href="#" class="font-bold text-[--primary-color] hover:underline">اقرأ المزيد &larr;</a>
                         </div>
                     </div>
-                     <!-- Post 3 -->
-                    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.4s;">
                         <img src="https://images.unsplash.com/photo-1476837579993-f1d3948f17c2?q=80&w=2070&auto=format&fit=crop" alt="صورة توابل وأعشاب" class="w-full h-56 object-cover">
                         <div class="p-6">
                            <h3 class="text-xl font-bold mb-3">أفضل 3 مكملات غذائية لمكافحة الالتهابات</h3>
@@ -434,240 +413,582 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Notification Modal -->
-    <div id="notification-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 opacity-0 -translate-y-10">
-        <div class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm">
-            <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">قريباً!</h3>
-            <p class="text-gray-700 mb-6">هذه الميزة المتقدمة قيد التطوير حالياً وستكون متاحة في المستقبل القريب لإثراء رحلتك العلاجية.</p>
-            <button id="close-notification-btn" class="btn-primary text-white py-2 px-8 rounded-full">حسناً</button>
+    <!-- Tool Modal -->
+    <div id="tool-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[100] p-4 opacity-0 -translate-y-10">
+        <div id="modal-content" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <!-- Content will be injected by JavaScript -->
         </div>
     </div>
     
     <script type="module">
         // --- SDK IMPORTS ---
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, orderBy, query, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- FIREBASE CONFIG ---
-        const firebaseConfig = {
-            apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg", 
+        // --- FIREBASE CONFIG (using variables provided by the environment) ---
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "YOUR_FALLBACK_API_KEY", // Fallback if not provided
             authDomain: "tibrasoul.firebaseapp.com",
             projectId: "tibrasoul",
             storageBucket: "tibrasoul.appspot.com",
             messagingSenderId: "920755760709",
             appId: "1:920755760709:web:778cd12e6edbd199827d2c"
         };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
         // --- FIREBASE INITIALIZATION ---
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
+        
+        // --- GLOBAL STATE ---
+        let currentUser = null;
 
-        // --- DOMContentLoaded WRAPPER ---
+        // --- APP INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
+            initAuth();
+            initSmartTools();
+            initFrequencyGenerator();
+            initGeneralUI();
+        });
 
-            // --- AUTHENTICATION ---
-            const loginBtn = document.getElementById('login-btn');
-            const loginBtnMobile = document.getElementById('login-btn-mobile');
+        // --- AUTHENTICATION MODULE ---
+        function initAuth() {
+            const loginBtns = [document.getElementById('login-btn'), document.getElementById('login-btn-mobile')];
             const profileNav = document.getElementById('profile-section-nav');
             const profileLinkMobile = document.getElementById('profile-link-mobile');
             const premiumContentSection = document.getElementById('premium-content');
+            const userAvatar = document.getElementById('user-avatar');
 
             onAuthStateChanged(auth, user => {
-                if (user) {
-                    // User is signed in
-                    loginBtn.classList.add('hidden');
-                    loginBtnMobile.classList.add('hidden');
-                    profileNav.classList.remove('hidden');
-                    profileNav.classList.add('flex');
-                    profileLinkMobile.classList.remove('hidden');
-                    document.getElementById('user-avatar').src = user.photoURL;
-                    premiumContentSection.classList.remove('hidden');
-                } else {
-                    // User is signed out
-                    loginBtn.classList.remove('hidden');
-                    loginBtnMobile.classList.remove('hidden');
-                    profileNav.classList.add('hidden');
-                    profileNav.classList.remove('flex');
-                    profileLinkMobile.classList.add('hidden');
-                    premiumContentSection.classList.add('hidden');
+                const isLoggedIn = !!user && !user.isAnonymous;
+                currentUser = user; // Store current user globally
+                
+                loginBtns.forEach(btn => btn.classList.toggle('hidden', isLoggedIn));
+
+                profileNav.classList.toggle('hidden', !isLoggedIn);
+                profileNav.classList.toggle('flex', isLoggedIn);
+                profileLinkMobile.classList.toggle('hidden', !isLoggedIn);
+                premiumContentSection.classList.toggle('hidden', !isLoggedIn);
+
+                if (isLoggedIn) {
+                    if (userAvatar) userAvatar.src = user.photoURL || 'https://placehold.co/40x40/5a6e5a/white?text=U';
+                    loadPatientFileData(); // Load user data when they log in
                 }
             });
+            
+            signInAnonymously(auth).catch(error => console.error("Anonymous sign-in failed:", error));
 
-            const handleLogin = () => {
-                signInWithPopup(auth, provider).catch(error => console.error("Login Error:", error));
+            const handleLogin = () => signInWithPopup(auth, provider).catch(error => console.error("Google Login Error:", error));
+            loginBtns.forEach(btn => btn.addEventListener('click', handleLogin));
+        }
+        
+        // --- PATIENT FILE & FIRESTORE MODULE ---
+        async function saveResultToFirestore(toolName, resultData) {
+            if (!currentUser || currentUser.isAnonymous) {
+                alert('الرجاء تسجيل الدخول لحفظ نتائجك.'); // You can replace this with a more elegant modal
+                return;
             }
-            loginBtn.addEventListener('click', handleLogin);
-            loginBtnMobile.addEventListener('click', handleLogin);
+            const resultId = `${toolName.replace(/\s+/g, '-')}-${new Date().getTime()}`;
+            const resultRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'toolResults', resultId);
+            
+            try {
+                await setDoc(resultRef, {
+                    tool: toolName,
+                    data: resultData,
+                    createdAt: new Date()
+                });
+                // Simple notification, can be improved
+                const saveBtn = document.getElementById('save-result-btn');
+                if(saveBtn) {
+                   saveBtn.textContent = 'تم الحفظ بنجاح!';
+                   saveBtn.disabled = true;
+                }
+                loadPatientFileData(); // Refresh the patient file view
+            } catch (error) {
+                console.error("Error saving document: ", error);
+                alert('حدث خطأ أثناء حفظ النتيجة.');
+            }
+        }
 
-            // --- SMART TOOLS NOTIFICATION ---
-            const smartToolButtons = document.querySelectorAll('.smart-tool-btn');
-            const notificationModal = document.getElementById('notification-modal');
-            const closeNotificationBtn = document.getElementById('close-notification-btn');
+        async function loadPatientFileData() {
+            if (!currentUser || currentUser.isAnonymous) return;
+            const container = document.getElementById('saved-results-container');
+            container.innerHTML = '<p>جاري تحميل سجلاتك...</p>';
 
-            const showNotification = () => {
-                notificationModal.classList.remove('hidden');
-                setTimeout(() => {
-                    notificationModal.classList.remove('opacity-0', '-translate-y-10');
-                }, 10);
+            try {
+                const resultsCol = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'toolResults');
+                const q = query(resultsCol, orderBy('createdAt', 'desc'), limit(20)); // Get latest 20 results
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    container.innerHTML = '<p>لا توجد نتائج محفوظة بعد. استخدم إحدى الأدوات الذكية واحفظ النتيجة لتظهر هنا.</p>';
+                    return;
+                }
+
+                let html = '';
+                querySnapshot.forEach(doc => {
+                    const result = doc.data();
+                    html += `
+                        <div class="p-4 bg-gray-50 border-r-4 border-gray-300 rounded-md">
+                            <h4 class="font-bold text-lg">${result.tool}</h4>
+                            <p class="text-sm text-gray-500 mb-2">تاريخ الحفظ: ${result.createdAt.toDate().toLocaleString('ar-EG')}</p>
+                            <div class="text-gray-700 whitespace-pre-wrap">${result.data}</div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (error) {
+                console.error("Error loading patient data:", error);
+                container.innerHTML = '<p class="text-red-500">حدث خطأ أثناء تحميل سجلاتك. يرجى المحاولة مرة أخرى.</p>';
+            }
+        }
+
+
+        // --- SMART TOOLS MODULE ---
+        function initSmartTools() {
+            const toolModal = document.getElementById('tool-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            const showModal = (content) => {
+                modalContent.innerHTML = content;
+                toolModal.classList.remove('hidden');
+                setTimeout(() => toolModal.classList.remove('opacity-0', '-translate-y-10'), 10);
+                const closeButton = modalContent.querySelector('.close-modal-btn');
+                if (closeButton) closeButton.addEventListener('click', hideModal);
             };
 
-            const hideNotification = () => {
-                notificationModal.classList.add('opacity-0', '-translate-y-10');
+            const hideModal = () => {
+                toolModal.classList.add('opacity-0', '-translate-y-10');
                 setTimeout(() => {
-                    notificationModal.classList.add('hidden');
+                    toolModal.classList.add('hidden');
+                    modalContent.innerHTML = '';
                 }, 300);
             };
             
-            smartToolButtons.forEach(button => {
-                button.addEventListener('click', showNotification);
-            });
-            closeNotificationBtn.addEventListener('click', hideNotification);
-            notificationModal.addEventListener('click', (e) => {
-                if(e.target === notificationModal) {
-                    hideNotification();
-                }
+            toolModal.addEventListener('click', e => {
+                if (e.target === toolModal) hideModal();
             });
 
-            // --- FREQUENCY GENERATOR ---
+            document.querySelectorAll('.smart-tool-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const tool = button.dataset.tool;
+                    let modalHTML = '';
+                    switch(tool) {
+                        case 'diagnosis':
+                             modalHTML = `
+                                <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">تشخيص متعدد الأبعاد</h3>
+                                <p class="text-gray-600 mb-6">يرجى إدخال المعلومات التالية بأكبر قدر ممكن من التفصيل لمساعدة مساعدنا الذكي على تقديم تحليل دقيق.</p>
+                                <form id="tool-form">
+                                    <div class="mb-4">
+                                        <label for="symptoms" class="block text-right font-semibold mb-2">1. الأعراض الجسدية</label>
+                                        <textarea id="symptoms" rows="3" class="w-full p-2 border rounded-md" placeholder="مثال: صداع نصفي، ألم في المفاصل..."></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="feelings" class="block text-right font-semibold mb-2">2. المشاعر والأفكار</label>
+                                        <textarea id="feelings" rows="3" class="w-full p-2 border rounded-md" placeholder="مثال: أشعر بقلق دائم، أفكار سلبية..."></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="lifestyle" class="block text-right font-semibold mb-2">3. نمط الحياة</label>
+                                        <textarea id="lifestyle" rows="3" class="w-full p-2 border rounded-md" placeholder="مثال: نومي متقطع، أعتمد على الوجبات السريعة..."></textarea>
+                                    </div>
+                                    <div class="text-left">
+                                        <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                        <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">ابدأ التحليل</button>
+                                    </div>
+                                </form>
+                                <div id="tool-results" class="mt-6 hidden"></div>`;
+                            break;
+
+                        case 'treatment-plan':
+                            modalHTML = `
+                                <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">وصفة علاجية شمولية ذكية</h3>
+                                <p class="text-gray-600 mb-6">أدخل التشخيص أو الأعراض الرئيسية، مع معلومات إضافية، للحصول على خطة علاجية مقترحة.</p>
+                                <form id="tool-form">
+                                    <div class="mb-4">
+                                        <label for="diagnosis-input" class="block text-right font-semibold mb-2">1. التشخيص أو الأعراض الرئيسية</label>
+                                        <textarea id="diagnosis-input" rows="4" class="w-full p-2 border rounded-md" placeholder="مثال: تشخيص بالقولون العصبي، مع قلق وتعب مستمر"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="weight" class="block text-right font-semibold mb-2">2. الوزن (اختياري)</label>
+                                        <input type="text" id="weight" class="w-full p-2 border rounded-md" placeholder="مثال: 70 كجم">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="history" class="block text-right font-semibold mb-2">3. تاريخ مرضي مهم (اختياري)</label>
+                                        <textarea id="history" rows="2" class="w-full p-2 border rounded-md" placeholder="مثال: حساسية من البنسلين، مرض السكري"></textarea>
+                                    </div>
+                                    <div class="text-left">
+                                        <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                        <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">صمم خطتي</button>
+                                    </div>
+                                </form>
+                                <div id="tool-results" class="mt-6 hidden"></div>`;
+                            break;
+                            
+                        case 'awareness-exercise':
+                             modalHTML = `
+                                <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">تمرين وعي موجّه</h3>
+                                <p class="text-gray-600 mb-6">صف المشاعر التي تمر بها أو الصدمة التي تود العمل عليها، وسيقوم المساعد الذكي بإنشاء تمرين كتابة موجه لك.</p>
+                                <form id="tool-form">
+                                    <div class="mb-4">
+                                        <label for="repressed-feelings" class="block text-right font-semibold mb-2">المشاعر المكبوتة أو الصدمة</label>
+                                        <textarea id="repressed-feelings" rows="4" class="w-full p-2 border rounded-md" placeholder="مثال: أشعر بغضب مكبوت تجاه موقف معين، أو حزن عميق بسبب تجربة سابقة..."></textarea>
+                                    </div>
+                                    <div class="text-left">
+                                        <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                        <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">أنشئ التمرين</button>
+                                    </div>
+                                </form>
+                                <div id="tool-results" class="mt-6 hidden"></div>`;
+                            break;
+                            
+                        case 'consultation':
+                             modalHTML = `
+                                <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">استشارة طبية آلية</h3>
+                                <p class="text-gray-600 mb-6">اطرح سؤالك على مساعد د. عمر الذكي للحصول على إجابات تستند إلى مبادئ الطب الشمولي.</p>
+                                <form id="tool-form">
+                                    <div class="mb-4">
+                                        <label for="question" class="block text-right font-semibold mb-2">سؤالك</label>
+                                        <textarea id="question" rows="4" class="w-full p-2 border rounded-md" placeholder="مثال: ما هي أفضل الطرق لتقوية المناعة بشكل طبيعي؟"></textarea>
+                                    </div>
+                                    <div class="text-left">
+                                        <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                        <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">احصل على الإجابة</button>
+                                    </div>
+                                </form>
+                                <div id="tool-results" class="mt-6 hidden"></div>`;
+                            break;
+                            
+                        case 'supplements':
+                             modalHTML = `
+                                <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">توصية مكملات غذائية</h3>
+                                <p class="text-gray-600 mb-6">صف أعراضك أو الصق نتائج تحليل الدم هنا، وسيقوم المساعد الذكي بتحليلها وتقديم توصيات للمكملات الغذائية.</p>
+                                <form id="tool-form">
+                                    <div class="mb-4">
+                                        <label for="analysis-data" class="block text-right font-semibold mb-2">الأعراض أو نتائج التحليل</label>
+                                        <textarea id="analysis-data" rows="5" class="w-full p-2 border rounded-md" placeholder="مثال: أعاني من تساقط الشعر، إرهاق مستمر، وأظافر هشة. أو: Vitamin D: 15 ng/mL, Ferritin: 20 µg/L"></textarea>
+                                    </div>
+                                    <div class="text-left">
+                                        <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                        <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">احصل على توصية</button>
+                                    </div>
+                                </form>
+                                <div id="tool-results" class="mt-6 hidden"></div>`;
+                            break;
+                            
+                        case 'intention':
+                             modalHTML = `
+                                <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">نية اليوم</h3>
+                                <p class="text-gray-600 mb-6">احصل على نية إيجابية ومركزة لدعمك في يومك. يمكنك تحديد شعورك الحالي لجعل النية أكثر ملاءمة.</p>
+                                <form id="tool-form">
+                                    <div class="mb-4">
+                                        <label for="current-feeling" class="block text-right font-semibold mb-2">شعوري الآن (اختياري)</label>
+                                        <input type="text" id="current-feeling" class="w-full p-2 border rounded-md" placeholder="مثال: متوتر، سعيد، محبط، ممتن...">
+                                    </div>
+                                    <div class="text-left">
+                                        <button type="button" class="close-modal-btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                        <button type="submit" class="btn-primary text-white py-2 px-6 rounded-full mr-2">أعطني نيتي</button>
+                                    </div>
+                                </form>
+                                <div id="tool-results" class="mt-6 hidden"></div>`;
+                            break;
+                    }
+                    
+                    showModal(modalHTML);
+                    document.getElementById('tool-form').addEventListener('submit', (e) => handleToolSubmit(e, tool));
+                });
+            });
+
+            async function handleApiRequest(prompt, resultsDivId) {
+                const resultsDiv = document.getElementById(resultsDivId);
+                resultsDiv.classList.remove('hidden');
+                resultsDiv.innerHTML = `
+                    <div class="text-center p-4">
+                        <i class="fas fa-spinner fa-spin text-3xl text-[--primary-color]"></i>
+                        <p class="mt-2">جاري التحليل باستخدام الذكاء الاصطناعي...</p>
+                    </div>`;
+                
+                const apiKey = ""; // This will be handled by the environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }]
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const data = await response.json();
+
+                    if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
+                        return data.candidates[0].content.parts[0].text;
+                    } else {
+                        throw new Error("Invalid API response structure");
+                    }
+                } catch (error) {
+                    console.error("API Request Error:", error);
+                    resultsDiv.innerHTML = '<p class="text-center text-red-500">عذراً، حدث خطأ أثناء الاتصال بالمساعد الذكي. يرجى المحاولة مرة أخرى.</p>';
+                    return null;
+                }
+            }
+            
+            async function handleToolSubmit(e, tool) {
+                e.preventDefault();
+                let prompt = '';
+                let toolTitle = '';
+                let rawInputForSaving = ''; // To store the user's raw text input
+                
+                // Construct prompt based on tool
+                switch(tool) {
+                    case 'diagnosis':
+                        toolTitle = "تشخيص متعدد الأبعاد";
+                        const symptoms = document.getElementById('symptoms').value;
+                        const feelings = document.getElementById('feelings').value;
+                        const lifestyle = document.getElementById('lifestyle').value;
+                        rawInputForSaving = `الأعراض: ${symptoms}\nالمشاعر: ${feelings}\nنمط الحياة: ${lifestyle}`;
+                        if (!symptoms && !feelings && !lifestyle) {
+                            alert('يرجى إدخال بعض المعلومات للتحليل.'); return;
+                        }
+                        prompt = `Act as a holistic medicine expert. Analyze the user's input based on a tripartite model (organic, emotional, energetic) and provide a probable diagnosis or assessment. User Input -> Symptoms: "${symptoms}", Feelings: "${feelings}", Lifestyle: "${lifestyle}". Structure the output as a clean, readable text in Arabic with three main sections: "الاحتمال العضوي", "الجذر الشعوري", and "التوازن الطاقي المختل". Use markdown for formatting.`;
+                        break;
+                    
+                    case 'treatment-plan':
+                        toolTitle = "وصفة علاجية شمولية";
+                        const diagnosisInput = document.getElementById('diagnosis-input').value;
+                        const weight = document.getElementById('weight').value;
+                        const history = document.getElementById('history').value;
+                        rawInputForSaving = `التشخيص: ${diagnosisInput}\nالوزن: ${weight}\nالتاريخ المرضي: ${history}`;
+                        if (!diagnosisInput) { alert('يرجى إدخال التشخيص أو الأعراض الرئيسية.'); return; }
+                        prompt = `As a functional medicine doctor, design a comprehensive 21-day holistic treatment plan for a patient. Patient details -> Diagnosis/Symptoms: "${diagnosisInput}", Weight: "${weight}", Medical History: "${history}". The plan should include sections for: "الأدوية أو المكملات المقترحة", "توصيات التغذية", "تمارين تأمل أو وعي", and "نصائح طاقة ونمط حياة". Present the output in a well-structured, easy-to-read format in Arabic using markdown. It should be a general daily plan, not a strict schedule.`;
+                        break;
+
+                    case 'awareness-exercise':
+                        toolTitle = "تمرين وعي موجّه";
+                        const repressedFeelings = document.getElementById('repressed-feelings').value;
+                        rawInputForSaving = `المشاعر: ${repressedFeelings}`;
+                        if (!repressedFeelings) { alert('يرجى وصف مشاعرك.'); return; }
+                        prompt = `You are a therapeutic writing coach. Based on the user's stated repressed feelings or past trauma, create a guided expressive writing exercise. User's input: "${repressedFeelings}". The output should be in Arabic and include: 1. A short, gentle introduction. 2. A series of 3-5 reflective writing prompts. 3. A concluding emotional guidance on how to process what they've written. Format the output with clear headings using markdown.`;
+                        break;
+                    
+                    case 'consultation':
+                        toolTitle = "استشارة طبية آلية";
+                        const question = document.getElementById('question').value;
+                        rawInputForSaving = `السؤال: ${question}`;
+                        if (!question) { alert('يرجى كتابة سؤالك.'); return; }
+                        prompt = `As a holistic medicine assistant for Dr. Omar, answer the following question in Arabic, incorporating principles of holistic, functional, and spiritual medicine where appropriate. Keep the tone empathetic and informative. Question: "${question}"`;
+                        break;
+                    
+                    case 'supplements':
+                         toolTitle = "توصية مكملات غذائية";
+                        const analysisData = document.getElementById('analysis-data').value;
+                        rawInputForSaving = `البيانات: ${analysisData}`;
+                        if (!analysisData) { alert('يرجى إدخال الأعراض أو نتائج التحليل.'); return; }
+                        prompt = `As a functional medicine expert, analyze the provided symptoms or blood test results and recommend the most effective supplements. Include recommended timing (e.g., with food, in the morning) and any potential warnings. Input: "${analysisData}". The output should be a clear, bulleted list in Arabic, with each supplement having its own section for "التوقيت" and "تحذيرات".`;
+                        break;
+                        
+                    case 'intention':
+                        toolTitle = "نية اليوم";
+                        const currentFeeling = document.getElementById('current-feeling').value;
+                        rawInputForSaving = `الشعور: ${currentFeeling}`;
+                        prompt = `As a spiritual wellness coach, provide a supportive, healing daily intention for the user. If the user provides their current feeling, tailor the intention to it. User's feeling: "${currentFeeling}". The output should be a single, powerful intention sentence in Arabic, followed by a short (1-2 sentences) "تمرين دعم داخلي" to help them embody that intention.`;
+                        break;
+                }
+
+                const responseText = await handleApiRequest(prompt, 'tool-results');
+                if (responseText) {
+                    const resultsDiv = document.getElementById('tool-results');
+                    resultsDiv.innerHTML = `
+                        <div id="result-content" class="p-4 bg-gray-50 rounded-md text-right whitespace-pre-wrap border">${responseText}</div>
+                        <div class="mt-4 text-left">
+                            ${currentUser && !currentUser.isAnonymous ? '<button id="save-result-btn" class="btn-secondary py-2 px-4 rounded-full text-sm">حفظ النتيجة</button>' : ''}
+                            <button id="download-pdf-btn" class="btn-primary text-white py-2 px-4 rounded-full mr-2 text-sm">تحميل كـ PDF</button>
+                        </div>
+                    `;
+
+                    // Add event listeners for the new buttons
+                    if (currentUser && !currentUser.isAnonymous) {
+                         document.getElementById('save-result-btn').addEventListener('click', () => {
+                             // We save the raw user input and the AI's response text together.
+                             const fullResultText = `--- المدخلات ---\n${rawInputForSaving}\n\n--- نتيجة التحليل ---\n${responseText}`;
+                             saveResultToFirestore(toolTitle, fullResultText)
+                         });
+                    }
+                   
+                    document.getElementById('download-pdf-btn').addEventListener('click', () => downloadResultAsPDF('result-content', toolTitle));
+                }
+            }
+        }
+        
+        // --- PDF DOWNLOAD MODULE ---
+        function downloadResultAsPDF(elementId, title) {
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            // Use html2canvas to capture the element as an image
+            html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF({
+                    orientation: 'p',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                // Set metadata
+                pdf.setProperties({
+                    title: `تقرير ${title} - د. عمر`,
+                    author: 'موقع د. عمر - TibraSoul'
+                });
+
+                // You might need to add a font that supports Arabic
+                // For this example, we'll proceed, but text might not render correctly without it.
+                // Example: pdf.addFont('NotoSansArabic-Regular.ttf', 'NotoSansArabic', 'normal');
+                // pdf.setFont('NotoSansArabic');
+
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const canvasWidth = canvas.width;
+                const canvasHeight = canvas.height;
+                const ratio = canvasWidth / canvasHeight;
+                
+                const imgWidth = pdfWidth - 20; // with margin
+                const imgHeight = imgWidth / ratio;
+                
+                let heightLeft = imgHeight;
+                let position = 10; // top margin
+
+                // Header
+                pdf.setFontSize(20);
+                pdf.text(`تقرير من: د. عمر`, pdfWidth / 2, position, { align: 'center' });
+                pdf.setFontSize(14);
+                pdf.text(title, pdfWidth / 2, position + 10, { align: 'center' });
+                position += 20;
+
+                pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                heightLeft -= (pdfHeight - position - 10);
+
+                while (heightLeft > 0) {
+                    position = -heightLeft - 10;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= pdfHeight;
+                }
+
+                pdf.save(`${title.replace(/\s+/g, '-')}_${new Date().toISOString().split('T')[0]}.pdf`);
+            });
+        }
+
+
+        // --- FREQUENCY GENERATOR MODULE ---
+        function initFrequencyGenerator() {
+            // This function remains largely the same as in the original code
             const freqButtonsContainer = document.getElementById('frequency-buttons');
             const stopFreqBtn = document.getElementById('stop-freq-btn');
             const canvas = document.getElementById('frequency-canvas');
+            if (!freqButtonsContainer || !stopFreqBtn || !canvas) return;
+
+            let oscillator, analyser, waveform;
             const canvasCtx = canvas.getContext('2d');
-            let audioCtx;
-            let oscillator;
-            let gainNode;
-            let analyser;
             let animationFrameId;
 
-            const initAudio = () => {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-            }
+            const setupAudio = async () => {
+                if (oscillator) return;
+                await Tone.start();
+                oscillator = new Tone.Oscillator({type: 'sine'}).toDestination();
+                analyser = new Tone.Analyser('waveform', 1024);
+                oscillator.connect(analyser);
+            };
 
-            const playFrequency = (freq) => {
-                initAudio();
-                if (oscillator) {
-                    stopFrequency(); // Stop any previous frequency before starting a new one
-                }
-
-                oscillator = audioCtx.createOscillator();
-                gainNode = audioCtx.createGain();
-                analyser = audioCtx.createAnalyser();
+            const playFrequency = async (freq) => {
+                await setupAudio();
                 
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                oscillator.frequency.value = freq;
+                if (Tone.context.state !== 'running') await Tone.start();
+                if (oscillator.state !== 'started') oscillator.start();
                 
-                analyser.fftSize = 2048;
-                const bufferLength = analyser.frequencyBinCount;
-                const dataArray = new Uint8Array(bufferLength);
-
-                oscillator.connect(gainNode);
-                gainNode.connect(analyser);
-                analyser.connect(audioCtx.destination);
-                
-                gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.1); // Faster fade in
-
-                oscillator.start();
                 stopFreqBtn.classList.remove('hidden');
-                visualize(analyser, dataArray, bufferLength);
+                visualize();
             };
 
             const stopFrequency = () => {
                 if (oscillator) {
-                    gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2); // Faster fade out
-                    oscillator.stop(audioCtx.currentTime + 0.2);
-                    oscillator = null;
-                    cancelAnimationFrame(animationFrameId);
-                    clearCanvas();
+                    oscillator.stop();
                     stopFreqBtn.classList.add('hidden');
                     document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                    clearCanvas();
                 }
-            };
-
-            const visualize = (analyser, dataArray, bufferLength) => {
-                canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-
-                const draw = () => {
-                    animationFrameId = requestAnimationFrame(draw);
-                    analyser.getByteTimeDomainData(dataArray);
-
-                    canvasCtx.fillStyle = '#1a1a1a';
-                    canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-                    canvasCtx.lineWidth = 2;
-                    canvasCtx.strokeStyle = 'rgb(129, 178, 154)';
-                    canvasCtx.beginPath();
-
-                    const sliceWidth = canvas.width * 1.0 / bufferLength;
-                    let x = 0;
-
-                    for (let i = 0; i < bufferLength; i++) {
-                        const v = dataArray[i] / 128.0;
-                        const y = v * canvas.height / 2;
-                        if (i === 0) {
-                            canvasCtx.moveTo(x, y);
-                        } else {
-                            canvasCtx.lineTo(x, y);
-                        }
-                        x += sliceWidth;
-                    }
-
-                    canvasCtx.lineTo(canvas.width, canvas.height / 2);
-                    canvasCtx.stroke();
-                };
-                draw();
             };
             
+            function visualize() {
+                animationFrameId = requestAnimationFrame(visualize);
+                const waveformValues = analyser.getValue();
+                canvasCtx.fillStyle = '#1a1a1a';
+                canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+                canvasCtx.lineWidth = 2;
+                canvasCtx.strokeStyle = 'rgb(129, 178, 154)';
+                canvasCtx.beginPath();
+                const sliceWidth = canvas.width * 1.0 / waveformValues.length;
+                let x = 0;
+                for (let i = 0; i < waveformValues.length; i++) {
+                    const v = (waveformValues[i] + 1) / 2;
+                    const y = v * canvas.height;
+                    if (i === 0) canvasCtx.moveTo(x, y);
+                    else canvasCtx.lineTo(x, y);
+                    x += sliceWidth;
+                }
+                canvasCtx.stroke();
+            }
+
             const clearCanvas = () => {
-                if(canvasCtx) {
+                if (canvasCtx) {
                     canvasCtx.fillStyle = '#1a1a1a';
                     canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
                 }
-            }
+            };
 
-            if(freqButtonsContainer){
-                freqButtonsContainer.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('freq-btn')) {
-                        document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-                        e.target.classList.add('active');
-                        const freq = parseFloat(e.target.dataset.freq);
-                        playFrequency(freq);
+            freqButtonsContainer.addEventListener('click', (e) => {
+                const button = e.target.closest('.freq-btn');
+                if (button) {
+                    const isActive = button.classList.contains('active');
+                    if (isActive) {
+                        stopFrequency();
+                        return;
                     }
-                });
-            }
+                    if (oscillator && oscillator.state === "started") stopFrequency();
+                    document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+                    button.classList.add('active');
+                    playFrequency(parseFloat(button.dataset.freq));
+                }
+            });
 
-            if(stopFreqBtn) {
-                stopFreqBtn.addEventListener('click', stopFrequency);
-            }
+            stopFreqBtn.addEventListener('click', stopFrequency);
+            clearCanvas();
+        }
 
-            // --- GENERAL UI ---
+        // --- GENERAL UI MODULE ---
+        function initGeneralUI() {
             // Mobile Menu Toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            mobileMenu.addEventListener('click', (e) => { if(e.target.tagName === 'A') mobileMenu.classList.add('hidden'); });
 
             // Scroll Animations
-            const animatedElements = document.querySelectorAll('.fade-in-up');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
                 });
-            }, {
-                threshold: 0.1
-            });
-
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
-        });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        }
     </script>
 </body>
 </html>
