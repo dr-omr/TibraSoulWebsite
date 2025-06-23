@@ -100,6 +100,10 @@
             transform: scale(1.05);
             box-shadow: 0 0 15px var(--accent-color);
         }
+        /* Notification Modal */
+        #notification-modal {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -111,6 +115,7 @@
             <div class="hidden md:flex items-center space-x-reverse space-x-8">
                 <a href="#about" class="hover:text-[--primary-color]">عني</a>
                 <a href="#services" class="hover:text-[--primary-color]">جلساتي</a>
+                <a href="#smart-tools" class="hover:text-[--primary-color]">أدواتي الذكية</a>
                 <a href="#store" class="hover:text-[--primary-color]">المتجر</a>
                 <a href="#frequencies" class="hover:text-[--primary-color]">الترددات</a>
                 <a href="#blog" class="hover:text-[--primary-color]">المدونة</a>
@@ -133,6 +138,7 @@
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
             <a href="#about" class="block py-2 hover:text-[--primary-color]">عني</a>
             <a href="#services" class="block py-2 hover:text-[--primary-color]">جلساتي</a>
+            <a href="#smart-tools" class="block py-2 hover:text-[--primary-color]">أدواتي الذكية</a>
             <a href="#store" class="block py-2 hover:text-[--primary-color]">المتجر</a>
             <a href="#frequencies" class="block py-2 hover:text-[--primary-color]">الترددات</a>
             <a href="#blog" class="block py-2 hover:text-[--primary-color]">المدونة</a>
@@ -177,7 +183,7 @@
 
         <!-- Services Section -->
         <section id="services" class="py-20">
-            <div class="container mx-auto px-6 text-center">
+             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">جلسات العلاج الشمولي</h2>
                 <p class="max-w-2xl mx-auto mb-12">جلسات شخصية عن بعد، مصممة خصيصاً لتلبية احتياجاتك الفريدة ومساعدتك على تحقيق أهدافك الصحية.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -206,14 +212,66 @@
             </div>
         </section>
 
+        <!-- Smart Healing Tools Section -->
+        <section id="smart-tools" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 section-title">أدواتي العلاجية الذكية</h2>
+                <p class="max-w-3xl mx-auto mb-12">مجموعة من الأدوات التفاعلية المتقدمة، المبنية على الذكاء الاصطناعي والطب الشمولي، لمساعدتك على فهم نفسك بشكل أعمق وتسريع رحلة شفائك. (قيد التطوير)</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Tool 1 -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-sitemap"></i></div>
+                        <h3 class="text-xl font-bold mb-3">تشخيص متعدد الأبعاد</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">حلل أعراضك لفهم جذورها العضوية، الشعورية، والطاقية.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                    </div>
+                    <!-- Tool 2 -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-prescription-bottle-alt"></i></div>
+                        <h3 class="text-xl font-bold mb-3">وصفة علاجية شمولية</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">احصل على خطة علاجية ذكية ومخصصة لمدة 21 يوم.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                    </div>
+                    <!-- Tool 3 -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-brain"></i></div>
+                        <h3 class="text-xl font-bold mb-3">تمارين وعي موجّه</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">تمارين تأمل وكتابة تستهدف جذورك الشعورية العميقة.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                    </div>
+                    <!-- Tool 4 -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-robot"></i></div>
+                        <h3 class="text-xl font-bold mb-3">استشارة طبية آلية</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">اطرح سؤالك واحصل على إجابة فورية من مساعدي الذكي.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                    </div>
+                    <!-- Tool 5 -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-search-plus"></i></div>
+                        <h3 class="text-xl font-bold mb-3">اختبار استبصاري</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">اكتشف أنماطك النفسية اللاواعية عبر اختبار تفاعلي.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                    </div>
+                    <!-- Tool 6 -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center fade-in-up">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-vial"></i></div>
+                        <h3 class="text-xl font-bold mb-3">توصية مكملات ذكية</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">حلل نتائج تحاليلك واحصل على توصيات مكملات دقيقة.</p>
+                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-4">ابدأ الآن</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Store Section -->
-        <section id="store" class="py-20 bg-white">
+        <section id="store" class="py-20">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">متجر المنتجات الشافية</h2>
                 <p class="max-w-2xl mx-auto mb-12">مجموعة منتقاة بعناية من المنتجات الطبيعية والأدوية الوظيفية التي أثق بها وأوصي بها لدعم رحلتك العلاجية.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                      <!-- Product 1 -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up">
+                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up">
                         <img src="https://placehold.co/300x300/5a6e5a/white?text=DMSO" alt="DMSO" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">DMSO للجلد</h3>
@@ -223,7 +281,7 @@
                         </div>
                     </div>
                     <!-- Product 2 -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.1s;">
                         <img src="https://placehold.co/300x300/c8a07d/white?text=Vit+D3" alt="صورة المنتج 1" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">مكمل فيتامين د3 + ك2</h3>
@@ -233,7 +291,7 @@
                         </div>
                     </div>
                     <!-- Product 3 -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.2s;">
                         <img src="https://placehold.co/300x300/5a6e5a/white?text=Mg+Oil" alt="صورة المنتج 2" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">زيت الماغنسيوم النقي</h3>
@@ -243,7 +301,7 @@
                         </div>
                     </div>
                      <!-- Product 4 -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in-up" style="animation-delay: 0.3s;">
                         <img src="https://placehold.co/300x300/c8a07d/white?text=Probiotic" alt="صورة المنتج 4" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">بروبيوتيك عالي الجودة</h3>
@@ -255,21 +313,21 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- Frequency Generator Section -->
-        <section id="frequencies" class="py-20">
+        <section id="frequencies" class="py-20 bg-white">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">مولد الترددات الشفائية</h2>
                 <p class="max-w-2xl mx-auto mb-12">اختر أحد ترددات السولفيجيو للاستماع إليها أثناء التأمل. استخدم سماعات الرأس لأفضل تأثير.</p>
-                <div class="bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
+                <div class="bg-gray-100 p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
                     <canvas id="frequency-canvas" class="w-full h-32 mb-8"></canvas>
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="frequency-buttons">
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="396">396 Hz - تحرير الذنب والخوف</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="417">417 Hz - تسهيل التغيير</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="528">528 Hz - التحول والمعجزات</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="639">639 Hz - إعادة الاتصال والعلاقات</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="741">741 Hz - إيقاظ الحدس</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition" data-freq="852">852 Hz - العودة إلى النظام الروحي</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="396">396 Hz - تحرير الذنب والخوف</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="417">417 Hz - تسهيل التغيير</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="528">528 Hz - التحول والمعجزات</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="639">639 Hz - إعادة الاتصال والعلاقات</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="741">741 Hz - إيقاظ الحدس</button>
+                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="852">852 Hz - العودة إلى النظام الروحي</button>
                     </div>
                     <button id="stop-freq-btn" class="mt-8 btn-secondary py-2 px-6 rounded-full hidden">إيقاف التردد</button>
                 </div>
@@ -277,16 +335,16 @@
         </section>
         
         <!-- Premium Content Section -->
-        <section id="premium-content" class="py-20 bg-white hidden">
+        <section id="premium-content" class="py-20 hidden">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">أهلاً بك في مجتمع الرسالة</h2>
                 <p class="max-w-2xl mx-auto mb-12">هذه مساحتك الحصرية كمشترك. هنا ستجد محتوى خاصاً، جلسات تأمل عميقة، ودروساً متقدمة غير متوفرة للعامة.</p>
-                <div class="bg-gray-50 p-8 rounded-xl shadow-inner max-w-3xl mx-auto">
+                <div class="bg-white p-8 rounded-xl shadow-inner max-w-3xl mx-auto">
                      <h3 class="text-2xl font-bold mb-4">تأمل حصري: الاستقبال والتوسع</h3>
                     <p>برمج عقلك الباطن على الاستقبال اللامحدود مع هذا التأمل الصوتي العميق.</p>
                     <div class="mt-6">
                         <audio controls class="w-full">
-                            <source src="TibraSoulWebsite/assets/audio/تأمل الاستقبال والتوسع برمج عقلك الباطن على الاستقبال اللامحدود.mp3" type="audio/mpeg">
+                            <source src="https://github.com/dr-omr/TibraSoulWebsite/raw/main/assets/audio/guided-meditation.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
@@ -375,6 +433,15 @@
     <a href="https://wa.me/967771447111" class="whatsapp-float" target="_blank" aria-label="تواصل معنا عبر واتساب">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 opacity-0 -translate-y-10">
+        <div class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm">
+            <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">قريباً!</h3>
+            <p class="text-gray-700 mb-6">هذه الميزة المتقدمة قيد التطوير حالياً وستكون متاحة في المستقبل القريب لإثراء رحلتك العلاجية.</p>
+            <button id="close-notification-btn" class="btn-primary text-white py-2 px-8 rounded-full">حسناً</button>
+        </div>
+    </div>
     
     <script type="module">
         // --- SDK IMPORTS ---
@@ -392,176 +459,214 @@
             appId: "1:920755760709:web:778cd12e6edbd199827d2c"
         };
 
-        // --- FIREBASE INITIALIZATION (MODULAR SYNTAX) ---
+        // --- FIREBASE INITIALIZATION ---
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
-        // --- AUTHENTICATION ---
-        const loginBtn = document.getElementById('login-btn');
-        const loginBtnMobile = document.getElementById('login-btn-mobile');
-        const profileNav = document.getElementById('profile-section-nav');
-        const profileLinkMobile = document.getElementById('profile-link-mobile');
-        const premiumContentSection = document.getElementById('premium-content');
+        // --- DOMContentLoaded WRAPPER ---
+        document.addEventListener('DOMContentLoaded', () => {
 
-        onAuthStateChanged(auth, user => {
-            if (user) {
-                // User is signed in
-                loginBtn.classList.add('hidden');
-                loginBtnMobile.classList.add('hidden');
-                profileNav.classList.remove('hidden');
-                profileNav.classList.add('flex');
-                profileLinkMobile.classList.remove('hidden');
-                document.getElementById('user-avatar').src = user.photoURL;
-                premiumContentSection.classList.remove('hidden');
-            } else {
-                // User is signed out
-                loginBtn.classList.remove('hidden');
-                loginBtnMobile.classList.remove('hidden');
-                profileNav.classList.add('hidden');
-                profileNav.classList.remove('flex');
-                profileLinkMobile.classList.add('hidden');
-                premiumContentSection.classList.add('hidden');
-            }
-        });
+            // --- AUTHENTICATION ---
+            const loginBtn = document.getElementById('login-btn');
+            const loginBtnMobile = document.getElementById('login-btn-mobile');
+            const profileNav = document.getElementById('profile-section-nav');
+            const profileLinkMobile = document.getElementById('profile-link-mobile');
+            const premiumContentSection = document.getElementById('premium-content');
 
-        const handleLogin = () => {
-            signInWithPopup(auth, provider).catch(error => console.error("Login Error:", error));
-        }
-        loginBtn.addEventListener('click', handleLogin);
-        loginBtnMobile.addEventListener('click', handleLogin);
-
-
-        // --- FREQUENCY GENERATOR ---
-        const freqButtonsContainer = document.getElementById('frequency-buttons');
-        const stopFreqBtn = document.getElementById('stop-freq-btn');
-        const canvas = document.getElementById('frequency-canvas');
-        const canvasCtx = canvas.getContext('2d');
-        let audioCtx;
-        let oscillator;
-        let gainNode;
-        let analyser;
-        let animationFrameId;
-
-        const initAudio = () => {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
-
-        const playFrequency = (freq) => {
-            initAudio();
-            if (oscillator) {
-                stopFrequency(); // Stop any previous frequency before starting a new one
-            }
-
-            oscillator = audioCtx.createOscillator();
-            gainNode = audioCtx.createGain();
-            analyser = audioCtx.createAnalyser();
-            
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
-            
-            analyser.fftSize = 2048;
-            const bufferLength = analyser.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-
-            oscillator.connect(gainNode);
-            gainNode.connect(analyser);
-            analyser.connect(audioCtx.destination);
-            
-            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.1); // Faster fade in
-
-            oscillator.start();
-            stopFreqBtn.classList.remove('hidden');
-            visualize(analyser, dataArray, bufferLength);
-        };
-
-        const stopFrequency = () => {
-            if (oscillator) {
-                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2); // Faster fade out
-                oscillator.stop(audioCtx.currentTime + 0.2);
-                oscillator = null;
-                cancelAnimationFrame(animationFrameId);
-                clearCanvas();
-                stopFreqBtn.classList.add('hidden');
-                document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-            }
-        };
-
-        const visualize = (analyser, dataArray, bufferLength) => {
-            canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-
-            const draw = () => {
-                animationFrameId = requestAnimationFrame(draw);
-                analyser.getByteTimeDomainData(dataArray);
-
-                canvasCtx.fillStyle = '#1a1a1a';
-                canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-                canvasCtx.lineWidth = 2;
-                canvasCtx.strokeStyle = 'rgb(129, 178, 154)';
-                canvasCtx.beginPath();
-
-                const sliceWidth = canvas.width * 1.0 / bufferLength;
-                let x = 0;
-
-                for (let i = 0; i < bufferLength; i++) {
-                    const v = dataArray[i] / 128.0;
-                    const y = v * canvas.height / 2;
-                    if (i === 0) {
-                        canvasCtx.moveTo(x, y);
-                    } else {
-                        canvasCtx.lineTo(x, y);
-                    }
-                    x += sliceWidth;
-                }
-
-                canvasCtx.lineTo(canvas.width, canvas.height / 2);
-                canvasCtx.stroke();
-            };
-            draw();
-        };
-        
-        const clearCanvas = () => {
-             canvasCtx.fillStyle = '#1a1a1a';
-             canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        freqButtonsContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('freq-btn')) {
-                 document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                const freq = parseFloat(e.target.dataset.freq);
-                playFrequency(freq);
-            }
-        });
-
-        stopFreqBtn.addEventListener('click', stopFrequency);
-
-        // --- GENERAL UI ---
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Scroll Animations
-        const animatedElements = document.querySelectorAll('.fade-in-up');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
+            onAuthStateChanged(auth, user => {
+                if (user) {
+                    // User is signed in
+                    loginBtn.classList.add('hidden');
+                    loginBtnMobile.classList.add('hidden');
+                    profileNav.classList.remove('hidden');
+                    profileNav.classList.add('flex');
+                    profileLinkMobile.classList.remove('hidden');
+                    document.getElementById('user-avatar').src = user.photoURL;
+                    premiumContentSection.classList.remove('hidden');
+                } else {
+                    // User is signed out
+                    loginBtn.classList.remove('hidden');
+                    loginBtnMobile.classList.remove('hidden');
+                    profileNav.classList.add('hidden');
+                    profileNav.classList.remove('flex');
+                    profileLinkMobile.classList.add('hidden');
+                    premiumContentSection.classList.add('hidden');
                 }
             });
-        }, {
-            threshold: 0.1
-        });
 
-        animatedElements.forEach(el => {
-            observer.observe(el);
+            const handleLogin = () => {
+                signInWithPopup(auth, provider).catch(error => console.error("Login Error:", error));
+            }
+            loginBtn.addEventListener('click', handleLogin);
+            loginBtnMobile.addEventListener('click', handleLogin);
+
+            // --- SMART TOOLS NOTIFICATION ---
+            const smartToolButtons = document.querySelectorAll('.smart-tool-btn');
+            const notificationModal = document.getElementById('notification-modal');
+            const closeNotificationBtn = document.getElementById('close-notification-btn');
+
+            const showNotification = () => {
+                notificationModal.classList.remove('hidden');
+                setTimeout(() => {
+                    notificationModal.classList.remove('opacity-0', '-translate-y-10');
+                }, 10);
+            };
+
+            const hideNotification = () => {
+                notificationModal.classList.add('opacity-0', '-translate-y-10');
+                setTimeout(() => {
+                    notificationModal.classList.add('hidden');
+                }, 300);
+            };
+            
+            smartToolButtons.forEach(button => {
+                button.addEventListener('click', showNotification);
+            });
+            closeNotificationBtn.addEventListener('click', hideNotification);
+            notificationModal.addEventListener('click', (e) => {
+                if(e.target === notificationModal) {
+                    hideNotification();
+                }
+            });
+
+            // --- FREQUENCY GENERATOR ---
+            const freqButtonsContainer = document.getElementById('frequency-buttons');
+            const stopFreqBtn = document.getElementById('stop-freq-btn');
+            const canvas = document.getElementById('frequency-canvas');
+            const canvasCtx = canvas.getContext('2d');
+            let audioCtx;
+            let oscillator;
+            let gainNode;
+            let analyser;
+            let animationFrameId;
+
+            const initAudio = () => {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            }
+
+            const playFrequency = (freq) => {
+                initAudio();
+                if (oscillator) {
+                    stopFrequency(); // Stop any previous frequency before starting a new one
+                }
+
+                oscillator = audioCtx.createOscillator();
+                gainNode = audioCtx.createGain();
+                analyser = audioCtx.createAnalyser();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                
+                analyser.fftSize = 2048;
+                const bufferLength = analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+
+                oscillator.connect(gainNode);
+                gainNode.connect(analyser);
+                analyser.connect(audioCtx.destination);
+                
+                gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.1); // Faster fade in
+
+                oscillator.start();
+                stopFreqBtn.classList.remove('hidden');
+                visualize(analyser, dataArray, bufferLength);
+            };
+
+            const stopFrequency = () => {
+                if (oscillator) {
+                    gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2); // Faster fade out
+                    oscillator.stop(audioCtx.currentTime + 0.2);
+                    oscillator = null;
+                    cancelAnimationFrame(animationFrameId);
+                    clearCanvas();
+                    stopFreqBtn.classList.add('hidden');
+                    document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+                }
+            };
+
+            const visualize = (analyser, dataArray, bufferLength) => {
+                canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const draw = () => {
+                    animationFrameId = requestAnimationFrame(draw);
+                    analyser.getByteTimeDomainData(dataArray);
+
+                    canvasCtx.fillStyle = '#1a1a1a';
+                    canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+                    canvasCtx.lineWidth = 2;
+                    canvasCtx.strokeStyle = 'rgb(129, 178, 154)';
+                    canvasCtx.beginPath();
+
+                    const sliceWidth = canvas.width * 1.0 / bufferLength;
+                    let x = 0;
+
+                    for (let i = 0; i < bufferLength; i++) {
+                        const v = dataArray[i] / 128.0;
+                        const y = v * canvas.height / 2;
+                        if (i === 0) {
+                            canvasCtx.moveTo(x, y);
+                        } else {
+                            canvasCtx.lineTo(x, y);
+                        }
+                        x += sliceWidth;
+                    }
+
+                    canvasCtx.lineTo(canvas.width, canvas.height / 2);
+                    canvasCtx.stroke();
+                };
+                draw();
+            };
+            
+            const clearCanvas = () => {
+                if(canvasCtx) {
+                    canvasCtx.fillStyle = '#1a1a1a';
+                    canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            if(freqButtonsContainer){
+                freqButtonsContainer.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('freq-btn')) {
+                        document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        const freq = parseFloat(e.target.dataset.freq);
+                        playFrequency(freq);
+                    }
+                });
+            }
+
+            if(stopFreqBtn) {
+                stopFreqBtn.addEventListener('click', stopFrequency);
+            }
+
+            // --- GENERAL UI ---
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Scroll Animations
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
         });
     </script>
 </body>
