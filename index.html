@@ -484,13 +484,13 @@
         import { getAuth, onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- SECURE FIREBASE CONFIG ---
-        // Use environment variables for configuration. Fallback to a default for local dev.
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-             apiKey: "YOUR_FALLBACK_API_KEY", // Replace with your actual config for local testing
+        // --- FIREBASE CONFIG - KEYS RE-ADDED FOR EXTERNAL HOSTING ---
+        // These keys are from your original code.
+        const firebaseConfig = {
+             apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg",
              authDomain: "tibrasoul.firebaseapp.com",
              projectId: "tibrasoul",
-             storageBucket: "tibrasoul.appspot.com", // Corrected storage bucket
+             storageBucket: "tibrasoul.appspot.com",
              messagingSenderId: "920755760709",
              appId: "1:920755760709:web:778cd12e6edbd199827d2c"
         };
@@ -564,7 +564,9 @@
             }
 
             notificationToast.classList.remove('hidden');
-            notificationToast.classList.add('translate-x-0');
+            setTimeout(() => {
+                notificationToast.classList.remove('translate-x-full');
+            }, 10);
             
             notificationTimeout = setTimeout(() => {
                 notificationToast.classList.add('translate-x-full');
@@ -600,22 +602,23 @@
                 }
             });
             
-            // Securely sign in the user
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch(error) {
-                console.error("Auth initialization error:", error);
-                showNotification("حدث خطأ في المصادقة، بعض الميزات قد لا تعمل.", "error");
-            }
+            // Anonymous sign-in for users who don't use Google
+             try {
+                 await signInAnonymously(auth);
+             } catch(error) {
+                 console.error("Anonymous sign-in error:", error);
+                 showNotification("حدث خطأ في المصادقة الأولية.", "warning");
+             }
 
             const handleLogin = () => {
                 signInWithPopup(auth, provider).catch(error => {
                     console.error("Google Login Error:", error);
-                    showNotification("فشل تسجيل الدخول. يرجى التأكد من أن النطاق مضاف لقائمة المصرح بهم.", "error");
+                    // This error is often because the domain is not authorized in Firebase.
+                    if (error.code === 'auth/operation-not-allowed') {
+                         showNotification("فشل تسجيل الدخول. يجب تفعيل Google كطريقة تسجيل دخول في مشروع Firebase.", "error");
+                    } else {
+                        showNotification("فشل تسجيل الدخول. يرجى التأكد من أن النطاق مضاف لقائمة المصرح بهم والمحاولة مرة أخرى.", "error");
+                    }
                 });
             }
             loginBtns.forEach(btn => btn.addEventListener('click', handleLogin));
@@ -854,8 +857,9 @@
                         <p class="mt-2">جاري التحليل باستخدام الذكاء الاصطناعي...</p>
                     </div>`;
                 
-                // IMPORTANT: The API key is now empty. The Canvas environment will handle it.
-                const apiKey = ""; 
+                // --- GEMINI API KEY - RE-ADDED FOR EXTERNAL HOSTING ---
+                // This key is from your original code.
+                const apiKey = "AIzaSyCOfNaYITDWfe6OibILsDBx6Pe6b3SeNJ4";
                 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
