@@ -481,7 +481,7 @@
     <script type="module">
         // --- SDK IMPORTS ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- FIREBASE CONFIG - KEYS RE-ADDED FOR EXTERNAL HOSTING ---
@@ -602,13 +602,8 @@
                 }
             });
             
-            // Anonymous sign-in for users who don't use Google
-             try {
-                 await signInAnonymously(auth);
-             } catch(error) {
-                 console.error("Anonymous sign-in error:", error);
-                 showNotification("حدث خطأ في المصادقة الأولية.", "warning");
-             }
+            // **FIX**: Removed the automatic anonymous sign-in call that was causing the error.
+            // The app will now wait for the user to explicitly sign in with Google.
 
             const handleLogin = () => {
                 signInWithPopup(auth, provider).catch(error => {
