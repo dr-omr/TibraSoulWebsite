@@ -203,6 +203,27 @@
             box-shadow: 0 0 15px var(--accent-color);
         }
 
+        /* Single Post Styles */
+        #view-single-post .post-content h2 {
+            font-size: 1.75rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        #view-single-post .post-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        #view-single-post .post-content ul {
+            list-style-type: disc;
+            margin-right: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        #view-single-post .post-content li {
+            margin-bottom: 0.5rem;
+        }
+
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -492,31 +513,53 @@
                 <h2 class="text-4xl font-bold mb-4 section-title">من وحي المدونة</h2>
                 <p class="max-w-2xl mx-auto mb-12">مقالات ورؤى لمساعدتك على فهم جسدك بشكل أفضل واتخاذ قرارات صحية مستنيرة.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-right">
+                    <!-- Article 1 -->
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2">
                         <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop" alt="صورة طعام صحي" class="w-full h-56 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-3">هل أمعاؤك هي سبب تقلبات مزاجك؟</h3>
                             <p class="text-gray-600 mb-4">اكتشف العلاقة المدهشة بين صحة الجهاز الهضمي وصحتك النفسية.</p>
-                            <a href="#" class="font-bold text-[--primary-color] hover:underline">اقرأ المزيد &larr;</a>
+                            <a href="#" class="read-more-btn font-bold text-[--primary-color] hover:underline" data-postid="gut-brain">اقرأ المزيد &larr;</a>
                         </div>
                     </div>
+                    <!-- Article 2 -->
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.2s;">
                         <img src="https://images.unsplash.com/photo-1599301934984-1d2741913a5f?q=80&w=2070&auto=format&fit=crop" alt="صورة امرأة تتأمل" class="w-full h-56 object-cover">
                         <div class="p-6">
                              <h3 class="text-xl font-bold mb-3">قوة التنفس: كيف تهدئ جهازك العصبي في 5 دقائق</h3>
                             <p class="text-gray-600 mb-4">تعلم تقنية تنفس بسيطة وفعالة لخفض التوتر والقلق فوراً.</p>
-                            <a href="#" class="font-bold text-[--primary-color] hover:underline">اقرأ المزيد &larr;</a>
+                            <a href="#" class="read-more-btn font-bold text-[--primary-color] hover:underline" data-postid="breathing">اقرأ المزيد &larr;</a>
                         </div>
                     </div>
+                    <!-- Article 3 -->
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.4s;">
                         <img src="https://images.unsplash.com/photo-1476837579993-f1d3948f17c2?q=80&w=2070&auto=format&fit=crop" alt="صورة توابل وأعشاب" class="w-full h-56 object-cover">
                         <div class="p-6">
                            <h3 class="text-xl font-bold mb-3">أفضل 3 مكملات غذائية لمكافحة الالتهابات</h3>
                             <p class="text-gray-600 mb-4">دليلي لاختيار المكملات الأكثر فعالية لدعم صحتك العامة.</p>
-                            <a href="#" class="font-bold text-[--primary-color] hover:underline">اقرأ المزيد &larr;</a>
+                            <a href="#" class="read-more-btn font-bold text-[--primary-color] hover:underline" data-postid="supplements">اقرأ المزيد &larr;</a>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Single Post View (NEW) -->
+        <section id="view-single-post" class="page-view py-20 bg-white hidden">
+            <div class="container mx-auto px-6 max-w-4xl">
+                 <div class="text-right mb-12">
+                     <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="blog">
+                         <i class="fas fa-arrow-right-long ml-2"></i>
+                         الرجوع إلى المدونة
+                     </button>
+                 </div>
+                 <article>
+                     <h1 id="post-title" class="text-4xl md:text-5xl font-bold mb-4 text-center section-title"></h1>
+                     <img id="post-image" src="" alt="صورة المقال" class="w-full h-96 object-cover rounded-xl shadow-lg my-8">
+                     <div id="post-content" class="prose lg:prose-xl max-w-none text-right">
+                         <!-- Article content will be injected here -->
+                     </div>
+                 </article>
             </div>
         </section>
 
@@ -591,7 +634,8 @@
             initFrequencyGenerator();
             initGeneralUI();
             initNavigation();
-            initCreativeEffects(); // Initialize new design effects
+            initCreativeEffects();
+            initBlog(); // Initialize blog functionality
             showView('hero');
         });
 
@@ -1143,6 +1187,108 @@
 
             stopFreqBtn.addEventListener('click', stopFrequency);
             clearCanvas();
+        }
+
+        // --- BLOG MODULE (NEW) ---
+        function initBlog() {
+            const posts = {
+                'gut-brain': {
+                    title: 'هل أمعاؤك هي سبب تقلبات مزاجك؟ العقل الثاني الذي يسكن أحشاءك',
+                    image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop',
+                    content: `
+                        <h2>مقدمة: أكثر من مجرد هضم</h2>
+                        <p>لطالما نظرنا إلى الجهاز الهضمي على أنه مجرد آلة لمعالجة الطعام، لكن العلم الحديث يكشف عن حقيقة مذهلة: أمعاؤك هي "عقلك الثاني". هناك شبكة معقدة من الأعصاب والناقلات العصبية والميكروبات التي تربط بين ما يحدث في أحشائك وما تشعر به في رأسك. هذا المحور، المعروف بـ "محور الأمعاء-الدماغ" (Gut-Brain Axis)، هو طريق سريع ثنائي الاتجاه، حيث تؤثر مشاعرك على جهازك الهضمي، وحالة جهازك الهضمي تؤثر بشكل مباشر على مزاجك وصحتك النفسية.</p>
+                        
+                        <h2>كيف تتحدث الأمعاء مع الدماغ؟</h2>
+                        <p>يتم هذا التواصل عبر عدة قنوات:</p>
+                        <ul>
+                            <li><strong>العصب الحائر (Vagus Nerve):</strong> هو أطول عصب في الجسم، ويعمل كخط مباشر لنقل الإشارات بين الأمعاء والدماغ.</li>
+                            <li><strong>الناقلات العصبية:</strong> هل تعلم أن حوالي 90% من السيروتونين (هرمون السعادة) يتم إنتاجه في الأمعاء؟ بكتيريا الأمعاء تلعب دوراً حيوياً في إنتاج هذه الكيماويات التي تنظم المزاج.</li>
+                            <li><strong>الجهاز المناعي:</strong> صحة بطانة الأمعاء تؤثر على الالتهابات في الجسم، والالتهاب المزمن يرتبط ارتباطاً وثيقاً بالاكتئاب والقلق.</li>
+                        </ul>
+
+                        <h2>علامات تدل على أن أمعاءك تطلب المساعدة</h2>
+                        <p>إذا كنت تعاني من مشاكل هضمية مزمنة مثل الانتفاخ، الغازات، الإمساك أو الإسهال، بالتزامن مع تقلبات مزاجية، قلق، ضبابية دماغية، أو تعب مستمر، فقد يكون عقلك الثاني هو السبب. تجاهل هذه الإشارات يشبه تجاهل ضوء تحذير في سيارتك.</p>
+
+                        <h2>خطوات عملية لدعم محور الأمعاء-الدماغ</h2>
+                        <p>الخبر السار هو أنه يمكنك تحسين صحتك النفسية عبر العناية بأمعائك:</p>
+                        <ol>
+                            <li><strong>التغذية أولاً:</strong> ركز على الأطعمة الغنية بالألياف (الخضروات، الفواكه، البقوليات) لتغذية البكتيريا النافعة.</li>
+                            <li><strong>البروبيوتيك والبريبيوتيك:</strong> تناول الأطعمة المخمرة مثل الزبادي والكفير، بالإضافة إلى الأطعمة الغنية بالبريبيوتيك مثل الثوم والبصل والموز.</li>
+                            <li><strong>تجنب مسببات الالتهاب:</strong> قلل من السكريات المصنعة، الأطعمة المعالجة، والدهون غير الصحية.</li>
+                            <li><strong>إدارة التوتر:</strong> التوتر هو عدو الأمعاء الأول. مارس التأمل، اليوغا، أو تمارين التنفس العميق لتهدئة جهازك العصبي.</li>
+                        </ol>
+                        <p>تذكر دائماً، الشفاء رحلة تبدأ من الداخل. عندما تعتني بعقلك الثاني، فإنك تضع الأساس لصحة نفسية وجسدية متكاملة.</p>
+                    `
+                },
+                'breathing': {
+                    title: 'قوة التنفس: كيف تهدئ جهازك العصبي في 5 دقائق',
+                    image: 'https://images.unsplash.com/photo-1599301934984-1d2741913a5f?q=80&w=2070&auto=format&fit=crop',
+                    content: `
+                        <h2>مقدمة: الأداة الأقوى التي تملكها</h2>
+                        <p>في خضم حياتنا السريعة المليئة بالتوتر، نمتلك أداة شفاء قوية ومجانية ومتاحة لنا في كل لحظة: أنفاسنا. التنفس هو العملية الجسدية الوحيدة التي يمكننا التحكم بها بشكل واعٍ، وهذا التحكم يمنحنا مفتاحاً مباشراً لتهدئة جهازنا العصبي والخروج من حالة "الكر أو الفر" (Fight or Flight) والدخول في حالة "الراحة والهضم" (Rest and Digest).</p>
+                        
+                        <h2>علم التنفس والهدوء</h2>
+                        <p>عندما نكون متوترين، يصبح تنفسنا سطحياً وسريعاً. هذا يرسل إشارة إلى الدماغ بأن هناك خطراً، مما يزيد من إفراز هرمونات التوتر مثل الكورتيزول. على العكس، عندما نبطئ ونعمّق أنفاسنا، فإننا نفعّل العصب الحائر ونرسل إشارة للدماغ بأننا في أمان. هذا يقلل من دقات القلب، يخفض ضغط الدم، ويساعد على استرخاء العضلات.</p>
+                        
+                        <h2>تمرين التنفس الصندوقي (Box Breathing): 5 دقائق للسكينة</h2>
+                        <p>هذا التمرين يستخدمه نخبة الجنود والرياضيين للحفاظ على هدوئهم تحت الضغط. وهو بسيط وفعال للغاية. ابحث عن مكان هادئ واجلس بشكل مريح.</p>
+                        <ol>
+                            <li><strong>شهيق (4 ثوان):</strong> خذ شهيقاً عميقاً وبطيئاً من أنفك، وعدّ في عقلك حتى الرقم 4. اشعر بالهواء يملأ رئتيك وبطنك يرتفع.</li>
+                            <li><strong>احبس (4 ثوان):</strong> احبس أنفاسك بلطف، وعدّ حتى الرقم 4. حاول أن تظل مسترخياً بدون شد عضلاتك.</li>
+                            <li><strong>زفير (4 ثوان):</strong> أخرج الهواء ببطء من فمك، وعدّ حتى الرقم 4. تخيل أن كل التوتر يغادر جسدك مع الزفير.</li>
+                            <li><strong>احبس (4 ثوان):</strong> احبس أنفاسك مرة أخرى وهي فارغة، وعدّ حتى الرقم 4.</li>
+                        </ol>
+                        <p>كرر هذه الدورة لمدة 5 دقائق. ستلاحظ فرقاً كبيراً في حالتك الذهنية والجسدية. اجعل هذا التمرين جزءاً من روتينك اليومي، أو استخدمه في أي لحظة تشعر فيها بالتوتر لتستعيد هدوءك وسيطرتك فوراً.</p>
+                    `
+                },
+                'supplements': {
+                    title: 'أفضل 3 مكملات غذائية لمكافحة الالتهابات',
+                    image: 'https://images.unsplash.com/photo-1476837579993-f1d3948f17c2?q=80&w=2070&auto=format&fit=crop',
+                    content: `
+                        <h2>مقدمة: الالتهاب، الصديق والعدو</h2>
+                        <p>الالتهاب هو استجابة طبيعية من جهاز المناعة لحماية الجسم من الإصابات والعدوى. لكن عندما يصبح هذا الالتهاب مزمناً ومنخفض الدرجة، يتحول إلى عدو صامت يكمن وراء العديد من الأمراض المزمنة، من أمراض القلب والسكري إلى أمراض المناعة الذاتية وحتى الاكتئاب. النظام الغذائي يلعب دوراً محورياً، ولكن بعض المكملات الغذائية يمكن أن تكون أدوات قوية في ترسانتك لمكافحة هذا العدو.</p>
+                        
+                        <h2>1. الكركمين (Curcumin)</h2>
+                        <p>هو المركب النشط في الكركم، ويعتبر واحداً من أقوى مضادات الالتهاب الطبيعية. يعمل الكركمين على مستوى جزيئي عن طريق تثبيط (NF-kB)، وهو جزيء رئيسي يشعل جينات الالتهاب في خلايانا.</p>
+                        <ul>
+                            <li><strong>نصيحة الطبيب:</strong> ابحث عن مكمل يحتوي على الكركمين مع الفلفل الأسود (Piperine)، حيث أن الفلفل الأسود يزيد من امتصاص الكركمين بنسبة تصل إلى 2000%.</li>
+                        </ul>
+
+                        <h2>2. أوميغا-3 (Omega-3 Fatty Acids)</h2>
+                        <p>هذه الدهون الصحية، الموجودة بكثرة في الأسماك الدهنية مثل السلمون والسردين، ضرورية لموازنة استجابة الجسم الالتهابية. معظم الأنظمة الغذائية الحديثة غنية بالأوميغا-6 (الموجود في الزيوت النباتية المصنعة) وفقيرة بالأوميغا-3، مما يخلق حالة التهابية. المكملات تساعد على استعادة هذا التوازن الحاسم.</p>
+                        <ul>
+                            <li><strong>نصيحة الطبيب:</strong> اختر مكملاً عالي الجودة من زيت السمك، وتأكد من أنه يحتوي على نسب جيدة من EPA و DHA، وهما النوعان الأكثر فعالية من الأوميغا-3.</li>
+                        </ul>
+                        
+                        <h2>3. المغنيسيوم (Magnesium)</h2>
+                        <p>هذا المعدن الحيوي يشارك في أكثر من 300 تفاعل كيميائي في الجسم، ونقصه يرتبط ارتباطاً مباشراً بزيادة علامات الالتهاب مثل بروتين سي التفاعلي (CRP). يساعد المغنيسيوم على تنظيم استجابة الجسم للتوتر، والذي يعد محركاً رئيسياً للالتهاب المزمن.</p>
+                        <ul>
+                            <li><strong>نصيحة الطبيب:</strong> اختر أشكال المغنيسيوم عالية الامتصاص مثل (Magnesium Glycinate) أو (Magnesium Malate)، خاصة إذا كنت تعاني من مشاكل هضمية.</li>
+                        </ul>
+                        <p><strong>ملاحظة هامة:</strong> قبل البدء بأي مكمل غذائي جديد، من الضروري استشارة طبيبك أو ممارس صحي مؤهل للتأكد من أنه مناسب لحالتك الصحية ولا يتعارض مع أي أدوية أخرى تتناولها.</p>
+                    `
+                }
+            };
+
+            const postTitleEl = document.getElementById('post-title');
+            const postImageEl = document.getElementById('post-image');
+            const postContentEl = document.getElementById('post-content');
+
+            document.querySelectorAll('.read-more-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const postId = button.dataset.postid;
+                    const post = posts[postId];
+
+                    if (post) {
+                        postTitleEl.textContent = post.title;
+                        postImageEl.src = post.image;
+                        postContentEl.innerHTML = post.content;
+                        showView('single-post');
+                    }
+                });
+            });
         }
 
         // --- GENERAL UI & CREATIVE EFFECTS ---
