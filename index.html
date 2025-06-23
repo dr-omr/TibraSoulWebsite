@@ -112,6 +112,14 @@
         #tool-modal {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
+        .dashboard-card {
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -122,8 +130,8 @@
             <a href="#" class="font-brand text-4xl text-gray-800">د. عمر</a>
             <div class="hidden md:flex items-center space-x-reverse space-x-8">
                 <a href="#about" class="hover:text-[--primary-color]">عني</a>
-                <a href="#services" class="hover:text-[--primary-color]">جلساتي</a>
-                <a href="#smart-tools" class="hover:text-[--primary-color]">أدواتي الذكية</a>
+                <a href="#dashboard" class="hover:text-[--primary-color]">الخدمات التفاعلية</a>
+                <a href="#services" class="hover:text-[--primary-color]">الجلسات</a>
                 <a href="#store" class="hover:text-[--primary-color]">المتجر</a>
                 <a href="#blog" class="hover:text-[--primary-color]">المدونة</a>
                  <!-- Login/Profile Link -->
@@ -144,8 +152,8 @@
          <!-- Mobile Menu -->
          <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
               <a href="#about" class="block py-2 hover:text-[--primary-color]">عني</a>
-              <a href="#services" class="block py-2 hover:text-[--primary-color]">جلساتي</a>
-              <a href="#smart-tools" class="block py-2 hover:text-[--primary-color]">أدواتي الذكية</a>
+              <a href="#dashboard" class="block py-2 hover:text-[--primary-color]">الخدمات التفاعلية</a>
+              <a href="#services" class="block py-2 hover:text-[--primary-color]">الجلسات</a>
               <a href="#store" class="block py-2 hover:text-[--primary-color]">المتجر</a>
               <a href="#blog" class="block py-2 hover:text-[--primary-color]">المدونة</a>
               <a href="#contact" class="block py-2 hover:text-[--primary-color]">تواصل معي</a>
@@ -166,7 +174,66 @@
                 <h1 class="font-brand text-7xl md:text-9xl mb-4">ṬibraSoul</h1>
                 <h2 class="text-2xl md:text-4xl font-bold mb-2">رحلتك نحو الشفاء المتكامل تبدأ هنا</h2>
                 <p class="text-lg md:text-xl max-w-3xl mx-auto">أساعدك على استعادة توازن جسدك وروحك عبر دمج حكمة الطب الشمولي والوظيفي مع أحدث العلوم.</p>
-                <a href="#services" class="mt-8 inline-block bg-white text-[--primary-color] font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-200 transition">اكتشف كيف أساعدك</a>
+                <a href="#dashboard" class="mt-8 inline-block bg-white text-[--primary-color] font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-200 transition">اكتشف خدماتنا</a>
+            </div>
+        </section>
+
+        <!-- Interactive Dashboard Section -->
+        <section id="dashboard" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 section-title">لوحة التحكم التفاعلية</h2>
+                <p class="max-w-3xl mx-auto mb-12">اختر الأداة أو الخدمة التي تناسب احتياجك الحالي وابدأ رحلة الشفاء.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1: AI Tools -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg dashboard-card text-center">
+                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-magic-wand-sparkles"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">الأدوات الذكية</h3>
+                        <p class="text-gray-600 mb-6">استخدم أدوات الذكاء الاصطناعي للتشخيص، إنشاء الخطط العلاجية، الحصول على توصيات، والمزيد.</p>
+                        <div class="grid grid-cols-2 gap-3">
+                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="diagnosis">التشخيص</button>
+                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="treatment-plan">خطة علاجية</button>
+                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="supplements">توصية مكملات</button>
+                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="awareness-exercise">تمرين وعي</button>
+                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="consultation">استشارة آلية</button>
+                           <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full" data-tool="intention">نية اليوم</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Consultations -->
+                    <a href="#services" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                        <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-user-doctor"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">الجلسات الاستشارية</h3>
+                        <p class="text-gray-600">احجز جلسة استشارية شاملة أو جلسة متابعة معي مباشرة لوضع خريطة طريق علاجية مخصصة.</p>
+                    </a>
+
+                    <!-- Card 3: Frequency Generator -->
+                    <a href="#frequencies" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                        <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas-solid fa-wave-square"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">الترددات الشفائية</h3>
+                        <p class="text-gray-600">استمع إلى ترددات السولفيجيو المصممة لتهدئة الجهاز العصبي وتحفيز الشفاء أثناء التأمل.</p>
+                    </a>
+
+                    <!-- Card 4: Store -->
+                    <a href="#store" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                        <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-store"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">المتجر العلاجي</h3>
+                        <p class="text-gray-600">تصفح مجموعتنا المنتقاة من المكملات الغذائية والمنتجات الطبيعية التي أوصي بها.</p>
+                    </a>
+
+                    <!-- Card 5: Blog -->
+                    <a href="#blog" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                        <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-book-open"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">المقالات والمعرفة</h3>
+                        <p class="text-gray-600">اقرأ أحدث المقالات والرؤى حول الطب الشمولي، التغذية، والصحة النفسية لتعميق فهمك.</p>
+                    </a>
+                    
+                    <!-- Card 6: Patient File -->
+                    <a href="#premium-content" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                        <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-folder-user"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">ملف المريض</h3>
+                        <p class="text-gray-600">ادخل إلى مساحتك الخاصة لمراجعة نتائجك المحفوظة والمحتوى الحصري للأعضاء (يتطلب تسجيل الدخول).</p>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -215,61 +282,8 @@
             </div>
         </section>
 
-        <!-- Smart Healing Tools Section -->
-        <section id="smart-tools" class="py-20 bg-white">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4 section-title">أدواتي العلاجية الذكية</h2>
-                <p class="max-w-3xl mx-auto mb-12">مجموعة من الأدوات التفاعلية المتقدمة، المبنية على الذكاء الاصطناعي والطب الشمولي، لمساعدتك على فهم نفسك بشكل أعمق وتسريع رحلة شفائك. (تتطلب بعض الأدوات تسجيل الدخول).</p>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Tool 1: Multi-dimensional Diagnosis -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
-                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-sitemap"></i></div>
-                        <h3 class="text-xl font-bold mb-3">1. تشخيص متعدد الأبعاد</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">حلل أعراضك لفهم جذورها العضوية، الشعورية، والطاقية.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="diagnosis">ابدأ التشخيص</button>
-                    </div>
-                    <!-- Tool 2: Holistic Treatment Plan -->
-                     <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
-                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-file-prescription"></i></div>
-                        <h3 class="text-xl font-bold mb-3">2. وصفة علاجية شمولية</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">احصل على خطة علاجية أولية لمدة 21 يوم بناءً على حالتك.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="treatment-plan">صمم خطتي</button>
-                    </div>
-                    <!-- Tool 3: Guided Awareness Exercise -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
-                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-brain"></i></div>
-                        <h3 class="text-xl font-bold mb-3">3. تمرين وعي موجّه</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">تمرين كتابة موجه لمساعدتك على تحرير المشاعر المكبوتة.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="awareness-exercise">ابدأ التمرين</button>
-                    </div>
-                    <!-- Tool 4: Automated Consultation -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
-                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-robot"></i></div>
-                        <h3 class="text-xl font-bold mb-3">4. استشارة طبية آلية</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">اطرح سؤالك واحصل على إجابة فورية من مساعدي الذكي.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="consultation">اسأل الآن</button>
-                    </div>
-                    <!-- Tool 6: Supplement Recommendation -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
-                        <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-pills"></i></div>
-                        <h3 class="text-xl font-bold mb-3">5. توصية مكملات غذائية</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">احصل على توصيات للمكملات بناءً على أعراضك.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="supplements">احصل على توصية</button>
-                    </div>
-                    <!-- Tool 10: Daily Intention -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col fade-in-up">
-                        <div class="text-5xl text-[--primary-color] mb-4"><i class="far fa-lightbulb"></i></div>
-                        <h3 class="text-xl font-bold mb-3">6. نية اليوم</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">احصل على نية إيجابية تدعمك في رحلة شفائك اليوم.</p>
-                        <button class="smart-tool-btn btn-secondary w-full py-2 rounded-full mt-auto" data-tool="intention">احصل على نيتي</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
         <!-- Store Section -->
-        <section id="store" class="py-20">
+        <section id="store" class="py-20 bg-gray-50">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">متجر المنتجات الشافية</h2>
                 <p class="max-w-2xl mx-auto mb-12">مجموعة منتقاة بعناية من المنتجات الطبيعية والأدوية الوظيفية التي أثق بها وأوصي بها لدعم رحلتك العلاجية.</p>
