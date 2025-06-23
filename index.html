@@ -120,6 +120,9 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+        .page-view {
+           transition: opacity 0.5s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -127,18 +130,18 @@
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-sm shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="font-brand text-4xl text-gray-800">د. عمر</a>
+            <a href="#" class="font-brand text-4xl text-gray-800 nav-link" data-view="hero">د. عمر</a>
             <div class="hidden md:flex items-center space-x-reverse space-x-8">
-                <a href="#about" class="hover:text-[--primary-color]">عني</a>
-                <a href="#dashboard" class="hover:text-[--primary-color]">الخدمات التفاعلية</a>
-                <a href="#services" class="hover:text-[--primary-color]">الجلسات</a>
-                <a href="#store" class="hover:text-[--primary-color]">المتجر</a>
-                <a href="#blog" class="hover:text-[--primary-color]">المدونة</a>
+                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="about">عني</a>
+                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="dashboard">الخدمات التفاعلية</a>
+                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="services">الجلسات</a>
+                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="store">المتجر</a>
+                <a href="#" class="nav-link hover:text-[--primary-color]" data-view="blog">المدونة</a>
                  <!-- Login/Profile Link -->
                  <div id="auth-section" class="flex items-center">
                      <button id="login-btn" class="font-bold text-[--primary-color] hover:underline">تسجيل الدخول</button>
                      <div id="profile-section-nav" class="hidden items-center">
-                         <a href="#premium-content" class="font-bold text-[--primary-color] hover:underline ml-4">ملف المريض</a>
+                         <a href="#" class="nav-link font-bold text-[--primary-color] hover:underline ml-4" data-view="premium-content">ملف المريض</a>
                          <img id="user-avatar" class="w-8 h-8 rounded-full" alt="صورة المستخدم" onerror="this.src='https://placehold.co/40x40/5a6e5a/white?text=U'">
                      </div>
                  </div>
@@ -151,35 +154,35 @@
         </nav>
          <!-- Mobile Menu -->
          <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-              <a href="#about" class="block py-2 hover:text-[--primary-color]">عني</a>
-              <a href="#dashboard" class="block py-2 hover:text-[--primary-color]">الخدمات التفاعلية</a>
-              <a href="#services" class="block py-2 hover:text-[--primary-color]">الجلسات</a>
-              <a href="#store" class="block py-2 hover:text-[--primary-color]">المتجر</a>
-              <a href="#blog" class="block py-2 hover:text-[--primary-color]">المدونة</a>
+              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="about">عني</a>
+              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="dashboard">الخدمات التفاعلية</a>
+              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="services">الجلسات</a>
+              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="store">المتجر</a>
+              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="blog">المدونة</a>
               <a href="#contact" class="block py-2 hover:text-[--primary-color]">تواصل معي</a>
               <hr class="my-2">
               <div id="auth-section-mobile">
                   <button id="login-btn-mobile" class="w-full text-right py-2 font-bold text-[--primary-color]">تسجيل الدخول</button>
-                  <a href="#premium-content" id="profile-link-mobile" class="hidden w-full text-right py-2 font-bold text-[--primary-color]">ملف المريض</a>
+                  <a href="#" id="profile-link-mobile" class="nav-link hidden w-full text-right py-2 font-bold text-[--primary-color]" data-view="premium-content">ملف المريض</a>
               </div>
          </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- Hero Section -->
-        <section id="hero" class="relative h-screen flex items-center justify-center text-white text-center">
+        <section id="view-hero" class="page-view relative h-screen flex items-center justify-center text-white text-center">
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542601906-8b6aBA801697?q=80&w=2070&auto=format&fit=crop');"></div>
             <div class="absolute inset-0 hero-gradient"></div>
             <div class="relative z-10 p-6 fade-in-up">
                 <h1 class="font-brand text-7xl md:text-9xl mb-4">ṬibraSoul</h1>
                 <h2 class="text-2xl md:text-4xl font-bold mb-2">رحلتك نحو الشفاء المتكامل تبدأ هنا</h2>
                 <p class="text-lg md:text-xl max-w-3xl mx-auto">أساعدك على استعادة توازن جسدك وروحك عبر دمج حكمة الطب الشمولي والوظيفي مع أحدث العلوم.</p>
-                <a href="#dashboard" class="mt-8 inline-block bg-white text-[--primary-color] font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-200 transition">اكتشف خدماتنا</a>
+                <a href="#" class="nav-link mt-8 inline-block bg-white text-[--primary-color] font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-200 transition" data-view="dashboard">اكتشف خدماتنا</a>
             </div>
         </section>
 
         <!-- Interactive Dashboard Section -->
-        <section id="dashboard" class="py-20 bg-gray-50">
+        <section id="view-dashboard" class="page-view py-20 bg-gray-50 hidden">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">لوحة التحكم التفاعلية</h2>
                 <p class="max-w-3xl mx-auto mb-12">اختر الأداة أو الخدمة التي تناسب احتياجك الحالي وابدأ رحلة الشفاء.</p>
@@ -200,35 +203,35 @@
                     </div>
 
                     <!-- Card 2: Consultations -->
-                    <a href="#services" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="services">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-user-doctor"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الجلسات الاستشارية</h3>
                         <p class="text-gray-600">احجز جلسة استشارية شاملة أو جلسة متابعة معي مباشرة لوضع خريطة طريق علاجية مخصصة.</p>
                     </a>
 
                     <!-- Card 3: Frequency Generator -->
-                    <a href="#frequencies" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="frequencies">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas-solid fa-wave-square"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الترددات الشفائية</h3>
                         <p class="text-gray-600">استمع إلى ترددات السولفيجيو المصممة لتهدئة الجهاز العصبي وتحفيز الشفاء أثناء التأمل.</p>
                     </a>
 
                     <!-- Card 4: Store -->
-                    <a href="#store" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="store">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-store"></i></div>
                         <h3 class="text-2xl font-bold mb-3">المتجر العلاجي</h3>
                         <p class="text-gray-600">تصفح مجموعتنا المنتقاة من المكملات الغذائية والمنتجات الطبيعية التي أوصي بها.</p>
                     </a>
 
                     <!-- Card 5: Blog -->
-                    <a href="#blog" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="blog">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-book-open"></i></div>
                         <h3 class="text-2xl font-bold mb-3">المقالات والمعرفة</h3>
                         <p class="text-gray-600">اقرأ أحدث المقالات والرؤى حول الطب الشمولي، التغذية، والصحة النفسية لتعميق فهمك.</p>
                     </a>
                     
                     <!-- Card 6: Patient File -->
-                    <a href="#premium-content" class="group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center">
+                    <a href="#" class="nav-link group dashboard-card block bg-white p-8 rounded-xl shadow-lg text-center" data-view="premium-content">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-folder-user"></i></div>
                         <h3 class="text-2xl font-bold mb-3">ملف المريض</h3>
                         <p class="text-gray-600">ادخل إلى مساحتك الخاصة لمراجعة نتائجك المحفوظة والمحتوى الحصري للأعضاء (يتطلب تسجيل الدخول).</p>
@@ -238,7 +241,7 @@
         </section>
 
         <!-- About Me Section -->
-        <section id="about" class="py-20 bg-white">
+        <section id="view-about" class="page-view py-20 bg-white hidden">
             <div class="container mx-auto px-6">
                 <div class="md:flex items-center gap-12">
                     <div class="md:w-1/3 text-center fade-in-up">
@@ -255,7 +258,7 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="py-20">
+        <section id="view-services" class="page-view py-20 hidden">
              <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">جلسات العلاج الشمولي</h2>
                 <p class="max-w-2xl mx-auto mb-12">جلسات شخصية عن بعد، مصممة خصيصاً لتلبية احتياجاتك الفريدة ومساعدتك على تحقيق أهدافك الصحية.</p>
@@ -283,7 +286,7 @@
         </section>
 
         <!-- Store Section -->
-        <section id="store" class="py-20 bg-gray-50">
+        <section id="view-store" class="page-view py-20 bg-gray-50 hidden">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">متجر المنتجات الشافية</h2>
                 <p class="max-w-2xl mx-auto mb-12">مجموعة منتقاة بعناية من المنتجات الطبيعية والأدوية الوظيفية التي أثق بها وأوصي بها لدعم رحلتك العلاجية.</p>
@@ -333,7 +336,7 @@
         </section>
         
         <!-- Frequency Generator Section -->
-        <section id="frequencies" class="py-20 bg-white">
+        <section id="view-frequencies" class="page-view py-20 bg-white hidden">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">مولد الترددات الشفائية</h2>
                 <p class="max-w-2xl mx-auto mb-12">اختر أحد ترددات السولفيجيو للاستماع إليها أثناء التأمل. استخدم سماعات الرأس لأفضل تأثير.</p>
@@ -353,9 +356,9 @@
         </section>
         
         <!-- Premium Content / Patient File Section -->
-        <section id="premium-content" class="py-20 hidden">
+        <section id="view-premium-content" class="page-view py-20 hidden">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4 section-title">ملف المريض ومحتوى الأعضاء</h2>
+                <h2 id="welcome-message" class="text-4xl font-bold mb-4 section-title">مرحباً بك في أسرتنا</h2>
                 <p class="max-w-2xl mx-auto mb-12">هذه مساحتك الحصرية. هنا ستجد المحتوى الخاص وجميع نتائجك المحفوظة من أدواتنا الذكية.</p>
                 <div id="patient-file-content" class="bg-white p-8 rounded-xl shadow-inner max-w-4xl mx-auto text-right">
                     <h3 class="text-2xl font-bold mb-6">سجلاتي المحفوظة</h3>
@@ -368,7 +371,7 @@
         </section>
 
         <!-- Blog Section -->
-        <section id="blog" class="py-20 bg-gray-50">
+        <section id="view-blog" class="page-view py-20 bg-gray-50 hidden">
              <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">من وحي المدونة</h2>
                 <p class="max-w-2xl mx-auto mb-12">مقالات ورؤى لمساعدتك على فهم جسدك بشكل أفضل واتخاذ قرارات صحية مستنيرة.</p>
@@ -440,9 +443,12 @@
         import { getAuth, onAuthStateChanged, signInAnonymously, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, getDocs, orderBy, query, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- FIREBASE CONFIG (using variables provided by the environment) ---
+        // --- FIREBASE CONFIG ---
+        // !! هام جداً !!
+        // لتشغيل خدمة تسجيل الدخول، يجب عليك استبدال "YOUR_FIREBASE_API_KEY"
+        // بمفتاح API الخاص بمشروعك على Firebase. يمكنك الحصول عليه من إعدادات مشروعك.
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            apiKey: "YOUR_FALLBACK_API_KEY", // Fallback if not provided
+            apiKey: "YOUR_FIREBASE_API_KEY", // <-- ضع مفتاح API الخاص بـ Firebase هنا
             authDomain: "tibrasoul.firebaseapp.com",
             projectId: "tibrasoul",
             storageBucket: "tibrasoul.appspot.com",
@@ -466,15 +472,47 @@
             initSmartTools();
             initFrequencyGenerator();
             initGeneralUI();
+            initNavigation();
+            showView('hero'); // Show hero view by default
         });
+
+        // --- NAVIGATION MODULE ---
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const viewName = link.dataset.view;
+                    if (viewName) {
+                        showView(viewName);
+                    }
+                });
+            });
+        }
+
+        function showView(viewId) {
+            // Hide all page views
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.add('hidden');
+            });
+
+            // Show the target view
+            const targetView = document.getElementById('view-' + viewId);
+            if(targetView) {
+                targetView.classList.remove('hidden');
+                window.scrollTo(0, 0); // Scroll to top of the new view
+            }
+        }
+
 
         // --- AUTHENTICATION MODULE ---
         function initAuth() {
             const loginBtns = [document.getElementById('login-btn'), document.getElementById('login-btn-mobile')];
             const profileNav = document.getElementById('profile-section-nav');
             const profileLinkMobile = document.getElementById('profile-link-mobile');
-            const premiumContentSection = document.getElementById('premium-content');
+            const premiumContentSection = document.getElementById('view-premium-content');
             const userAvatar = document.getElementById('user-avatar');
+            const welcomeMessage = document.getElementById('welcome-message');
 
             onAuthStateChanged(auth, user => {
                 const isLoggedIn = !!user && !user.isAnonymous;
@@ -485,24 +523,33 @@
                 profileNav.classList.toggle('hidden', !isLoggedIn);
                 profileNav.classList.toggle('flex', isLoggedIn);
                 profileLinkMobile.classList.toggle('hidden', !isLoggedIn);
-                premiumContentSection.classList.toggle('hidden', !isLoggedIn);
-
+                
                 if (isLoggedIn) {
                     if (userAvatar) userAvatar.src = user.photoURL || 'https://placehold.co/40x40/5a6e5a/white?text=U';
+                    if (welcomeMessage) welcomeMessage.textContent = `مرحباً بك في أسرتنا، ${user.displayName || 'صديقي'}`;
                     loadPatientFileData(); // Load user data when they log in
                 }
             });
             
             signInAnonymously(auth).catch(error => console.error("Anonymous sign-in failed:", error));
 
-            const handleLogin = () => signInWithPopup(auth, provider).catch(error => console.error("Google Login Error:", error));
+            const handleLogin = () => {
+                if (firebaseConfig.apiKey === "YOUR_FIREBASE_API_KEY") {
+                    alert("خطأ في الإعداد: مفتاح Firebase API غير مكون. لا يمكن إتمام عملية تسجيل الدخول.");
+                    return;
+                }
+                signInWithPopup(auth, provider).catch(error => {
+                    console.error("Google Login Error:", error)
+                    alert("فشل تسجيل الدخول. تأكد من أن النطاق الخاص بك مضاف إلى قائمة النطاقات المصرح بها في إعدادات Firebase Authentication.")
+                });
+            }
             loginBtns.forEach(btn => btn.addEventListener('click', handleLogin));
         }
         
         // --- PATIENT FILE & FIRESTORE MODULE ---
         async function saveResultToFirestore(toolName, resultData) {
             if (!currentUser || currentUser.isAnonymous) {
-                alert('الرجاء تسجيل الدخول لحفظ نتائجك.'); // You can replace this with a more elegant modal
+                alert('الرجاء تسجيل الدخول لحفظ نتائجك.'); 
                 return;
             }
             const resultId = `${toolName.replace(/\s+/g, '-')}-${new Date().getTime()}`;
@@ -514,13 +561,12 @@
                     data: resultData,
                     createdAt: new Date()
                 });
-                // Simple notification, can be improved
                 const saveBtn = document.getElementById('save-result-btn');
                 if(saveBtn) {
                    saveBtn.textContent = 'تم الحفظ بنجاح!';
                    saveBtn.disabled = true;
                 }
-                loadPatientFileData(); // Refresh the patient file view
+                loadPatientFileData();
             } catch (error) {
                 console.error("Error saving document: ", error);
                 alert('حدث خطأ أثناء حفظ النتيجة.');
@@ -534,7 +580,7 @@
 
             try {
                 const resultsCol = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'toolResults');
-                const q = query(resultsCol, orderBy('createdAt', 'desc'), limit(20)); // Get latest 20 results
+                const q = query(resultsCol, orderBy('createdAt', 'desc'), limit(20));
                 const querySnapshot = await getDocs(q);
 
                 if (querySnapshot.empty) {
@@ -724,24 +770,7 @@
                         <p class="mt-2">جاري التحليل باستخدام الذكاء الاصطناعي...</p>
                     </div>`;
                 
-                // =================================================================
-                // !! هام جداً !!
-                // عند تشغيل هذا الملف خارج بيئة التطوير الأصلية (مثل GitHub Pages)،
-                // يجب عليك الحصول على مفتاح API الخاص بك من Google AI Studio ووضعه هنا.
-                // استبدل "YOUR_GOOGLE_AI_API_KEY" بالمفتاح الحقيقي.
-                const apiKey = "AIzaSyCOfNaYITDWfe6OibILsDBx6Pe6b3SeNJ4"; // <-- تم وضع مفتاحك هنا
-                // =================================================================
-
-                // التحقق مما إذا كان المفتاح قد تم إدخاله
-                if (apiKey === "" || apiKey === "YOUR_GOOGLE_AI_API_KEY") {
-                     const errorHtml = `
-                        <div class="p-4 bg-red-100 border-r-4 border-red-500 rounded-md text-red-800 text-right">
-                            <h4 class="font-bold">خطأ في الإعداد</h4>
-                            <p>لم يتم تكوين مفتاح الواجهة البرمجية (API Key) للذكاء الاصطناعي. لتشغيل هذه الميزة، يرجى تعديل الكود البرمجي وإضافة مفتاحك الخاص في المتغير 'apiKey' داخل دالة 'handleApiRequest'. يمكنك الحصول على مفتاح مجاني من Google AI Studio.</p>
-                        </div>`;
-                     resultsDiv.innerHTML = errorHtml;
-                     return null;
-                }
+                const apiKey = "AIzaSyCOfNaYITDWfe6OibILsDBx6Pe6b3SeNJ4"; 
                 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
@@ -852,7 +881,6 @@
                     // Add event listeners for the new buttons
                     if (currentUser && !currentUser.isAnonymous) {
                          document.getElementById('save-result-btn').addEventListener('click', () => {
-                             // We save the raw user input and the AI's response text together.
                              const fullResultText = `--- المدخلات ---\n${rawInputForSaving}\n\n--- نتيجة التحليل ---\n${responseText}`;
                              saveResultToFirestore(toolTitle, fullResultText)
                          });
@@ -869,7 +897,6 @@
             const element = document.getElementById(elementId);
             if (!element) return;
 
-            // Use html2canvas to capture the element as an image
             html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
                 const imgData = canvas.toDataURL('image/png');
                 const pdf = new jsPDF({
@@ -878,16 +905,10 @@
                     format: 'a4'
                 });
 
-                // Set metadata
                 pdf.setProperties({
                     title: `تقرير ${title} - د. عمر`,
                     author: 'موقع د. عمر - TibraSoul'
                 });
-
-                // You might need to add a font that supports Arabic
-                // For this example, we'll proceed, but text might not render correctly without it.
-                // Example: pdf.addFont('NotoSansArabic-Regular.ttf', 'NotoSansArabic', 'normal');
-                // pdf.setFont('NotoSansArabic');
 
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 const pdfHeight = pdf.internal.pageSize.getHeight();
@@ -895,13 +916,12 @@
                 const canvasHeight = canvas.height;
                 const ratio = canvasWidth / canvasHeight;
                 
-                const imgWidth = pdfWidth - 20; // with margin
+                const imgWidth = pdfWidth - 20;
                 const imgHeight = imgWidth / ratio;
                 
                 let heightLeft = imgHeight;
-                let position = 10; // top margin
+                let position = 10;
 
-                // Header
                 pdf.setFontSize(20);
                 pdf.text(`تقرير من: د. عمر`, pdfWidth / 2, position, { align: 'center' });
                 pdf.setFontSize(14);
@@ -925,13 +945,12 @@
 
         // --- FREQUENCY GENERATOR MODULE ---
         function initFrequencyGenerator() {
-            // This function remains largely the same as in the original code
             const freqButtonsContainer = document.getElementById('frequency-buttons');
             const stopFreqBtn = document.getElementById('stop-freq-btn');
             const canvas = document.getElementById('frequency-canvas');
             if (!freqButtonsContainer || !stopFreqBtn || !canvas) return;
 
-            let oscillator, analyser, waveform;
+            let oscillator, analyser;
             const canvasCtx = canvas.getContext('2d');
             let animationFrameId;
 
@@ -1016,7 +1035,11 @@
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            mobileMenu.addEventListener('click', (e) => { if(e.target.tagName === 'A') mobileMenu.classList.add('hidden'); });
+            mobileMenu.addEventListener('click', (e) => { 
+                if(e.target.classList.contains('nav-link')){
+                     mobileMenu.classList.add('hidden');
+                }
+             });
 
             // Scroll Animations
             const observer = new IntersectionObserver((entries) => {
@@ -1028,4 +1051,4 @@
         }
     </script>
 </body>
-</html>
+</ht
