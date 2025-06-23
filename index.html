@@ -710,7 +710,25 @@
                         <p class="mt-2">جاري التحليل باستخدام الذكاء الاصطناعي...</p>
                     </div>`;
                 
-                const apiKey = ""; // This will be handled by the environment
+                // =================================================================
+                // !! هام جداً !!
+                // عند تشغيل هذا الملف خارج بيئة التطوير الأصلية (مثل GitHub Pages)،
+                // يجب عليك الحصول على مفتاح API الخاص بك من Google AI Studio ووضعه هنا.
+                // استبدل "YOUR_GOOGLE_AI_API_KEY" بالمفتاح الحقيقي.
+                const apiKey = "YOUR_GOOGLE_AI_API_KEY"; // <-- ضع مفتاحك هنا
+                // =================================================================
+
+                // التحقق مما إذا كان المفتاح قد تم إدخاله
+                if (apiKey === "" || apiKey === "YOUR_GOOGLE_AI_API_KEY") {
+                     const errorHtml = `
+                        <div class="p-4 bg-red-100 border-r-4 border-red-500 rounded-md text-red-800 text-right">
+                            <h4 class="font-bold">خطأ في الإعداد</h4>
+                            <p>لم يتم تكوين مفتاح الواجهة البرمجية (API Key) للذكاء الاصطناعي. لتشغيل هذه الميزة، يرجى تعديل الكود البرمجي وإضافة مفتاحك الخاص في المتغير 'apiKey' داخل دالة 'handleApiRequest'. يمكنك الحصول على مفتاح مجاني من Google AI Studio.</p>
+                        </div>`;
+                     resultsDiv.innerHTML = errorHtml;
+                     return null;
+                }
+                
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
                 const payload = {
@@ -723,18 +741,23 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    if (!response.ok) {
+                       const errorData = await response.json();
+                       console.error("API Error Details:", errorData);
+                       throw new Error(`HTTP error! status: ${response.status}`);
+                    }
                     
                     const data = await response.json();
 
                     if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
                         return data.candidates[0].content.parts[0].text;
                     } else {
+                        console.error("Invalid API response:", data);
                         throw new Error("Invalid API response structure");
                     }
                 } catch (error) {
                     console.error("API Request Error:", error);
-                    resultsDiv.innerHTML = '<p class="text-center text-red-500">عذراً، حدث خطأ أثناء الاتصال بالمساعد الذكي. يرجى المحاولة مرة أخرى.</p>';
+                    resultsDiv.innerHTML = '<p class="text-center text-red-500">عذراً، حدث خطأ أثناء الاتصال بالمساعد الذكي. قد يكون مفتاح API غير صالح أو أن هناك مشكلة في الشبكة. يرجى مراجعة Console المتصفح لمزيد من التفاصيل والمحاولة مرة أخرى.</p>';
                     return null;
                 }
             }
