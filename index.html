@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="د. عمر العماد - رحلتك نحو الشفاء بالطب الشمولي والوظيفي. أدوات ذكية، جلسات علاجية، ومنتجات طبيعية.">
-    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر العماد, طِبرا, عجلة الحياة, تقييم صحي, DMSO, ترددات شفائية, تشخيص ذكي, خطة علاجية, تحليل الدم, خريطة الجسم, مفكرة الأعراض, تردد النقلة الموازية, صلاح الراشد">
+    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر العماد, طِبرا, عجلة الحياة, تقييم صحي, DMSO, ترددات شفائية, تشخيص ذكي, خطة علاجية, تحليل الدم, خريطة الجسم, مفكرة الأعراض, تردد النقلة الموازية, صلاح الراشد, اختبار لوشير للألوان">
     <title>د. عمر العماد | خبير الطب الشمولي والوظيفي</title>
 
     <!-- Fonts & Icons -->
@@ -22,6 +22,7 @@
     <!-- 3D Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TorusKnotGeometry.js"></script>
 
 
     <style>
@@ -166,13 +167,41 @@
             border-right: 4px solid var(--accent-light);
         }
 
-        /* --- QUIZZES (NEW) --- */
-        .quiz-option {
-            transition: background-color 0.2s, border-color 0.2s;
+        /* --- LUSCHER QUIZ STYLES --- */
+        .color-swatch-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
-        .quiz-option.selected {
-            background-color: var(--accent-light);
-            border-color: var(--accent-color);
+        .color-swatch {
+            width: 100%;
+            height: 60px;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
+            border: 3px solid transparent;
+            position: relative;
+        }
+        .color-swatch:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .color-swatch.selected {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: scale(0.9);
+        }
+        .color-swatch.selected::after {
+            content: attr(data-order);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 5px black;
         }
     </style>
 </head>
@@ -358,7 +387,7 @@
                  </div>
                 <div class="md:flex items-center gap-12">
                     <div class="md:w-1/3 text-center fade-in-up">
-                        <img src="https://i.ibb.co/6wmT73L/image-c28027.jpg" alt="صورة د. عمر العماد" class="rounded-full shadow-2xl mx-auto w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white" onerror="this.onerror=null;this.src='https://placehold.co/320x320/eeeeee/333333?text=Dr.+Omar';">
+                        <img src="https://i.ibb.co/6wmT73L/image_6a42ff.jpg" alt="صورة د. عمر العماد" class="rounded-full shadow-2xl mx-auto w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white" onerror="this.onerror=null;this.src='https://placehold.co/320x320/eeeeee/333333?text=Dr.+Omar';">
                     </div>
                     <div class="md:w-2/3 mt-8 md:mt-0 fade-in-up">
                         <h2 class="text-4xl font-bold mb-4 section-title text-right">عن د. عمر العماد</h2>
@@ -583,6 +612,11 @@
                         <h3 class="text-2xl font-bold mb-3 text-[--primary-dark]">احسب درجة السمية في جسمك</h3>
                         <p class="text-gray-600 mb-4">قيّم تعرضك للسموم البيئية وقدرة جسمك على التخلص منها.</p>
                         <button class="btn btn-primary text-white py-2 px-6 rounded-full quiz-start-btn" data-quiz="toxicity-score">ابدأ الاختبار</button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="text-2xl font-bold mb-3 text-[--primary-dark]">اختبار لوشير للألوان</h3>
+                        <p class="text-gray-600 mb-4">اختر الألوان حسب تفضيلك للكشف عن جوانب من حالتك النفسية الحالية.</p>
+                        <button class="btn btn-primary text-white py-2 px-6 rounded-full quiz-start-btn" data-quiz="luscher-color-test">ابدأ الاختبار</button>
                     </div>
                 </div>
             </div>
@@ -876,7 +910,6 @@
                  window.scrollTo(0, 0);
 
                 if (viewId === 'body-map') {
-                     // Special handler to initialize 3D scene only when view is shown
                      const canvasContainer = document.getElementById('body-map-container');
                      if (canvasContainer && !canvasContainer.querySelector('canvas')) {
                         init3DBodyMap();
@@ -1314,51 +1347,46 @@ Structure the output in Arabic with clear headings for each marker using markdow
                 const imgData = canvas.toDataURL('image/png');
                 const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
                 pdf.setProperties({ title: `تقرير ${title} - د. عمر العماد`, author: 'موقع د. عمر العماد - TibraSoul' });
-                // Note: jsPDF might not support Arabic fonts by default. This is a basic implementation.
-                // For full Arabic support, a custom font needs to be added to jsPDF.
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 pdf.addImage(imgData, 'PNG', 10, 10, pdfWidth - 20, 0);
                 pdf.save(`${title.replace(/\s+/g, '-')}_${new Date().toISOString().split('T')[0]}.pdf`);
             });
         }
 
-        // --- FREQUENCY GENERATOR MODULE (UPGRADED) ---
+        // --- FREQUENCY GENERATOR MODULE (ROBUST & UPGRADED) ---
         function initFrequencyGenerator() {
-            const freqButtonsContainer = document.getElementById('frequency-buttons');
-            const parallelShiftButtonsContainer = document.getElementById('parallel-shift-buttons');
             const stopFreqBtn = document.getElementById('stop-freq-btn');
             const canvas = document.getElementById('frequency-canvas');
-            if (!freqButtonsContainer || !stopFreqBtn || !canvas) return;
+            if (!stopFreqBtn || !canvas) return;
 
             let audioContext, oscillator, analyser, gainNode, animationFrameId;
+            let isAudioInitialized = false;
             const canvasCtx = canvas.getContext('2d');
             
-            const allFreqButtons = [
-                ...freqButtonsContainer.querySelectorAll('.freq-btn'),
-                ...parallelShiftButtonsContainer.querySelectorAll('.freq-btn')
-            ];
+            const allFreqButtons = document.querySelectorAll('.freq-btn');
 
-            const setupAudio = async () => {
-                 if (!audioContext) {
-                     try {
-                         await Tone.start();
-                         audioContext = Tone.context;
-                         analyser = audioContext.createAnalyser();
-                         gainNode = audioContext.createGain();
-                         analyser.fftSize = 2048;
-                         gainNode.connect(analyser);
-                         analyser.connect(audioContext.destination);
-                         console.log("Audio Context is ready.");
-                     } catch (e) {
-                         console.error("Could not start Audio Context: ", e);
-                         showNotification("لا يمكن تشغيل الصوت. يرجى التفاعل مع الصفحة أولاً.", "error");
-                     }
-                 }
+            const setupAudioFirstTime = async () => {
+                if (isAudioInitialized) return true;
+                try {
+                    await Tone.start();
+                    audioContext = Tone.context;
+                    analyser = audioContext.createAnalyser();
+                    gainNode = audioContext.createGain();
+                    analyser.fftSize = 1024;
+                    gainNode.connect(analyser);
+                    analyser.connect(audioContext.destination);
+                    console.log("Audio Context is ready.");
+                    isAudioInitialized = true;
+                    return true;
+                } catch (e) {
+                    console.error("Could not start Audio Context: ", e);
+                    showNotification("لا يمكن تشغيل الصوت. يرجى التفاعل مع الصفحة أولاً.", "error");
+                    return false;
+                }
             };
             
-            const playFrequency = async (freq) => {
-                 await setupAudio();
-                 if (!audioContext) return;
+            const playFrequency = (freq) => {
+                if (!isAudioInitialized) return;
 
                 if (oscillator) {
                     oscillator.stop();
@@ -1366,20 +1394,24 @@ Structure the output in Arabic with clear headings for each marker using markdow
                 }
 
                 oscillator = new Tone.Oscillator(freq, "sine").connect(gainNode);
+                oscillator.volume.value = -12; // Lower volume for comfort
                 oscillator.start();
-                gainNode.gain.rampTo(0.3, 0.1); // Reduced volume slightly for comfort
+                gainNode.gain.rampTo(1, 0.1);
                 stopFreqBtn.classList.remove('hidden');
-                visualize();
+                if (!animationFrameId) visualize();
             };
             
             const stopFrequency = () => {
                 if (oscillator) {
-                    gainNode.gain.rampTo(0, 0.5); // Ramp down volume
+                    gainNode.gain.rampTo(0, 0.5);
                     setTimeout(() => {
                         oscillator.stop();
                         oscillator.disconnect();
                         oscillator = null;
-                        cancelAnimationFrame(animationFrameId);
+                        if (animationFrameId) {
+                           cancelAnimationFrame(animationFrameId);
+                           animationFrameId = null;
+                        }
                         clearCanvas();
                     }, 500);
                 }
@@ -1390,45 +1422,35 @@ Structure the output in Arabic with clear headings for each marker using markdow
             function visualize() {
                 const bufferLength = analyser.frequencyBinCount;
                 const dataArray = new Uint8Array(bufferLength);
-                const centerX = canvas.width / 2;
-                const centerY = canvas.height / 2;
-                const radius = Math.min(centerX, centerY) - 10;
                 
                 const draw = () => {
                     animationFrameId = requestAnimationFrame(draw);
-                    analyser.getByteFrequencyData(dataArray);
+                    if (!analyser) return;
+                    analyser.getByteTimeDomainData(dataArray);
                     
-                    canvasCtx.fillStyle = 'rgba(18, 18, 18, 0.1)'; // Fading effect
+                    canvasCtx.fillStyle = '#121212';
                     canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+                    canvasCtx.lineWidth = 2;
+                    canvasCtx.strokeStyle = 'rgb(200, 160, 125, 0.7)';
+                    canvasCtx.beginPath();
                     
-                    const barWidth = (2 * Math.PI) / (bufferLength * 0.5);
-                    let angle = 0;
-
-                    for (let i = 0; i < bufferLength * 0.5; i++) {
-                        const barHeight = dataArray[i] * 0.5;
-                        
-                        const r = 150 + barHeight * 0.2;
-                        const g = 180 + barHeight * 0.3;
-                        const b = 150 + barHeight * 0.4;
-                        canvasCtx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.6)`;
-                        
-                        const x = centerX + Math.cos(angle) * radius;
-                        const y = centerY + Math.sin(angle) * radius;
-                        const x_end = centerX + Math.cos(angle) * (radius + barHeight);
-                        const y_end = centerY + Math.sin(angle) * (radius + barHeight);
-
-                        canvasCtx.beginPath();
-                        canvasCtx.moveTo(x, y);
-                        canvasCtx.lineTo(x_end, y_end);
-                        canvasCtx.lineWidth = barWidth * 5; // Use lineWidth for radial bars
-                        canvasCtx.stroke();
-                        
-                        angle += barWidth;
+                    const sliceWidth = canvas.width * 1.0 / bufferLength;
+                    let x = 0;
+                    for(let i = 0; i < bufferLength; i++) {
+                        const v = dataArray[i] / 128.0;
+                        const y = v * canvas.height / 2;
+                        if(i === 0) {
+                            canvasCtx.moveTo(x, y);
+                        } else {
+                            canvasCtx.lineTo(x, y);
+                        }
+                        x += sliceWidth;
                     }
+                    canvasCtx.lineTo(canvas.width, canvas.height / 2);
+                    canvasCtx.stroke();
                 };
                 draw();
             }
-
 
             const clearCanvas = () => {
                 canvasCtx.fillStyle = '#121212';
@@ -1436,7 +1458,11 @@ Structure the output in Arabic with clear headings for each marker using markdow
             };
             
             allFreqButtons.forEach(button => {
-                 button.addEventListener('click', (e) => {
+                 button.addEventListener('click', async (e) => {
+                    if (!isAudioInitialized) {
+                       const audioReady = await setupAudioFirstTime();
+                       if (!audioReady) return;
+                    }
                     allFreqButtons.forEach(b => b.classList.remove('active'));
                     button.classList.add('active');
                     const freq = parseFloat(button.dataset.freq);
@@ -1713,8 +1739,6 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
 
         // --- BODY MAP MODULE (Lazy Init) ---
         function initBodyMap() {
-            // The actual 3D initialization is now deferred to showView to prevent
-            // WebGL context issues on hidden elements. This function just sets up the data.
             window.organData = {
                 brain: {
                     name: 'الدماغ والجهاز العصبي',
@@ -1749,54 +1773,47 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
             const infoContainer = document.getElementById('body-map-info');
             const organNameEl = document.getElementById('organ-name');
             const organDetailsEl = document.getElementById('organ-details');
+            if(!container) return;
+            container.innerHTML = ''; // Clear previous content
 
-            // --- Scene Setup ---
             const scene = new THREE.Scene();
             scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim());
             const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(0, 1.5, 10);
+            camera.position.set(0, 1.5, 12);
 
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.shadowMap.enabled = true;
             container.appendChild(renderer.domElement);
 
-            // --- Controls ---
             const controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.target.set(0, 1, 0);
+            controls.dampingFactor = 0.1;
+            controls.target.set(0, 1.2, 0);
 
-            // --- Lighting ---
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
             scene.add(ambientLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
-            directionalLight.position.set(5, 10, 7.5);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            directionalLight.position.set(8, 12, 10);
             scene.add(directionalLight);
-
-            // --- Materials ---
-            const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0xe6d3c1, roughness: 0.7, metalness: 0.1 });
-            const organMaterial = new THREE.MeshStandardMaterial({ color: 0x5a6e5a, roughness: 0.5, metalness: 0.1, transparent: true, opacity: 0.6 });
+            
+            const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0xe6d3c1, transparent: true, opacity: 0.15, roughness: 0.7, metalness: 0.1 });
+            const organMaterial = new THREE.MeshStandardMaterial({ color: 0x5a6e5a, roughness: 0.5, metalness: 0.1 });
             const hoverMaterial = new THREE.MeshStandardMaterial({ color: 0xe0c4a4, emissive: 0xc8a07d, roughness: 0.5, metalness: 0.1 });
-
-            // --- Create Stylized Body ---
+            
             const bodyParts = [];
-            const createLimb = (height, topRadius, bottomRadius, position) => {
-                const limb = new THREE.Mesh(new THREE.CylinderGeometry(topRadius, bottomRadius, height, 16), bodyMaterial);
-                limb.position.y = position;
-                return limb;
-            };
 
+            // Main Torso
             const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.5, 2.2, 16), bodyMaterial);
             torso.position.y = 1.1;
             scene.add(torso);
-
+            
+            // Head
             const head = new THREE.Mesh(new THREE.SphereGeometry(0.6, 32, 32), bodyMaterial);
             head.position.y = 2.8;
             scene.add(head);
 
-            // --- Interactive Organs ---
+            // Organs
             const createOrgan = (geometry, position, name) => {
                 const organ = new THREE.Mesh(geometry, organMaterial.clone());
                 organ.position.copy(position);
@@ -1806,16 +1823,27 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                 return organ;
             };
 
-            createOrgan(new THREE.SphereGeometry(0.5, 16, 16), new THREE.Vector3(0, 2.8, 0), 'brain');
+            const brain = createOrgan(new THREE.TorusKnotGeometry(0.3, 0.08, 100, 12), new THREE.Vector3(0, 2.8, 0), 'brain');
             createOrgan(new THREE.BoxGeometry(0.5, 0.2, 0.1), new THREE.Vector3(0, 2.1, 0.3), 'thyroid');
-            createOrgan(new THREE.SphereGeometry(0.3, 16, 16), new THREE.Vector3(0.1, 1.5, 0.2), 'heart');
-            createOrgan(new THREE.CapsuleGeometry(0.3, 0.6, 4, 8), new THREE.Vector3(-0.25, 1, 0.1), 'liver');
-            createOrgan(new THREE.TorusKnotGeometry(0.3, 0.05, 100, 8, 2, 3), new THREE.Vector3(0, 0.5, 0.1), 'gut');
-            const adrenal1 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(0.2, 0.8, -0.1), 'adrenals');
-            const adrenal2 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(-0.2, 0.8, -0.1), 'adrenals');
-            adrenal2.userData.name = 'adrenals'; // Both point to the same data
+            const heart = createOrgan(new THREE.OctahedronGeometry(0.3, 0), new THREE.Vector3(0.1, 1.5, 0.2), 'heart');
+            createOrgan(new THREE.CylinderGeometry(0.2, 0.4, 0.8, 16), new THREE.Vector3(-0.35, 1, 0.1), 'liver');
+            createOrgan(new THREE.TorusGeometry(0.25, 0.1, 8, 20), new THREE.Vector3(0, 0.5, 0.1), 'gut');
+            const adrenal1 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(0.2, 0.9, -0.1), 'adrenals');
+            const adrenal2 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(-0.2, 0.9, -0.1), 'adrenals');
+            adrenal2.userData.name = 'adrenals';
 
-            // --- Raycasting for Interaction ---
+            // Procedural "Energy Veins"
+            const points = [
+                new THREE.Vector3(0, -0.5, 0), new THREE.Vector3(0.3, 0, 0.2), new THREE.Vector3(0.1, 0.5, 0.3),
+                new THREE.Vector3(-0.2, 1.0, 0.1), new THREE.Vector3(0, 1.5, -0.2), new THREE.Vector3(0.2, 2.0, 0),
+                new THREE.Vector3(0, 2.5, 0.3), new THREE.Vector3(0, 3.0, 0)
+            ];
+            const curve = new THREE.CatmullRomCurve3(points);
+            const tubeGeo = new THREE.TubeGeometry(curve, 64, 0.03, 8, false);
+            const tubeMat = new THREE.MeshBasicMaterial({ color: 0xc8a07d, transparent: true, opacity: 0.5 });
+            const tube = new THREE.Mesh(tubeGeo, tubeMat);
+            scene.add(tube);
+            
             const raycaster = new THREE.Raycaster();
             const mouse = new THREE.Vector2();
             let intersectedObject = null;
@@ -1845,39 +1873,35 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                 }
             }
 
-            // --- Animation Loop ---
+            let clock = new THREE.Clock();
             function animate() {
                 requestAnimationFrame(animate);
                 controls.update();
+                const delta = clock.getDelta();
+                heart.rotation.y += delta * 0.5;
+                brain.rotation.x += delta * 0.2;
                 
-                // Hover effect
                 raycaster.setFromCamera(mouse, camera);
                 const intersects = raycaster.intersectObjects(bodyParts);
                 
                 if (intersects.length > 0) {
                     if (intersectedObject !== intersects[0].object) {
-                        if (intersectedObject) {
-                            intersectedObject.material = intersectedObject.userData.originalMaterial;
-                        }
+                        if (intersectedObject) intersectedObject.material = intersectedObject.userData.originalMaterial;
                         intersectedObject = intersects[0].object;
                         intersectedObject.material = hoverMaterial;
                     }
                 } else {
-                    if (intersectedObject) {
-                        intersectedObject.material = intersectedObject.userData.originalMaterial;
-                    }
+                    if (intersectedObject) intersectedObject.material = intersectedObject.userData.originalMaterial;
                     intersectedObject = null;
                 }
-
                 renderer.render(scene, camera);
             }
 
-            // --- Event Listeners ---
             window.addEventListener('resize', () => {
                 camera.aspect = container.clientWidth / container.clientHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(container.clientWidth, container.clientHeight);
-            });
+            }, false);
             container.addEventListener('pointermove', onPointerMove);
             container.addEventListener('click', onPointerClick);
             
@@ -1933,8 +1957,8 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                         { q: "هل نظامك الغذائي يحتوي على الكثير من الأطعمة المصنعة أو السريعة؟", points: 2 },
                         { q: "هل تستخدم منتجات التنظيف أو العناية الشخصية التقليدية (غير الطبيعية)؟", points: 2 },
                         { q: "هل تعاني من صداع، تعب، أو حساسية كيميائية (للعطور مثلاً)؟", points: 2 },
-                        { q: "هل حركة أمعائك منتظمة (على الأقل مرة واحدة يومياً)؟", points: -2 }, // Negative points for good habit
-                        { q: "هل تتعرق بانتظام من خلال التمارين الرياضية أو الساونا؟", points: -1 }, // Negative points for good habit
+                        { q: "هل حركة أمعائك منتظمة (على الأقل مرة واحدة يومياً)؟", points: -2 }, 
+                        { q: "هل تتعرق بانتظام من خلال التمارين الرياضية أو الساونا؟", points: -1 },
                     ],
                     results: [
                         { score: -3, text: "درجة سمية منخفضة جدًا. يبدو أنك تقوم بعمل رائع في تقليل تعرضك للسموم ودعم قدرة جسمك على التخلص منها." },
@@ -1942,6 +1966,24 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                         { score: 3, text: "درجة سمية معتدلة إلى عالية. قد يستفيد جسمك بشكل كبير من استراتيجيات دعم إزالة السموم وتقليل التعرض للمواد الكيميائية." },
                         { score: 6, text: "درجة سمية عالية. من المهم اتخاذ خطوات جادة لتقليل تعرضك للسموم ودعم مسارات التخلص منها في الكبد والأمعاء والجلد." }
                     ]
+                },
+                'luscher-color-test': {
+                    title: 'اختبار لوشير المبسط للألوان',
+                    isColorTest: true,
+                    colors: [
+                        { name: 'أزرق', hex: '#004084' }, { name: 'أخضر', hex: '#006400' }, { name: 'أحمر', hex: '#b00000' }, { name: 'أصفر', hex: '#ffd700' },
+                        { name: 'بنفسجي', hex: '#6a0dad' }, { name: 'بني', hex: '#8b4513' }, { name: 'أسود', hex: '#000000' }, { name: 'رمادي', hex: '#808080' }
+                    ],
+                    interpretations: {
+                        'أزرق': 'يشير إلى الحاجة إلى الهدوء والسكينة والرضا. اختيارك له أولاً يعكس رغبة في بيئة مستقرة ومتناغمة.',
+                        'أخضر': 'يمثل الثبات والعزيمة والمثابرة. اختياره يعبر عن رغبة في تأكيد الذات والسيطرة على مسار الحياة.',
+                        'أحمر': 'يرمز إلى الطاقة والحيوية والرغبة في الفعل والإنجاز. اختياره يعكس حالة من الإثارة والقوة الدافعة.',
+                        'أصفر': 'يعبر عن الأمل والتفاؤل والرغبة في التحرر والمستقبل المشرق. اختياره يشير إلى البحث عن السعادة والتوسع.',
+                        'بنفسجي': 'مزيج من الأحمر والأزرق، يرمز إلى الرغبة في علاقة صوفية أو سحرية. قد يعبر عن عدم النضج أو الحاجة للهروب من الواقع.',
+                        'بني': 'يمثل الجذور والحواس الجسدية. قد يشير اختياره إلى الشعور بالإرهاق والحاجة إلى الراحة واستعادة الحيوية الجسدية.',
+                        'أسود': 'يرمز إلى النفي والرفض والتخلي. اختياره كأول لون قد يشير إلى التمرد ضد الوضع الحالي أو الشعور بالضغط الشديد.',
+                        'رمادي': 'يمثل الحياد وعدم الرغبة في المشاركة. اختياره قد يعبر عن رغبة في عزل النفس عن الصراعات أو التحفيز الزائد.'
+                    }
                 }
             };
 
@@ -1959,9 +2001,18 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
             
             function startQuiz(quizId) {
                 const quizData = quizzes[quizId];
+                if (quizData.isColorTest) {
+                    renderColorTest(quizData);
+                } else {
+                    renderQuestionnaire(quizData);
+                }
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.add('is-open'), 10);
+            }
+            
+            function renderQuestionnaire(quizData) {
                 let currentQuestion = 0;
                 let score = 0;
-
                 function renderQuestion() {
                     if (currentQuestion >= quizData.questions.length) {
                         renderResult();
@@ -1979,19 +2030,13 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                     `;
                     document.querySelectorAll('.quiz-answer-btn').forEach(btn => {
                         btn.addEventListener('click', (e) => {
-                            if (e.target.dataset.answer === 'yes') {
-                                score += q.points;
-                            } else {
-                                if (q.points < 0) {
-                                    score -= q.points;
-                                }
-                            }
+                            if (e.target.dataset.answer === 'yes') score += q.points;
+                            else if (q.points < 0) score -= q.points;
                             currentQuestion++;
                             renderQuestion();
                         });
                     });
                 }
-                
                 function renderResult() {
                     let resultText = '';
                     for (let i = quizData.results.length - 1; i >= 0; i--) {
@@ -2000,22 +2045,82 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                             break;
                         }
                     }
-                     modalContent.innerHTML = `
-                        <h3 class="text-2xl font-bold mb-2">النتيجة</h3>
-                        <div class="bg-gray-100 p-6 rounded-lg text-center">
-                            <p class="text-lg mb-2">درجتك هي: <span class="font-bold text-2xl text-[--primary-color]">${score}</span></p>
-                            <p class="text-gray-700">${resultText}</p>
-                        </div>
-                        <div class="text-center mt-6">
-                            <button class="close-quiz-modal-btn btn btn-primary text-white py-2 px-6 rounded-full">إغلاق</button>
-                        </div>
-                    `;
+                     modalContent.innerHTML = `<h3 class="text-2xl font-bold mb-2">النتيجة</h3><div class="bg-gray-100 p-6 rounded-lg text-center"><p class="text-lg mb-2">درجتك هي: <span class="font-bold text-2xl text-[--primary-color]">${score}</span></p><p class="text-gray-700">${resultText}</p></div><div class="text-center mt-6"><button class="close-quiz-modal-btn btn btn-primary text-white py-2 px-6 rounded-full">إغلاق</button></div>`;
                     modalContent.querySelector('.close-quiz-modal-btn').addEventListener('click', hideQuizModal);
                 }
-                
-                modal.classList.remove('hidden');
-                setTimeout(() => modal.classList.add('is-open'), 10);
                 renderQuestion();
+            }
+
+            function renderColorTest(quizData) {
+                let selectedOrder = [];
+                const totalColors = quizData.colors.length;
+
+                function updateInstructions() {
+                     const instructionEl = modalContent.querySelector('#luscher-instructions');
+                     if(instructionEl) {
+                        const remaining = totalColors - selectedOrder.length;
+                        if (remaining > 0) {
+                           instructionEl.textContent = `اختر اللون المفضل لديك من بين الألوان المتبقية. (${remaining} متبقي)`;
+                        } else {
+                           instructionEl.textContent = 'اكتمل الاختيار! انقر أدناه للحصول على تحليلك.';
+                        }
+                     }
+                }
+
+                function handleColorClick(e) {
+                    const swatch = e.target;
+                    if (swatch.classList.contains('selected')) return;
+
+                    selectedOrder.push(swatch.dataset.colorName);
+                    swatch.classList.add('selected');
+                    swatch.setAttribute('data-order', selectedOrder.length);
+                    
+                    updateInstructions();
+
+                    if (selectedOrder.length === totalColors) {
+                        const analyzeBtn = modalContent.querySelector('#analyze-luscher-btn');
+                        if(analyzeBtn) {
+                           analyzeBtn.classList.remove('hidden');
+                           analyzeBtn.classList.add('flex');
+                        }
+                    }
+                }
+
+                modalContent.innerHTML = `
+                    <h3 class="text-2xl font-bold mb-2">${quizData.title}</h3>
+                    <p id="luscher-instructions" class="text-gray-600 mb-4 text-center">اختر اللون المفضل لديك من بين الألوان المتبقية. (8 متبقي)</p>
+                    <div class="color-swatch-container">
+                        ${quizData.colors.map(c => `<div class="color-swatch" data-color-name="${c.name}" style="background-color: ${c.hex};"></div>`).join('')}
+                    </div>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <p><strong>إخلاء مسؤولية:</strong> هذا الاختبار هو نسخة مبسطة لأغراض الاستكشاف الذاتي فقط ولا يمثل تشخيصاً نفسياً أو طبياً كاملاً.</p>
+                    </div>
+                    <div class="text-center mt-6">
+                        <button id="analyze-luscher-btn" class="hidden btn btn-primary text-white py-2 px-8 rounded-full">احصل على التحليل</button>
+                    </div>
+                `;
+
+                const swatches = modalContent.querySelectorAll('.color-swatch');
+                swatches.forEach(swatch => swatch.addEventListener('click', handleColorClick));
+
+                modalContent.querySelector('#analyze-luscher-btn').addEventListener('click', () => {
+                    const firstChoice = selectedOrder[0];
+                    const lastChoice = selectedOrder[7];
+                    const analysis = `
+                        <h3 class="text-2xl font-bold mb-2">تحليل اختياراتك</h3>
+                        <div class="text-right space-y-3">
+                           <p><strong>تفضيلك الأول (<span class="font-bold text-green-600">هدف مرغوب</span>): ${firstChoice}</strong></p>
+                           <p class="text-gray-700 pr-4">${quizData.interpretations[firstChoice]}</p>
+                           <p><strong>تفضيلك الأخير (<span class="font-bold text-red-600">صفة مرفوضة</span>): ${lastChoice}</strong></p>
+                           <p class="text-gray-700 pr-4">رفضك للون ${lastChoice} قد يشير إلى أنك ترفض بوعي أو بغير وعي الصفات التي يمثلها. ${quizData.interpretations[lastChoice]}</p>
+                        </div>
+                        <div class="text-center mt-6">
+                           <button class="close-quiz-modal-btn btn btn-primary text-white py-2 px-6 rounded-full">إغلاق</button>
+                        </div>
+                    `;
+                    modalContent.innerHTML = analysis;
+                    modalContent.querySelector('.close-quiz-modal-btn').addEventListener('click', hideQuizModal);
+                });
             }
         }
 
