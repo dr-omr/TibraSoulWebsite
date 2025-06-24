@@ -19,10 +19,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- 3D Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TorusKnotGeometry.js"></script>
 
 
     <style>
@@ -143,14 +139,24 @@
         #audio-progress-bar { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: var(--accent-light); outline: none; transition: opacity .2s; }
         #audio-progress-bar::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--primary-color); cursor: pointer; }
         
-        /* --- BODY MAP (3D UPGRADE) --- */
-        #body-map-container {
-            height: 500px;
-            cursor: grab;
-            background-color: var(--secondary-color);
-            border-radius: 1rem;
+        /* --- BODY MAP (SVG UPGRADE) --- */
+        #body-map-svg .organ-path {
+            fill: rgba(90, 110, 90, 0.1); /* Lighter base fill */
+            stroke: var(--primary-dark);
+            stroke-width: 1;
+            transition: fill 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
         }
-        #body-map-container:active { cursor: grabbing; }
+        #body-map-svg .organ-path:hover {
+            fill: rgba(200, 160, 125, 0.7); /* Accent color on hover */
+            transform: scale(1.02);
+            stroke-width: 1.5;
+        }
+        #body-map-svg .organ-path.selected {
+            fill: var(--accent-color);
+            stroke: var(--primary-dark);
+            stroke-width: 2;
+        }
 
         #body-map-info {
              transition: opacity 0.5s ease, transform 0.5s ease;
@@ -205,6 +211,51 @@
             color: white;
             text-shadow: 0 0 5px black;
         }
+        
+        /* --- FAQ Section --- */
+        .faq-section {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .faq-section details {
+            border-bottom: 1px solid var(--accent-light);
+            padding: 1.5rem;
+        }
+        .faq-section details:last-child {
+            border-bottom: none;
+        }
+        .faq-section summary {
+            font-weight: 700;
+            color: var(--primary-dark);
+            cursor: pointer;
+            list-style: none; /* Hide default arrow */
+            position: relative;
+            padding-left: 2rem;
+        }
+        .faq-section summary::-webkit-details-marker {
+            display: none; /* Hide default arrow for Chrome/Safari */
+        }
+        .faq-section summary::before {
+            content: '+';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        .faq-section details[open] summary::before {
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .faq-section details[open] p {
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="bg-secondary-color text-text-dark">
@@ -212,8 +263,8 @@
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-sm shadow-lg sticky top-0 z-50 transition-shadow duration-300">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold text-primary-dark nav-link" data-view="hero">
-                <span style="text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">د. عمر العماد</span>
+            <a href="#" class="font-brand text-5xl text-primary-dark nav-link" data-view="hero" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+                د. عمر العماد
             </a>
             <div class="hidden md:flex items-center space-x-reverse space-x-6">
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="about">عني</a>
@@ -258,8 +309,8 @@
             <div class="absolute inset-0 bg-cover bg-center hero-bg" style="background-image: url('https://images.unsplash.com/photo-1542601906-8b6aBA801697?q=80&w=2070&auto=format&fit=crop');"></div>
             <div class="absolute inset-0 hero-gradient"></div>
             <div class="relative z-10 p-6 fade-in-up">
-                <h1 class="text-5xl md:text-7xl font-bold mb-4">د. عمر العماد</h1>
-                <h2 class="font-brand text-5xl md:text-7xl mb-2 text-accent-gold">ṬibraSoul</h2>
+                <h1 class="font-brand text-6xl md:text-8xl mb-4 text-accent-gold" style="text-shadow: 2px 2px 5px rgba(0,0,0,0.5);">ṬibraSoul</h1>
+                <h2 class="text-4xl md:text-6xl font-bold mb-2">د. عمر العماد</h2>
                 <p class="text-lg md:text-xl max-w-3xl mx-auto">رحلتك نحو الشفاء المتكامل تبدأ هنا</p>
                 <a href="#" class="nav-link mt-8 inline-block btn bg-white text-[--primary-color] font-bold py-3 px-8 rounded-full text-lg btn-glow" data-view="dashboard">اكتشف خدماتنا</a>
             </div>
@@ -276,7 +327,7 @@
                         <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-magic-wand-sparkles"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الأدوات الذكية</h3>
                         <p class="text-gray-600 mb-6">استخدم أدوات الذكاء الاصطناعي للتشخيص، إنشاء الخطط العلاجية، الحصول على توصيات، والمزيد.</p>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="blood-test-decoder">فك شفرة التحاليل</button>
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="diagnosis">التشخيص</button>
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="treatment-plan">خطة علاجية</button>
@@ -284,6 +335,7 @@
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="awareness-exercise">تمرين وعي</button>
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="consultation">استشارة آلية</button>
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="intention">نية اليوم</button>
+                           <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="hair-protocol">بروتوكول الشعر</button>
                         </div>
                     </div>
 
@@ -579,7 +631,7 @@
             </div>
         </section>
 
-        <!-- Body Map Section (3D UPGRADE) -->
+        <!-- Body Map Section (SVG UPGRADE) -->
         <section id="view-body-map" class="page-view py-20 bg-white hidden">
             <div class="container mx-auto px-6">
                  <div class="text-right mb-12">
@@ -590,13 +642,31 @@
                  </div>
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-bold mb-4 section-title">خريطة الجسد الشعوري</h2>
-                    <p class="max-w-3xl mx-auto text-lg">استخدم الفأرة لتدوير النموذج. انقر على أي عضو لاستكشاف الأمراض المرتبطة به وأسبابها الشعورية العميقة بناءً على مبادئ الطب الشعوري.</p>
+                    <p class="max-w-3xl mx-auto text-lg">انقر على أي عضو لاستكشاف الأمراض المرتبطة به وأسبابها الشعورية العميقة بناءً على مبادئ الطب الشعوري.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                    <!-- 3D Body Map Container -->
-                    <div id="body-map-container" class="md:col-span-1 w-full rounded-lg shadow-lg">
-                        <!-- three.js canvas will be injected here -->
+                    <!-- SVG Body Map Container -->
+                    <div id="body-map-svg-container" class="md:col-span-1 w-full rounded-lg shadow-lg flex justify-center items-center p-4">
+                       <svg id="body-map-svg" class="w-full max-w-xs h-auto" viewBox="0 0 300 600" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Base Body Outline -->
+                            <path d="M150 580 C 120 500, 110 400, 110 350 C 110 250, 120 200, 150 180 C 180 200, 190 250, 190 350 C 190 400, 180 500, 150 580 Z" fill="rgba(230, 211, 193, 0.2)" stroke="#ccc" stroke-width="0.5"/>
+                            <path d="M150 180 C 120 180, 100 130, 150 50 C 200 130, 180 180, 150 180Z" fill="rgba(230, 211, 193, 0.2)" stroke="#ccc" stroke-width="0.5"/>
+                            <!-- Organs -->
+                            <path class="organ-path" data-organ="brain" d="M150,110 a55,55 0 1,0 0.1,0 Z" />
+                            <path class="organ-path" data-organ="thyroid" d="M150,195 a25,12 0 0,0 0,-1 Z" />
+                            <path class="organ-path" data-organ="heart" d="M150 250 C 140 240, 120 245, 125 265 S 150 280, 150 280 S 175 265, 175 265 S 160 240, 150 250 Z" />
+                            <path class="organ-path" data-organ="liver" d="M125,320 a40,25 0 0,1 50,0 l-5 -30 l-40 0 l-5 30 Z" />
+                            <path class="organ-path" data-organ="gut" d="M150,380 a45,30 0 1,0 0.1,0 Z M150,380 a30,20 0 1,1 0.1,0 Z" />
+                            <g data-organ="adrenals" class="organ-path">
+                                <path d="M120,310 a15,8 0 0,1 10,-5" />
+                                <path d="M170,310 a15,8 0 0,0 -10,-5" />
+                            </g>
+                             <g data-organ="kidneys" class="organ-path">
+                                <path d="M125 340 C 115 340, 110 370, 125 370 C 135 370, 130 340, 125 340 Z" />
+                                <path d="M175 340 C 165 340, 160 370, 175 370 C 185 370, 180 340, 175 340 Z" />
+                            </g>
+                        </svg>
                     </div>
 
                     <!-- Info Panel -->
@@ -796,25 +866,27 @@
             </div>
         </section>
         
-        <!-- Mindfulness Moment Section -->
-        <section class="py-20 bg-gray-50">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4 section-title">لحظة هدوء</h2>
-                <p class="max-w-2xl mx-auto mb-8 text-lg">خذ دقيقة من يومك لإعادة شحن طاقتك وتهدئة جهازك العصبي مع هذا التمرين التنفسي الموجه.</p>
-                <div class="max-w-md mx-auto fade-in-up">
-                    <div class="audio-player">
-                         <div class="flex items-center">
-                             <button id="audio-play-pause-btn" class="text-4xl text-[--primary-color] hover:text-[--primary-dark] transition-colors">
-                                 <i class="fas fa-play-circle"></i>
-                             </button>
-                             <div class="flex-grow mx-4 text-right">
-                                 <div class="font-bold text-lg text-text-dark">تمرين التنفس العميق</div>
-                                 <div id="audio-time" class="text-sm text-gray-600">00:00 / 01:00</div>
-                                 <input type="range" id="audio-progress-bar" value="0" step="1" class="w-full mt-2">
-                             </div>
-                         </div>
-                    </div>
-                    <audio id="guided-audio" src="https://firebasestorage.googleapis.com/v0/b/tibrasoul.appspot.com/o/audio%2F1-minute-breathing-meditation.mp3?alt=media&token=48734898-1e43-4158-b7a4-9dfc120336b1"></audio>
+        <!-- FAQ Section (NEW) -->
+        <section class="py-20 bg-secondary-color">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold mb-12 text-center section-title">أسئلة شائعة</h2>
+                <div class="max-w-4xl mx-auto faq-section">
+                    <details>
+                        <summary>متى يُنصح باستخدام أداة التشخيص الآلي؟</summary>
+                        <p class="mt-4 text-gray-700">أداة التشخيص الآلي مصممة لتكون نقطة بداية استكشافية عندما تشعر بأعراض غير واضحة أو متعددة. إنها تساعد في ربط الأعراض الجسدية بالمشاعر ونمط الحياة لتقديم رؤية شمولية محتملة، ولكنها لا تغني أبداً عن استشارة طبية متخصصة لتأكيد التشخيص.</p>
+                    </details>
+                    <details>
+                        <summary>ما الفرق بين "خطة علاجية" و"تشخيص"؟</summary>
+                        <p class="mt-4 text-gray-700">التشخيص يهدف إلى تحديد "ماذا" يحدث في جسمك بناءً على الأعراض التي تقدمها. أما الخطة العلاجية فتهدف إلى تحديد "كيف" يمكن معالجة هذا التشخيص أو مجموعة الأعراض من خلال اقتراح بروتوكول علاجي يتضمن تغذية، مكملات، ونصائح حياتية. يمكنك استخدام نتيجة التشخيص كمدخل لطلب خطة علاجية.</p>
+                    </details>
+                     <details>
+                        <summary>هل "خريطة الجسد الشعوري" علمية؟</summary>
+                        <p class="mt-4 text-gray-700">خريطة الجسد الشعوري مبنية على مبادئ الطب الشعوري والطب الألماني الحديث (GNM)، وهي مدارس ترى أن لكل مرض جسدي جذر أو صدمة شعورية مرتبطة به. بينما لا تزال هذه الأفكار في طور البحث في الأوساط العلمية التقليدية، فإنها تقدم منظوراً قوياً للشفاء الذاتي وفهم أعمق لرسائل أجسادنا.</p>
+                    </details>
+                    <details>
+                        <summary>هل يمكنني الاعتماد على بروتوكول الشعر فقط؟</summary>
+                        <p class="mt-4 text-gray-700">البروتوكول المقدم هو مجموعة من أفضل الممارسات الشمولية التي أثبتت فعاليتها للكثيرين. ومع ذلك، تختلف الاستجابة من شخص لآخر. للحصول على أفضل النتائج، يُفضل دمج البروتوكول مع نظام غذائي صحي، إدارة للتوتر، ونوم كافٍ. هو جزء من منظومة متكاملة وليس حلاً سحرياً منفرداً.</p>
+                    </details>
                 </div>
             </div>
         </section>
@@ -839,6 +911,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" class="hidden fixed bottom-5 right-5 bg-[--primary-color] text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-2xl transition-opacity duration-300 hover:bg-[--primary-dark]">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/967771447111" class="whatsapp-float" target="_blank" aria-label="تواصل معنا عبر واتساب">
@@ -937,13 +1014,6 @@
              if(targetView) {
                  targetView.classList.remove('hidden');
                  window.scrollTo(0, 0);
-
-                if (viewId === 'body-map') {
-                     const canvasContainer = document.getElementById('body-map-container');
-                     if (canvasContainer && !canvasContainer.querySelector('canvas')) {
-                        init3DBodyMap();
-                     }
-                 }
 
                  const elementsToAnimate = targetView.querySelectorAll('.fade-in-up');
                  elementsToAnimate.forEach(el => el.classList.remove('is-visible'));
@@ -1163,6 +1233,60 @@
                     const tool = button.dataset.tool;
                     let modalHTML = '';
                     switch(tool) {
+                        case 'hair-protocol':
+                            modalHTML = `
+                                <button class="close-modal-btn absolute top-4 left-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button>
+                                <h3 class="text-2xl font-bold mb-4 text-center text-[--primary-color]">البروتوكول الشمولي لعلاج الشعر</h3>
+                                <div class="text-right space-y-4">
+                                    <p class="text-center text-gray-600 mb-4">بروتوكول علاجي شامل لتأخير الشيب وتحفيز تصبغ الشعر وتقليل التساقط.</p>
+                                    
+                                    <div class="p-4 bg-gray-50 rounded-lg">
+                                        <h4 class="font-bold text-lg mb-2 text-[--primary-dark]">الجزء 1: الزيوت العلاجية الموضعية (2-3 مرات أسبوعياً)</h4>
+                                        <p><strong>التركيبة:</strong></p>
+                                        <ul class="list-disc list-inside pr-4">
+                                            <li>زيت إكليل الجبل: 10 مل</li>
+                                            <li>زيت النعناع: 5 مل</li>
+                                            <li>زيت الليمون: 5 مل</li>
+                                            <li>زيت السمسم (كزيت حامل): 30 مل</li>
+                                            <li>زيت الخروع (اختياري للتكثيف): 10 مل</li>
+                                            <li>كيروسين طبي أو بارافين طبي: 5 مل</li>
+                                        </ul>
+                                        <p class="mt-2"><strong>طريقة الاستخدام:</strong> امزج المكونات، دفئها قليلاً، دلك فروة الرأس لـ 5-10 دقائق، واتركها لساعتين على الأقل قبل غسلها بشامبو طبيعي.</p>
+                                    </div>
+
+                                    <div class="p-4 bg-gray-50 rounded-lg">
+                                        <h4 class="font-bold text-lg mb-2 text-[--primary-dark]">الجزء 2: مكملات غذائية يومية</h4>
+                                         <ul class="list-disc list-inside pr-4">
+                                            <li><strong>صباحًا بعد الفطور:</strong> Zinc (30-50 ملغ) مع Vitamin C (Liposomal) (500-1000 ملغ)</li>
+                                            <li><strong>بعد ساعتين من الزنك:</strong> Copper (2-3 ملغ)</li>
+                                            <li><strong>صباحًا أو مساءً:</strong> Fo-Ti (كبسولة 500-1000 ملغ) - <span class="text-red-500 font-bold">ينصح بعمل تحليل وظائف كبد.</span></li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="p-4 bg-gray-50 rounded-lg">
+                                        <h4 class="font-bold text-lg mb-2 text-[--primary-dark]">الجزء 3: قناع الشعر الطبيعي (مرة أسبوعياً)</h4>
+                                        <p><strong>التركيبة:</strong> ملعقة كبيرة سدر بودرة، ملعقة صغيرة عكبر نحل، نصف ملعقة صغيرة بذور الخلة المطحونة، 2 ملعقة كبيرة خل تفاح طبيعي، وماء دافئ للعجن.</p>
+                                        <p class="mt-2"><strong>طريقة الاستخدام:</strong> يوضع على الفروة والشعر لمدة 30-60 دقيقة ثم يغسل جيداً.</p>
+                                    </div>
+
+                                    <div class="p-4 bg-gray-50 rounded-lg">
+                                        <h4 class="font-bold text-lg mb-2 text-[--primary-dark]">الجزء 4: مادة ORMUS</h4>
+                                        <p><strong>الجرعة:</strong> ملعقة صغيرة يومياً صباحاً على معدة فارغة من مصدر موثوق.</p>
+                                        <p><strong>الفوائد:</strong> يزيد التركيز، يوازن الطاقات، ويحفز تجدد الخلايا الصبغية.</p>
+                                        <p class="text-red-500 font-bold mt-2">تحذير: لا تستخدم ORMUS مع أدوية نفسية أو مناعية دون استشارة طبيب.</p>
+                                    </div>
+
+                                    <div class="p-4 bg-green-50 rounded-lg border-r-4 border-green-500">
+                                        <h4 class="font-bold text-lg mb-2 text-green-800">نصائح عامة داعمة</h4>
+                                        <ul class="list-disc list-inside pr-4">
+                                            <li>اتبع نظامًا غذائيًا غنيًا بفيتامينات B12، حمض الفوليك، والسيليكا.</li>
+                                            <li>خفف التوتر، لأن الإجهاد يزيد من الشيب.</li>
+                                            <li>تجنب الصبغات الكيميائية القوية أثناء البروتوكول.</li>
+                                            <li>أكثر من شرب العصائر الخضراء.</li>
+                                        </ul>
+                                    </div>
+                                </div>`;
+                             break;
                          case 'blood-test-decoder':
                              modalHTML = `
                                  <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">فك شفرة تحاليل الدم</h3>
@@ -1739,6 +1863,15 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                 });
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+            
+            // Back to top button
+            const backToTopBtn = document.getElementById('back-to-top-btn');
+            window.addEventListener('scroll', () => {
+                backToTopBtn.classList.toggle('hidden', window.scrollY < 300);
+            }, { passive: true });
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         }
 
         function initCreativeEffects() {
@@ -1771,8 +1904,14 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
             });
         }
 
-        // --- BODY MAP MODULE (Lazy Init) ---
+        // --- BODY MAP MODULE (SVG UPGRADE) ---
         function initBodyMap() {
+            const infoContainer = document.getElementById('body-map-info');
+            const organNameEl = document.getElementById('organ-name');
+            const organDetailsEl = document.getElementById('organ-details');
+            const organPaths = document.querySelectorAll('#body-map-svg .organ-path');
+            if (!infoContainer) return;
+            
             window.organData = {
                 brain: {
                     name: 'الدماغ والجهاز العصبي',
@@ -1817,111 +1956,19 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                     holisticAdvice: 'واجه مخاوفك بدلاً من الهروب منها، قيم علاقاتك وابنِ روابط صحية، اشرب كمية كافية من الماء بنية التطهير، مارس تقنيات التأريض.'
                 }
             };
-        }
-
-        // --- 3D BODY MAP MODULE (PROFESSIONAL UPGRADE) ---
-        function init3DBodyMap() {
-            const container = document.getElementById('body-map-container');
-            const infoContainer = document.getElementById('body-map-info');
-            const organNameEl = document.getElementById('organ-name');
-            const organDetailsEl = document.getElementById('organ-details');
-            if(!container || container.querySelector('canvas')) return; // Exit if already initialized
-            container.innerHTML = ''; 
-
-            const scene = new THREE.Scene();
-            scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim());
-            const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(0, 1.5, 12);
-
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            container.appendChild(renderer.domElement);
-
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.1;
-            controls.target.set(0, 1.2, 0);
-
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-            scene.add(ambientLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
-            directionalLight.position.set(8, 12, 10);
-            scene.add(directionalLight);
             
-            const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0xe6d3c1, transparent: true, opacity: 0.1, roughness: 0.7, metalness: 0.1 });
-            const organMaterial = new THREE.MeshStandardMaterial({ color: 0x5a6e5a, roughness: 0.5, metalness: 0.1 });
-            const hoverMaterial = new THREE.MeshStandardMaterial({ color: 0xe0c4a4, emissive: 0xc8a07d, roughness: 0.5, metalness: 0.1 });
-            
-            const bodyParts = [];
-            
-            const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.5, 2.2, 16), bodyMaterial);
-            torso.position.y = 1.1;
-            scene.add(torso);
-            
-            const head = new THREE.Mesh(new THREE.SphereGeometry(0.6, 32, 32), bodyMaterial);
-            head.position.y = 2.8;
-            scene.add(head);
-
-            const createOrgan = (geometry, position, name) => {
-                const organ = new THREE.Mesh(geometry, organMaterial.clone());
-                organ.position.copy(position);
-                organ.userData = { id: name, originalMaterial: organ.material };
-                scene.add(organ);
-                bodyParts.push(organ);
-                return organ;
-            };
-
-            const brain = createOrgan(new THREE.TorusKnotGeometry(0.3, 0.08, 100, 12), new THREE.Vector3(0, 2.8, 0), 'brain');
-            createOrgan(new THREE.BoxGeometry(0.5, 0.2, 0.1), new THREE.Vector3(0, 2.1, 0.3), 'thyroid');
-            const heart = createOrgan(new THREE.OctahedronGeometry(0.3, 0), new THREE.Vector3(0.1, 1.5, 0.2), 'heart');
-            createOrgan(new THREE.CylinderGeometry(0.2, 0.4, 0.8, 16), new THREE.Vector3(-0.35, 1, 0.1), 'liver');
-            createOrgan(new THREE.TorusGeometry(0.25, 0.1, 8, 20), new THREE.Vector3(0, 0.5, 0.1), 'gut');
-            const adrenal1 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(0.2, 0.9, -0.1), 'adrenals');
-            const adrenal2 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(-0.2, 0.9, -0.1), 'adrenals');
-            adrenal2.userData.id = 'adrenals';
-            createOrgan(new THREE.SphereGeometry(0.25, 16, 16), new THREE.Vector3(0.4, 0.8, -0.2), 'kidneys');
-            createOrgan(new THREE.SphereGeometry(0.25, 16, 16), new THREE.Vector3(-0.4, 0.8, -0.2), 'kidneys');
-
-
-            const createEnergyVeins = () => {
-                for (let i = 0; i < 10; i++) {
-                    const points = [];
-                    for (let j = 0; j < 5; j++) {
-                        points.push(new THREE.Vector3(
-                            (Math.random() - 0.5) * 2,
-                            Math.random() * 3.5,
-                            (Math.random() - 0.5) * 2
-                        ));
-                    }
-                    const curve = new THREE.CatmullRomCurve3(points);
-                    const tubeGeo = new THREE.TubeGeometry(curve, 32, 0.01 + Math.random() * 0.02, 8, false);
-                    const tubeMat = new THREE.MeshBasicMaterial({ color: 0xc8a07d, transparent: true, opacity: 0.3 + Math.random() * 0.3 });
-                    const tube = new THREE.Mesh(tubeGeo, tubeMat);
-                    scene.add(tube);
-                }
-            };
-            createEnergyVeins();
-            
-            const raycaster = new THREE.Raycaster();
-            const mouse = new THREE.Vector2();
-            let intersectedObject = null;
-
-            function onPointerMove(event) {
-                const rect = renderer.domElement.getBoundingClientRect();
-                mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-                mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-            }
-
-            function onPointerClick(event) {
-                raycaster.setFromCamera(mouse, camera);
-                const intersects = raycaster.intersectObjects(bodyParts);
-                if (intersects.length > 0) {
-                    const organKey = intersects[0].object.userData.id;
+            organPaths.forEach(path => {
+                path.addEventListener('click', () => {
+                    const organKey = path.dataset.organ;
                     const data = window.organData[organKey];
+
+                    organPaths.forEach(p => p.classList.remove('selected'));
+                    path.classList.add('selected');
+
                     if (data) {
                         infoContainer.style.opacity = 0;
                         infoContainer.style.transform = 'translateY(20px)';
+                        
                         setTimeout(() => {
                             organNameEl.textContent = data.name;
                             organDetailsEl.innerHTML = `
@@ -1933,44 +1980,9 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                             infoContainer.style.transform = 'translateY(0)';
                         }, 300);
                     }
-                }
-            }
-
-            let clock = new THREE.Clock();
-            function animate() {
-                requestAnimationFrame(animate);
-                controls.update();
-                const delta = clock.getDelta();
-                heart.rotation.y += delta * 0.5;
-                brain.rotation.x += delta * 0.2;
-                
-                raycaster.setFromCamera(mouse, camera);
-                const intersects = raycaster.intersectObjects(bodyParts);
-                
-                if (intersects.length > 0) {
-                    if (intersectedObject !== intersects[0].object) {
-                        if (intersectedObject) intersectedObject.material = intersectedObject.userData.originalMaterial;
-                        intersectedObject = intersects[0].object;
-                        intersectedObject.material = hoverMaterial;
-                    }
-                } else {
-                    if (intersectedObject) intersectedObject.material = intersectedObject.userData.originalMaterial;
-                    intersectedObject = null;
-                }
-                renderer.render(scene, camera);
-            }
-
-            window.addEventListener('resize', () => {
-                camera.aspect = container.clientWidth / container.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(container.clientWidth, container.clientHeight);
-            }, false);
-            container.addEventListener('pointermove', onPointerMove);
-            container.addEventListener('click', onPointerClick);
-            
-            animate();
+                });
+            });
         }
-
 
         // --- QUIZZES MODULE (COMPLETED) ---
         function initQuizzes() {
@@ -2119,7 +2131,7 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                 const totalColors = quizData.colors.length;
 
                 function updateInstructions() {
-                     const instructionEl = modalContent.querySelector('#luscher-instructions');
+                     const instructionEl = modalContent.querySelector('#luscher-instruction');
                      if(instructionEl) {
                         const remaining = totalColors - selectedOrder.length;
                         if (remaining > 0) {
