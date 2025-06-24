@@ -184,7 +184,7 @@
                      <button id="login-btn" class="font-bold text-[--primary-color] hover:underline">تسجيل الدخول</button>
                      <div id="profile-section-nav" class="hidden items-center">
                          <a href="#" class="nav-link font-bold text-[--primary-color] hover:underline ml-4" data-view="premium-content">ملف المريض</a>
-                         <img id="user-avatar" class="w-8 h-8 rounded-full" alt="صورة المستخدم" onerror="this.src='https://placehold.co/40x40/5a6e5a/white?text=U'">
+                         <img id="user-avatar" class="w-8 h-8 rounded-full" alt="صورة المستخدم" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM1YTZlNWEiLz4KPHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSJ3aGl0ZSI+VTwvdGV4dD4KPC9zdmc+Cg=='">
                      </div>
                  </div>
             </div>
@@ -773,13 +773,22 @@
         import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, limit, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // =========================================================================
+        // !! ‫ملاحظة هامة للمطور: مفتاح API مطلوب !!
+        // =========================================================================
+        // ‫لجعل الأدوات الذكية تعمل، يجب عليك الحصول على مفتاح API الخاص بك من
+        // Google AI Studio ‫ووضعه هنا.
+        // 1. ‫اذهب إلى: https://aistudio.google.com/app/apikey
+        // 2. ‫أنشئ مفتاح API جديد.
+        // 3. ‫انسخ المفتاح والصقه في المتغير أدناه.
+        const GEMINI_API_KEY = "AIzaSyCcEB_ieBruV8PPJBqjY-SjziVegEuJBD0"; // <-- تم لصق المفتاح هنا
+        // =========================================================================
+
         // --- FIREBASE CONFIG ---
-        // The firebaseConfig is now loaded from the environment for security and portability.
-        // A fallback is provided from the original code to ensure functionality.
         const firebaseConfig = typeof __firebase_config !== 'undefined'
           ? JSON.parse(__firebase_config)
           : {
-              apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg",
+              apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg", // Fallback for local testing
               authDomain: "tibrasoul.firebaseapp.com",
               projectId: "tibrasoul",
               storageBucket: "tibrasoul.appspot.com",
@@ -841,9 +850,7 @@
                  targetView.classList.remove('hidden');
                  window.scrollTo(0, 0);
                  const elementsToAnimate = targetView.querySelectorAll('.fade-in-up');
-                 // Reset animation for re-triggering
                  elementsToAnimate.forEach(el => el.classList.remove('is-visible'));
-                 // Trigger animation
                  setTimeout(() => {
                     elementsToAnimate.forEach(el => {
                          el.classList.add('is-visible');
@@ -859,7 +866,6 @@
         function showNotification(message, type = 'error', duration = 4000) {
             if (notificationTimeout) clearTimeout(notificationTimeout);
             notificationMessage.textContent = message;
-            // Reset classes
             notificationToast.className = 'fixed top-20 right-5 py-3 px-6 rounded-lg shadow-xl z-[150] transition-all duration-500 transform text-white';
             if (type === 'success') {
                 notificationToast.classList.add('bg-green-500');
@@ -869,12 +875,12 @@
                 notificationToast.classList.add('bg-red-600');
             }
             notificationToast.classList.remove('hidden');
-            notificationToast.classList.add('translate-x-full'); // Start off-screen
+            notificationToast.classList.add('translate-x-full');
             setTimeout(() => {
-                notificationToast.classList.remove('translate-x-full'); // Slide in
+                notificationToast.classList.remove('translate-x-full');
             }, 10);
             notificationTimeout = setTimeout(() => {
-                notificationToast.classList.add('translate-x-full'); // Slide out
+                notificationToast.classList.add('translate-x-full');
                  setTimeout(() => notificationToast.classList.add('hidden'), 500);
             }, duration);
         }
@@ -898,7 +904,7 @@
                 document.getElementById('profile-link-mobile').classList.toggle('hidden', !isLoggedIn);
 
                 if (isLoggedIn) {
-                    document.getElementById('user-avatar').src = user.photoURL || 'https://placehold.co/40x40/5a6e5a/white?text=U';
+                    document.getElementById('user-avatar').src = user.photoURL || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM1YTZlNWEiLz4KPHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSJ3aGl0ZSI+VTwvdGV4dD4KPC9zdmc+Cg==';
                     document.getElementById('welcome-message').textContent = `مرحباً بك في أسرتنا، ${user.displayName || 'صديقي'}`;
                     loadPatientFileData();
                     toggleJournalView(true);
@@ -1139,23 +1145,31 @@
                 resultsDiv.classList.remove('hidden');
                 resultsDiv.innerHTML = `<div class="ai-loader"><div class="ai-loader-dots"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div><p class="mt-4 text-[--primary-color]">جاري التحليل...</p></div>`;
                 
-                // The API key is injected by the environment at runtime.
-                const apiKey = ""; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                if (!GEMINI_API_KEY) {
+                    showNotification("مفتاح Google API غير موجود. يرجى إضافته في بداية الكود.", "error");
+                    resultsDiv.innerHTML = `<p class="text-center text-red-500">خطأ: مفتاح Google API مطلوب لتشغيل هذه الأداة.</p>`;
+                    return null;
+                }
+
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
 
                 try {
                     const response = await fetch(apiUrl, {
                         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
                     });
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error("API Error Response:", errorData);
+                        throw new Error(`HTTP error! status: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
+                    }
                     const data = await response.json();
                     if (data.candidates && data.candidates[0].content.parts.length > 0) {
                         return data.candidates[0].content.parts[0].text;
                     } else { throw new Error("Invalid API response structure"); }
                 } catch (error) {
                     console.error("API Request Error:", error);
-                    resultsDiv.innerHTML = '<p class="text-center text-red-500">حدث خطأ. يرجى المحاولة مرة أخرى.</p>';
+                    resultsDiv.innerHTML = `<p class="text-center text-red-500">حدث خطأ: ${error.message}. يرجى التحقق من مفتاح API وصلاحياته.</p>`;
                     return null;
                 }
             }
@@ -1428,23 +1442,17 @@ Structure the output in Arabic with clear headings for each marker using markdow
             if (!ctx) return;
             const slidersContainer = document.getElementById('wheel-of-life-sliders');
             const getInsightBtn = document.getElementById('get-wheel-insight-btn');
-            const resultDiv = document.getElementById('wheel-of-life-result');
-
+            
             const labels = ['الصحة الجسدية', 'النمو الشخصي', 'الحياة المهنية', 'المالية', 'البيئة المحيطة', 'المرح والاستجمام', 'العلاقات الأسرية والاجتماعية', 'الحياة الروحية'];
             const initialData = Array(labels.length).fill(5);
             
-            // Create sliders
-            labels.forEach((label, index) => {
-                const sliderHTML = `
-                    <div class="flex items-center gap-4">
-                        <label for="slider-${index}" class="w-1/3 text-right">${label}</label>
-                        <input type="range" id="slider-${index}" min="0" max="10" value="5" class="range-slider flex-grow" data-index="${index}">
-                        <span id="value-${index}" class="w-8 text-center font-bold">${initialData[index]}</span>
-                    </div>`;
-                slidersContainer.innerHTML += sliderHTML;
-            });
+            slidersContainer.innerHTML = labels.map((label, index) => `
+                <div class="flex items-center gap-4">
+                    <label for="slider-${index}" class="w-1/3 text-right">${label}</label>
+                    <input type="range" id="slider-${index}" min="0" max="10" value="5" class="range-slider flex-grow" data-index="${index}">
+                    <span id="value-${index}" class="w-8 text-center font-bold">5</span>
+                </div>`).join('');
             
-            // Chart initialization
             wheelChart = new Chart(ctx, {
                 type: 'radar',
                 data: {
@@ -1462,44 +1470,21 @@ Structure the output in Arabic with clear headings for each marker using markdow
                     }]
                 },
                 options: {
-                    elements: {
-                        line: {
-                            borderWidth: 3
-                        }
-                    },
+                    elements: { line: { borderWidth: 3 } },
                     scales: {
                         r: {
-                            angleLines: {
-                                color: 'rgba(90, 110, 90, 0.3)'
-                            },
-                            grid: {
-                                color: 'rgba(90, 110, 90, 0.3)'
-                            },
-                            pointLabels: {
-                                font: {
-                                    family: "'Noto Kufi Arabic', sans-serif",
-                                    size: 13
-                                },
-                                color: '#333'
-                            },
-                            ticks: {
-                                backdropColor: 'var(--secondary-color)',
-                                color: '#555',
-                                stepSize: 2
-                            },
+                            angleLines: { color: 'rgba(90, 110, 90, 0.3)' },
+                            grid: { color: 'rgba(90, 110, 90, 0.3)' },
+                            pointLabels: { font: { family: "'Noto Kufi Arabic', sans-serif", size: 13 }, color: '#333' },
+                            ticks: { backdropColor: 'var(--secondary-color)', color: '#555', stepSize: 2 },
                             suggestedMin: 0,
                             suggestedMax: 10
                         }
                     },
-                    plugins: {
-                        legend: {
-                           display: false
-                        }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
 
-            // Event listeners
             slidersContainer.addEventListener('input', (e) => {
                 if (e.target.type === 'range') {
                     const index = e.target.dataset.index;
@@ -1522,6 +1507,13 @@ Structure the output in Arabic with clear headings for each marker using markdow
             resultDiv.style.opacity = '0';
             resultDiv.innerHTML = `<div class="ai-loader"><div class="ai-loader-dots"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div><p class="mt-4 text-[--primary-color]">جاري تحليل عجلة حياتك...</p></div>`;
 
+            if (!GEMINI_API_KEY) {
+                showNotification("مفتاح Google API غير موجود. يرجى إضافته.", "error");
+                resultDiv.innerHTML = `<p class="text-center text-red-500">خطأ: مفتاح Google API مطلوب لهذه الميزة.</p>`;
+                resultDiv.style.opacity = '1';
+                return;
+            }
+
             let userInput = "User's Wheel of Life scores are: ";
             labels.forEach((label, index) => {
                 userInput += `${label}: ${data[index]}/10, `;
@@ -1535,28 +1527,29 @@ Structure the output in Arabic with clear headings for each marker using markdow
 5.  End with an encouraging and empowering message.
 The entire response should be in warm, supportive Arabic. Start with a positive affirmation. Use markdown for lists and bolding.`;
             
-            const insightText = await handleApiRequest(prompt, 'wheel-of-life-result'); // uses a different function
-             if (insightText) {
-                resultDiv.innerHTML = `
-                    <div id="wheel-result-content" class="text-right whitespace-pre-wrap">${insightText}</div>
-                    <div class="mt-4 text-center">
-                        ${currentUser ? '<button id="save-wheel-result-btn" class="btn btn-secondary py-2 px-4 rounded-full text-sm">حفظ النتيجة في ملفي</button>' : '<p class="text-sm text-gray-500">سجل الدخول لحفظ هذه الرؤى القيمة!</p>'}
-                    </div>`;
-                if(currentUser) {
-                    document.getElementById('save-wheel-result-btn').addEventListener('click', () => {
-                         const fullResultText = `--- تقييم عجلة العافية ---\n${userInput}\n\n--- رؤى التحليل ---\n${insightText}`;
-                         saveResultToFirestore("تحليل عجلة العافية", fullResultText);
-                    });
+            try {
+                const insightText = await handleApiRequest(prompt, 'wheel-of-life-result');
+                if (insightText) {
+                    resultDiv.innerHTML = `
+                        <div id="wheel-result-content" class="text-right whitespace-pre-wrap">${insightText}</div>
+                        <div class="mt-4 text-center">
+                            ${currentUser ? '<button id="save-wheel-result-btn" class="btn btn-secondary py-2 px-4 rounded-full text-sm">حفظ النتيجة في ملفي</button>' : '<p class="text-sm text-gray-500">سجل الدخول لحفظ هذه الرؤى القيمة!</p>'}
+                        </div>`;
+                    if(currentUser) {
+                        document.getElementById('save-wheel-result-btn').addEventListener('click', () => {
+                            const fullResultText = `--- تقييم عجلة العافية ---\n${userInput}\n\n--- رؤى التحليل ---\n${insightText}`;
+                            saveResultToFirestore("تحليل عجلة العافية", fullResultText);
+                        });
+                    }
                 }
-             } else {
-                 resultDiv.innerHTML = '<p class="text-center text-red-500">حدث خطأ أثناء توليد التحليل. يرجى المحاولة مرة أخرى.</p>';
-             }
+            } catch (error) {
+                 resultDiv.innerHTML = `<p class="text-center text-red-500">حدث خطأ أثناء توليد التحليل. يرجى المحاولة مرة أخرى.</p>`;
+            }
              resultDiv.style.opacity = '1';
 
-             async function handleApiRequest(prompt, resultsDivId) { // Local definition to avoid conflict
+             async function handleApiRequest(prompt, resultsDivId) {
                 const resultsDiv = document.getElementById(resultsDivId);
-                const apiKey = "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
 
                 try {
@@ -1568,8 +1561,8 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                     } else { throw new Error("Invalid API response structure"); }
                 } catch (error) {
                     console.error("API Request Error:", error);
-                    resultsDiv.innerHTML = '<p class="text-center text-red-500">حدث خطأ. يرجى المحاولة مرة أخرى.</p>';
-                    return null;
+                    resultsDiv.innerHTML = `<p class="text-center text-red-500">حدث خطأ. يرجى التحقق من مفتاح API.</p>`;
+                    throw error;
                 }
             }
         }
