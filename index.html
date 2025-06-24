@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="د. عمر العماد - رحلتك نحو الشفاء بالطب الشمولي والوظيفي. أدوات ذكية، جلسات علاجية، ومنتجات طبيعية.">
-    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر العماد, طِبرا, عجلة الحياة, تقييم صحي, DMSO, ترددات شفائية, تشخيص ذكي, خطة علاجية, تحليل الدم, خريطة الجسم, مفكرة الأعراض, تردد النقلة الموازية, صلاح الراشد, اختبار لوشير للألوان">
+    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر العماد, طِبرا, عجلة الحياة, تقييم صحي, DMSO, ترددات شفائية, تشخيص ذكي, خطة علاجية, تحليل الدم, خريطة الجسم, مفكرة الأعراض, تردد النقلة الموازية, صلاح الراشد, اختبار لوشير للألوان, الطب الشعوري, احمد الدملاوي">
     <title>د. عمر العماد | خبير الطب الشمولي والوظيفي</title>
 
     <!-- Fonts & Icons -->
@@ -112,9 +112,9 @@
 
         /* --- FREQUENCY GENERATOR STYLES (REFINED) --- */
         #frequency-canvas { background: linear-gradient(135deg, #121212 0%, #2f3d2f 100%); border-radius: 8px; box-shadow: inset 0 0 15px rgba(0,0,0,0.6); }
-        .freq-btn.active { background-color: var(--accent-color); color: white; transform: scale(1.05); box-shadow: 0 0 15px var(--accent-color); border-color: var(--accent-color); }
+        .freq-btn.active, .music-btn.active { background-color: var(--accent-color); color: white; transform: scale(1.05); box-shadow: 0 0 15px var(--accent-color); border-color: var(--accent-color); }
         .freq-description { font-size: 0.8rem; color: #777; margin-top: 4px; }
-        .freq-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .freq-btn, .music-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 
 
         /* --- SINGLE POST STYLES --- */
@@ -154,6 +154,8 @@
 
         #body-map-info {
              transition: opacity 0.5s ease, transform 0.5s ease;
+             max-height: 500px;
+             overflow-y: auto;
         }
 
         /* --- JOURNAL (NEW) --- */
@@ -210,7 +212,9 @@
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-sm shadow-lg sticky top-0 z-50 transition-shadow duration-300">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold text-primary-dark nav-link" data-view="hero">د. عمر العماد</a>
+            <a href="#" class="text-3xl font-bold text-primary-dark nav-link" data-view="hero">
+                <span style="text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">د. عمر العماد</span>
+            </a>
             <div class="hidden md:flex items-center space-x-reverse space-x-6">
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="about">عني</a>
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="dashboard">الخدمات التفاعلية</a>
@@ -293,8 +297,8 @@
                     <!-- NEW Card: Body Map -->
                     <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="body-map">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fa-solid fa-person-chalkboard"></i></div>
-                        <h3 class="text-2xl font-bold mb-3">خريطة الجسم ثلاثية الأبعاد</h3>
-                        <p class="text-gray-600">استكشف أعضاء جسدك وافهم رسائلها من منظور شمولي.</p>
+                        <h3 class="text-2xl font-bold mb-3">خريطة الجسد الشعوري</h3>
+                        <p class="text-gray-600">استكشف أعضاء جسدك وافهم رسائلها من منظور الطب الشعوري.</p>
                     </a>
 
                     <!-- NEW Card: Symptom Journal -->
@@ -495,9 +499,35 @@
                      </button>
                  </div>
                 <h2 class="text-4xl font-bold mb-4 section-title">مولد الترددات الشفائية</h2>
-                <p class="max-w-2xl mx-auto mb-12">اختر أحد الترددات للاستماع إليها أثناء التأمل. استخدم سماعات الرأس لأفضل تأثير. تم تطوير هذا القسم بناءً على أبحاث الدكتور صلاح الراشد في مجال الترددات والطاقة.</p>
-                <div class="bg-gray-100 p-8 rounded-xl shadow-lg max-w-5xl mx-auto">
-                    <canvas id="frequency-canvas" class="w-full h-48 mb-8"></canvas>
+                <p class="max-w-2xl mx-auto mb-6">استمع للترددات النقية للتأمل العميق، أو اختر الموسيقى الهادئة للاسترخاء. استخدم سماعات الرأس لأفضل تأثير.</p>
+                
+                <div id="audio-init-prompt" class="text-center mb-8">
+                    <button id="start-audio-btn" class="btn btn-primary text-white py-3 px-8 text-lg rounded-full">
+                        <i class="fas fa-power-off mr-2"></i> بدء النظام الصوتي
+                    </button>
+                </div>
+
+                <div id="frequency-player-container" class="bg-gray-100 p-8 rounded-xl shadow-lg max-w-5xl mx-auto hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">مشغل الترددات</h3>
+                             <canvas id="frequency-canvas" class="w-full h-40 mb-4"></canvas>
+                             <button id="stop-freq-btn" class="btn btn-secondary py-2 px-6 rounded-full w-full">إيقاف التردد</button>
+                        </div>
+                        <div>
+                           <h3 class="text-2xl font-bold mb-4">موسيقى هادئة</h3>
+                           <div id="music-player" class="bg-white p-4 rounded-lg">
+                               <p id="music-title" class="font-bold text-lg">موسيقى للاسترخاء</p>
+                               <p class="text-sm text-gray-500 mb-2">تأليف: Ashot Danielyan</p>
+                               <audio id="background-music" loop src="https://cdn.pixabay.com/download/audio/2022/11/21/audio_a1bf8202ef.mp3"></audio>
+                               <div class="flex items-center gap-4 mt-2">
+                                   <button id="music-play-pause-btn" class="music-btn text-3xl text-[--primary-color]"><i class="fas fa-play"></i></button>
+                                   <input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.5" class="w-full">
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                    <hr class="my-8">
                     <h3 class="text-2xl font-bold mb-4">ترددات النقلة الموازية (Parallel Shift)</h3>
                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="parallel-shift-buttons">
                         <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="7.83">
@@ -545,7 +575,6 @@
                              <span class="freq-description">الاتصال بالنظام الروحي</span>
                         </button>
                     </div>
-                    <button id="stop-freq-btn" class="mt-8 btn btn-secondary py-2 px-6 rounded-full hidden">إيقاف التردد</button>
                 </div>
             </div>
         </section>
@@ -560,8 +589,8 @@
                      </button>
                  </div>
                 <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold mb-4 section-title">خريطة الجسم ثلاثية الأبعاد</h2>
-                    <p class="max-w-3xl mx-auto text-lg">استخدم الفأرة لتدوير النموذج. انقر على أي عضو لاستكشاف وظيفته من منظور شمولي، الأعراض المرتبطة به، وكيفية دعمه.</p>
+                    <h2 class="text-4xl font-bold mb-4 section-title">خريطة الجسد الشعوري</h2>
+                    <p class="max-w-3xl mx-auto text-lg">استخدم الفأرة لتدوير النموذج. انقر على أي عضو لاستكشاف الأمراض المرتبطة به وأسبابها الشعورية العميقة بناءً على مبادئ الطب الشعوري.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
@@ -1355,9 +1384,16 @@ Structure the output in Arabic with clear headings for each marker using markdow
 
         // --- FREQUENCY GENERATOR MODULE (ROBUST & UPGRADED) ---
         function initFrequencyGenerator() {
+            const audioPrompt = document.getElementById('audio-init-prompt');
+            const startAudioBtn = document.getElementById('start-audio-btn');
+            const playerContainer = document.getElementById('frequency-player-container');
             const stopFreqBtn = document.getElementById('stop-freq-btn');
             const canvas = document.getElementById('frequency-canvas');
-            if (!stopFreqBtn || !canvas) return;
+            const musicPlayer = document.getElementById('background-music');
+            const musicPlayPauseBtn = document.getElementById('music-play-pause-btn');
+            const musicVolumeSlider = document.getElementById('music-volume');
+
+            if (!startAudioBtn || !playerContainer) return;
 
             let audioContext, oscillator, analyser, gainNode, animationFrameId;
             let isAudioInitialized = false;
@@ -1365,18 +1401,17 @@ Structure the output in Arabic with clear headings for each marker using markdow
             
             const allFreqButtons = document.querySelectorAll('.freq-btn');
 
-            const setupAudioFirstTime = async () => {
+            const setupAudioSystem = async () => {
                 if (isAudioInitialized) return true;
                 try {
                     await Tone.start();
                     audioContext = Tone.context;
-                    analyser = audioContext.createAnalyser();
-                    gainNode = audioContext.createGain();
-                    analyser.fftSize = 1024;
-                    gainNode.connect(analyser);
-                    analyser.connect(audioContext.destination);
-                    console.log("Audio Context is ready.");
+                    analyser = new Tone.Analyser('waveform', 1024);
+                    gainNode = new Tone.Gain(0.5).toDestination();
                     isAudioInitialized = true;
+                    console.log("Audio Context is ready.");
+                    audioPrompt.classList.add('hidden');
+                    playerContainer.classList.remove('hidden');
                     return true;
                 } catch (e) {
                     console.error("Could not start Audio Context: ", e);
@@ -1385,82 +1420,66 @@ Structure the output in Arabic with clear headings for each marker using markdow
                 }
             };
             
+            startAudioBtn.addEventListener('click', setupAudioSystem);
+
             const playFrequency = (freq) => {
                 if (!isAudioInitialized) return;
+                
+                musicPlayer.pause();
+                musicPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
 
                 if (oscillator) {
-                    oscillator.stop();
                     oscillator.disconnect();
+                    oscillator.stop();
                 }
 
-                oscillator = new Tone.Oscillator(freq, "sine").connect(gainNode);
-                oscillator.volume.value = -12; // Lower volume for comfort
+                oscillator = new Tone.Oscillator(freq, "sine").connect(analyser).connect(gainNode);
+                oscillator.volume.value = -9;
                 oscillator.start();
-                gainNode.gain.rampTo(1, 0.1);
+                
                 stopFreqBtn.classList.remove('hidden');
                 if (!animationFrameId) visualize();
             };
             
             const stopFrequency = () => {
                 if (oscillator) {
-                    gainNode.gain.rampTo(0, 0.5);
-                    setTimeout(() => {
-                        oscillator.stop();
-                        oscillator.disconnect();
-                        oscillator = null;
-                        if (animationFrameId) {
-                           cancelAnimationFrame(animationFrameId);
-                           animationFrameId = null;
-                        }
-                        clearCanvas();
-                    }, 500);
+                    oscillator.stop();
+                    oscillator.disconnect();
+                    oscillator = null;
                 }
                 stopFreqBtn.classList.add('hidden');
                 allFreqButtons.forEach(b => b.classList.remove('active'));
             };
             
             function visualize() {
-                const bufferLength = analyser.frequencyBinCount;
-                const dataArray = new Uint8Array(bufferLength);
-                
                 const draw = () => {
                     animationFrameId = requestAnimationFrame(draw);
-                    if (!analyser) return;
-                    analyser.getByteTimeDomainData(dataArray);
-                    
+                    if (!analyser || !oscillator) {
+                       canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+                       return;
+                    };
+                    const waveform = analyser.getValue();
                     canvasCtx.fillStyle = '#121212';
                     canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
                     canvasCtx.lineWidth = 2;
                     canvasCtx.strokeStyle = 'rgb(200, 160, 125, 0.7)';
                     canvasCtx.beginPath();
                     
-                    const sliceWidth = canvas.width * 1.0 / bufferLength;
-                    let x = 0;
-                    for(let i = 0; i < bufferLength; i++) {
-                        const v = dataArray[i] / 128.0;
-                        const y = v * canvas.height / 2;
-                        if(i === 0) {
-                            canvasCtx.moveTo(x, y);
-                        } else {
-                            canvasCtx.lineTo(x, y);
-                        }
-                        x += sliceWidth;
+                    for (let i = 0; i < waveform.length; i++) {
+                        const x = (i / (waveform.length -1)) * canvas.width;
+                        const y = (waveform[i] + 1) / 2 * canvas.height;
+                        if (i === 0) canvasCtx.moveTo(x, y);
+                        else canvasCtx.lineTo(x, y);
                     }
-                    canvasCtx.lineTo(canvas.width, canvas.height / 2);
                     canvasCtx.stroke();
                 };
                 draw();
             }
-
-            const clearCanvas = () => {
-                canvasCtx.fillStyle = '#121212';
-                canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-            };
             
             allFreqButtons.forEach(button => {
                  button.addEventListener('click', async (e) => {
                     if (!isAudioInitialized) {
-                       const audioReady = await setupAudioFirstTime();
+                       const audioReady = await setupAudioSystem();
                        if (!audioReady) return;
                     }
                     allFreqButtons.forEach(b => b.classList.remove('active'));
@@ -1471,7 +1490,22 @@ Structure the output in Arabic with clear headings for each marker using markdow
             });
             
             stopFreqBtn.addEventListener('click', stopFrequency);
-            clearCanvas();
+            
+            // Music Player Logic
+            musicPlayPauseBtn.addEventListener('click', () => {
+                if (!isAudioInitialized) return;
+                if (musicPlayer.paused) {
+                    stopFrequency();
+                    musicPlayer.play();
+                    musicPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    musicPlayer.pause();
+                    musicPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            });
+            musicVolumeSlider.addEventListener('input', (e) => {
+                musicPlayer.volume = e.target.value;
+            });
         }
 
         // --- BLOG MODULE ---
@@ -1742,27 +1776,45 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
             window.organData = {
                 brain: {
                     name: 'الدماغ والجهاز العصبي',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> ليس فقط مركز القيادة، بل هو جهاز استقبال وبث للطاقة والأفكار. يرتبط ارتباطاً وثيقاً بصحة الأمعاء (محور الأمعاء-الدماغ).</p><p class="mb-2"><strong>أعراض الخلل:</strong> ضبابية الدماغ، ضعف الذاكرة، القلق، الاكتئاب، الصداع، الأرق.</p><p class="mb-2"><strong>كيف تدعمه:</strong> دهون صحية (أوميغا-3)، تأمل، نوم عميق، تقليل المحفزات الزرقاء ليلاً، تعلم أشياء جديدة.</p>`
+                    emotionalCause: 'صراعات فكرية مستمرة، رفض أو مقاومة الأفكار الجديدة، الشعور بالانفصال عن الحدس الداخلي.',
+                    associatedDiseases: 'الصداع النصفي، الزهايمر، باركنسون، الجلطات، الأورام، ضبابية الدماغ.',
+                    holisticAdvice: 'مارس التأمل لتصفية الذهن، تعلم تقنيات التنفس لتهدئة الجهاز العصبي، اكتب أفكارك لتحريرها، ثق بحدسك أكثر.'
                 },
                 thyroid: {
                     name: 'الغدة الدرقية',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> هي منظم طاقة الجسم وصوتك الحقيقي في العالم. تتحكم في معدل الأيض وكيفية استخدامك للطاقة.</p><p class="mb-2"><strong>أعراض الخلل:</strong> تعب مزمن، زيادة أو نقصان في الوزن، تساقط الشعر، حساسية للبرد، تقلبات مزاجية.</p><p class="mb-2"><strong>كيف تدعمها:</strong> اليود والسيلينيوم والزنك، تجنب الإجهاد المزمن، تقليل الغلوتين ومنتجات الألبان إذا كنت تعاني من حساسية.</p>`
+                    emotionalCause: 'الشعور بالإذلال، عدم القدرة على التعبير عن الذات، الشعور بأن دورك لم يأت بعد، كبت الإبداع.',
+                    associatedDiseases: 'خمول أو فرط نشاط الغدة، تضخم الغدة، مرض هاشيموتو، مرض جريفز.',
+                    holisticAdvice: 'تحدث عن حقيقتك، مارس هواية إبداعية (رسم، كتابة، غناء)، قل "لا" عند الحاجة، حرر رقبتك وكتفيك من خلال التمارين.'
                 },
                 heart: {
                     name: 'القلب',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> مركز الحب والاتصال والرحمة. ليس مجرد مضخة، بل له حقله الكهرومغناطيسي الخاص به والذي يؤثر على كل خلية.</p><p class="mb-2"><strong>أعراض الخلل:</strong> ارتفاع ضغط الدم، خفقان، الشعور بالانفصال، صعوبة في العطاء أو تلقي الحب.</p><p class="mb-2"><strong>كيف تدعمه:</strong> ممارسة الامتنان، قضاء وقت مع الأحباء، تمارين الكارديو المعتدلة، CoQ10، المغنيسيوم.</p>`
+                    emotionalCause: 'نقص الفرح والحب، جروح عاطفية قديمة، الشعور بالوحدة، النقد الذاتي القاسي.',
+                    associatedDiseases: 'ارتفاع ضغط الدم، النوبات القلبية، عدم انتظام ضربات القلب, أمراض الشرايين.',
+                    holisticAdvice: 'مارس الامتنان يومياً، سامح نفسك والآخرين، اقض وقتاً في الطبيعة، تواصل مع الأصدقاء والأحباء، احتضن أكثر.'
                 },
                 liver: {
                     name: 'الكبد',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> هو مختبر الجسم الكيميائي ومركز معالجة السموم والمشاعر المكبوتة مثل الغضب والإحباط.</p><p class="mb-2"><strong>أعراض الخلل:</strong> مشاكل جلدية (حب الشباب، أكزيما)، تعب، صعوبة في هضم الدهون، حساسية كيميائية، غضب مكبوت.</p><p class="mb-2"><strong>كيف تدعمه:</strong> خضروات صليبية (بروكلي، قرنبيط)، الشمندر، الكركم، الشاي الأخضر، تقنيات التحرر من الغضب.</p>`
+                    emotionalCause: 'الغضب المكبوت، المرارة، الاستياء المزمن، الخوف من النقص والفقر.',
+                    associatedDiseases: 'تليف الكبد، الكبد الدهني، التهاب الكبد، حصوات المرارة، مشاكل جلدية.',
+                    holisticAdvice: 'تعلم تقنيات صحية للتعبير عن الغضب (مثل الكتابة أو الرياضة)، مارس التسامح، ركز على الوفرة بدلاً من النقص، تناول الأطعمة المرة (جرجير، هندباء).'
                 },
                 gut: {
                     name: 'الأمعاء (الجهاز الهضمي)',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> "عقلك الثاني"، حيث يتم امتصاص العناصر الغذائية وتصنيع 80% من السيروتونين. صحة الأمعاء هي أساس صحة الجسم كله.</p><p class="mb-2"><strong>أعراض الخلل:</strong> انتفاخ، غازات، إمساك أو إسهال، حساسية غذائية، أمراض مناعية ذاتية، مشاكل جلدية، قلق واكتئاب.</p><p class="mb-2"><strong>كيف تدعمها:</strong> بروبيوتيك وبريبيوتيك، مرق العظام، الأطعمة المخمرة، تجنب الأطعمة المصنعة والسكر، إدارة التوتر.</p>`
+                    emotionalCause: 'عدم القدرة على "هضم" أو تقبل مواقف الحياة، التمسك بالماضي، القلق المفرط بشأن المستقبل.',
+                    associatedDiseases: 'القولون العصبي، كرونز، التهاب القولون التقرحي، الإمساك/الإسهال المزمن، الحساسيات الغذائية.',
+                    holisticAdvice: 'مارس اليقظة الذهنية أثناء تناول الطعام، تعلم التخلي عما لا يمكنك التحكم فيه، اكتب مخاوفك على ورق، تناول البروبيوتيك لدعم "عقلك الثاني".'
                 },
                 adrenals: {
                     name: 'الغدد الكظرية',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> بطاريات طاقتك ومدير استجابتك للإجهاد والتوتر. تنتج هرمونات مثل الكورتيزول والأدرينالين.</p><p class="mb-2"><strong>أعراض الخلل:</strong> إرهاق كظري، تعب صباحي وصعوبة في الاستيقاظ، رغبة شديدة في الملح والسكر، ضعف المناعة، دوخة عند الوقوف.</p><p class="mb-2"><strong>كيف تدعمها:</strong> إدارة الإجهاد (أساسي)، نوم كافٍ، فيتامين سي ومجموعة فيتامينات ب، أعشاب متكيفة (أشواغاندا)، إضافة ملح بحري عالي الجودة للطعام.</p>`
+                    emotionalCause: 'الإجهاد المزمن، الشعور بأنك في وضع "النجاة" باستمرار، عدم الشعور بالأمان، تحمل مسؤوليات تفوق طاقتك.',
+                    associatedDiseases: 'الإرهاق الكظري، متلازمة التعب المزمن، مشاكل النوم، القلق.',
+                    holisticAdvice: 'ضع حدوداً صحية، تعلم قول "لا"، خصص وقتاً يومياً للاسترخاء التام (بدون شاشات)، قلل من الكافيين، مارس التأمل أو اليوجا التصالحية.'
+                },
+                kidneys: {
+                    name: 'الكلى',
+                    emotionalCause: 'الخوف العميق، مشاكل في العلاقات والشراكات، الشعور بخيبة الأمل والنقد.',
+                    associatedDiseases: 'حصوات الكلى، الفشل الكلوي، التهابات المسالك البولية المتكررة.',
+                    holisticAdvice: 'واجه مخاوفك بدلاً من الهروب منها، قيم علاقاتك وابنِ روابط صحية، اشرب كمية كافية من الماء بنية التطهير، مارس تقنيات التأريض.'
                 }
             };
         }
@@ -1773,8 +1825,8 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
             const infoContainer = document.getElementById('body-map-info');
             const organNameEl = document.getElementById('organ-name');
             const organDetailsEl = document.getElementById('organ-details');
-            if(!container) return;
-            container.innerHTML = ''; // Clear previous content
+            if(!container || container.querySelector('canvas')) return; // Exit if already initialized
+            container.innerHTML = ''; 
 
             const scene = new THREE.Scene();
             scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim());
@@ -1797,27 +1849,24 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
             directionalLight.position.set(8, 12, 10);
             scene.add(directionalLight);
             
-            const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0xe6d3c1, transparent: true, opacity: 0.15, roughness: 0.7, metalness: 0.1 });
+            const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0xe6d3c1, transparent: true, opacity: 0.1, roughness: 0.7, metalness: 0.1 });
             const organMaterial = new THREE.MeshStandardMaterial({ color: 0x5a6e5a, roughness: 0.5, metalness: 0.1 });
             const hoverMaterial = new THREE.MeshStandardMaterial({ color: 0xe0c4a4, emissive: 0xc8a07d, roughness: 0.5, metalness: 0.1 });
             
             const bodyParts = [];
-
-            // Main Torso
+            
             const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.5, 2.2, 16), bodyMaterial);
             torso.position.y = 1.1;
             scene.add(torso);
             
-            // Head
             const head = new THREE.Mesh(new THREE.SphereGeometry(0.6, 32, 32), bodyMaterial);
             head.position.y = 2.8;
             scene.add(head);
 
-            // Organs
             const createOrgan = (geometry, position, name) => {
                 const organ = new THREE.Mesh(geometry, organMaterial.clone());
                 organ.position.copy(position);
-                organ.userData = { name: name, originalMaterial: organ.material };
+                organ.userData = { id: name, originalMaterial: organ.material };
                 scene.add(organ);
                 bodyParts.push(organ);
                 return organ;
@@ -1830,19 +1879,29 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
             createOrgan(new THREE.TorusGeometry(0.25, 0.1, 8, 20), new THREE.Vector3(0, 0.5, 0.1), 'gut');
             const adrenal1 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(0.2, 0.9, -0.1), 'adrenals');
             const adrenal2 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(-0.2, 0.9, -0.1), 'adrenals');
-            adrenal2.userData.name = 'adrenals';
+            adrenal2.userData.id = 'adrenals';
+            createOrgan(new THREE.SphereGeometry(0.25, 16, 16), new THREE.Vector3(0.4, 0.8, -0.2), 'kidneys');
+            createOrgan(new THREE.SphereGeometry(0.25, 16, 16), new THREE.Vector3(-0.4, 0.8, -0.2), 'kidneys');
 
-            // Procedural "Energy Veins"
-            const points = [
-                new THREE.Vector3(0, -0.5, 0), new THREE.Vector3(0.3, 0, 0.2), new THREE.Vector3(0.1, 0.5, 0.3),
-                new THREE.Vector3(-0.2, 1.0, 0.1), new THREE.Vector3(0, 1.5, -0.2), new THREE.Vector3(0.2, 2.0, 0),
-                new THREE.Vector3(0, 2.5, 0.3), new THREE.Vector3(0, 3.0, 0)
-            ];
-            const curve = new THREE.CatmullRomCurve3(points);
-            const tubeGeo = new THREE.TubeGeometry(curve, 64, 0.03, 8, false);
-            const tubeMat = new THREE.MeshBasicMaterial({ color: 0xc8a07d, transparent: true, opacity: 0.5 });
-            const tube = new THREE.Mesh(tubeGeo, tubeMat);
-            scene.add(tube);
+
+            const createEnergyVeins = () => {
+                for (let i = 0; i < 10; i++) {
+                    const points = [];
+                    for (let j = 0; j < 5; j++) {
+                        points.push(new THREE.Vector3(
+                            (Math.random() - 0.5) * 2,
+                            Math.random() * 3.5,
+                            (Math.random() - 0.5) * 2
+                        ));
+                    }
+                    const curve = new THREE.CatmullRomCurve3(points);
+                    const tubeGeo = new THREE.TubeGeometry(curve, 32, 0.01 + Math.random() * 0.02, 8, false);
+                    const tubeMat = new THREE.MeshBasicMaterial({ color: 0xc8a07d, transparent: true, opacity: 0.3 + Math.random() * 0.3 });
+                    const tube = new THREE.Mesh(tubeGeo, tubeMat);
+                    scene.add(tube);
+                }
+            };
+            createEnergyVeins();
             
             const raycaster = new THREE.Raycaster();
             const mouse = new THREE.Vector2();
@@ -1858,14 +1917,18 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                 raycaster.setFromCamera(mouse, camera);
                 const intersects = raycaster.intersectObjects(bodyParts);
                 if (intersects.length > 0) {
-                    const organKey = intersects[0].object.userData.name;
+                    const organKey = intersects[0].object.userData.id;
                     const data = window.organData[organKey];
                     if (data) {
                         infoContainer.style.opacity = 0;
                         infoContainer.style.transform = 'translateY(20px)';
                         setTimeout(() => {
                             organNameEl.textContent = data.name;
-                            organDetailsEl.innerHTML = data.content;
+                            organDetailsEl.innerHTML = `
+                                <p class="mb-2"><strong>الأمراض المرتبطة:</strong> ${data.associatedDiseases}</p>
+                                <p class="mb-2"><strong>السبب الشعوري الجذري:</strong> ${data.emotionalCause}</p>
+                                <p class="mb-2"><strong>نصيحة شمولية:</strong> ${data.holisticAdvice}</p>
+                            `;
                             infoContainer.style.opacity = 1;
                             infoContainer.style.transform = 'translateY(0)';
                         }, 300);
@@ -2081,7 +2144,7 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                         const analyzeBtn = modalContent.querySelector('#analyze-luscher-btn');
                         if(analyzeBtn) {
                            analyzeBtn.classList.remove('hidden');
-                           analyzeBtn.classList.add('flex');
+                           analyzeBtn.classList.add('flex', 'mx-auto');
                         }
                     }
                 }
@@ -2228,8 +2291,8 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                     ]
                 },
                 options: {
-                    responsive: true,
-                    plugins: { legend: { position: 'top' } },
+                                responsive: true,
+                                 plugins: { legend: { position: 'top' } },
                     scales: { y: { beginAtZero: true, max: 10 } }
                 }
             });
@@ -2237,3 +2300,5 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
     </script>
 </body>
 </html>
+
+                    
