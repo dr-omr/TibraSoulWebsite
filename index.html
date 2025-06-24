@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="د. عمر العماد - رحلتك نحو الشفاء بالطب الشمولي والوظيفي. أدوات ذكية، جلسات علاجية، ومنتجات طبيعية.">
-    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر العماد, طِبرا, عجلة الحياة, تقييم صحي, DMSO, ترددات شفائية, تشخيص ذكي, خطة علاجية">
+    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر العماد, طِبرا, عجلة الحياة, تقييم صحي, DMSO, ترددات شفائية, تشخيص ذكي, خطة علاجية, تحليل الدم, خريطة الجسم, مفكرة الأعراض">
     <title>د. عمر العماد | خبير الطب الشمولي والوظيفي</title>
 
     <!-- Fonts & Icons -->
@@ -88,17 +88,20 @@
         /* --- WHATSAPP & MODAL --- */
         .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; left: 40px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100; transition: transform 0.3s ease; display: flex; align-items: center; justify-content: center; }
         .whatsapp-float:hover { transform: scale(1.1) rotate(10deg); }
-        #tool-modal { transition: opacity 0.3s ease, backdrop-filter 0.3s ease; backdrop-filter: blur(0px); }
-        #tool-modal.is-open { opacity: 1; backdrop-filter: blur(8px); }
+        #tool-modal, #quiz-modal { transition: opacity 0.3s ease, backdrop-filter 0.3s ease; backdrop-filter: blur(0px); }
+        #tool-modal.is-open, #quiz-modal.is-open { opacity: 1; backdrop-filter: blur(8px); }
 
         /* --- FADE-IN ANIMATION --- */
         .fade-in-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
         
         /* --- AI LOADER --- */
-        .ai-loader .ai-loader-dots div { background-color: var(--primary-color); animation: pulse-loader 1.4s infinite ease-in-out both; }
-        .ai-loader .ai-loader-dots .dot1 { animation-delay: -0.32s; }
-        .ai-loader .ai-loader-dots .dot2 { animation-delay: -0.16s; }
+        .ai-loader { text-align: center; }
+        .ai-loader .ai-loader-dots { display: inline-block; position: relative; width: 80px; height: 10px; }
+        .ai-loader .ai-loader-dots div { position: absolute; top: 0; width: 13px; height: 13px; border-radius: 50%; background-color: var(--primary-color); animation: pulse-loader 1.4s infinite ease-in-out both; }
+        .ai-loader .ai-loader-dots .dot1 { left: 8px; animation-delay: -0.32s; }
+        .ai-loader .ai-loader-dots .dot2 { left: 32px; animation-delay: -0.16s; }
+        .ai-loader .ai-loader-dots .dot3 { left: 56px; }
 
         /* --- FREQUENCY GENERATOR STYLES --- */
         #frequency-canvas { background-color: #1a1a1a; border-radius: 8px; box-shadow: inset 0 0 10px #000; }
@@ -110,7 +113,7 @@
         #view-single-post .post-content ul { list-style-type: disc; margin-right: 2rem; margin-bottom: 1.5rem; }
         #view-single-post .post-content li { margin-bottom: 0.5rem; }
 
-        /* --- WHEEL OF LIFE (NEW) --- */
+        /* --- WHEEL OF LIFE --- */
         #wheel-of-life-result { transition: opacity 0.5s ease-in-out; }
         #wheel-of-life-result-container .range-slider {
             -webkit-appearance: none; appearance: none;
@@ -122,10 +125,46 @@
              border-radius: 50%; background: var(--primary-color); cursor: pointer;
         }
 
-        /* --- AUDIO PLAYER (NEW) --- */
+        /* --- AUDIO PLAYER --- */
         .audio-player { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border-radius: 15px; padding: 20px; box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1); }
         #audio-progress-bar { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: var(--accent-light); outline: none; transition: opacity .2s; }
         #audio-progress-bar::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--primary-color); cursor: pointer; }
+        
+        /* --- BODY MAP (NEW) --- */
+        #body-map-svg .organ {
+            fill: rgba(90, 110, 90, 0.2);
+            stroke: var(--primary-dark);
+            stroke-width: 1.5;
+            transition: fill 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        #body-map-svg .organ:hover {
+            fill: rgba(200, 160, 125, 0.7);
+            transform: scale(1.05);
+        }
+        #body-map-info {
+             transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* --- JOURNAL (NEW) --- */
+        #journal-form label {
+            text-align: right;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .journal-entry {
+            border-right: 4px solid var(--accent-light);
+        }
+
+        /* --- QUIZZES (NEW) --- */
+        .quiz-option {
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .quiz-option.selected {
+            background-color: var(--accent-light);
+            border-color: var(--accent-color);
+        }
     </style>
 </head>
 <body class="bg-secondary-color text-text-dark">
@@ -137,7 +176,6 @@
             <div class="hidden md:flex items-center space-x-reverse space-x-6">
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="about">عني</a>
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="dashboard">الخدمات التفاعلية</a>
-                <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="wheel-of-life">تقييم العافية</a>
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="services">الجلسات</a>
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="store">المتجر</a>
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="blog">المدونة</a>
@@ -156,21 +194,20 @@
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </nav>
-         <!-- Mobile Menu -->
-         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="about">عني</a>
-              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="dashboard">الخدمات التفاعلية</a>
-              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="wheel-of-life">تقييم العافية</a>
-              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="services">الجلسات</a>
-              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="store">المتجر</a>
-              <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="blog">المدونة</a>
-              <a href="#contact" class="block py-2 hover:text-[--primary-color]">تواصل معي</a>
-              <hr class="my-2">
-              <div id="auth-section-mobile">
-                  <button id="login-btn-mobile" class="w-full text-right py-2 font-bold text-[--primary-color]">تسجيل الدخول</button>
-                  <a href="#" id="profile-link-mobile" class="nav-link hidden w-full text-right py-2 font-bold text-[--primary-color]" data-view="premium-content">ملف المريض</a>
-              </div>
-         </div>
+          <!-- Mobile Menu -->
+          <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+               <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="about">عني</a>
+               <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="dashboard">الخدمات التفاعلية</a>
+               <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="services">الجلسات</a>
+               <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="store">المتجر</a>
+               <a href="#" class="nav-link block py-2 hover:text-[--primary-color]" data-view="blog">المدونة</a>
+               <a href="#contact" class="block py-2 hover:text-[--primary-color]">تواصل معي</a>
+               <hr class="my-2">
+               <div id="auth-section-mobile">
+                   <button id="login-btn-mobile" class="w-full text-right py-2 font-bold text-[--primary-color]">تسجيل الدخول</button>
+                   <a href="#" id="profile-link-mobile" class="nav-link hidden w-full text-right py-2 font-bold text-[--primary-color]" data-view="premium-content">ملف المريض</a>
+               </div>
+          </div>
     </header>
 
     <main id="main-content">
@@ -192,12 +229,13 @@
                 <h2 class="text-4xl font-bold mb-4 section-title">لوحة التحكم التفاعلية</h2>
                 <p class="max-w-3xl mx-auto mb-12">اختر الأداة أو الخدمة التي تناسب احتياجك الحالي وابدأ رحلة الشفاء.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Cards from original code -->
-                    <div class="p-8 rounded-xl shadow-lg dashboard-card text-center">
+                    <!-- Card 1: AI Tools -->
+                    <div class="p-8 rounded-xl shadow-lg dashboard-card text-center md:col-span-2">
                         <div class="text-5xl text-[--primary-color] mb-4"><i class="fas fa-magic-wand-sparkles"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الأدوات الذكية</h3>
                         <p class="text-gray-600 mb-6">استخدم أدوات الذكاء الاصطناعي للتشخيص، إنشاء الخطط العلاجية، الحصول على توصيات، والمزيد.</p>
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                           <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="blood-test-decoder">فك شفرة التحاليل</button>
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="diagnosis">التشخيص</button>
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="treatment-plan">خطة علاجية</button>
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="supplements">توصية مكملات</button>
@@ -206,38 +244,68 @@
                            <button class="smart-tool-btn btn btn-secondary w-full py-2 rounded-full" data-tool="intention">نية اليوم</button>
                         </div>
                     </div>
+
+                    <!-- Card 2: Wheel of Life -->
+                    <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="wheel-of-life">
+                        <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fa-solid fa-dharmachakra"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">عجلة العافية</h3>
+                        <p class="text-gray-600">قيّم جوانب حياتك المختلفة واحصل على رؤى فورية لتحقيق التوازن.</p>
+                    </a>
+                    
+                    <!-- NEW Card: Body Map -->
+                    <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="body-map">
+                        <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fa-solid fa-person-chalkboard"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">خريطة الجسم التفاعلية</h3>
+                        <p class="text-gray-600">استكشف أعضاء جسدك وافهم رسائلها من منظور شمولي.</p>
+                    </a>
+
+                    <!-- NEW Card: Symptom Journal -->
+                    <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="journal">
+                        <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fa-solid fa-book-medical"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">مفكرة الأعراض والمزاج</h3>
+                        <p class="text-gray-600">تتبع صحتك اليومية واكتشف الأنماط الخفية (للمسجلين فقط).</p>
+                    </a>
+
+                    <!-- NEW Card: Quizzes -->
+                    <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="quizzes">
+                        <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fa-solid fa-clipboard-question"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">التقييمات الصحية</h3>
+                        <p class="text-gray-600">أجب عن استبيانات دقيقة لتقييم جوانب محددة من صحتك.</p>
+                    </a>
+
+                    <!-- Original Cards -->
                     <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="services">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-user-doctor"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الجلسات الاستشارية</h3>
-                        <p class="text-gray-600">احجز جلسة استشارية شاملة أو جلسة متابعة معي مباشرة لوضع خريطة طريق علاجية مخصصة.</p>
+                        <p class="text-gray-600">احجز جلسة استشارية شاملة أو جلسة متابعة معي مباشرة.</p>
                     </a>
                     <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="frequencies">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-wave-square"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الترددات الشفائية</h3>
-                        <p class="text-gray-600">استمع إلى ترددات السولفيجيو المصممة لتهدئة الجهاز العصبي وتحفيز الشفاء أثناء التأمل.</p>
+                        <p class="text-gray-600">استمع إلى ترددات السولفيجيو المصممة لتهدئة الجهاز العصبي.</p>
                     </a>
                     <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="store">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-store"></i></div>
                         <h3 class="text-2xl font-bold mb-3">المتجر العلاجي</h3>
-                        <p class="text-gray-600">تصفح مجموعتنا المنتقاة من المكملات الغذائية والمنتجات الطبيعية التي أوصي بها.</p>
+                        <p class="text-gray-600">تصفح المكملات الغذائية والمنتجات الطبيعية التي أوصي بها.</p>
                     </a>
                     <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="blog">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-book-open"></i></div>
                         <h3 class="text-2xl font-bold mb-3">المقالات والمعرفة</h3>
-                        <p class="text-gray-600">اقرأ أحدث المقالات والرؤى حول الطب الشمولي، التغذية، والصحة النفسية لتعميق فهمك.</p>
+                        <p class="text-gray-600">اقرأ أحدث المقالات والرؤى حول الطب الشمولي.</p>
                     </a>
                     <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="premium-content">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-folder-user"></i></div>
                         <h3 class="text-2xl font-bold mb-3">ملف المريض</h3>
-                        <p class="text-gray-600">ادخل إلى مساحتك الخاصة لمراجعة نتائجك المحفوظة والمحتوى الحصري للأعضاء (يتطلب تسجيل الدخول).</p>
+                        <p class="text-gray-600">ادخل إلى مساحتك الخاصة لمراجعة نتائجك المحفوظة.</p>
                     </a>
                 </div>
             </div>
         </section>
         
-        <!-- Wheel of Life Section (NEW) -->
+        <!-- Wheel of Life Section -->
         <section id="view-wheel-of-life" class="page-view py-20 bg-white hidden">
-            <div class="container mx-auto px-6">
+             <div class="container mx-auto px-6">
                  <div class="text-right mb-12">
                      <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
                          <i class="fas fa-arrow-right-long ml-2"></i>
@@ -264,15 +332,14 @@
                 <div class="mt-12 text-center">
                      <button id="get-wheel-insight-btn" class="btn btn-primary text-white py-3 px-8 text-lg rounded-full">اكشف عن رؤيتك الشخصية</button>
                      <div id="wheel-of-life-result" class="mt-6 p-6 bg-green-50 border-r-4 border-primary-color rounded-lg max-w-4xl mx-auto opacity-0 hidden">
-                        <!-- AI Insight will be injected here -->
-                    </div>
+                         <!-- AI Insight will be injected here -->
+                     </div>
                 </div>
             </div>
         </section>
 
         <!-- About Me Section -->
         <section id="view-about" class="page-view py-20 bg-white hidden">
-             <!-- Content from original code -->
              <div class="container mx-auto px-6">
                  <div class="text-right mb-12">
                      <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
@@ -293,10 +360,9 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- Services Section -->
         <section id="view-services" class="page-view py-20 hidden">
-             <!-- Content from original code -->
              <div class="container mx-auto px-6 text-center">
                  <div class="text-right mb-12">
                      <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
@@ -331,7 +397,6 @@
 
         <!-- Store Section -->
         <section id="view-store" class="page-view py-20 bg-gray-50 hidden">
-            <!-- Content from original code -->
             <div class="container mx-auto px-6 text-center">
                  <div class="text-right mb-12">
                      <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
@@ -342,7 +407,6 @@
                 <h2 class="text-4xl font-bold mb-4 section-title">متجر المنتجات الشافية</h2>
                 <p class="max-w-2xl mx-auto mb-12">مجموعة منتقاة بعناية من المنتجات الطبيعية والأدوية الوظيفية التي أثق بها وأوصي بها لدعم رحلتك العلاجية.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                     <!-- Product 1 -->
                     <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 fade-in-up hover:-translate-y-2">
                         <img src="https://placehold.co/300x300/5a6e5a/white?text=DMSO" alt="DMSO" class="w-full h-56 object-cover">
                         <div class="p-6">
@@ -352,7 +416,6 @@
                             <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20DMSO%20للجلد" target="_blank" class="btn btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
-                    <!-- Product 2 -->
                     <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.1s;">
                         <img src="https://placehold.co/300x300/c8a07d/white?text=Vit+D3" alt="مكمل فيتامين د3 + ك2" class="w-full h-56 object-cover">
                         <div class="p-6">
@@ -362,7 +425,6 @@
                             <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20مكمل%20فيتامين%20د3%20%2B%20ك2" target="_blank" class="btn btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
-                    <!-- Product 3 -->
                     <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.2s;">
                         <img src="https://placehold.co/300x300/5a6e5a/white?text=Mg+Oil" alt="زيت الماغنسيوم النقي" class="w-full h-56 object-cover">
                         <div class="p-6">
@@ -372,7 +434,6 @@
                             <a href="https://wa.me/967771447111?text=أرغب%20في%20شراء%20زيت%20الماغنسيوم%20النقي" target="_blank" class="btn btn-secondary w-full block py-2 rounded-full">اطلب عبر واتساب</a>
                         </div>
                     </div>
-                     <!-- Product 4 -->
                     <div class="border bg-white border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.3s;">
                         <img src="https://placehold.co/300x300/c8a07d/white?text=Probiotic" alt="بروبيوتيك عالي الجودة" class="w-full h-56 object-cover">
                         <div class="p-6">
@@ -388,7 +449,6 @@
         
         <!-- Frequency Generator Section -->
         <section id="view-frequencies" class="page-view py-20 bg-white hidden">
-            <!-- Content from original code -->
             <div class="container mx-auto px-6 text-center">
                  <div class="text-right mb-12">
                      <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
@@ -412,10 +472,162 @@
                 </div>
             </div>
         </section>
+
+        <!-- Body Map Section (NEW) -->
+        <section id="view-body-map" class="page-view py-20 bg-white hidden">
+            <div class="container mx-auto px-6">
+                <div class="text-right mb-12">
+                     <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
+                         <i class="fas fa-arrow-right-long ml-2"></i>
+                         الرجوع إلى لوحة التحكم
+                     </button>
+                 </div>
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 section-title">خريطة الجسم التفاعلية</h2>
+                    <p class="max-w-3xl mx-auto text-lg">انقر على أي عضو في الرسم التوضيحي لاستكشاف وظيفته من منظور شمولي، الأعراض المرتبطة به، وكيفية دعمه لتحقيق الشفاء.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                    <!-- Body Map SVG -->
+                    <div class="md:col-span-1 flex justify-center items-center">
+                        <svg id="body-map-svg" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-xs h-auto">
+                            <!-- Head/Brain -->
+                            <path class="organ" data-organ="brain" d="M100,50 a40,40 0 1,0 0.1,0 Z" />
+                            <text x="100" y="55" text-anchor="middle" font-size="10" fill="#333">الدماغ</text>
+                            <!-- Thyroid -->
+                            <path class="organ" data-organ="thyroid" d="M85,95 a15,8 0 0,0 30,0 Z" />
+                            <text x="100" y="100" text-anchor="middle" font-size="8" fill="#333">الغدة الدرقية</text>
+                             <!-- Heart -->
+                            <path class="organ" data-organ="heart" d="M100 130 C 90 120, 70 125, 75 145 S 100 160, 100 160 S 125 145, 125 145 S 110 120, 100 130 Z" />
+                             <!-- Liver -->
+                            <path class="organ" data-organ="liver" d="M105,170 C 130,170 140,190 130,210 L 80,210 C 70,190 80,170 105,170 Z" />
+                            <text x="110" y="195" text-anchor="middle" font-size="10" fill="#333">الكبد</text>
+                            <!-- Gut/Intestines -->
+                            <path class="organ" data-organ="gut" d="M80,220 C 75,260 125,260 120,220 C 120,220 110,230 100,230 C 90,230 80,220 80,220 Z M85,240 C 85,255 115,255 115,240 C 110,245 90,245 85,240 Z" />
+                            <text x="100" y="245" text-anchor="middle" font-size="10" fill="#333">الأمعاء</text>
+                             <!-- Adrenals -->
+                            <path class="organ" data-organ="adrenals" d="M80,180 a10,5 0 0,1 15,0" />
+                            <path class="organ" data-organ="adrenals" d="M105,180 a10,5 0 0,1 15,0" />
+                        </svg>
+                    </div>
+
+                    <!-- Info Panel -->
+                    <div id="body-map-info-container" class="md:col-span-2">
+                        <div id="body-map-info" class="bg-white p-8 rounded-xl shadow-lg opacity-0 transform translate-y-5">
+                            <h3 id="organ-name" class="text-3xl font-bold mb-4 text-[--primary-color]">حدد عضواً للبدء</h3>
+                            <div id="organ-details">
+                                <p class="text-gray-600">انقر على رسم الجسم لاكتشاف المزيد.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quizzes Section (NEW) -->
+        <section id="view-quizzes" class="page-view py-20 bg-gray-50 hidden">
+             <div class="container mx-auto px-6">
+                 <div class="text-right mb-12">
+                     <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
+                         <i class="fas fa-arrow-right-long ml-2"></i>
+                         الرجوع إلى لوحة التحكم
+                     </button>
+                 </div>
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 section-title">التقييمات الصحية التفاعلية</h2>
+                    <p class="max-w-3xl mx-auto text-lg">هذه الاستبيانات ليست تشخيصاً طبياً، بل هي أدوات لمساعدتك على زيادة وعيك بصحتك وتحديد المجالات التي قد تحتاج إلى اهتمام. ناقش النتائج دائماً مع مختص.</p>
+                </div>
+                
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="text-2xl font-bold mb-3 text-[--primary-dark]">اختبار الإرهاق الكظري</h3>
+                        <p class="text-gray-600 mb-4">هل تشعر بالتعب المستمر وصعوبة في التعامل مع الإجهاد؟ قد تكون غدتك الكظرية بحاجة إلى دعم.</p>
+                        <button class="btn btn-primary text-white py-2 px-6 rounded-full quiz-start-btn" data-quiz="adrenal-fatigue">ابدأ الاختبار</button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="text-2xl font-bold mb-3 text-[--primary-dark]">تقييم الأمعاء المتسربة</h3>
+                        <p class="text-gray-600 mb-4">اكتشف ما إذا كانت مشاكل مثل الانتفاخ، الحساسية الغذائية، أو المشاكل الجلدية قد تكون مرتبطة بصحة أمعائك.</p>
+                        <button class="btn btn-secondary py-2 px-6 rounded-full" disabled>قريباً...</button>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="text-2xl font-bold mb-3 text-[--primary-dark]">احسب درجة السمية في جسمك</h3>
+                        <p class="text-gray-600 mb-4">قيّم تعرضك للسموم البيئية وقدرة جسمك على التخلص منها.</p>
+                        <button class="btn btn-secondary py-2 px-6 rounded-full" disabled>قريباً...</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journal Section (NEW) -->
+        <section id="view-journal" class="page-view py-20 bg-white hidden">
+            <div class="container mx-auto px-6">
+                <div id="journal-content-container">
+                     <div class="text-right mb-12">
+                         <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
+                             <i class="fas fa-arrow-right-long ml-2"></i>
+                             الرجوع إلى لوحة التحكم
+                          </button>
+                     </div>
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold mb-4 section-title">مفكرة الأعراض والمزاج</h2>
+                        <p class="max-w-3xl mx-auto text-lg">أداة قوية لتصبح محققاً في رحلتك الصحية. سجّل تتبعك اليومي هنا لاكتشاف الروابط بين نمط حياتك وما تشعر به.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- New Entry Form -->
+                        <div class="md:col-span-1 bg-gray-50 p-6 rounded-xl shadow-lg">
+                            <h3 class="text-2xl font-bold mb-4 text-center">إدخال اليوم</h3>
+                            <form id="journal-form">
+                                <div class="mb-4">
+                                    <label for="entry-date">التاريخ</label>
+                                    <input type="date" id="entry-date" class="w-full p-2 border rounded-md" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="mood-rating">المزاج (1=سيء, 10=ممتاز)</label>
+                                    <input type="range" id="mood-rating" min="1" max="10" value="5" class="w-full">
+                                </div>
+                                 <div class="mb-4">
+                                    <label for="energy-rating">الطاقة (1=منهك, 10=حيوي)</label>
+                                    <input type="range" id="energy-rating" min="1" max="10" value="5" class="w-full">
+                                </div>
+                                 <div class="mb-4">
+                                    <label for="sleep-quality">جودة النوم (ساعات)</label>
+                                    <input type="number" id="sleep-quality" min="0" max="12" step="0.5" class="w-full p-2 border rounded-md" placeholder="e.g., 7.5">
+                                </div>
+                                 <div class="mb-4">
+                                    <label for="symptoms-today">الأعراض اليوم</label>
+                                    <textarea id="symptoms-today" rows="3" class="w-full p-2 border rounded-md" placeholder="صداع، انتفاخ، ألم مفاصل..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary text-white w-full py-3 rounded-full">حفظ الإدخال</button>
+                            </form>
+                        </div>
+                        <!-- Entries & Charts -->
+                        <div class="md:col-span-2">
+                             <h3 class="text-2xl font-bold mb-4 text-center">تحليل الأنماط</h3>
+                             <div class="bg-gray-50 p-6 rounded-xl shadow-lg mb-6">
+                                 <canvas id="journal-chart"></canvas>
+                             </div>
+                             <h3 class="text-2xl font-bold mb-4 text-center">سجل إدخالاتي</h3>
+                             <div id="journal-entries-container" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                                 <!-- Entries will be loaded here -->
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div id="journal-login-prompt" class="hidden text-center py-16">
+                     <div class="bg-white max-w-2xl mx-auto p-8 rounded-xl shadow-lg">
+                         <i class="fas fa-lock text-5xl text-[--accent-color] mb-4"></i>
+                         <h3 class="text-2xl font-bold mb-3">هذه الميزة حصرية للأعضاء</h3>
+                         <p class="text-gray-600 mb-6">يرجى تسجيل الدخول للوصول إلى مفكرة الأعراض والمزاج الخاصة بك وحفظ تقدمك.</p>
+                         <button id="login-for-journal-btn" class="btn btn-primary text-white py-2 px-8 rounded-full">تسجيل الدخول</button>
+                     </div>
+                 </div>
+            </div>
+        </section>
         
         <!-- Premium Content / Patient File Section -->
         <section id="view-premium-content" class="page-view py-20 hidden">
-            <!-- Content from original code -->
             <div class="container mx-auto px-6 text-center">
                  <div class="text-right mb-12">
                      <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
@@ -428,7 +640,6 @@
                 <div id="patient-file-content" class="bg-white p-8 rounded-xl shadow-inner max-w-4xl mx-auto text-right">
                     <h3 class="text-2xl font-bold mb-6">سجلاتي المحفوظة</h3>
                     <div id="saved-results-container" class="space-y-6">
-                        <!-- Saved results will be loaded here -->
                         <p>الرجاء تسجيل الدخول لعرض سجلاتك المحفوظة.</p>
                     </div>
                 </div>
@@ -437,7 +648,6 @@
 
         <!-- Blog Section -->
         <section id="view-blog" class="page-view py-20 bg-gray-50 hidden">
-             <!-- Content from original code -->
              <div class="container mx-auto px-6 text-center">
                  <div class="text-right mb-12">
                      <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="dashboard">
@@ -448,7 +658,6 @@
                 <h2 class="text-4xl font-bold mb-4 section-title">من وحي المدونة</h2>
                 <p class="max-w-2xl mx-auto mb-12">مقالات ورؤى لمساعدتك على فهم جسدك بشكل أفضل واتخاذ قرارات صحية مستنيرة.</p>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-right">
-                    <!-- Article 1 -->
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2">
                         <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop" alt="صورة طعام صحي" class="w-full h-56 object-cover">
                         <div class="p-6">
@@ -457,7 +666,6 @@
                             <a href="#" class="read-more-btn font-bold text-[--primary-color] hover:underline" data-postid="gut-brain">اقرأ المزيد &larr;</a>
                         </div>
                     </div>
-                    <!-- Article 2 -->
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.2s;">
                         <img src="https://images.unsplash.com/photo-1599301934984-1d2741913a5f?q=80&w=2070&auto=format&fit=crop" alt="صورة امرأة تتأمل" class="w-full h-56 object-cover">
                         <div class="p-6">
@@ -466,7 +674,6 @@
                             <a href="#" class="read-more-btn font-bold text-[--primary-color] hover:underline" data-postid="breathing">اقرأ المزيد &larr;</a>
                         </div>
                     </div>
-                    <!-- Article 3 -->
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 fade-in-up hover:-translate-y-2" style="animation-delay: 0.4s;">
                         <img src="https://images.unsplash.com/photo-1476837579993-f1d3948f17c2?q=80&w=2070&auto=format&fit=crop" alt="صورة توابل وأعشاب" class="w-full h-56 object-cover">
                         <div class="p-6">
@@ -481,7 +688,6 @@
 
         <!-- Single Post View -->
         <section id="view-single-post" class="page-view py-20 bg-white hidden">
-            <!-- Content from original code -->
             <div class="container mx-auto px-6 max-w-4xl">
                  <div class="text-right mb-12">
                      <button class="nav-link font-bold text-[--primary-color] hover:text-[--accent-color] transition-colors" data-view="blog">
@@ -492,14 +698,12 @@
                  <article>
                      <h1 id="post-title" class="text-4xl md:text-5xl font-bold mb-4 text-center section-title"></h1>
                      <img id="post-image" src="" alt="صورة المقال" class="w-full h-96 object-cover rounded-xl shadow-lg my-8">
-                     <div id="post-content" class="prose lg:prose-xl max-w-none text-right">
-                         <!-- Article content will be injected here -->
-                     </div>
+                     <div id="post-content" class="prose lg:prose-xl max-w-none text-right"></div>
                  </article>
             </div>
         </section>
         
-        <!-- Mindfulness Moment Section (NEW) -->
+        <!-- Mindfulness Moment Section -->
         <section class="py-20 bg-gray-50">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 section-title">لحظة هدوء</h2>
@@ -526,7 +730,6 @@
     
     <!-- Footer -->
     <footer id="contact" class="bg-gray-800 text-white pt-20 pb-8">
-        <!-- Content from original code -->
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-4">هل أنت مستعد لبدء رحلة الشفاء؟</h2>
             <p class="max-w-xl mx-auto mb-8">تواصل معي اليوم عبر واتساب لحجز استشارتك الأولى، أو تابعني على وسائل التواصل الاجتماعي لمحتوى يومي ملهم.</p>
@@ -549,12 +752,15 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Tool Modal -->
+    <!-- Modals -->
     <div id="tool-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-4 opacity-0">
-        <div id="modal-content" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
-            <!-- Content will be injected by JavaScript -->
-        </div>
+        <div id="modal-content" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300"></div>
     </div>
+    
+    <div id="quiz-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-4 opacity-0">
+        <div id="quiz-modal-content" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300"></div>
+    </div>
+
 
     <!-- Notification Toast -->
     <div id="notification-toast" class="hidden fixed top-20 right-5 py-3 px-6 rounded-lg shadow-xl z-[150] transition-transform duration-500 translate-x-full">
@@ -565,17 +771,22 @@
         // --- SDK IMPORTS ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, limit, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- FIREBASE CONFIG ---
-        const firebaseConfig = {
-             apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg",
-             authDomain: "tibrasoul.firebaseapp.com",
-             projectId: "tibrasoul",
-             storageBucket: "tibrasoul.appspot.com",
-             messagingSenderId: "920755760709",
-             appId: "1:920755760709:web:778cd12e6edbd199827d2c"
-        };
+        // The firebaseConfig is now loaded from the environment for security and portability.
+        // A fallback is provided from the original code to ensure functionality.
+        const firebaseConfig = typeof __firebase_config !== 'undefined'
+          ? JSON.parse(__firebase_config)
+          : {
+              apiKey: "AIzaSyBi2y64T-X1FNwbhv8ATQnF5xTZ3Pq4neg",
+              authDomain: "tibrasoul.firebaseapp.com",
+              projectId: "tibrasoul",
+              storageBucket: "tibrasoul.appspot.com",
+              messagingSenderId: "920755760709",
+              appId: "1:920755760709:web:778cd12e6edbd199827d2c"
+          };
+        
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
         // --- FIREBASE INITIALIZATION ---
@@ -586,7 +797,8 @@
         
         // --- GLOBAL STATE ---
         let currentUser = null;
-        let wheelChart; // New state for chart instance
+        let wheelChart;
+        let journalChart; 
 
         // --- APP INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -597,20 +809,23 @@
             initNavigation();
             initCreativeEffects();
             initBlog();
-            initWheelOfLife(); // NEW
-            initAudioPlayer(); // NEW
+            initWheelOfLife();
+            initAudioPlayer();
+            initBodyMap(); 
+            initQuizzes(); 
+            initJournal(); 
             showView('hero');
         });
 
         // --- NAVIGATION MODULE ---
         function initNavigation() {
-            // Unchanged from original code
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const viewName = link.dataset.view;
                     if (viewName) {
+                        document.getElementById('mobile-menu').classList.add('hidden');
                         showView(viewName);
                     }
                 });
@@ -618,15 +833,23 @@
         }
 
         function showView(viewId) {
-            // Unchanged from original code
-            document.querySelectorAll('.page-view').forEach(view => {
+             document.querySelectorAll('.page-view').forEach(view => {
                 view.classList.add('hidden');
-            });
-            const targetView = document.getElementById('view-' + viewId);
-            if(targetView) {
-                targetView.classList.remove('hidden');
-                window.scrollTo(0, 0);
-            }
+             });
+             const targetView = document.getElementById('view-' + viewId);
+             if(targetView) {
+                 targetView.classList.remove('hidden');
+                 window.scrollTo(0, 0);
+                 const elementsToAnimate = targetView.querySelectorAll('.fade-in-up');
+                 // Reset animation for re-triggering
+                 elementsToAnimate.forEach(el => el.classList.remove('is-visible'));
+                 // Trigger animation
+                 setTimeout(() => {
+                    elementsToAnimate.forEach(el => {
+                         el.classList.add('is-visible');
+                    });
+                 }, 100);
+             }
         }
 
         // --- NOTIFICATION MODULE ---
@@ -634,9 +857,9 @@
         const notificationMessage = document.getElementById('notification-message');
         let notificationTimeout;
         function showNotification(message, type = 'error', duration = 4000) {
-            // Unchanged from original code
             if (notificationTimeout) clearTimeout(notificationTimeout);
             notificationMessage.textContent = message;
+            // Reset classes
             notificationToast.className = 'fixed top-20 right-5 py-3 px-6 rounded-lg shadow-xl z-[150] transition-all duration-500 transform text-white';
             if (type === 'success') {
                 notificationToast.classList.add('bg-green-500');
@@ -646,58 +869,59 @@
                 notificationToast.classList.add('bg-red-600');
             }
             notificationToast.classList.remove('hidden');
+            notificationToast.classList.add('translate-x-full'); // Start off-screen
             setTimeout(() => {
-                notificationToast.classList.remove('translate-x-full');
+                notificationToast.classList.remove('translate-x-full'); // Slide in
             }, 10);
             notificationTimeout = setTimeout(() => {
-                notificationToast.classList.add('translate-x-full');
+                notificationToast.classList.add('translate-x-full'); // Slide out
                  setTimeout(() => notificationToast.classList.add('hidden'), 500);
             }, duration);
         }
 
         // --- AUTHENTICATION MODULE ---
         function initAuth() {
-            // Unchanged from original code
-            const loginBtns = [document.getElementById('login-btn'), document.getElementById('login-btn-mobile')];
-            const profileNav = document.getElementById('profile-section-nav');
-            const profileLinkMobile = document.getElementById('profile-link-mobile');
-            const userAvatar = document.getElementById('user-avatar');
-            const welcomeMessage = document.getElementById('welcome-message');
-
+            const loginBtns = [
+                document.getElementById('login-btn'), 
+                document.getElementById('login-btn-mobile'),
+                document.getElementById('login-for-journal-btn')
+            ];
+            
             onAuthStateChanged(auth, user => {
                 currentUser = user;
                 const isLoggedIn = !!user;
                 
-                loginBtns.forEach(btn => btn.classList.toggle('hidden', isLoggedIn));
-                profileNav.classList.toggle('hidden', !isLoggedIn);
-                profileNav.classList.toggle('flex', isLoggedIn);
-                profileLinkMobile.classList.toggle('hidden', !isLoggedIn);
-                
+                document.getElementById('login-btn').classList.toggle('hidden', isLoggedIn);
+                document.getElementById('login-btn-mobile').classList.toggle('hidden', isLoggedIn);
+                document.getElementById('profile-section-nav').classList.toggle('hidden', !isLoggedIn);
+                document.getElementById('profile-section-nav').classList.toggle('flex', isLoggedIn);
+                document.getElementById('profile-link-mobile').classList.toggle('hidden', !isLoggedIn);
+
                 if (isLoggedIn) {
-                    if (userAvatar) userAvatar.src = user.photoURL || 'https://placehold.co/40x40/5a6e5a/white?text=U';
-                    if (welcomeMessage) welcomeMessage.textContent = `مرحباً بك في أسرتنا، ${user.displayName || 'صديقي'}`;
+                    document.getElementById('user-avatar').src = user.photoURL || 'https://placehold.co/40x40/5a6e5a/white?text=U';
+                    document.getElementById('welcome-message').textContent = `مرحباً بك في أسرتنا، ${user.displayName || 'صديقي'}`;
                     loadPatientFileData();
+                    toggleJournalView(true);
+                    loadJournalEntries(); 
                 } else {
-                     document.getElementById('saved-results-container').innerHTML = '<p>الرجاء تسجيل الدخول لعرض سجلاتك المحفوظة.</p>';
+                    document.getElementById('saved-results-container').innerHTML = '<p>الرجاء تسجيل الدخول لعرض سجلاتك المحفوظة.</p>';
+                    toggleJournalView(false);
                 }
             });
 
             const handleLogin = () => {
                 signInWithPopup(auth, provider).catch(error => {
                     console.error("Google Login Error:", error);
-                    if (error.code === 'auth/operation-not-allowed') {
-                         showNotification("فشل تسجيل الدخول. يجب تفعيل Google كطريقة تسجيل دخول في مشروع Firebase.", "error");
-                    } else {
-                        showNotification("فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.", "error");
-                    }
+                    showNotification("فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.", "error");
                 });
             }
-            loginBtns.forEach(btn => btn.addEventListener('click', handleLogin));
+            loginBtns.forEach(btn => {
+                if(btn) btn.addEventListener('click', handleLogin)
+            });
         }
         
-        // --- PATIENT FILE & FIRESTORE MODULE ---
+        // --- FIRESTORE MODULE ---
         async function saveResultToFirestore(toolName, resultData) {
-            // Unchanged from original code
             if (!currentUser) {
                 showNotification('الرجاء تسجيل الدخول لحفظ نتائجك.', 'warning'); 
                 return;
@@ -725,21 +949,19 @@
         }
 
         async function loadPatientFileData() {
-            // Unchanged from original code
             if (!currentUser) return;
             const container = document.getElementById('saved-results-container');
             container.innerHTML = '<p>جاري تحميل سجلاتك...</p>';
             try {
                 const resultsCol = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'toolResults');
-                const q = query(resultsCol, limit(50));
+                const q = query(resultsCol, orderBy("createdAt", "desc"), limit(50));
                 const querySnapshot = await getDocs(q);
                 if (querySnapshot.empty) {
                     container.innerHTML = '<p>لا توجد نتائج محفوظة بعد. استخدم إحدى الأدوات الذكية واحفظ النتيجة لتظهر هنا.</p>';
                     return;
                 }
-                const sortedDocs = querySnapshot.docs.sort((a, b) => b.data().createdAt.toDate() - a.data().createdAt.toDate());
                 let html = '';
-                sortedDocs.forEach(doc => {
+                querySnapshot.forEach(doc => {
                     const result = doc.data();
                     html += `
                         <div class="p-4 bg-gray-50 border-r-4 border-gray-300 rounded-md">
@@ -757,7 +979,6 @@
 
         // --- SMART TOOLS MODULE ---
         function initSmartTools() {
-            // Unchanged from original code
             const toolModal = document.getElementById('tool-modal');
             const modalContent = document.getElementById('modal-content');
             
@@ -766,7 +987,7 @@
                 toolModal.classList.remove('hidden');
                 setTimeout(() => {
                     toolModal.classList.add('is-open');
-                    modalContent.classList.add('scale-100');
+                    modalContent.parentElement.classList.add('scale-100');
                 }, 10);
                 const closeButton = modalContent.querySelector('.close-modal-btn');
                 if (closeButton) closeButton.addEventListener('click', hideModal);
@@ -774,7 +995,7 @@
 
             const hideModal = () => {
                 toolModal.classList.remove('is-open');
-                modalContent.classList.remove('scale-100');
+                modalContent.parentElement.classList.remove('scale-100');
                 setTimeout(() => {
                     toolModal.classList.add('hidden');
                     modalContent.innerHTML = '';
@@ -790,6 +1011,22 @@
                     const tool = button.dataset.tool;
                     let modalHTML = '';
                     switch(tool) {
+                         case 'blood-test-decoder':
+                             modalHTML = `
+                                 <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">فك شفرة تحاليل الدم</h3>
+                                 <p class="text-gray-600 mb-6">الصق نتائج تحاليل دمك هنا. ستقوم الأداة بتحليلها من منظور الطب الوظيفي، مع التركيز على المعدلات المثالية وليس فقط الطبيعية.</p>
+                                 <form id="tool-form">
+                                     <div class="mb-4">
+                                         <label for="blood-test-data" class="block text-right font-semibold mb-2">نتائج التحليل</label>
+                                         <textarea id="blood-test-data" rows="10" class="w-full p-2 border rounded-md" placeholder="مثال:&#10;Vitamin D (25-OH) ..... 21 ng/mL&#10;Ferritin ................ 35 ng/mL&#10;TSH ..................... 3.8 mIU/L"></textarea>
+                                     </div>
+                                     <div class="text-left">
+                                         <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
+                                         <button type="submit" class="btn btn-primary text-white py-2 px-6 rounded-full mr-2">حلل نتائجي</button>
+                                     </div>
+                                 </form>
+                                 <div id="tool-results" class="mt-6 hidden"></div>`;
+                             break;
                          case 'diagnosis':
                              modalHTML = `
                                  <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">تشخيص متعدد الأبعاد</h3>
@@ -823,14 +1060,6 @@
                                          <label for="diagnosis-input" class="block text-right font-semibold mb-2">1. التشخيص أو الأعراض الرئيسية</label>
                                          <textarea id="diagnosis-input" rows="4" class="w-full p-2 border rounded-md" placeholder="مثال: تشخيص بالقولون العصبي، مع قلق وتعب مستمر"></textarea>
                                      </div>
-                                     <div class="mb-4">
-                                         <label for="weight" class="block text-right font-semibold mb-2">2. الوزن (اختياري)</label>
-                                         <input type="text" id="weight" class="w-full p-2 border rounded-md" placeholder="مثال: 70 كجم">
-                                     </div>
-                                     <div class="mb-4">
-                                         <label for="history" class="block text-right font-semibold mb-2">3. تاريخ مرضي مهم (اختياري)</label>
-                                         <textarea id="history" rows="2" class="w-full p-2 border rounded-md" placeholder="مثال: حساسية من البنسلين، مرض السكري"></textarea>
-                                     </div>
                                      <div class="text-left">
                                          <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
                                          <button type="submit" class="btn btn-primary text-white py-2 px-6 rounded-full mr-2">صمم خطتي</button>
@@ -845,7 +1074,7 @@
                                  <form id="tool-form">
                                      <div class="mb-4">
                                          <label for="repressed-feelings" class="block text-right font-semibold mb-2">المشاعر المكبوتة أو الصدمة</label>
-                                         <textarea id="repressed-feelings" rows="4" class="w-full p-2 border rounded-md" placeholder="مثال: أشعر بغضب مكبوت تجاه موقف معين، أو حزن عميق بسبب تجربة سابقة..."></textarea>
+                                         <textarea id="repressed-feelings" rows="4" class="w-full p-2 border rounded-md" placeholder="مثال: أشعر بغضب مكبوت تجاه موقف معين..."></textarea>
                                      </div>
                                      <div class="text-left">
                                          <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
@@ -877,7 +1106,7 @@
                                  <form id="tool-form">
                                      <div class="mb-4">
                                          <label for="analysis-data" class="block text-right font-semibold mb-2">الأعراض أو نتائج التحليل</label>
-                                         <textarea id="analysis-data" rows="5" class="w-full p-2 border rounded-md" placeholder="مثال: أعاني من تساقط الشعر، إرهاق مستمر، وأظافر هشة. أو: Vitamin D: 15 ng/mL, Ferritin: 20 µg/L"></textarea>
+                                         <textarea id="analysis-data" rows="5" class="w-full p-2 border rounded-md" placeholder="مثال: أعاني من تساقط الشعر، إرهاق مستمر..."></textarea>
                                      </div>
                                      <div class="text-left">
                                          <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
@@ -889,12 +1118,8 @@
                          case 'intention':
                               modalHTML = `
                                  <h3 class="text-2xl font-bold mb-4 text-[--primary-color]">نية اليوم</h3>
-                                 <p class="text-gray-600 mb-6">احصل على نية إيجابية ومركزة لدعمك في يومك. يمكنك تحديد شعورك الحالي لجعل النية أكثر ملاءمة.</p>
+                                 <p class="text-gray-600 mb-6">احصل على نية إيجابية ومركزة لدعمك في يومك.</p>
                                  <form id="tool-form">
-                                     <div class="mb-4">
-                                         <label for="current-feeling" class="block text-right font-semibold mb-2">شعوري الآن (اختياري)</label>
-                                         <input type="text" id="current-feeling" class="w-full p-2 border rounded-md" placeholder="مثال: متوتر، سعيد، محبط، ممتن...">
-                                     </div>
                                      <div class="text-left">
                                          <button type="button" class="close-modal-btn btn btn-secondary py-2 px-6 rounded-full">إغلاق</button>
                                          <button type="submit" class="btn btn-primary text-white py-2 px-6 rounded-full mr-2">أعطني نيتي</button>
@@ -910,18 +1135,12 @@
             });
 
             async function handleApiRequest(prompt, resultsDivId) {
-                // Unchanged from original code
                 const resultsDiv = document.getElementById(resultsDivId);
                 resultsDiv.classList.remove('hidden');
-                resultsDiv.innerHTML = `
-                    <div class="ai-loader">
-                        <div class="ai-loader-dots">
-                            <div class="dot1"></div><div class="dot2"></div><div class="dot3"></div>
-                        </div>
-                        <p class="mt-2 text-[--primary-color]">جاري التحليل باستخدام الذكاء الاصطناعي...</p>
-                    </div>`;
+                resultsDiv.innerHTML = `<div class="ai-loader"><div class="ai-loader-dots"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div><p class="mt-4 text-[--primary-color]">جاري التحليل...</p></div>`;
                 
-                const apiKey = "AIzaSyCOfNaYITDWfe6OibILsDBx6Pe6b3SeNJ4";
+                // The API key is injected by the environment at runtime.
+                const apiKey = ""; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
 
@@ -929,72 +1148,77 @@
                     const response = await fetch(apiUrl, {
                         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
                     });
-                    if (!response.ok) {
-                       const errorData = await response.json();
-                       console.error("API Error Details:", errorData);
-                       throw new Error(`HTTP error! status: ${response.status}`);
-                    }
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     const data = await response.json();
                     if (data.candidates && data.candidates[0].content.parts.length > 0) {
                         return data.candidates[0].content.parts[0].text;
                     } else { throw new Error("Invalid API response structure"); }
                 } catch (error) {
                     console.error("API Request Error:", error);
-                    resultsDiv.innerHTML = '<p class="text-center text-red-500">عذراً، حدث خطأ أثناء الاتصال بالمساعد الذكي. يرجى المحاولة مرة أخرى.</p>';
+                    resultsDiv.innerHTML = '<p class="text-center text-red-500">حدث خطأ. يرجى المحاولة مرة أخرى.</p>';
                     return null;
                 }
             }
             
             async function handleToolSubmit(e, tool) {
-                // Unchanged from original code
                 e.preventDefault();
                 let prompt = '', toolTitle = '', rawInputForSaving = '';
                  switch(tool) {
-                    case 'diagnosis':
-                        toolTitle = "تشخيص متعدد الأبعاد";
-                        const symptoms = document.getElementById('symptoms').value;
-                        const feelings = document.getElementById('feelings').value;
-                        const lifestyle = document.getElementById('lifestyle').value;
-                        rawInputForSaving = `الأعراض: ${symptoms}\nالمشاعر: ${feelings}\nنمط الحياة: ${lifestyle}`;
-                        if (!symptoms && !feelings && !lifestyle) { showNotification('يرجى إدخال بعض المعلومات للتحليل.', 'warning'); return; }
-                        prompt = `Act as a holistic medicine expert. Analyze the user's input based on a tripartite model (organic, emotional, energetic) and provide a probable diagnosis or assessment. User Input -> Symptoms: "${symptoms}", Feelings: "${feelings}", Lifestyle: "${lifestyle}". Structure the output as a clean, readable text in Arabic with three main sections: "الاحتمال العضوي", "الجذر الشعوري", and "التوازن الطاقي المختل". Use markdown for formatting.`;
-                        break;
-                    case 'treatment-plan':
-                        toolTitle = "وصفة علاجية شمولية";
-                        const diagnosisInput = document.getElementById('diagnosis-input').value;
-                        const weight = document.getElementById('weight').value;
-                        const history = document.getElementById('history').value;
-                        rawInputForSaving = `التشخيص: ${diagnosisInput}\nالوزن: ${weight}\nالتاريخ المرضي: ${history}`;
-                        if (!diagnosisInput) { showNotification('يرجى إدخال التشخيص أو الأعراض الرئيسية.', 'warning'); return; }
-                        prompt = `As a functional medicine doctor, design a comprehensive 21-day holistic treatment plan for a patient. Patient details -> Diagnosis/Symptoms: "${diagnosisInput}", Weight: "${weight}", Medical History: "${history}". The plan should include sections for: "الأدوية أو المكملات المقترحة", "توصيات التغذية", "تمارين تأمل أو وعي", and "نصائح طاقة ونمط حياة". Present the output in a well-structured, easy-to-read format in Arabic using markdown. It should be a general daily plan, not a strict schedule.`;
-                        break;
-                    case 'awareness-exercise':
-                        toolTitle = "تمرين وعي موجّه";
-                        const repressedFeelings = document.getElementById('repressed-feelings').value;
-                        rawInputForSaving = `المشاعر: ${repressedFeelings}`;
-                        if (!repressedFeelings) { showNotification('يرجى وصف مشاعرك.', 'warning'); return; }
-                        prompt = `You are a therapeutic writing coach. Based on the user's stated repressed feelings or past trauma, create a guided expressive writing exercise. User's input: "${repressedFeelings}". The output should be in Arabic and include: 1. A short, gentle introduction. 2. A series of 3-5 reflective writing prompts. 3. A concluding emotional guidance on how to process what they've written. Format the output with clear headings using markdown.`;
-                        break;
-                    case 'consultation':
-                        toolTitle = "استشارة طبية آلية";
-                        const question = document.getElementById('question').value;
-                        rawInputForSaving = `السؤال: ${question}`;
-                        if (!question) { showNotification('يرجى كتابة سؤالك.', 'warning'); return; }
-                        prompt = `As a holistic medicine assistant for Dr. Omar, answer the following question in Arabic, incorporating principles of holistic, functional, and spiritual medicine where appropriate. Keep the tone empathetic and informative. Question: "${question}"`;
-                        break;
-                    case 'supplements':
-                         toolTitle = "توصية مكملات غذائية";
-                        const analysisData = document.getElementById('analysis-data').value;
-                        rawInputForSaving = `البيانات: ${analysisData}`;
-                        if (!analysisData) { showNotification('يرجى إدخال الأعراض أو نتائج التحليل.', 'warning'); return; }
-                        prompt = `As a functional medicine expert, analyze the provided symptoms or blood test results and recommend the most effective supplements. Include recommended timing (e.g., with food, in the morning) and any potential warnings. Input: "${analysisData}". The output should be a clear, bulleted list in Arabic, with each supplement having its own section for "التوقيت" and "تحذيرات".`;
-                        break;
-                    case 'intention':
-                        toolTitle = "نية اليوم";
-                        const currentFeeling = document.getElementById('current-feeling').value;
-                        rawInputForSaving = `الشعور: ${currentFeeling}`;
-                        prompt = `As a spiritual wellness coach, provide a supportive, healing daily intention for the user. If the user provides their current feeling, tailor the intention to it. User's feeling: "${currentFeeling}". The output should be a single, powerful intention sentence in Arabic, followed by a short (1-2 sentences) "تمرين دعم داخلي" to help them embody that intention.`;
-                        break;
+                     case 'blood-test-decoder':
+                         toolTitle = "فك شفرة تحاليل الدم";
+                         const bloodTestData = document.getElementById('blood-test-data').value;
+                         rawInputForSaving = `بيانات التحليل: ${bloodTestData}`;
+                         if (!bloodTestData) { showNotification('يرجى لصق نتائج التحليل.', 'warning'); return; }
+                         prompt = `Act as a functional medicine expert analyzing blood test results. The user has provided these results: "${bloodTestData}". Your task is to:
+1.  Identify key markers (like Vitamin D, Ferritin, TSH, etc.).
+2.  For each marker, state its functional/optimal range (which is often stricter than the standard lab range).
+3.  Compare the user's result to the optimal range.
+4.  Explain in simple Arabic what this result means for their health from a holistic perspective (e.g., how low ferritin affects energy and hair).
+5.  Provide actionable recommendations including specific foods, lifestyle changes, and potential supplements to help them reach the optimal range.
+Structure the output in Arabic with clear headings for each marker using markdown. Start with a disclaimer that this is not a medical diagnosis.`;
+                         break;
+                     case 'diagnosis':
+                         toolTitle = "تشخيص متعدد الأبعاد";
+                         const symptoms = document.getElementById('symptoms').value;
+                         const feelings = document.getElementById('feelings').value;
+                         const lifestyle = document.getElementById('lifestyle').value;
+                         rawInputForSaving = `الأعراض: ${symptoms}\nالمشاعر: ${feelings}\nنمط الحياة: ${lifestyle}`;
+                         if (!symptoms && !feelings && !lifestyle) { showNotification('يرجى إدخال بعض المعلومات للتحليل.', 'warning'); return; }
+                         prompt = `Act as a holistic medicine expert. Analyze the user's input based on a tripartite model (organic, emotional, energetic) and provide a probable diagnosis or assessment. User Input -> Symptoms: "${symptoms}", Feelings: "${feelings}", Lifestyle: "${lifestyle}". Structure the output as a clean, readable text in Arabic with three main sections: "الاحتمال العضوي", "الجذر الشعوري", and "التوازن الطاقي المختل". Use markdown for formatting.`;
+                         break;
+                     case 'treatment-plan':
+                         toolTitle = "وصفة علاجية شمولية";
+                         const diagnosisInput = document.getElementById('diagnosis-input').value;
+                         rawInputForSaving = `التشخيص: ${diagnosisInput}`;
+                         if (!diagnosisInput) { showNotification('يرجى إدخال التشخيص أو الأعراض الرئيسية.', 'warning'); return; }
+                         prompt = `As a functional medicine doctor, design a comprehensive 21-day holistic treatment plan for a patient with the following diagnosis/symptoms: "${diagnosisInput}". The plan should include sections for: "الأدوية أو المكملات المقترحة", "توصيات التغذية", "تمارين تأمل أو وعي", and "نصائح طاقة ونمط حياة". Present the output in a well-structured, easy-to-read format in Arabic using markdown.`;
+                         break;
+                     case 'awareness-exercise':
+                         toolTitle = "تمرين وعي موجّه";
+                         const repressedFeelings = document.getElementById('repressed-feelings').value;
+                         rawInputForSaving = `المشاعر: ${repressedFeelings}`;
+                         if (!repressedFeelings) { showNotification('يرجى وصف مشاعرك.', 'warning'); return; }
+                         prompt = `You are a therapeutic writing coach. Based on the user's stated repressed feelings: "${repressedFeelings}", create a guided expressive writing exercise. The output should be in Arabic and include: 1. A gentle introduction. 2. A series of 3-5 reflective writing prompts. 3. A concluding guidance on how to process what they've written. Format the output with clear headings using markdown.`;
+                         break;
+                     case 'consultation':
+                         toolTitle = "استشارة طبية آلية";
+                         const question = document.getElementById('question').value;
+                         rawInputForSaving = `السؤال: ${question}`;
+                         if (!question) { showNotification('يرجى كتابة سؤالك.', 'warning'); return; }
+                         prompt = `As a holistic medicine assistant for Dr. Omar, answer the following question in Arabic, incorporating principles of holistic, functional, and spiritual medicine where appropriate. Question: "${question}"`;
+                         break;
+                     case 'supplements':
+                          toolTitle = "توصية مكملات غذائية";
+                         const analysisData = document.getElementById('analysis-data').value;
+                         rawInputForSaving = `البيانات: ${analysisData}`;
+                         if (!analysisData) { showNotification('يرجى إدخال الأعراض أو نتائج التحليل.', 'warning'); return; }
+                         prompt = `As a functional medicine expert, analyze the provided symptoms or blood test results: "${analysisData}" and recommend the most effective supplements. Include recommended timing (e.g., with food, in the morning) and any potential warnings. The output should be a clear, bulleted list in Arabic.`;
+                         break;
+                     case 'intention':
+                         toolTitle = "نية اليوم";
+                         rawInputForSaving = `طلب نية اليوم`;
+                         prompt = `As a spiritual wellness coach, provide a supportive, healing daily intention for the user. The output should be a single, powerful intention sentence in Arabic, followed by a short (1-2 sentences) "تمرين دعم داخلي" to help them embody that intention.`;
+                         break;
                 }
                 const responseText = await handleApiRequest(prompt, 'tool-results');
                 if (responseText) {
@@ -1018,7 +1242,6 @@
         
         // --- PDF DOWNLOAD MODULE ---
         function downloadResultAsPDF(elementId, title) {
-            // Unchanged from original code
             const { jsPDF } = window.jspdf;
             const element = document.getElementById(elementId);
             if (!element) return;
@@ -1027,298 +1250,376 @@
                 const imgData = canvas.toDataURL('image/png');
                 const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
                 pdf.setProperties({ title: `تقرير ${title} - د. عمر العماد`, author: 'موقع د. عمر العماد - TibraSoul' });
+                // Note: jsPDF might not support Arabic fonts by default. This is a basic implementation.
+                // For full Arabic support, a custom font needs to be added to jsPDF.
                 const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = pdf.internal.pageSize.getHeight();
-                const imgWidth = pdfWidth - 20;
-                const imgHeight = imgWidth / (canvas.width / canvas.height);
-                let heightLeft = imgHeight;
-                let position = 15;
-                pdf.setFont('Amiri', 'normal'); 
-                pdf.text(title, pdfWidth / 2, 10, { align: 'center' });
-                pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-                heightLeft -= (pdfHeight - position - 10);
-                while (heightLeft > 0) {
-                    position = -heightLeft - 10;
-                    pdf.addPage();
-                    pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-                    heightLeft -= pdfHeight;
-                }
+                pdf.addImage(imgData, 'PNG', 10, 10, pdfWidth - 20, 0);
                 pdf.save(`${title.replace(/\s+/g, '-')}_${new Date().toISOString().split('T')[0]}.pdf`);
             });
         }
 
         // --- FREQUENCY GENERATOR MODULE ---
         function initFrequencyGenerator() {
-            // Unchanged from original code
             const freqButtonsContainer = document.getElementById('frequency-buttons');
             const stopFreqBtn = document.getElementById('stop-freq-btn');
             const canvas = document.getElementById('frequency-canvas');
             if (!freqButtonsContainer || !stopFreqBtn || !canvas) return;
-
-            let oscillator, analyser;
+            let audioContext, oscillator, analyser, gainNode, animationFrameId;
             const canvasCtx = canvas.getContext('2d');
-            let animationFrameId;
-
+            
             const setupAudio = async () => {
-                if (oscillator) return;
-                try {
-                    await Tone.start();
-                    oscillator = new Tone.Oscillator({type: 'sine'}).toDestination();
-                    analyser = new Tone.Analyser('waveform', 1024);
-                    oscillator.connect(analyser);
-                } catch(e) { console.error("Tone.js setup failed:", e); showNotification("فشل تهيئة الصوت. قد تحتاج إلى التفاعل مع الصفحة أولاً.", "warning"); }
+                 if (!audioContext) {
+                    try {
+                        await Tone.start();
+                        audioContext = Tone.context;
+                        analyser = audioContext.createAnalyser();
+                        gainNode = audioContext.createGain();
+                        analyser.fftSize = 2048;
+                        gainNode.connect(analyser);
+                        analyser.connect(audioContext.destination);
+                        console.log("Audio Context is ready.");
+                    } catch (e) {
+                        console.error("Could not start Audio Context: ", e);
+                        showNotification("لا يمكن تشغيل الصوت. يرجى التفاعل مع الصفحة أولاً.", "error");
+                    }
+                }
             };
+            
             const playFrequency = async (freq) => {
-                await setupAudio();
-                if (!oscillator) return;
-                oscillator.frequency.value = freq;
-                if (Tone.context.state !== 'running') await Tone.start();
-                if (oscillator.state !== 'started') oscillator.start();
+                 await setupAudio();
+                if (!audioContext) return;
+
+                if (oscillator) {
+                    oscillator.stop();
+                    oscillator.disconnect();
+                }
+
+                oscillator = new Tone.Oscillator(freq, "sine").connect(gainNode);
+                oscillator.start();
+                gainNode.gain.rampTo(0.5, 0.1); // Ramp up volume
                 stopFreqBtn.classList.remove('hidden');
                 visualize();
             };
+            
             const stopFrequency = () => {
-                if (oscillator && oscillator.state === "started") { oscillator.stop(); oscillator.dispose(); oscillator = null; }
+                if (oscillator) {
+                    gainNode.gain.rampTo(0, 0.5); // Ramp down volume
+                    setTimeout(() => {
+                        oscillator.stop();
+                        oscillator.disconnect();
+                        oscillator = null;
+                        cancelAnimationFrame(animationFrameId);
+                        clearCanvas();
+                    }, 500);
+                }
                 stopFreqBtn.classList.add('hidden');
                 document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-                if (animationFrameId) cancelAnimationFrame(animationFrameId);
-                clearCanvas();
             };
+            
             function visualize() {
-                animationFrameId = requestAnimationFrame(visualize);
-                if (!analyser) return;
-                const waveformValues = analyser.getValue();
+                const bufferLength = analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+                
+                const draw = () => {
+                    animationFrameId = requestAnimationFrame(draw);
+                    analyser.getByteTimeDomainData(dataArray);
+                    
+                    canvasCtx.fillStyle = '#1a1a1a';
+                    canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+                    canvasCtx.lineWidth = 2;
+                    canvasCtx.strokeStyle = 'rgb(200, 160, 125)';
+                    canvasCtx.beginPath();
+                    
+                    const sliceWidth = canvas.width * 1.0 / bufferLength;
+                    let x = 0;
+                    
+                    for(let i = 0; i < bufferLength; i++) {
+                        const v = dataArray[i] / 128.0;
+                        const y = v * canvas.height / 2;
+                        if(i === 0) {
+                            canvasCtx.moveTo(x, y);
+                        } else {
+                            canvasCtx.lineTo(x, y);
+                        }
+                        x += sliceWidth;
+                    }
+                    
+                    canvasCtx.lineTo(canvas.width, canvas.height / 2);
+                    canvasCtx.stroke();
+                };
+                draw();
+            }
+
+            const clearCanvas = () => {
                 canvasCtx.fillStyle = '#1a1a1a';
                 canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-                canvasCtx.lineWidth = 2;
-                canvasCtx.strokeStyle = 'rgb(129, 178, 154)';
+                canvasCtx.lineWidth = 1;
+                canvasCtx.strokeStyle = '#333';
                 canvasCtx.beginPath();
-                const sliceWidth = canvas.width * 1.0 / waveformValues.length;
-                let x = 0;
-                for (let i = 0; i < waveformValues.length; i++) {
-                    const v = (waveformValues[i] + 1) / 2;
-                    const y = v * canvas.height;
-                    if (i === 0) canvasCtx.moveTo(x, y);
-                    else canvasCtx.lineTo(x, y);
-                    x += sliceWidth;
-                }
+                canvasCtx.moveTo(0, canvas.height / 2);
+                canvasCtx.lineTo(canvas.width, canvas.height / 2);
                 canvasCtx.stroke();
-            }
-            const clearCanvas = () => { if (canvasCtx) { canvasCtx.fillStyle = '#1a1a1a'; canvasCtx.fillRect(0, 0, canvas.width, canvas.height); } };
+            };
+            
             freqButtonsContainer.addEventListener('click', (e) => {
                 const button = e.target.closest('.freq-btn');
                 if (button) {
-                    const isActive = button.classList.contains('active');
-                    stopFrequency(); 
-                    if (!isActive) {
-                         document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-                         button.classList.add('active');
-                         playFrequency(parseFloat(button.dataset.freq));
-                    }
+                     document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+                     button.classList.add('active');
+                    const freq = parseFloat(button.dataset.freq);
+                    playFrequency(freq);
                 }
             });
+            
             stopFreqBtn.addEventListener('click', stopFrequency);
             clearCanvas();
         }
 
         // --- BLOG MODULE ---
         function initBlog() {
-            // Unchanged from original code
             const posts = {
-                'gut-brain': {
-                    title: 'هل أمعاؤك هي سبب تقلبات مزاجك؟ العقل الثاني الذي يسكن أحشاءك',
-                    image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop',
-                    content: `<p>محتوى المقال...</p>`
+                'gut-brain': { 
+                    title: 'هل أمعاؤك هي سبب تقلبات مزاجك؟', 
+                    image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop', 
+                    content: `
+                        <h2>العلاقة الخفية بين القناة الهضمية والدماغ</h2>
+                        <p>هل تعلم أن أمعاءك يطلق عليها "الدماغ الثاني"؟ هذا ليس مجرد تعبير مجازي. يوجد اتصال مباشر ومعقد بين دماغك وجهازك الهضمي، يُعرف باسم محور الأمعاء-الدماغ. هذا المحور هو طريق سريع ثنائي الاتجاه، حيث ترسل الأمعاء إشارات إلى الدماغ والعكس صحيح.</p>
+                        <p>ما يقرب من 80-90% من السيروتونين في الجسم، وهو ناقل عصبي رئيسي مسؤول عن الشعور بالسعادة والرفاهية، يتم إنتاجه في القناة الهضمية. عندما يكون الميكروبيوم المعوي (مجموعة البكتيريا والكائنات الحية الدقيقة الأخرى في أمعائك) غير متوازن، يمكن أن يؤثر ذلك بشكل مباشر على إنتاج السيروتونين، مما يؤدي إلى تقلبات مزاجية، قلق، وحتى اكتئاب.</p>
+                        <h2>كيف تدعم هذا المحور الهام؟</h2>
+                        <ul>
+                            <li><strong>تغذية غنية بالألياف:</strong> تغذي الألياف البكتيريا المفيدة في أمعائك. ركز على الخضروات والفواكه والبقوليات.</li>
+                            <li><strong>الأطعمة المخمرة:</strong> الزبادي، الكفير، مخلل الملفوف هي مصادر ممتازة للبروبيوتيك (البكتيريا الجيدة).</li>
+                            <li><strong>تقليل السكر والأطعمة المصنعة:</strong> هذه الأطعمة تغذي البكتيريا الضارة وتسبب الالتهابات.</li>
+                            <li><strong>إدارة الإجهاد:</strong> الإجهاد المزمن يمكن أن يضر ببطانة الأمعاء ويخل بتوازن الميكروبيوم. مارس التأمل، التنفس العميق، أو اليوجا.</li>
+                        </ul>
+                        <p>الاهتمام بصحة أمعائك ليس فقط لتحسين الهضم، بل هو خطوة أساسية نحو صحة نفسية وعقلية أفضل. ابدأ اليوم بإجراء تغيير صغير واحد، وشاهد كيف يتغير شعورك.</p>
+                    ` 
                 },
-                'breathing': {
-                    title: 'قوة التنفس: كيف تهدئ جهازك العصبي في 5 دقائق',
-                    image: 'https://images.unsplash.com/photo-1599301934984-1d2741913a5f?q=80&w=2070&auto=format&fit=crop',
-                    content: `<p>محتوى المقال...</p>`
+                'breathing': { 
+                    title: 'قوة التنفس: كيف تهدئ جهازك العصبي في 5 دقائق', 
+                    image: 'https://images.unsplash.com/photo-1599301934984-1d2741913a5f?q=80&w=2070&auto=format&fit=crop', 
+                    content: 'محتوى المقال عن التنفس...' 
                 },
-                'supplements': {
-                    title: 'أفضل 3 مكملات غذائية لمكافحة الالتهابات',
-                    image: 'https://images.unsplash.com/photo-1476837579993-f1d3948f17c2?q=80&w=2070&auto=format&fit=crop',
-                    content: `<p>محتوى المقال...</p>`
+                'supplements': { 
+                    title: 'أفضل 3 مكملات غذائية لمكافحة الالتهابات', 
+                    image: 'https://images.unsplash.com/photo-1476837579993-f1d3948f17c2?q=80&w=2070&auto=format&fit=crop', 
+                    content: 'محتوى المقال عن المكملات...' 
                 }
             };
-            const postTitleEl = document.getElementById('post-title');
-            const postImageEl = document.getElementById('post-image');
-            const postContentEl = document.getElementById('post-content');
             document.querySelectorAll('.read-more-btn').forEach(button => {
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
                     const postId = button.dataset.postid;
                     const post = posts[postId];
                     if (post) {
-                        postTitleEl.textContent = post.title;
-                        postImageEl.src = post.image;
-                        postContentEl.innerHTML = post.content;
+                        document.getElementById('post-title').textContent = post.title;
+                        document.getElementById('post-image').src = post.image;
+                        document.getElementById('post-image').alt = post.title;
+                        document.getElementById('post-content').innerHTML = post.content;
                         showView('single-post');
                     }
                 });
             });
         }
 
-        // --- WHEEL OF LIFE MODULE (NEW) ---
+        // --- WHEEL OF LIFE MODULE ---
         function initWheelOfLife() {
             const ctx = document.getElementById('wheel-of-life-chart');
+            if (!ctx) return;
             const slidersContainer = document.getElementById('wheel-of-life-sliders');
-            if (!ctx || !slidersContainer) return;
+            const getInsightBtn = document.getElementById('get-wheel-insight-btn');
+            const resultDiv = document.getElementById('wheel-of-life-result');
 
-            const categories = [
-                { id: 'health', label: 'الصحة الجسدية', icon: 'fa-heart-pulse', color: 'rgba(231, 76, 60, 0.6)' },
-                { id: 'career', label: 'الحياة المهنية', icon: 'fa-briefcase', color: 'rgba(52, 152, 219, 0.6)' },
-                { id: 'finance', label: 'الوضع المالي', icon: 'fa-sack-dollar', color: 'rgba(46, 204, 113, 0.6)' },
-                { id: 'spirituality', label: 'الروحانيات', icon: 'fa-om', color: 'rgba(155, 89, 182, 0.6)' },
-                { id: 'relationships', label: 'العلاقات', icon: 'fa-users', color: 'rgba(241, 196, 15, 0.6)' },
-                { id: 'personal_growth', label: 'النمو الشخصي', icon: 'fa-seedling', color: 'rgba(26, 188, 156, 0.6)' },
-                { id: 'environment', label: 'البيئة المحيطة', icon: 'fa-house-chimney', color: 'rgba(230, 126, 34, 0.6)' },
-                { id: 'fun', label: 'المرح والترفيه', icon: 'fa-puzzle-piece', color: 'rgba(243, 156, 18, 0.6)' }
-            ];
-
-            slidersContainer.innerHTML = categories.map(cat => `
-                <div class="flex items-center gap-4">
-                    <label for="${cat.id}-slider" class="w-40 text-right font-semibold"><i class="fas ${cat.icon} text-[--primary-color] ml-2"></i>${cat.label}</label>
-                    <input type="range" id="${cat.id}-slider" min="1" max="10" value="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer range-slider" data-category="${cat.id}">
-                    <span id="${cat.id}-value" class="font-bold w-8 text-center text-[--primary-dark]">5</span>
-                </div>
-            `).join('');
-
-            const chartData = {
-                labels: categories.map(c => c.label),
-                datasets: [{
-                    label: 'تقييم الرضا', data: categories.map(() => 5),
-                    backgroundColor: 'rgba(90, 110, 90, 0.4)', // Main color from user's theme
-                    borderColor: 'rgba(90, 110, 90, 1)',
-                    borderWidth: 2, pointBackgroundColor: '#fff', pointBorderColor: '#435243',
-                    pointHoverBackgroundColor: '#fff', pointHoverBorderColor: 'rgb(54, 162, 235)'
-                }]
-            };
-
-            const chartConfig = {
-                type: 'radar', data: chartData,
+            const labels = ['الصحة الجسدية', 'النمو الشخصي', 'الحياة المهنية', 'المالية', 'البيئة المحيطة', 'المرح والاستجمام', 'العلاقات الأسرية والاجتماعية', 'الحياة الروحية'];
+            const initialData = Array(labels.length).fill(5);
+            
+            // Create sliders
+            labels.forEach((label, index) => {
+                const sliderHTML = `
+                    <div class="flex items-center gap-4">
+                        <label for="slider-${index}" class="w-1/3 text-right">${label}</label>
+                        <input type="range" id="slider-${index}" min="0" max="10" value="5" class="range-slider flex-grow" data-index="${index}">
+                        <span id="value-${index}" class="w-8 text-center font-bold">${initialData[index]}</span>
+                    </div>`;
+                slidersContainer.innerHTML += sliderHTML;
+            });
+            
+            // Chart initialization
+            wheelChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'تقييمي الحالي',
+                        data: initialData,
+                        fill: true,
+                        backgroundColor: 'rgba(200, 160, 125, 0.4)',
+                        borderColor: 'rgb(200, 160, 125)',
+                        pointBackgroundColor: 'rgb(200, 160, 125)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(200, 160, 125)'
+                    }]
+                },
                 options: {
-                    scales: {
-                        r: {
-                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
-                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
-                            pointLabels: { font: { family: "'Noto Kufi Arabic', sans-serif", size: 14 }, color: '#333' },
-                            ticks: { backdropColor: 'transparent', color: 'rgba(0, 0, 0, 0.5)', stepSize: 2 },
-                            min: 0, max: 10
+                    elements: {
+                        line: {
+                            borderWidth: 3
                         }
                     },
-                    plugins: { legend: { display: false } }
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(90, 110, 90, 0.3)'
+                            },
+                            grid: {
+                                color: 'rgba(90, 110, 90, 0.3)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    family: "'Noto Kufi Arabic', sans-serif",
+                                    size: 13
+                                },
+                                color: '#333'
+                            },
+                            ticks: {
+                                backdropColor: 'var(--secondary-color)',
+                                color: '#555',
+                                stepSize: 2
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                           display: false
+                        }
+                    }
                 }
-            };
-            
-            wheelChart = new Chart(ctx, chartConfig);
-
-            document.querySelectorAll('.range-slider').forEach(slider => {
-                slider.addEventListener('input', (e) => {
-                    const value = e.target.value;
-                    const categoryId = e.target.dataset.category;
-                    document.getElementById(`${categoryId}-value`).textContent = value;
-                    const categoryIndex = categories.findIndex(cat => cat.id === categoryId);
-                    wheelChart.data.datasets[0].data[categoryIndex] = value;
-                    wheelChart.update();
-                });
             });
 
-            document.getElementById('get-wheel-insight-btn').addEventListener('click', getWheelInsight);
+            // Event listeners
+            slidersContainer.addEventListener('input', (e) => {
+                if (e.target.type === 'range') {
+                    const index = e.target.dataset.index;
+                    const value = e.target.value;
+                    document.getElementById(`value-${index}`).textContent = value;
+                    wheelChart.data.datasets[0].data[index] = value;
+                    wheelChart.update();
+                }
+            });
+            
+            getInsightBtn.addEventListener('click', getWheelInsight);
         }
-
+        
         async function getWheelInsight() {
             const resultDiv = document.getElementById('wheel-of-life-result');
             const data = wheelChart.data.datasets[0].data;
             const labels = wheelChart.data.labels;
-
-            const scores = labels.map((label, index) => ({ label: label, score: data[index] }));
-            const sortedScores = [...scores].sort((a, b) => a.score - b.score);
-            const lowestAreas = sortedScores.slice(0, 2);
-
-            resultDiv.innerHTML = `<div class="ai-loader">
-                <div class="ai-loader-dots"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div>
-                <p class="mt-2 text-[--primary-color]">يقوم مساعدنا الذكي بتحليل تقييمك...</p>
-            </div>`;
+            
             resultDiv.classList.remove('hidden');
-            setTimeout(() => resultDiv.style.opacity = 1, 10);
-            
-            const prompt = `Act as an empathetic holistic wellness coach. A user has completed a 'Wheel of Life' assessment. Their two lowest-scoring areas are "${lowestAreas[0].label}" (Score: ${lowestAreas[0].score}) and "${lowestAreas[1].label}" (Score: ${lowestAreas[1].score}). Provide a short, encouraging, and insightful analysis in Arabic. Start by acknowledging their self-reflection. Then, briefly explain how these two areas might be interconnected. Finally, suggest ONE concrete, simple first step they can take. The tone should be supportive, not clinical. Use markdown for gentle formatting.`;
-            
-            const apiKey = "AIzaSyCOfNaYITDWfe6OibILsDBx6Pe6b3SeNJ4"; 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+            resultDiv.style.opacity = '0';
+            resultDiv.innerHTML = `<div class="ai-loader"><div class="ai-loader-dots"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div><p class="mt-4 text-[--primary-color]">جاري تحليل عجلة حياتك...</p></div>`;
 
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
-                });
-                 if (!response.ok) throw new Error(`API error! status: ${response.status}`);
-                const apiData = await response.json();
-                const insightText = apiData.candidates[0].content.parts[0].text;
-                
+            let userInput = "User's Wheel of Life scores are: ";
+            labels.forEach((label, index) => {
+                userInput += `${label}: ${data[index]}/10, `;
+            });
+
+            const prompt = `Act as a wise and compassionate holistic life coach. Based on the user's Wheel of Life scores: [${userInput}]. Your task is to:
+1.  Identify the top 2-3 highest scoring areas and acknowledge them as strengths.
+2.  Identify the top 2-3 lowest scoring areas and frame them as opportunities for growth, not failures.
+3.  Provide one insightful, holistic observation about the potential interplay between the high and low areas (e.g., "I notice your career score is high, but your health is low. Perhaps your professional success is coming at the expense of your physical wellbeing?").
+4.  Offer one simple, actionable first step for one of the lowest areas.
+5.  End with an encouraging and empowering message.
+The entire response should be in warm, supportive Arabic. Start with a positive affirmation. Use markdown for lists and bolding.`;
+            
+            const insightText = await handleApiRequest(prompt, 'wheel-of-life-result'); // uses a different function
+             if (insightText) {
                 resultDiv.innerHTML = `
-                     <h4 class="text-xl font-bold mb-3 text-[--primary-color]">رؤى من أجل توازنك</h4>
-                     <div class="text-right whitespace-pre-wrap">${insightText}</div>
-                     <div class="mt-4 text-left">
-                         ${currentUser ? '<button id="save-wheel-result-btn" class="btn btn-secondary py-2 px-4 rounded-full text-sm">حفظ التقييم</button>' : '<p class="text-sm text-gray-500">سجل دخولك لحفظ هذا التقييم في ملفك.</p>'}
-                     </div>
-                `;
-                if(currentUser){
+                    <div id="wheel-result-content" class="text-right whitespace-pre-wrap">${insightText}</div>
+                    <div class="mt-4 text-center">
+                        ${currentUser ? '<button id="save-wheel-result-btn" class="btn btn-secondary py-2 px-4 rounded-full text-sm">حفظ النتيجة في ملفي</button>' : '<p class="text-sm text-gray-500">سجل الدخول لحفظ هذه الرؤى القيمة!</p>'}
+                    </div>`;
+                if(currentUser) {
                     document.getElementById('save-wheel-result-btn').addEventListener('click', () => {
-                        const resultToSave = scores.map(s => `${s.label}: ${s.score}`).join('\n');
-                        const fullResult = `--- تقييم عجلة العافية ---\n${resultToSave}\n\n--- رؤية المساعد الذكي ---\n${insightText}`;
-                        saveResultToFirestore("تقييم عجلة العافية", fullResult);
+                         const fullResultText = `--- تقييم عجلة العافية ---\n${userInput}\n\n--- رؤى التحليل ---\n${insightText}`;
+                         saveResultToFirestore("تحليل عجلة العافية", fullResultText);
                     });
                 }
-            } catch (error) {
-                console.error("Wheel of Life Insight Error:", error);
-                resultDiv.innerHTML = '<p class="text-red-500">عذراً، حدث خطأ أثناء توليد رؤيتك. يرجى المحاولة مرة أخرى.</p>';
+             } else {
+                 resultDiv.innerHTML = '<p class="text-center text-red-500">حدث خطأ أثناء توليد التحليل. يرجى المحاولة مرة أخرى.</p>';
+             }
+             resultDiv.style.opacity = '1';
+
+             async function handleApiRequest(prompt, resultsDivId) { // Local definition to avoid conflict
+                const resultsDiv = document.getElementById(resultsDivId);
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+
+                try {
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const data = await response.json();
+                    if (data.candidates && data.candidates[0].content.parts.length > 0) {
+                        return data.candidates[0].content.parts[0].text;
+                    } else { throw new Error("Invalid API response structure"); }
+                } catch (error) {
+                    console.error("API Request Error:", error);
+                    resultsDiv.innerHTML = '<p class="text-center text-red-500">حدث خطأ. يرجى المحاولة مرة أخرى.</p>';
+                    return null;
+                }
             }
         }
         
-        // --- AUDIO PLAYER MODULE (NEW) ---
+        // --- AUDIO PLAYER MODULE ---
         function initAudioPlayer() {
-            const audio = document.getElementById('guided-audio');
-            const playPauseBtn = document.getElementById('audio-play-pause-btn');
-            const icon = playPauseBtn.querySelector('i');
-            const timeDisplay = document.getElementById('audio-time');
-            const progressBar = document.getElementById('audio-progress-bar');
+             const audio = document.getElementById('guided-audio');
             if(!audio) return;
+            const playPauseBtn = document.getElementById('audio-play-pause-btn');
+            const playIcon = playPauseBtn.querySelector('i');
+            const progressBar = document.getElementById('audio-progress-bar');
+            const timeDisplay = document.getElementById('audio-time');
+            const totalDuration = 60; // 1 minute
 
             const formatTime = (seconds) => {
-                const mins = Math.floor(seconds / 60);
+                const minutes = Math.floor(seconds / 60);
                 const secs = Math.floor(seconds % 60);
-                return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
             };
-            
-            const togglePlay = () => {
+
+            playPauseBtn.addEventListener('click', () => {
                 if (audio.paused) {
                     audio.play();
-                    icon.classList.replace('fa-play-circle', 'fa-pause-circle');
+                    playIcon.classList.replace('fa-play-circle', 'fa-pause-circle');
                 } else {
                     audio.pause();
-                    icon.classList.replace('fa-pause-circle', 'fa-play-circle');
+                    playIcon.classList.replace('fa-pause-circle', 'fa-play-circle');
                 }
-            };
-            
-            const updateProgress = () => {
-                progressBar.value = (audio.currentTime / audio.duration) * 100 || 0;
-                timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 60)}`;
-            };
-            
-            const setProgress = () => { audio.currentTime = (progressBar.value / 100) * audio.duration; };
+            });
 
-            playPauseBtn.addEventListener('click', togglePlay);
-            audio.addEventListener('timeupdate', updateProgress);
-            audio.addEventListener('loadedmetadata', updateProgress);
-            audio.addEventListener('ended', () => icon.classList.replace('fa-pause-circle', 'fa-play-circle'));
-            progressBar.addEventListener('input', setProgress);
+            audio.addEventListener('timeupdate', () => {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.value = progress;
+                timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(totalDuration)}`;
+            });
+
+            audio.addEventListener('ended', () => {
+                playIcon.classList.replace('fa-pause-circle', 'fa-play-circle');
+                progressBar.value = 0;
+                timeDisplay.textContent = `00:00 / ${formatTime(totalDuration)}`;
+            });
+
+            progressBar.addEventListener('input', () => {
+                const seekTime = (progressBar.value / 100) * audio.duration;
+                audio.currentTime = seekTime;
+            });
         }
 
         // --- GENERAL UI & CREATIVE EFFECTS ---
         function initGeneralUI() {
-            // Unchanged from original code
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
@@ -1326,7 +1627,7 @@
                 if(e.target.classList.contains('nav-link') || e.target.closest('.nav-link')){
                      mobileMenu.classList.add('hidden');
                 }
-             });
+            });
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1337,38 +1638,300 @@
         }
 
         function initCreativeEffects() {
-            // Unchanged from original code
             const cards = document.querySelectorAll('.dashboard-card');
             cards.forEach(card => {
                 card.addEventListener('mousemove', (e) => {
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
-                    const centerX = card.offsetWidth / 2;
-                    const centerY = card.offsetHeight / 2;
-                    const rotateX = ((y - centerY) / centerY) * -5;
-                    const rotateY = ((x - centerX) / centerX) * 5;
+                    const rotateX = ((y - card.offsetHeight / 2) / (card.offsetHeight / 2)) * -5;
+                    const rotateY = ((x - card.offsetWidth / 2) / (card.offsetWidth / 2)) * 5;
                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
                 });
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
                 });
             });
-
             document.querySelectorAll('.btn').forEach(button => {
                 button.addEventListener('click', function(e) {
-                    const rect = button.getBoundingClientRect();
-                    const ripple = document.createElement('span');
-                    const diameter = Math.max(button.clientWidth, button.clientHeight);
-                    const radius = diameter / 2;
-                    ripple.style.width = ripple.style.height = `${diameter}px`;
-                    ripple.style.left = `${e.clientX - rect.left - radius}px`;
-                    ripple.style.top = `${e.clientY - rect.top - radius}px`;
-                    ripple.classList.add('ripple');
-                    const existingRipple = button.querySelector('.ripple');
-                    if(existingRipple) { existingRipple.remove(); }
-                    button.appendChild(ripple);
+                     const rect = this.getBoundingClientRect();
+                     const ripple = document.createElement('span');
+                     const d = Math.max(this.clientWidth, this.clientHeight);
+                     ripple.style.width = ripple.style.height = d + 'px';
+                     ripple.style.left = e.clientX - rect.left - d/2 + 'px';
+                     ripple.style.top = e.clientY - rect.top - d/2 + 'px';
+                     ripple.classList.add('ripple');
+                     this.appendChild(ripple);
+                     setTimeout(() => ripple.remove(), 600);
                 });
+            });
+        }
+
+        // --- BODY MAP MODULE (NEW) ---
+        function initBodyMap() {
+            const infoContainer = document.getElementById('body-map-info');
+            const organNameEl = document.getElementById('organ-name');
+            const organDetailsEl = document.getElementById('organ-details');
+            if (!infoContainer) return;
+
+            const organData = {
+                brain: {
+                    name: 'الدماغ والجهاز العصبي',
+                    content: `
+                        <p class="mb-2"><strong>منظور شمولي:</strong> ليس فقط مركز القيادة، بل هو جهاز استقبال وبث للطاقة والأفكار. يرتبط ارتباطاً وثيقاً بصحة الأمعاء (محور الأمعاء-الدماغ).</p>
+                        <p class="mb-2"><strong>أعراض الخلل:</strong> ضبابية الدماغ، ضعف الذاكرة، القلق، الاكتئاب، الصداع، الأرق.</p>
+                        <p class="mb-2"><strong>كيف تدعمه:</strong> دهون صحية (أوميغا-3)، تأمل، نوم عميق، تقليل المحفزات الزرقاء ليلاً، تعلم أشياء جديدة.</p>`
+                },
+                thyroid: {
+                    name: 'الغدة الدرقية',
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> هي منظم طاقة الجسم وصوتك الحقيقي في العالم. تتحكم في معدل الأيض وكيفية استخدامك للطاقة.</p>
+                        <p class="mb-2"><strong>أعراض الخلل:</strong> تعب مزمن، زيادة أو نقصان في الوزن، تساقط الشعر، حساسية للبرد، تقلبات مزاجية.</p>
+                        <p class="mb-2"><strong>كيف تدعمها:</strong> اليود والسيلينيوم والزنك، تجنب الإجهاد المزمن، تقليل الغلوتين ومنتجات الألبان إذا كنت تعاني من حساسية.</p>`
+                },
+                heart: {
+                    name: 'القلب',
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> مركز الحب والاتصال والرحمة. ليس مجرد مضخة، بل له حقله الكهرومغناطيسي الخاص به والذي يؤثر على كل خلية.</p>
+                        <p class="mb-2"><strong>أعراض الخلل:</strong> ارتفاع ضغط الدم، خفقان، الشعور بالانفصال، صعوبة في العطاء أو تلقي الحب.</p>
+                        <p class="mb-2"><strong>كيف تدعمه:</strong> ممارسة الامتنان، قضاء وقت مع الأحباء، تمارين الكارديو المعتدلة، CoQ10، المغنيسيوم.</p>`
+                },
+                liver: {
+                    name: 'الكبد',
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> هو مختبر الجسم الكيميائي ومركز معالجة السموم والمشاعر المكبوتة مثل الغضب والإحباط.</p>
+                        <p class="mb-2"><strong>أعراض الخلل:</strong> مشاكل جلدية (حب الشباب، أكزيما)، تعب، صعوبة في هضم الدهون، حساسية كيميائية، غضب مكبوت.</p>
+                        <p class="mb-2"><strong>كيف تدعمه:</strong> خضروات صليبية (بروكلي، قرنبيط)، الشمندر، الكركم، الشاي الأخضر، تقنيات التحرر من الغضب.</p>`
+                },
+                gut: {
+                    name: 'الأمعاء (الجهاز الهضمي)',
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> "عقلك الثاني"، حيث يتم امتصاص العناصر الغذائية وتصنيع 80% من السيروتونين. صحة الأمعاء هي أساس صحة الجسم كله.</p>
+                        <p class="mb-2"><strong>أعراض الخلل:</strong> انتفاخ، غازات، إمساك أو إسهال، حساسية غذائية، أمراض مناعية ذاتية، مشاكل جلدية، قلق واكتئاب.</p>
+                        <p class="mb-2"><strong>كيف تدعمها:</strong> بروبيوتيك وبريبيوتيك، مرق العظام، الأطعمة المخمرة، تجنب الأطعمة المصنعة والسكر، إدارة التوتر.</p>`
+                },
+                adrenals: {
+                    name: 'الغدد الكظرية',
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> بطاريات طاقتك ومدير استجابتك للإجهاد والتوتر. تنتج هرمونات مثل الكورتيزول والأدرينالين.</p>
+                        <p class="mb-2"><strong>أعراض الخلل:</strong> إرهاق كظري، تعب صباحي وصعوبة في الاستيقاظ، رغبة شديدة في الملح والسكر، ضعف المناعة، دوخة عند الوقوف.</p>
+                        <p class="mb-2"><strong>كيف تدعمها:</strong> إدارة الإجهاد (أساسي)، نوم كافٍ، فيتامين سي ومجموعة فيتامينات ب، أعشاب متكيفة (أشواغاندا)، إضافة ملح بحري عالي الجودة للطعام.</p>`
+                }
+            };
+            
+            document.querySelectorAll('#body-map-svg .organ').forEach(organ => {
+                organ.addEventListener('click', () => {
+                    const organKey = organ.dataset.organ;
+                    const data = organData[organKey];
+
+                    if (data) {
+                        infoContainer.style.opacity = 0;
+                        infoContainer.style.transform = 'translateY(20px)';
+                        
+                        setTimeout(() => {
+                            organNameEl.textContent = data.name;
+                            organDetailsEl.innerHTML = data.content;
+                            infoContainer.style.opacity = 1;
+                            infoContainer.style.transform = 'translateY(0)';
+                        }, 300);
+                    }
+                });
+            });
+        }
+        
+        // --- QUIZZES MODULE (NEW) ---
+        function initQuizzes() {
+            const modal = document.getElementById('quiz-modal');
+            const modalContent = document.getElementById('quiz-modal-content');
+
+            const quizzes = {
+                'adrenal-fatigue': {
+                    title: 'اختبار الإرهاق الكظري',
+                    questions: [
+                        { q: "هل تشعر بالتعب حتى بعد ليلة نوم كاملة؟", points: 2 },
+                        { q: "هل تجد صعوبة في الاستيقاظ في الصباح؟", points: 2 },
+                        { q: "هل تشتهي الأطعمة المالحة أو السكرية بشدة؟", points: 2 },
+                        { q: "هل تشعر بالدوار أو الدوخة عند الوقوف بسرعة؟", points: 1 },
+                        { q: "هل قدرتك على التعامل مع الإجهاد منخفضة؟", points: 2 },
+                        { q: "هل تمرض بسهولة وتستغرق وقتاً أطول للشفاء؟", points: 1 },
+                        { q: "هل تشعر بأن لديك طاقة أفضل في المساء؟", points: 1 },
+                    ],
+                    results: [
+                        { score: 0, text: "احتمالية منخفضة لوجود إرهاق كظري. يبدو أن غددك الكظرية تعمل بشكل جيد. حافظ على نمط حياتك الصحي!" },
+                        { score: 4, text: "احتمالية متوسطة لوجود إرهاق كظري. قد تكون غددك الكظرية تحت ضغط. من الجيد البدء في تطبيق تقنيات إدارة الإجهاد والنوم بشكل أفضل." },
+                        { score: 7, text: "احتمالية عالية لوجود إرهاق كظري. غددك الكظرية بحاجة ماسة للدعم. نوصي بشدة بالتركيز على إدارة الإجهاد، التغذية الداعمة، والنوم. قد يكون من المفيد حجز استشارة لمناقشة النتائج." }
+                    ]
+                }
+            };
+
+            const hideQuizModal = () => {
+                modal.classList.remove('is-open');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            };
+
+            document.querySelectorAll('.quiz-start-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const quizId = btn.dataset.quiz;
+                    startQuiz(quizId);
+                });
+            });
+            
+            function startQuiz(quizId) {
+                const quizData = quizzes[quizId];
+                let currentQuestion = 0;
+                let score = 0;
+
+                function renderQuestion() {
+                    if (currentQuestion >= quizData.questions.length) {
+                        renderResult();
+                        return;
+                    }
+                    const q = quizData.questions[currentQuestion];
+                    modalContent.innerHTML = `
+                        <h3 class="text-2xl font-bold mb-2">${quizData.title}</h3>
+                        <p class="text-gray-500 mb-6">السؤال ${currentQuestion + 1} من ${quizData.questions.length}</p>
+                        <p class="text-xl font-semibold mb-6 text-center">${q.q}</p>
+                        <div class="flex justify-center gap-4">
+                           <button class="quiz-answer-btn btn btn-primary text-white py-2 px-8 rounded-full" data-answer="yes">نعم</button>
+                           <button class="quiz-answer-btn btn btn-secondary py-2 px-8 rounded-full" data-answer="no">لا</button>
+                        </div>
+                    `;
+                    document.querySelectorAll('.quiz-answer-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            if (e.target.dataset.answer === 'yes') {
+                                score += q.points;
+                            }
+                            currentQuestion++;
+                            renderQuestion();
+                        });
+                    });
+                }
+                
+                function renderResult() {
+                    let resultText = '';
+                    for (let i = quizData.results.length - 1; i >= 0; i--) {
+                        if (score >= quizData.results[i].score) {
+                            resultText = quizData.results[i].text;
+                            break;
+                        }
+                    }
+                     modalContent.innerHTML = `
+                        <h3 class="text-2xl font-bold mb-2">النتيجة</h3>
+                        <div class="bg-gray-100 p-6 rounded-lg text-center">
+                            <p class="text-lg mb-2">درجتك هي: <span class="font-bold text-2xl text-[--primary-color]">${score}</span></p>
+                            <p class="text-gray-700">${resultText}</p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button class="close-quiz-modal-btn btn btn-primary text-white py-2 px-6 rounded-full">إغلاق</button>
+                        </div>
+                    `;
+                    modalContent.querySelector('.close-quiz-modal-btn').addEventListener('click', hideQuizModal);
+                }
+                
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.add('is-open'), 10);
+                renderQuestion();
+            }
+        }
+
+        // --- JOURNAL MODULE (NEW) ---
+        function initJournal() {
+            const form = document.getElementById('journal-form');
+            if(!form) return;
+
+            document.getElementById('entry-date').valueAsDate = new Date();
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!currentUser) {
+                    showNotification("يجب تسجيل الدخول لحفظ الإدخالات.", "error");
+                    return;
+                }
+                const entry = {
+                    date: document.getElementById('entry-date').value,
+                    mood: document.getElementById('mood-rating').value,
+                    energy: document.getElementById('energy-rating').value,
+                    sleep: document.getElementById('sleep-quality').value,
+                    symptoms: document.getElementById('symptoms-today').value,
+                    createdAt: new Date()
+                };
+
+                try {
+                    const journalCollection = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'journalEntries');
+                    await addDoc(journalCollection, entry);
+                    showNotification("تم حفظ الإدخال بنجاح!", "success");
+                    form.reset();
+                    document.getElementById('entry-date').valueAsDate = new Date();
+                    loadJournalEntries(); 
+                } catch (error) {
+                    console.error("Error saving journal entry: ", error);
+                    showNotification("حدث خطأ أثناء حفظ الإدخال.", "error");
+                }
+            });
+        }
+        
+        function toggleJournalView(isLoggedIn) {
+            document.getElementById('journal-content-container').classList.toggle('hidden', !isLoggedIn);
+            document.getElementById('journal-login-prompt').classList.toggle('hidden', isLoggedIn);
+        }
+
+        async function loadJournalEntries() {
+            if (!currentUser) return;
+            const entriesContainer = document.getElementById('journal-entries-container');
+            entriesContainer.innerHTML = '<p>جاري تحميل السجلات...</p>';
+
+            const journalCollection = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'journalEntries');
+            const q = query(journalCollection, orderBy("date", "desc"), limit(30));
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                entriesContainer.innerHTML = '<p>لا توجد إدخالات بعد. ابدأ بتسجيل يومك!</p>';
+                if(journalChart) journalChart.destroy();
+                return;
+            }
+            
+            const entries = [];
+            let entriesHTML = '';
+            querySnapshot.forEach(doc => {
+                const data = doc.data();
+                entries.push(data);
+                entriesHTML += `
+                    <div class="bg-white p-4 rounded-lg shadow-sm journal-entry">
+                        <p class="font-bold text-lg">${data.date}</p>
+                        <p class="text-sm"><strong>المزاج:</strong> ${data.mood}/10 | <strong>الطاقة:</strong> ${data.energy}/10 | <strong>النوم:</strong> ${data.sleep || 'N/A'} س</p>
+                        ${data.symptoms ? `<p class="text-sm text-gray-600 mt-1"><strong>الأعراض:</strong> ${data.symptoms}</p>` : ''}
+                    </div>`;
+            });
+            entriesContainer.innerHTML = entriesHTML;
+            renderJournalChart(entries.reverse());
+        }
+
+        function renderJournalChart(entries) {
+            const ctx = document.getElementById('journal-chart').getContext('2d');
+            if (journalChart) {
+                journalChart.destroy();
+            }
+            journalChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: entries.map(e => e.date),
+                    datasets: [
+                        {
+                            label: 'مستوى المزاج',
+                            data: entries.map(e => e.mood),
+                            borderColor: 'rgb(200, 160, 125)',
+                            backgroundColor: 'rgba(200, 160, 125, 0.5)',
+                            tension: 0.1
+                        },
+                        {
+                            label: 'مستوى الطاقة',
+                            data: entries.map(e => e.energy),
+                            borderColor: 'rgb(90, 110, 90)',
+                            backgroundColor: 'rgba(90, 110, 90, 0.5)',
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'top' } },
+                    scales: { y: { beginAtZero: true, max: 10 } }
+                }
             });
         }
     </script>
