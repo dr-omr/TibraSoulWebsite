@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="د. عمر العماد - رحلتك نحو الشفاء بالطب الشمولي والوظيفي. أدوات ذكية، جلسات علاجية، ومنتجات طبيعية.">
-    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر العماد, طِبرا, عجلة الحياة, تقييم صحي, DMSO, ترددات شفائية, تشخيص ذكي, خطة علاجية, تحليل الدم, خريطة الجسم, مفكرة الأعراض">
+    <meta name="keywords" content="طب شمولي, طب وظيفي, علاج عن بعد, منتجات طبيعية, شفاء, دكتور عمر العماد, طِبرا, عجلة الحياة, تقييم صحي, DMSO, ترددات شفائية, تشخيص ذكي, خطة علاجية, تحليل الدم, خريطة الجسم, مفكرة الأعراض, تردد النقلة الموازية, صلاح الراشد">
     <title>د. عمر العماد | خبير الطب الشمولي والوظيفي</title>
 
     <!-- Fonts & Icons -->
@@ -19,17 +19,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- 3D Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
 
     <style>
-        /* --- GLOBAL DESIGN SYSTEM & VARIABLES --- */
+        /* --- GLOBAL DESIGN SYSTEM & VARIABLES (REFINED) --- */
         :root {
-            --primary-color: #5a6e5a;
-            --primary-dark: #435243;
-            --secondary-color: #f4f1eb;
-            --accent-color: #c8a07d;
-            --accent-light: #e6d3c1;
-            --text-dark: #333333;
-            --text-light: #f8f9fa;
+            --primary-color: #5a6e5a; /* Muted Sage Green */
+            --primary-dark: #435243;  /* Darker Sage */
+            --secondary-color: #f6f3ef; /* Warmer, richer off-white */
+            --accent-color: #c8a07d;  /* Warm Tan */
+            --accent-light: #e6d3c1; /* Lighter Tan */
+            --accent-gold: #e0c4a4;   /* Soft Gold for highlights */
+            --text-dark: #2f3d2f;    /* Desaturated Green-Black for text */
+            --text-light: #faf8f5;   /* Softer light text */
         }
         
         /* --- GENERAL BODY & TYPOGRAPHY STYLES --- */
@@ -40,8 +45,9 @@
             scroll-behavior: smooth;
         }
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Noto Kufi Arabic', sans-serif; /* Keep consistent font for headers */
+            font-family: 'Noto Kufi Arabic', sans-serif;
             font-weight: 700;
+            color: var(--primary-dark);
         }
         .font-brand {
             font-family: 'Great Vibes', cursive;
@@ -55,9 +61,9 @@
         }
         @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
         @keyframes glow {
-            0% { box-shadow: 0 0 5px var(--accent-light); }
-            50% { box-shadow: 0 0 20px var(--accent-light); }
-            100% { box-shadow: 0 0 5px var(--accent-light); }
+            0% { box-shadow: 0 0 5px var(--accent-gold); }
+            50% { box-shadow: 0 0 20px var(--accent-gold); }
+            100% { box-shadow: 0 0 5px var(--accent-gold); }
         }
         @keyframes pulse-loader {
           0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(90, 110, 90, 0.7); }
@@ -103,12 +109,15 @@
         .ai-loader .ai-loader-dots .dot2 { left: 32px; animation-delay: -0.16s; }
         .ai-loader .ai-loader-dots .dot3 { left: 56px; }
 
-        /* --- FREQUENCY GENERATOR STYLES --- */
-        #frequency-canvas { background-color: #1a1a1a; border-radius: 8px; box-shadow: inset 0 0 10px #000; }
-        .freq-btn.active { background-color: var(--accent-color); color: white; transform: scale(1.05); box-shadow: 0 0 15px var(--accent-color); }
+        /* --- FREQUENCY GENERATOR STYLES (REFINED) --- */
+        #frequency-canvas { background: linear-gradient(135deg, #121212 0%, #2f3d2f 100%); border-radius: 8px; box-shadow: inset 0 0 15px rgba(0,0,0,0.6); }
+        .freq-btn.active { background-color: var(--accent-color); color: white; transform: scale(1.05); box-shadow: 0 0 15px var(--accent-color); border-color: var(--accent-color); }
+        .freq-description { font-size: 0.8rem; color: #777; margin-top: 4px; }
+        .freq-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+
 
         /* --- SINGLE POST STYLES --- */
-        #view-single-post .post-content h2 { font-size: 1.75rem; font-weight: bold; margin-top: 2rem; margin-bottom: 1rem; }
+        #view-single-post .post-content h2 { font-size: 1.75rem; font-weight: bold; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary-dark); }
         #view-single-post .post-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; }
         #view-single-post .post-content ul { list-style-type: disc; margin-right: 2rem; margin-bottom: 1.5rem; }
         #view-single-post .post-content li { margin-bottom: 0.5rem; }
@@ -118,30 +127,30 @@
         #wheel-of-life-result-container .range-slider {
             -webkit-appearance: none; appearance: none;
             width: 100%; height: 8px; border-radius: 4px;
-            background: var(--accent-light); outline: none; transition: opacity .2s;
+            background: var(--accent-light); outline: none; transition: background 0.3s;
         }
         #wheel-of-life-result-container .range-slider::-webkit-slider-thumb {
              -webkit-appearance: none; appearance: none; width: 20px; height: 20px;
-             border-radius: 50%; background: var(--primary-color); cursor: pointer;
+             border-radius: 50%; background: var(--primary-color); cursor: pointer; transition: transform 0.2s;
         }
+        #wheel-of-life-result-container .range-slider:hover { background: var(--accent-gold); }
+        #wheel-of-life-result-container .range-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
 
         /* --- AUDIO PLAYER --- */
         .audio-player { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border-radius: 15px; padding: 20px; box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1); }
         #audio-progress-bar { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: var(--accent-light); outline: none; transition: opacity .2s; }
         #audio-progress-bar::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--primary-color); cursor: pointer; }
         
-        /* --- BODY MAP (NEW) --- */
-        #body-map-svg .organ {
-            fill: rgba(90, 110, 90, 0.2);
-            stroke: var(--primary-dark);
-            stroke-width: 1.5;
-            transition: fill 0.3s ease, transform 0.3s ease;
-            cursor: pointer;
+        /* --- BODY MAP (3D UPGRADE) --- */
+        #body-map-container {
+            height: 500px;
+            cursor: grab;
+            background-color: var(--secondary-color);
+            border-radius: 1rem;
         }
-        #body-map-svg .organ:hover {
-            fill: rgba(200, 160, 125, 0.7);
-            transform: scale(1.05);
-        }
+        #body-map-container:active { cursor: grabbing; }
+
         #body-map-info {
              transition: opacity 0.5s ease, transform 0.5s ease;
         }
@@ -172,7 +181,7 @@
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-sm shadow-lg sticky top-0 z-50 transition-shadow duration-300">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="font-brand text-4xl text-gray-800 nav-link" data-view="hero">د. عمر العماد</a>
+            <a href="#" class="text-3xl font-bold text-primary-dark nav-link" data-view="hero">د. عمر العماد</a>
             <div class="hidden md:flex items-center space-x-reverse space-x-6">
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="about">عني</a>
                 <a href="#" class="nav-link hover:text-[--primary-color] transition-colors duration-300" data-view="dashboard">الخدمات التفاعلية</a>
@@ -216,9 +225,9 @@
             <div class="absolute inset-0 bg-cover bg-center hero-bg" style="background-image: url('https://images.unsplash.com/photo-1542601906-8b6aBA801697?q=80&w=2070&auto=format&fit=crop');"></div>
             <div class="absolute inset-0 hero-gradient"></div>
             <div class="relative z-10 p-6 fade-in-up">
-                <h1 class="font-brand text-7xl md:text-9xl mb-4">ṬibraSoul</h1>
-                <h2 class="text-2xl md:text-4xl font-bold mb-2">رحلتك نحو الشفاء المتكامل تبدأ هنا</h2>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto">أساعدك على استعادة توازن جسدك وروحك عبر دمج حكمة الطب الشمولي والوظيفي مع أحدث العلوم.</p>
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">د. عمر العماد</h1>
+                <h2 class="font-brand text-5xl md:text-7xl mb-2 text-accent-gold">ṬibraSoul</h2>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">رحلتك نحو الشفاء المتكامل تبدأ هنا</p>
                 <a href="#" class="nav-link mt-8 inline-block btn bg-white text-[--primary-color] font-bold py-3 px-8 rounded-full text-lg btn-glow" data-view="dashboard">اكتشف خدماتنا</a>
             </div>
         </section>
@@ -255,7 +264,7 @@
                     <!-- NEW Card: Body Map -->
                     <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="body-map">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fa-solid fa-person-chalkboard"></i></div>
-                        <h3 class="text-2xl font-bold mb-3">خريطة الجسم التفاعلية</h3>
+                        <h3 class="text-2xl font-bold mb-3">خريطة الجسم ثلاثية الأبعاد</h3>
                         <p class="text-gray-600">استكشف أعضاء جسدك وافهم رسائلها من منظور شمولي.</p>
                     </a>
 
@@ -282,7 +291,7 @@
                     <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="frequencies">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-wave-square"></i></div>
                         <h3 class="text-2xl font-bold mb-3">الترددات الشفائية</h3>
-                        <p class="text-gray-600">استمع إلى ترددات السولفيجيو المصممة لتهدئة الجهاز العصبي.</p>
+                        <p class="text-gray-600">استمع إلى ترددات السولفيجيو وترددات النقلة الموازية.</p>
                     </a>
                     <a href="#" class="nav-link group dashboard-card block p-8 rounded-xl shadow-lg text-center" data-view="store">
                         <div class="text-5xl text-[--primary-color] mb-4 group-hover:text-[--accent-color] transition-colors"><i class="fas fa-store"></i></div>
@@ -457,23 +466,62 @@
                      </button>
                  </div>
                 <h2 class="text-4xl font-bold mb-4 section-title">مولد الترددات الشفائية</h2>
-                <p class="max-w-2xl mx-auto mb-12">اختر أحد ترددات السولفيجيو للاستماع إليها أثناء التأمل. استخدم سماعات الرأس لأفضل تأثير.</p>
-                <div class="bg-gray-100 p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
-                    <canvas id="frequency-canvas" class="w-full h-32 mb-8"></canvas>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="frequency-buttons">
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="396">396 Hz - تحرير الذنب والخوف</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="417">417 Hz - تسهيل التغيير</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="528">528 Hz - التحول والمعجزات</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="639">639 Hz - إعادة الاتصال والعلاقات</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="741">741 Hz - إيقاظ الحدس</button>
-                        <button class="freq-btn p-4 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="852">852 Hz - العودة إلى النظام الروحي</button>
+                <p class="max-w-2xl mx-auto mb-12">اختر أحد الترددات للاستماع إليها أثناء التأمل. استخدم سماعات الرأس لأفضل تأثير. تم تطوير هذا القسم بناءً على أبحاث الدكتور صلاح الراشد في مجال الترددات والطاقة.</p>
+                <div class="bg-gray-100 p-8 rounded-xl shadow-lg max-w-5xl mx-auto">
+                    <canvas id="frequency-canvas" class="w-full h-48 mb-8"></canvas>
+                    <h3 class="text-2xl font-bold mb-4">ترددات النقلة الموازية (Parallel Shift)</h3>
+                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="parallel-shift-buttons">
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="7.83">
+                            <span>7.83 Hz - تردد شومان</span>
+                            <span class="freq-description">التجذر والتناغم مع الأرض</span>
+                        </button>
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="432">
+                            <span>432 Hz - التناغم الكوني</span>
+                             <span class="freq-description">السكينة والهدوء الداخلي</span>
+                        </button>
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="111">
+                            <span>111 Hz - الجسر الطاقي</span>
+                            <span class="freq-description">ربط العقل الواعي باللاواعي</span>
+                        </button>
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="222">
+                            <span>222 Hz - الثقة والتوازن</span>
+                             <span class="freq-description">إعادة التوازن والثقة بالمسار</span>
+                        </button>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-4">ترددات السولفيجيو العلاجية</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4" id="frequency-buttons">
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="396">
+                            <span>396 Hz - تحرير الذنب</span>
+                             <span class="freq-description">التخلص من الخوف والشعور بالذنب</span>
+                        </button>
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="417">
+                            <span>417 Hz - تسهيل التغيير</span>
+                             <span class="freq-description">إزالة الطاقات السلبية</span>
+                        </button>
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="528">
+                            <span>528 Hz - التحول والمعجزات</span>
+                             <span class="freq-description">إصلاح الحمض النووي (DNA)</span>
+                        </button>
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="639">
+                             <span>639 Hz - إعادة الاتصال</span>
+                            <span class="freq-description">تحسين العلاقات والتناغم</span>
+                        </button>
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="741">
+                            <span>741 Hz - إيقاظ الحدس</span>
+                            <span class="freq-description">التطهير والتعبير عن الذات</span>
+                        </button>
+                        <button class="freq-btn p-3 rounded-lg border-2 border-gray-200 transition bg-white" data-freq="852">
+                            <span>852 Hz - العودة للروح</span>
+                             <span class="freq-description">الاتصال بالنظام الروحي</span>
+                        </button>
                     </div>
                     <button id="stop-freq-btn" class="mt-8 btn btn-secondary py-2 px-6 rounded-full hidden">إيقاف التردد</button>
                 </div>
             </div>
         </section>
 
-        <!-- Body Map Section (NEW) -->
+        <!-- Body Map Section (3D UPGRADE) -->
         <section id="view-body-map" class="page-view py-20 bg-white hidden">
             <div class="container mx-auto px-6">
                  <div class="text-right mb-12">
@@ -483,37 +531,19 @@
                      </button>
                  </div>
                 <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold mb-4 section-title">خريطة الجسم التفاعلية</h2>
-                    <p class="max-w-3xl mx-auto text-lg">انقر على أي عضو في الرسم التوضيحي لاستكشاف وظيفته من منظور شمولي، الأعراض المرتبطة به، وكيفية دعمه لتحقيق الشفاء.</p>
+                    <h2 class="text-4xl font-bold mb-4 section-title">خريطة الجسم ثلاثية الأبعاد</h2>
+                    <p class="max-w-3xl mx-auto text-lg">استخدم الفأرة لتدوير النموذج. انقر على أي عضو لاستكشاف وظيفته من منظور شمولي، الأعراض المرتبطة به، وكيفية دعمه.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                    <!-- Body Map SVG -->
-                    <div class="md:col-span-1 flex justify-center items-center">
-                        <svg id="body-map-svg" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-xs h-auto">
-                            <!-- Head/Brain -->
-                            <path class="organ" data-organ="brain" d="M100,50 a40,40 0 1,0 0.1,0 Z" />
-                            <text x="100" y="55" text-anchor="middle" font-size="10" fill="#333">الدماغ</text>
-                            <!-- Thyroid -->
-                            <path class="organ" data-organ="thyroid" d="M85,95 a15,8 0 0,0 30,0 Z" />
-                            <text x="100" y="100" text-anchor="middle" font-size="8" fill="#333">الغدة الدرقية</text>
-                             <!-- Heart -->
-                            <path class="organ" data-organ="heart" d="M100 130 C 90 120, 70 125, 75 145 S 100 160, 100 160 S 125 145, 125 145 S 110 120, 100 130 Z" />
-                             <!-- Liver -->
-                            <path class="organ" data-organ="liver" d="M105,170 C 130,170 140,190 130,210 L 80,210 C 70,190 80,170 105,170 Z" />
-                            <text x="110" y="195" text-anchor="middle" font-size="10" fill="#333">الكبد</text>
-                            <!-- Gut/Intestines -->
-                            <path class="organ" data-organ="gut" d="M80,220 C 75,260 125,260 120,220 C 120,220 110,230 100,230 C 90,230 80,220 80,220 Z M85,240 C 85,255 115,255 115,240 C 110,245 90,245 85,240 Z" />
-                            <text x="100" y="245" text-anchor="middle" font-size="10" fill="#333">الأمعاء</text>
-                             <!-- Adrenals -->
-                            <path class="organ" data-organ="adrenals" d="M80,180 a10,5 0 0,1 15,0" />
-                            <path class="organ" data-organ="adrenals" d="M105,180 a10,5 0 0,1 15,0" />
-                        </svg>
+                    <!-- 3D Body Map Container -->
+                    <div id="body-map-container" class="md:col-span-1 w-full rounded-lg shadow-lg">
+                        <!-- three.js canvas will be injected here -->
                     </div>
 
                     <!-- Info Panel -->
                     <div id="body-map-info-container" class="md:col-span-2">
-                        <div id="body-map-info" class="bg-white p-8 rounded-xl shadow-lg opacity-0 transform translate-y-5">
+                        <div id="body-map-info" class="bg-white p-8 rounded-xl shadow-lg opacity-0 transform translate-y-5 h-full">
                             <h3 id="organ-name" class="text-3xl font-bold mb-4 text-[--primary-color]">حدد عضواً للبدء</h3>
                             <div id="organ-details">
                                 <p class="text-gray-600">انقر على رسم الجسم لاكتشاف المزيد.</p>
@@ -844,6 +874,15 @@
              if(targetView) {
                  targetView.classList.remove('hidden');
                  window.scrollTo(0, 0);
+
+                if (viewId === 'body-map') {
+                     // Special handler to initialize 3D scene only when view is shown
+                     const canvasContainer = document.getElementById('body-map-container');
+                     if (canvasContainer && !canvasContainer.querySelector('canvas')) {
+                        init3DBodyMap();
+                     }
+                 }
+
                  const elementsToAnimate = targetView.querySelectorAll('.fade-in-up');
                  elementsToAnimate.forEach(el => el.classList.remove('is-visible'));
                  setTimeout(() => {
@@ -1017,7 +1056,7 @@
                     throw new Error(`HTTP error! status: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
                 }
                 const data = await response.json();
-                if (data.candidates && data.candidates[0].content.parts.length > 0) {
+                if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts.length > 0) {
                     return data.candidates[0].content.parts[0].text;
                 } else { throw new Error("Invalid API response structure"); }
             } catch (error) {
@@ -1283,15 +1322,22 @@ Structure the output in Arabic with clear headings for each marker using markdow
             });
         }
 
-        // --- FREQUENCY GENERATOR MODULE ---
+        // --- FREQUENCY GENERATOR MODULE (UPGRADED) ---
         function initFrequencyGenerator() {
             const freqButtonsContainer = document.getElementById('frequency-buttons');
+            const parallelShiftButtonsContainer = document.getElementById('parallel-shift-buttons');
             const stopFreqBtn = document.getElementById('stop-freq-btn');
             const canvas = document.getElementById('frequency-canvas');
             if (!freqButtonsContainer || !stopFreqBtn || !canvas) return;
+
             let audioContext, oscillator, analyser, gainNode, animationFrameId;
             const canvasCtx = canvas.getContext('2d');
             
+            const allFreqButtons = [
+                ...freqButtonsContainer.querySelectorAll('.freq-btn'),
+                ...parallelShiftButtonsContainer.querySelectorAll('.freq-btn')
+            ];
+
             const setupAudio = async () => {
                  if (!audioContext) {
                      try {
@@ -1321,7 +1367,7 @@ Structure the output in Arabic with clear headings for each marker using markdow
 
                 oscillator = new Tone.Oscillator(freq, "sine").connect(gainNode);
                 oscillator.start();
-                gainNode.gain.rampTo(0.5, 0.1); // Ramp up volume
+                gainNode.gain.rampTo(0.3, 0.1); // Reduced volume slightly for comfort
                 stopFreqBtn.classList.remove('hidden');
                 visualize();
             };
@@ -1338,62 +1384,64 @@ Structure the output in Arabic with clear headings for each marker using markdow
                     }, 500);
                 }
                 stopFreqBtn.classList.add('hidden');
-                document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+                allFreqButtons.forEach(b => b.classList.remove('active'));
             };
             
             function visualize() {
                 const bufferLength = analyser.frequencyBinCount;
                 const dataArray = new Uint8Array(bufferLength);
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radius = Math.min(centerX, centerY) - 10;
                 
                 const draw = () => {
                     animationFrameId = requestAnimationFrame(draw);
-                    analyser.getByteTimeDomainData(dataArray);
+                    analyser.getByteFrequencyData(dataArray);
                     
-                    canvasCtx.fillStyle = '#1a1a1a';
+                    canvasCtx.fillStyle = 'rgba(18, 18, 18, 0.1)'; // Fading effect
                     canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-                    canvasCtx.lineWidth = 2;
-                    canvasCtx.strokeStyle = 'rgb(200, 160, 125)';
-                    canvasCtx.beginPath();
                     
-                    const sliceWidth = canvas.width * 1.0 / bufferLength;
-                    let x = 0;
-                    
-                    for(let i = 0; i < bufferLength; i++) {
-                        const v = dataArray[i] / 128.0;
-                        const y = v * canvas.height / 2;
-                        if(i === 0) {
-                            canvasCtx.moveTo(x, y);
-                        } else {
-                            canvasCtx.lineTo(x, y);
-                        }
-                        x += sliceWidth;
+                    const barWidth = (2 * Math.PI) / (bufferLength * 0.5);
+                    let angle = 0;
+
+                    for (let i = 0; i < bufferLength * 0.5; i++) {
+                        const barHeight = dataArray[i] * 0.5;
+                        
+                        const r = 150 + barHeight * 0.2;
+                        const g = 180 + barHeight * 0.3;
+                        const b = 150 + barHeight * 0.4;
+                        canvasCtx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.6)`;
+                        
+                        const x = centerX + Math.cos(angle) * radius;
+                        const y = centerY + Math.sin(angle) * radius;
+                        const x_end = centerX + Math.cos(angle) * (radius + barHeight);
+                        const y_end = centerY + Math.sin(angle) * (radius + barHeight);
+
+                        canvasCtx.beginPath();
+                        canvasCtx.moveTo(x, y);
+                        canvasCtx.lineTo(x_end, y_end);
+                        canvasCtx.lineWidth = barWidth * 5; // Use lineWidth for radial bars
+                        canvasCtx.stroke();
+                        
+                        angle += barWidth;
                     }
-                    
-                    canvasCtx.lineTo(canvas.width, canvas.height / 2);
-                    canvasCtx.stroke();
                 };
                 draw();
             }
 
+
             const clearCanvas = () => {
-                canvasCtx.fillStyle = '#1a1a1a';
+                canvasCtx.fillStyle = '#121212';
                 canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-                canvasCtx.lineWidth = 1;
-                canvasCtx.strokeStyle = '#333';
-                canvasCtx.beginPath();
-                canvasCtx.moveTo(0, canvas.height / 2);
-                canvasCtx.lineTo(canvas.width, canvas.height / 2);
-                canvasCtx.stroke();
             };
             
-            freqButtonsContainer.addEventListener('click', (e) => {
-                const button = e.target.closest('.freq-btn');
-                if (button) {
-                     document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-                     button.classList.add('active');
+            allFreqButtons.forEach(button => {
+                 button.addEventListener('click', (e) => {
+                    allFreqButtons.forEach(b => b.classList.remove('active'));
+                    button.classList.add('active');
                     const freq = parseFloat(button.dataset.freq);
                     playFrequency(freq);
-                }
+                });
             });
             
             stopFreqBtn.addEventListener('click', stopFrequency);
@@ -1663,62 +1711,130 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
             });
         }
 
-        // --- BODY MAP MODULE (NEW) ---
+        // --- BODY MAP MODULE (Lazy Init) ---
         function initBodyMap() {
-            const infoContainer = document.getElementById('body-map-info');
-            const organNameEl = document.getElementById('organ-name');
-            const organDetailsEl = document.getElementById('organ-details');
-            if (!infoContainer) return;
-
-            const organData = {
+            // The actual 3D initialization is now deferred to showView to prevent
+            // WebGL context issues on hidden elements. This function just sets up the data.
+            window.organData = {
                 brain: {
                     name: 'الدماغ والجهاز العصبي',
-                    content: `
-                        <p class="mb-2"><strong>منظور شمولي:</strong> ليس فقط مركز القيادة، بل هو جهاز استقبال وبث للطاقة والأفكار. يرتبط ارتباطاً وثيقاً بصحة الأمعاء (محور الأمعاء-الدماغ).</p>
-                        <p class="mb-2"><strong>أعراض الخلل:</strong> ضبابية الدماغ، ضعف الذاكرة، القلق، الاكتئاب، الصداع، الأرق.</p>
-                        <p class="mb-2"><strong>كيف تدعمه:</strong> دهون صحية (أوميغا-3)، تأمل، نوم عميق، تقليل المحفزات الزرقاء ليلاً، تعلم أشياء جديدة.</p>`
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> ليس فقط مركز القيادة، بل هو جهاز استقبال وبث للطاقة والأفكار. يرتبط ارتباطاً وثيقاً بصحة الأمعاء (محور الأمعاء-الدماغ).</p><p class="mb-2"><strong>أعراض الخلل:</strong> ضبابية الدماغ، ضعف الذاكرة، القلق، الاكتئاب، الصداع، الأرق.</p><p class="mb-2"><strong>كيف تدعمه:</strong> دهون صحية (أوميغا-3)، تأمل، نوم عميق، تقليل المحفزات الزرقاء ليلاً، تعلم أشياء جديدة.</p>`
                 },
                 thyroid: {
                     name: 'الغدة الدرقية',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> هي منظم طاقة الجسم وصوتك الحقيقي في العالم. تتحكم في معدل الأيض وكيفية استخدامك للطاقة.</p>
-                        <p class="mb-2"><strong>أعراض الخلل:</strong> تعب مزمن، زيادة أو نقصان في الوزن، تساقط الشعر، حساسية للبرد، تقلبات مزاجية.</p>
-                        <p class="mb-2"><strong>كيف تدعمها:</strong> اليود والسيلينيوم والزنك، تجنب الإجهاد المزمن، تقليل الغلوتين ومنتجات الألبان إذا كنت تعاني من حساسية.</p>`
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> هي منظم طاقة الجسم وصوتك الحقيقي في العالم. تتحكم في معدل الأيض وكيفية استخدامك للطاقة.</p><p class="mb-2"><strong>أعراض الخلل:</strong> تعب مزمن، زيادة أو نقصان في الوزن، تساقط الشعر، حساسية للبرد، تقلبات مزاجية.</p><p class="mb-2"><strong>كيف تدعمها:</strong> اليود والسيلينيوم والزنك، تجنب الإجهاد المزمن، تقليل الغلوتين ومنتجات الألبان إذا كنت تعاني من حساسية.</p>`
                 },
                 heart: {
                     name: 'القلب',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> مركز الحب والاتصال والرحمة. ليس مجرد مضخة، بل له حقله الكهرومغناطيسي الخاص به والذي يؤثر على كل خلية.</p>
-                        <p class="mb-2"><strong>أعراض الخلل:</strong> ارتفاع ضغط الدم، خفقان، الشعور بالانفصال، صعوبة في العطاء أو تلقي الحب.</p>
-                        <p class="mb-2"><strong>كيف تدعمه:</strong> ممارسة الامتنان، قضاء وقت مع الأحباء، تمارين الكارديو المعتدلة، CoQ10، المغنيسيوم.</p>`
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> مركز الحب والاتصال والرحمة. ليس مجرد مضخة، بل له حقله الكهرومغناطيسي الخاص به والذي يؤثر على كل خلية.</p><p class="mb-2"><strong>أعراض الخلل:</strong> ارتفاع ضغط الدم، خفقان، الشعور بالانفصال، صعوبة في العطاء أو تلقي الحب.</p><p class="mb-2"><strong>كيف تدعمه:</strong> ممارسة الامتنان، قضاء وقت مع الأحباء، تمارين الكارديو المعتدلة، CoQ10، المغنيسيوم.</p>`
                 },
                 liver: {
                     name: 'الكبد',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> هو مختبر الجسم الكيميائي ومركز معالجة السموم والمشاعر المكبوتة مثل الغضب والإحباط.</p>
-                        <p class="mb-2"><strong>أعراض الخلل:</strong> مشاكل جلدية (حب الشباب، أكزيما)، تعب، صعوبة في هضم الدهون، حساسية كيميائية، غضب مكبوت.</p>
-                        <p class="mb-2"><strong>كيف تدعمه:</strong> خضروات صليبية (بروكلي، قرنبيط)، الشمندر، الكركم، الشاي الأخضر، تقنيات التحرر من الغضب.</p>`
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> هو مختبر الجسم الكيميائي ومركز معالجة السموم والمشاعر المكبوتة مثل الغضب والإحباط.</p><p class="mb-2"><strong>أعراض الخلل:</strong> مشاكل جلدية (حب الشباب، أكزيما)، تعب، صعوبة في هضم الدهون، حساسية كيميائية، غضب مكبوت.</p><p class="mb-2"><strong>كيف تدعمه:</strong> خضروات صليبية (بروكلي، قرنبيط)، الشمندر، الكركم، الشاي الأخضر، تقنيات التحرر من الغضب.</p>`
                 },
                 gut: {
                     name: 'الأمعاء (الجهاز الهضمي)',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> "عقلك الثاني"، حيث يتم امتصاص العناصر الغذائية وتصنيع 80% من السيروتونين. صحة الأمعاء هي أساس صحة الجسم كله.</p>
-                        <p class="mb-2"><strong>أعراض الخلل:</strong> انتفاخ، غازات، إمساك أو إسهال، حساسية غذائية، أمراض مناعية ذاتية، مشاكل جلدية، قلق واكتئاب.</p>
-                        <p class="mb-2"><strong>كيف تدعمها:</strong> بروبيوتيك وبريبيوتيك، مرق العظام، الأطعمة المخمرة، تجنب الأطعمة المصنعة والسكر، إدارة التوتر.</p>`
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> "عقلك الثاني"، حيث يتم امتصاص العناصر الغذائية وتصنيع 80% من السيروتونين. صحة الأمعاء هي أساس صحة الجسم كله.</p><p class="mb-2"><strong>أعراض الخلل:</strong> انتفاخ، غازات، إمساك أو إسهال، حساسية غذائية، أمراض مناعية ذاتية، مشاكل جلدية، قلق واكتئاب.</p><p class="mb-2"><strong>كيف تدعمها:</strong> بروبيوتيك وبريبيوتيك، مرق العظام، الأطعمة المخمرة، تجنب الأطعمة المصنعة والسكر، إدارة التوتر.</p>`
                 },
                 adrenals: {
                     name: 'الغدد الكظرية',
-                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> بطاريات طاقتك ومدير استجابتك للإجهاد والتوتر. تنتج هرمونات مثل الكورتيزول والأدرينالين.</p>
-                        <p class="mb-2"><strong>أعراض الخلل:</strong> إرهاق كظري، تعب صباحي وصعوبة في الاستيقاظ، رغبة شديدة في الملح والسكر، ضعف المناعة، دوخة عند الوقوف.</p>
-                        <p class="mb-2"><strong>كيف تدعمها:</strong> إدارة الإجهاد (أساسي)، نوم كافٍ، فيتامين سي ومجموعة فيتامينات ب، أعشاب متكيفة (أشواغاندا)، إضافة ملح بحري عالي الجودة للطعام.</p>`
+                    content: `<p class="mb-2"><strong>منظور شمولي:</strong> بطاريات طاقتك ومدير استجابتك للإجهاد والتوتر. تنتج هرمونات مثل الكورتيزول والأدرينالين.</p><p class="mb-2"><strong>أعراض الخلل:</strong> إرهاق كظري، تعب صباحي وصعوبة في الاستيقاظ، رغبة شديدة في الملح والسكر، ضعف المناعة، دوخة عند الوقوف.</p><p class="mb-2"><strong>كيف تدعمها:</strong> إدارة الإجهاد (أساسي)، نوم كافٍ، فيتامين سي ومجموعة فيتامينات ب، أعشاب متكيفة (أشواغاندا)، إضافة ملح بحري عالي الجودة للطعام.</p>`
                 }
             };
-            
-            document.querySelectorAll('#body-map-svg .organ').forEach(organ => {
-                organ.addEventListener('click', () => {
-                    const organKey = organ.dataset.organ;
-                    const data = organData[organKey];
+        }
 
+        // --- 3D BODY MAP MODULE (PROFESSIONAL UPGRADE) ---
+        function init3DBodyMap() {
+            const container = document.getElementById('body-map-container');
+            const infoContainer = document.getElementById('body-map-info');
+            const organNameEl = document.getElementById('organ-name');
+            const organDetailsEl = document.getElementById('organ-details');
+
+            // --- Scene Setup ---
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim());
+            const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(0, 1.5, 10);
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            container.appendChild(renderer.domElement);
+
+            // --- Controls ---
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.target.set(0, 1, 0);
+
+            // --- Lighting ---
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+            directionalLight.position.set(5, 10, 7.5);
+            scene.add(directionalLight);
+
+            // --- Materials ---
+            const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0xe6d3c1, roughness: 0.7, metalness: 0.1 });
+            const organMaterial = new THREE.MeshStandardMaterial({ color: 0x5a6e5a, roughness: 0.5, metalness: 0.1, transparent: true, opacity: 0.6 });
+            const hoverMaterial = new THREE.MeshStandardMaterial({ color: 0xe0c4a4, emissive: 0xc8a07d, roughness: 0.5, metalness: 0.1 });
+
+            // --- Create Stylized Body ---
+            const bodyParts = [];
+            const createLimb = (height, topRadius, bottomRadius, position) => {
+                const limb = new THREE.Mesh(new THREE.CylinderGeometry(topRadius, bottomRadius, height, 16), bodyMaterial);
+                limb.position.y = position;
+                return limb;
+            };
+
+            const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.5, 2.2, 16), bodyMaterial);
+            torso.position.y = 1.1;
+            scene.add(torso);
+
+            const head = new THREE.Mesh(new THREE.SphereGeometry(0.6, 32, 32), bodyMaterial);
+            head.position.y = 2.8;
+            scene.add(head);
+
+            // --- Interactive Organs ---
+            const createOrgan = (geometry, position, name) => {
+                const organ = new THREE.Mesh(geometry, organMaterial.clone());
+                organ.position.copy(position);
+                organ.userData = { name: name, originalMaterial: organ.material };
+                scene.add(organ);
+                bodyParts.push(organ);
+                return organ;
+            };
+
+            createOrgan(new THREE.SphereGeometry(0.5, 16, 16), new THREE.Vector3(0, 2.8, 0), 'brain');
+            createOrgan(new THREE.BoxGeometry(0.5, 0.2, 0.1), new THREE.Vector3(0, 2.1, 0.3), 'thyroid');
+            createOrgan(new THREE.SphereGeometry(0.3, 16, 16), new THREE.Vector3(0.1, 1.5, 0.2), 'heart');
+            createOrgan(new THREE.CapsuleGeometry(0.3, 0.6, 4, 8), new THREE.Vector3(-0.25, 1, 0.1), 'liver');
+            createOrgan(new THREE.TorusKnotGeometry(0.3, 0.05, 100, 8, 2, 3), new THREE.Vector3(0, 0.5, 0.1), 'gut');
+            const adrenal1 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(0.2, 0.8, -0.1), 'adrenals');
+            const adrenal2 = createOrgan(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Vector3(-0.2, 0.8, -0.1), 'adrenals');
+            adrenal2.userData.name = 'adrenals'; // Both point to the same data
+
+            // --- Raycasting for Interaction ---
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            let intersectedObject = null;
+
+            function onPointerMove(event) {
+                const rect = renderer.domElement.getBoundingClientRect();
+                mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+            }
+
+            function onPointerClick(event) {
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObjects(bodyParts);
+                if (intersects.length > 0) {
+                    const organKey = intersects[0].object.userData.name;
+                    const data = window.organData[organKey];
                     if (data) {
                         infoContainer.style.opacity = 0;
                         infoContainer.style.transform = 'translateY(20px)';
-                        
                         setTimeout(() => {
                             organNameEl.textContent = data.name;
                             organDetailsEl.innerHTML = data.content;
@@ -1726,11 +1842,50 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                             infoContainer.style.transform = 'translateY(0)';
                         }, 300);
                     }
-                });
+                }
+            }
+
+            // --- Animation Loop ---
+            function animate() {
+                requestAnimationFrame(animate);
+                controls.update();
+                
+                // Hover effect
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObjects(bodyParts);
+                
+                if (intersects.length > 0) {
+                    if (intersectedObject !== intersects[0].object) {
+                        if (intersectedObject) {
+                            intersectedObject.material = intersectedObject.userData.originalMaterial;
+                        }
+                        intersectedObject = intersects[0].object;
+                        intersectedObject.material = hoverMaterial;
+                    }
+                } else {
+                    if (intersectedObject) {
+                        intersectedObject.material = intersectedObject.userData.originalMaterial;
+                    }
+                    intersectedObject = null;
+                }
+
+                renderer.render(scene, camera);
+            }
+
+            // --- Event Listeners ---
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
             });
+            container.addEventListener('pointermove', onPointerMove);
+            container.addEventListener('click', onPointerClick);
+            
+            animate();
         }
-        
-        // --- QUIZZES MODULE (NEW & COMPLETED) ---
+
+
+        // --- QUIZZES MODULE (COMPLETED) ---
         function initQuizzes() {
             const modal = document.getElementById('quiz-modal');
             const modalContent = document.getElementById('quiz-modal-content');
@@ -1827,7 +1982,6 @@ The entire response should be in warm, supportive Arabic. Start with a positive 
                             if (e.target.dataset.answer === 'yes') {
                                 score += q.points;
                             } else {
-                                // For negative points (good habits), "No" means we don't add the negative score
                                 if (q.points < 0) {
                                     score -= q.points;
                                 }
